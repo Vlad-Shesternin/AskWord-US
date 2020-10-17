@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--==============================-->
+    <!--layout_words_creation-->
+    <!--==============================-->
+    <string name="format_english">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 0123456789</string>
+    <string name="enter_word">Введiть слово</string>
+    <string name="enter_translation">Введiть переклад</string>
+</resources>

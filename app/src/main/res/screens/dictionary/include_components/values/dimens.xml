@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--==============================-->
+    <!--layout_words_creation-->
+    <!--==============================-->
+    <dimen name="ib_margin">10dp</dimen>
+    <dimen name="edit_margin">10dp</dimen>
+</resources>

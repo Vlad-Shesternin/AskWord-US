@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--==============================-->
+    <!--fab_add-->
+    <!--==============================-->
+    <dimen name="fab_margin_horizontal">10dp</dimen>
+    <dimen name="fab_padding">10dp</dimen>
+    <dimen name="fab_margin_bottom">30dp</dimen>
+    <dimen name="fab_elevation">5dp</dimen>
+</resources>
