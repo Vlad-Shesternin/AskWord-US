@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <!--==============================-->
+    <!--PRESSED-->
+    <!--==============================-->
+    <item android:state_pressed="true">
+        <shape android:shape="oval">
+            <size tools:height="100dp" tools:width="100dp" />
+            <solid android:color="@color/colorPrimary" />
+        </shape>
+    </item>
+
+    <!--==============================-->
+    <!--ENABLED-->
+    <!--==============================-->
+    <item>
+        <shape android:shape="oval">
+            <size tools:height="100dp" tools:width="100dp" />
+            <solid android:color="@color/colorAccent" />
+        </shape>
+    </item>
+</selector>

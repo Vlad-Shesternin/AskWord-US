@@ -52,8 +52,49 @@
                 app:layout_constraintStart_toEndOf="@id/guideV_80"
                 app:layout_constraintTop_toBottomOf="@id/guideH_80"
                 app:layout_constraintVertical_bias="0" />
-            <Motion app:pathMotionArc="startVertical" />
+            <CustomAttribute
+                app:attributeName="crossfade"
+                app:customFloatValue="0" />
+            <Motion
+                app:pathMotionArc="startVertical" />
             <Transform android:elevation="@dimen/fab_elevation" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_words_creation">
+            <Layout
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="@id/fab_add"
+                app:layout_constraintEnd_toEndOf="@id/fab_add"
+                app:layout_constraintStart_toStartOf="@id/fab_add"
+                app:layout_constraintTop_toTopOf="@id/fab_add" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================-->
+    <!--APPEARANCE LAYOUT WORDs CREATION-->
+    <!--==============================-->
+    <ConstraintSet
+        android:id="@+id/appearance_layout_words_creation"
+        app:deriveConstraintsFrom="@id/start">
+        <Constraint android:id="@+id/guideH_7">
+            <Layout app:layout_constraintGuide_percent="0" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
+            <CustomAttribute
+                app:attributeName="crossfade"
+                app:customFloatValue="1" />
+            <Transform
+                android:elevation="@dimen/fab_elevation"
+                android:rotation="360" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_words_creation">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:visibility="visible" />
         </Constraint>
     </ConstraintSet>
 
@@ -61,6 +102,10 @@
     <!--MOVE TO CENTER-->
     <!--==============================-->
     <ConstraintSet android:id="@+id/move_to_center">
+        <Constraint android:id="@+id/guideH_7">
+            <Layout app:layout_constraintGuide_percent="0" />
+        </Constraint>
+
         <Constraint android:id="@+id/fab_add">
             <Layout
                 android:layout_width="0dp"

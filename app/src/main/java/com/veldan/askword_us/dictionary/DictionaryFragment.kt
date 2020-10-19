@@ -35,7 +35,7 @@ class DictionaryFragment : Fragment() {
         private val moveToCenter = R.id.move_to_center
         private val backMoveToCenter = R.id.back_move_to_center
 
-        //private val appearanceLayoutWordsCreation = R.id.appearance_layout_words_creation
+        private val appearanceLayoutWordsCreation = R.id.appearance_layout_words_creation
         private val appearanceFabsAdd = R.id.appearance_fabs_add
 
         private val choiceFabCategory = R.id.choice_fab_category
@@ -43,25 +43,23 @@ class DictionaryFragment : Fragment() {
         private val choiceFabFile = R.id.choice_fab_file
 
         init {
-            motion.fab_add.setOnClickListener(this)
             motion.fab_add.setOnLongClickListener(this)
 
+            motion.fab_add.setOnClickListener(this)
             motion.fab_category.setOnClickListener(this)
             motion.fab_photo.setOnClickListener(this)
             motion.fab_file.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
-            when (v?.id) {
-                motion.fab_add.id -> {
-                    when (motion.currentState) {
-                        start -> appearanceLayoutWordsCreation()
-                        appearanceFabsAdd -> appearanceFabAddsToMoveToCenter()
-                    }
-                }
-                motion.fab_category.id -> appearanceFabAddsToChoiceFabCategory()
-                motion.fab_photo.id -> appearanceFabAddsToChoiceFabPhoto()
-                motion.fab_file.id -> appearanceFabAddsToChoiceFabFile()
+            //when use Pair<Int, Int> (v?.id, motion.currentState)
+            when (v?.id to motion.currentState) {
+                motion.fab_add.id to start -> appearanceLayoutWordsCreation()
+                motion.fab_add.id to appearanceFabsAdd -> appearanceFabAddsToMoveToCenter()
+
+                motion.fab_file.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabFile()
+                motion.fab_photo.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabPhoto()
+                motion.fab_category.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabCategory()
             }
         }
 
@@ -87,7 +85,7 @@ class DictionaryFragment : Fragment() {
         }
 
         private fun appearanceLayoutWordsCreation() {
-            //   transition(start, appearanceLayoutWordsCreation)
+            transition(start, appearanceLayoutWordsCreation)
         }
 
         private fun appearanceFabAddsToMoveToCenter() {

@@ -77,13 +77,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tabs" />
 
-        <ImageButton
+        <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/fab_add"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:overlay="false"
             android:background="@drawable/fab_state"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_add" />
+            android:src="@drawable/ic_add"
+            app:altSrc="@drawable/ic_check" />
 
         <ImageButton
             android:id="@+id/fab_category"
@@ -113,6 +115,11 @@
             android:padding="@dimen/fab_padding"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_file_add"
+            android:visibility="invisible" />
+
+        <include
+            android:id="@+id/layout_words_creation"
+            layout="@layout/layout_words_creation"
             android:visibility="invisible" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
