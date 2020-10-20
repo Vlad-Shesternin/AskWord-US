@@ -3,6 +3,11 @@
     <!--==============================-->
     <!--layout_words_creation-->
     <!--==============================-->
-    <dimen name="ib_margin">10dp</dimen>
-    <dimen name="edit_margin">10dp</dimen>
+    <dimen name="words_creation_ib_margin">10dp</dimen>
+    <dimen name="words_creation_edit_margin">10dp</dimen>
+    <!--==============================-->
+    <!--layout_prompt-->
+    <!--==============================-->
+    <dimen name="prompt_edit_margin">20dp</dimen>
+    <dimen name="prompt_level_twistingY">-25dp</dimen>
 </resources>

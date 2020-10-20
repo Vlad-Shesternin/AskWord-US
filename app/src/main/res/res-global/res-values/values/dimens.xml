@@ -4,4 +4,8 @@
     <!--tabs-->
     <!--==============================-->
     <dimen name="tab_bottomRadius">20dp</dimen>
+    <!--==============================-->
+    <!--edit_text-->
+    <!--==============================-->
+    <dimen name="edit_text_size">25sp</dimen>
 </resources>

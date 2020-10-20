@@ -8,4 +8,5 @@
     <!--My Colors-->
     <!--==============================-->
     <color name="colorBlack">#000000</color>
+    <color name="colorShine">#FFF200</color>
 </resources>

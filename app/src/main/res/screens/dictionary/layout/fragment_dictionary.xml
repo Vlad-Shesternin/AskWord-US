@@ -81,11 +81,11 @@
             android:id="@+id/fab_add"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:overlay="false"
             android:background="@drawable/fab_state"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_add"
-            app:altSrc="@drawable/ic_check" />
+            app:altSrc="@drawable/ic_check"
+            app:overlay="false" />
 
         <ImageButton
             android:id="@+id/fab_category"

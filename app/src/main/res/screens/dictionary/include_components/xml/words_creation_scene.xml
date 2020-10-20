@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--==============================-->
+    <!--[START] -> [MOVE TO TOP]-->
+    <!--==============================-->
+    <Transition
+        app:constraintSetEnd="@+id/move_to_top"
+        app:constraintSetStart="@+id/start" />
+
+    <!--==============================-->
+    <!--[MOVE TO TOP] -> [TWISTING SHINE]-->
+    <!--==============================-->
+    <Transition
+        app:autoTransition="animateToEnd"
+        app:constraintSetEnd="@+id/twisting_shine"
+        app:constraintSetStart="@+id/move_to_top"
+        app:duration="500" />
+
+    <!--==============================-->
+    <!--START-->
+    <!--==============================-->
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/ifv_prompt_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/guideV_60"
+                app:layout_constraintStart_toEndOf="@id/guideV_40"
+                app:layout_constraintTop_toBottomOf="@id/guideH_55" />
+            <CustomAttribute
+                app:attributeName="backgroundColor"
+                app:customColorValue="@android:color/transparent" />
+            <CustomAttribute
+                app:attributeName="crossfade"
+                app:customFloatValue="0" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================-->
+    <!--MOVE TO TOP-->
+    <!--==============================-->
+    <ConstraintSet
+        android:id="@+id/move_to_top"
+        app:deriveConstraintsFrom="@id/start">
+        <Constraint android:id="@id/ifv_prompt_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/guideV_60"
+                app:layout_constraintStart_toEndOf="@id/guideV_40"
+                app:layout_constraintTop_toTopOf="parent" />
+            <Transform android:rotation="-180" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================-->
+    <!--TWISTING and SHINE-->
+    <!--==============================-->
+    <ConstraintSet
+        android:id="@+id/twisting_shine"
+        app:deriveConstraintsFrom="@id/move_to_top">
+        <Constraint android:id="@+id/ib_img_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+        <Constraint android:id="@+id/edit_word">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+        <Constraint android:id="@+id/edit_translation">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_prompt">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ifv_prompt_add" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+        <Constraint android:id="@id/ifv_prompt_add">
+            <Transform
+                android:rotation="-180"
+                android:rotationY="360"
+                android:translationY="@dimen/prompt_level_twistingY" />
+            <CustomAttribute
+                app:attributeName="crossfade"
+                app:customFloatValue="1" />
+        </Constraint>
+    </ConstraintSet>
+</MotionScene>

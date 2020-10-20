@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
+import com.veldan.askword_us.Animator
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.FragmentDictionaryBinding
-import kotlinx.android.synthetic.main.fragment_dictionary.view.*
+import com.veldan.askword_us.databinding.LayoutWordsCreationBinding
+import com.veldan.askword_us.generated.callback.OnClickListener
+
 
 class DictionaryFragment : Fragment() {
 
@@ -22,86 +24,122 @@ class DictionaryFragment : Fragment() {
 
         binding = FragmentDictionaryBinding.inflate(inflater)
 
-        FabAnimation(binding.motion)
+        DictionaryAnimation(binding)
 
         return binding.root
     }
 
-    private class FabAnimation(private val motion: MotionLayout) : View.OnClickListener,
+    //==============================
+    //      DictionaryAnimation
+    //==============================
+    private class DictionaryAnimation(private val layoutDictionary: FragmentDictionaryBinding) :
+        View.OnClickListener,
         View.OnLongClickListener {
 
-        private val start = R.id.start
+        //Components fragment_dictionary
+        private val motion = layoutDictionary.motion
+        private val fabAdd = layoutDictionary.fabAdd
+        private val fabCategory = layoutDictionary.fabCategory
+        private val fabPhoto = layoutDictionary.fabPhoto
+        private val fabFile = layoutDictionary.fabFile
 
+        //ConstraintIds for dictionary_scene
+        private val start = R.id.start
         private val moveToCenter = R.id.move_to_center
         private val backMoveToCenter = R.id.back_move_to_center
-
         private val appearanceLayoutWordsCreation = R.id.appearance_layout_words_creation
         private val appearanceFabsAdd = R.id.appearance_fabs_add
-
         private val choiceFabCategory = R.id.choice_fab_category
         private val choiceFabPhoto = R.id.choice_fab_photo
         private val choiceFabFile = R.id.choice_fab_file
 
         init {
-            motion.fab_add.setOnLongClickListener(this)
+            //init PromptAnimation(layout_words_creation)
+            PromptAnimation(layoutDictionary.layoutWordsCreation)
+        }
 
-            motion.fab_add.setOnClickListener(this)
-            motion.fab_category.setOnClickListener(this)
-            motion.fab_photo.setOnClickListener(this)
-            motion.fab_file.setOnClickListener(this)
+        init {
+            //OnLongClick
+            fabAdd.setOnLongClickListener(this)
+            //OnClick
+            fabAdd.setOnClickListener(this)
+            fabCategory.setOnClickListener(this)
+            fabPhoto.setOnClickListener(this)
+            fabFile.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
             //when use Pair<Int, Int> (v?.id, motion.currentState)
             when (v?.id to motion.currentState) {
-                motion.fab_add.id to start -> appearanceLayoutWordsCreation()
-                motion.fab_add.id to appearanceFabsAdd -> appearanceFabAddsToMoveToCenter()
+                fabAdd.id to start -> appearanceLayoutWordsCreation()
+                fabAdd.id to appearanceFabsAdd -> appearanceFabAddsToMoveToCenter()
 
-                motion.fab_file.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabFile()
-                motion.fab_photo.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabPhoto()
-                motion.fab_category.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabCategory()
+                fabFile.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabFile()
+                fabPhoto.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabPhoto()
+                fabCategory.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabCategory()
             }
         }
 
         override fun onLongClick(v: View?): Boolean {
-            when (v?.id) {
-                motion.fab_add.id -> startToMoveToCenter()
+            when (v?.id to motion.currentState) {
+                fabAdd.id to start -> startToMoveToCenter()
             }
             return true
         }
 
-        private fun transition(start: Int, end: Int) {
-            motion.also {
-                if (it.currentState == start) {
-                    it.setTransition(start, end)
-                    it.setTransitionDuration(1000)
-                    it.transitionToEnd()
-                }
-            }
-        }
 
         private fun startToMoveToCenter() {
-            transition(start, moveToCenter)
+            Animator.transition(motion, start, moveToCenter, 1000)
         }
 
         private fun appearanceLayoutWordsCreation() {
-            transition(start, appearanceLayoutWordsCreation)
+            Animator.transition(motion, start, appearanceLayoutWordsCreation, 1000)
         }
 
         private fun appearanceFabAddsToMoveToCenter() {
-            transition(appearanceFabsAdd, backMoveToCenter)
+            Animator.transition(motion, appearanceFabsAdd, backMoveToCenter, 1000)
         }
 
         private fun appearanceFabAddsToChoiceFabCategory() {
-            transition(appearanceFabsAdd, choiceFabCategory)
+            Animator.transition(motion, appearanceFabsAdd, choiceFabCategory, 1000)
         }
 
         private fun appearanceFabAddsToChoiceFabPhoto() {
-            transition(appearanceFabsAdd, choiceFabPhoto)
+            Animator.transition(motion, appearanceFabsAdd, choiceFabPhoto, 1000)
         }
 
         private fun appearanceFabAddsToChoiceFabFile() {
-            transition(appearanceFabsAdd, choiceFabFile)
+            Animator.transition(motion, appearanceFabsAdd, choiceFabFile, 1000)
+        }
+    }
+
+    //==============================
+    //      PromptAnimation
+    //==============================
+    private class PromptAnimation(private val layoutWordsCreation: LayoutWordsCreationBinding) :
+        View.OnClickListener {
+
+        //Components layout_words_creation
+        private val motion = layoutWordsCreation.motion
+        private val ifvPromptAdd = layoutWordsCreation.ifvPromptAdd
+
+        //ConstraintIds for dictionary_scene
+        private val start = R.id.start
+        private val moveToTop = R.id.move_to_top
+
+        init {
+            ifvPromptAdd.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            //when use Pair<Int, Int> (v?.id, motion.currentState)
+            when (v?.id to motion.currentState) {
+                ifvPromptAdd.id to start -> startToMoveToTop()
+            }
+        }
+
+        private fun startToMoveToTop() {
+            Animator.transition(motion, start, moveToTop, 1000)
         }
     }
 }

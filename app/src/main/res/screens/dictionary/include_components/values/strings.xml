@@ -6,4 +6,10 @@
     <string name="format_english">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 0123456789</string>
     <string name="enter_word">Введiть слово</string>
     <string name="enter_translation">Введiть переклад</string>
+
+    <!--==============================-->
+    <!--layout_prompt-->
+    <!--==============================-->
+    <string name="enter_prompt">Введiть пiдказку…</string>
+
 </resources>

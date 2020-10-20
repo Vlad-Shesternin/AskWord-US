@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/motion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:nextFocusForward="@id/edit_word">
+        android:nextFocusForward="@id/edit_word"
+        app:layoutDescription="@xml/words_creation_scene">
 
         <ImageButton
-            android:id="@+id/ib_add_img"
+            android:id="@+id/ib_img_add"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginVertical="@dimen/ib_margin"
+            android:layout_marginVertical="@dimen/words_creation_ib_margin"
             app:layout_constraintBottom_toTopOf="@id/guideH_25"
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +31,7 @@
             android:id="@+id/edit_word"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/edit_margin"
+            android:layout_margin="@dimen/words_creation_edit_margin"
             android:digits="@string/format_english"
             android:gravity="center"
             android:hint="@string/enter_word"
@@ -37,7 +39,7 @@
             android:inputType="textCapSentences"
             android:nextFocusForward="@id/edit_translation"
             android:singleLine="true"
-            android:textSize="25sp"
+            android:textSize="@dimen/edit_text_size"
             app:layout_constraintBottom_toTopOf="@id/guideH_40"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,15 +54,16 @@
 
         <EditText
             android:id="@+id/edit_translation"
+            focusAfterClickKeyDone="@{false}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/edit_margin"
+            android:layout_margin="@dimen/words_creation_edit_margin"
             android:gravity="center"
             android:hint="@string/enter_translation"
             android:imeOptions="actionDone"
             android:inputType="textCapSentences"
             android:singleLine="true"
-            android:textSize="25sp"
+            android:textSize="@dimen/edit_text_size"
             app:layout_constraintBottom_toTopOf="@id/guideH_55"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -87,16 +90,17 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.6" />
 
-        <ImageView
-            android:id="@+id/ib_help_add"
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/ifv_prompt_add"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/ic_help_add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@id/guideV_60"
-            app:layout_constraintStart_toEndOf="@id/guideV_40"
-            app:layout_constraintTop_toBottomOf="@id/guideH_55" />
+            android:src="@drawable/ic_prompt_add"
+            app:altSrc="@drawable/ic_prompt_add_shine" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/layout_prompt"
+            layout="@layout/layout_prompt"
+            android:visibility="invisible" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
