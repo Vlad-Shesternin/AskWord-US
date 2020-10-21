@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.Fragment
-import com.veldan.askword_us.Animator
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.FragmentDictionaryBinding
 import com.veldan.askword_us.databinding.LayoutWordsCreationBinding
-import com.veldan.askword_us.generated.callback.OnClickListener
+import com.veldan.askword_us.defaultFocusAndKeyboard
+import com.veldan.askword_us.interfaces.TransitionListener
+import com.veldan.askword_us.objects.Animator
 
 
 class DictionaryFragment : Fragment() {
@@ -53,11 +55,12 @@ class DictionaryFragment : Fragment() {
         private val choiceFabPhoto = R.id.choice_fab_photo
         private val choiceFabFile = R.id.choice_fab_file
 
+        //PromptAnimation(layout_words_creation)
         init {
-            //init PromptAnimation(layout_words_creation)
             PromptAnimation(layoutDictionary.layoutWordsCreation)
         }
 
+        //Events (fragment_dictionary)
         init {
             //OnLongClick
             fabAdd.setOnLongClickListener(this)
@@ -71,75 +74,71 @@ class DictionaryFragment : Fragment() {
         override fun onClick(v: View?) {
             //when use Pair<Int, Int> (v?.id, motion.currentState)
             when (v?.id to motion.currentState) {
-                fabAdd.id to start -> appearanceLayoutWordsCreation()
-                fabAdd.id to appearanceFabsAdd -> appearanceFabAddsToMoveToCenter()
+                fabAdd.id to start -> Animator.transition(motion,
+                    start,
+                    appearanceLayoutWordsCreation,
+                    1000)
+                fabAdd.id to appearanceFabsAdd -> Animator.transition(motion,
+                    appearanceFabsAdd,
+                    backMoveToCenter,
+                    1000)
 
-                fabFile.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabFile()
-                fabPhoto.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabPhoto()
-                fabCategory.id to appearanceFabsAdd -> appearanceFabAddsToChoiceFabCategory()
+                fabFile.id to appearanceFabsAdd -> Animator.transition(motion,
+                    appearanceFabsAdd,
+                    choiceFabFile,
+                    1000)
+                fabPhoto.id to appearanceFabsAdd -> Animator.transition(motion,
+                    appearanceFabsAdd,
+                    choiceFabPhoto,
+                    1000)
+                fabCategory.id to appearanceFabsAdd -> Animator.transition(motion,
+                    appearanceFabsAdd,
+                    choiceFabCategory,
+                    1000)
             }
         }
 
         override fun onLongClick(v: View?): Boolean {
             when (v?.id to motion.currentState) {
-                fabAdd.id to start -> startToMoveToCenter()
+                fabAdd.id to start -> Animator.transition(motion, start, moveToCenter, 1000)
             }
             return true
         }
 
+        //==============================
+        //      PromptAnimation
+        //==============================
+        private class PromptAnimation(private val layoutWordsCreation: LayoutWordsCreationBinding) :
+            View.OnClickListener, TransitionListener {
 
-        private fun startToMoveToCenter() {
-            Animator.transition(motion, start, moveToCenter, 1000)
-        }
+            //Components layout_words_creation
+            private val motion = layoutWordsCreation.motion
+            private val ifvPromptAdd = layoutWordsCreation.ifvPromptAdd
 
-        private fun appearanceLayoutWordsCreation() {
-            Animator.transition(motion, start, appearanceLayoutWordsCreation, 1000)
-        }
+            //ConstraintIds for dictionary_scene
+            private val start = R.id.start
+            private val moveToTop = R.id.move_to_top
+            private val twistingShine = R.id.twisting_shine
 
-        private fun appearanceFabAddsToMoveToCenter() {
-            Animator.transition(motion, appearanceFabsAdd, backMoveToCenter, 1000)
-        }
-
-        private fun appearanceFabAddsToChoiceFabCategory() {
-            Animator.transition(motion, appearanceFabsAdd, choiceFabCategory, 1000)
-        }
-
-        private fun appearanceFabAddsToChoiceFabPhoto() {
-            Animator.transition(motion, appearanceFabsAdd, choiceFabPhoto, 1000)
-        }
-
-        private fun appearanceFabAddsToChoiceFabFile() {
-            Animator.transition(motion, appearanceFabsAdd, choiceFabFile, 1000)
-        }
-    }
-
-    //==============================
-    //      PromptAnimation
-    //==============================
-    private class PromptAnimation(private val layoutWordsCreation: LayoutWordsCreationBinding) :
-        View.OnClickListener {
-
-        //Components layout_words_creation
-        private val motion = layoutWordsCreation.motion
-        private val ifvPromptAdd = layoutWordsCreation.ifvPromptAdd
-
-        //ConstraintIds for dictionary_scene
-        private val start = R.id.start
-        private val moveToTop = R.id.move_to_top
-
-        init {
-            ifvPromptAdd.setOnClickListener(this)
-        }
-
-        override fun onClick(v: View?) {
-            //when use Pair<Int, Int> (v?.id, motion.currentState)
-            when (v?.id to motion.currentState) {
-                ifvPromptAdd.id to start -> startToMoveToTop()
+            //Events (layout_words_creation)
+            init {
+                motion.setTransitionListener(this)
+                ifvPromptAdd.setOnClickListener(this)
             }
-        }
 
-        private fun startToMoveToTop() {
-            Animator.transition(motion, start, moveToTop, 1000)
+            override fun onClick(v: View?) {
+                //when use Pair<Int, Int> (v?.id, motion.currentState)
+                when (v?.id to motion.currentState) {
+                    ifvPromptAdd.id to start -> Animator.transition(motion, start, moveToTop, 5000)
+                }
+            }
+
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                super.onTransitionCompleted(motionLayout, currentId)
+                if (currentId == twistingShine) {
+                    layoutWordsCreation.layoutPrompt.editPrompt.defaultFocusAndKeyboard(true)
+                }
+            }
         }
     }
 }
