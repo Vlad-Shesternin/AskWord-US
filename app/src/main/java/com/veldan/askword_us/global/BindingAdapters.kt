@@ -1,4 +1,4 @@
-package com.veldan.askword_us
+package com.veldan.askword_us.global
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.view.View

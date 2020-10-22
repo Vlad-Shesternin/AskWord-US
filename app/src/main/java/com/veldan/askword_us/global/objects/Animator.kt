@@ -1,4 +1,4 @@
-package com.veldan.askword_us.objects
+package com.veldan.askword_us.global.objects
 
 import androidx.constraintlayout.motion.widget.MotionLayout
 

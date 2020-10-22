@@ -22,6 +22,17 @@
     <!--START-->
     <!--==============================-->
     <ConstraintSet android:id="@+id/start">
+
+        <Constraint android:id="@+id/ib_img_add">
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+        <Constraint android:id="@+id/edit_word">
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+        <Constraint android:id="@+id/edit_translation">
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
         <Constraint android:id="@+id/ifv_prompt_add">
             <Layout
                 android:layout_width="0dp"
@@ -46,6 +57,17 @@
     <ConstraintSet
         android:id="@+id/move_to_top"
         app:deriveConstraintsFrom="@id/start">
+
+        <Constraint android:id="@+id/ib_img_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+        <Constraint android:id="@+id/edit_word">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+        <Constraint android:id="@+id/edit_translation">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
         <Constraint android:id="@id/ifv_prompt_add">
             <Layout
                 android:layout_width="0dp"
@@ -64,16 +86,6 @@
     <ConstraintSet
         android:id="@+id/twisting_shine"
         app:deriveConstraintsFrom="@id/move_to_top">
-        <Constraint android:id="@+id/ib_img_add">
-            <PropertySet android:visibility="invisible" />
-        </Constraint>
-        <Constraint android:id="@+id/edit_word">
-            <PropertySet android:visibility="invisible" />
-        </Constraint>
-        <Constraint android:id="@+id/edit_translation">
-            <PropertySet android:visibility="invisible" />
-        </Constraint>
-
         <Constraint android:id="@+id/layout_prompt">
             <Layout
                 android:layout_width="match_parent"

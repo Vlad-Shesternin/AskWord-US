@@ -9,9 +9,10 @@ import androidx.fragment.app.Fragment
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.FragmentDictionaryBinding
 import com.veldan.askword_us.databinding.LayoutWordsCreationBinding
-import com.veldan.askword_us.defaultFocusAndKeyboard
-import com.veldan.askword_us.interfaces.TransitionListener
-import com.veldan.askword_us.objects.Animator
+import com.veldan.askword_us.global.defaultFocusAndKeyboard
+import com.veldan.askword_us.global.interfaces.TransitionListener
+import com.veldan.askword_us.global.objects.Animator
+import com.veldan.askword_us.global.objects.Clickable
 
 
 class DictionaryFragment : Fragment() {
@@ -39,7 +40,7 @@ class DictionaryFragment : Fragment() {
         View.OnLongClickListener {
 
         //Components fragment_dictionary
-        private val motion = layoutDictionary.motion
+        private val motion = layoutDictionary.layoutDictionary
         private val fabAdd = layoutDictionary.fabAdd
         private val fabCategory = layoutDictionary.fabCategory
         private val fabPhoto = layoutDictionary.fabPhoto
@@ -74,29 +75,35 @@ class DictionaryFragment : Fragment() {
         override fun onClick(v: View?) {
             //when use Pair<Int, Int> (v?.id, motion.currentState)
             when (v?.id to motion.currentState) {
-                fabAdd.id to start -> Animator.transition(motion,
-                    start,
-                    appearanceLayoutWordsCreation,
-                    1000)
-                fabAdd.id to appearanceFabsAdd -> Animator.transition(motion,
-                    appearanceFabsAdd,
-                    backMoveToCenter,
-                    1000)
+                fabAdd.id to start -> startToAppearanceLayoutWordsCreation()
+                fabAdd.id to appearanceFabsAdd -> appearanceFabsAddToBackMoveToCenter()
 
-                fabFile.id to appearanceFabsAdd -> Animator.transition(motion,
-                    appearanceFabsAdd,
-                    choiceFabFile,
-                    1000)
-                fabPhoto.id to appearanceFabsAdd -> Animator.transition(motion,
-                    appearanceFabsAdd,
-                    choiceFabPhoto,
-                    1000)
-                fabCategory.id to appearanceFabsAdd -> Animator.transition(motion,
-                    appearanceFabsAdd,
-                    choiceFabCategory,
-                    1000)
+                fabFile.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabFile()
+                fabPhoto.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabPhoto()
+                fabCategory.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabCategory()
             }
         }
+
+        private fun startToAppearanceLayoutWordsCreation() {
+            Animator.transition(motion, start, appearanceLayoutWordsCreation, 1000)
+        }
+
+        private fun appearanceFabsAddToBackMoveToCenter() {
+            Animator.transition(motion, appearanceFabsAdd, backMoveToCenter, 1000)
+        }
+
+        private fun appearanceFabsAddToChoiceFabFile() {
+            Animator.transition(motion, appearanceFabsAdd, choiceFabFile, 1000)
+        }
+
+        private fun appearanceFabsAddToChoiceFabPhoto() {
+            Animator.transition(motion, appearanceFabsAdd, choiceFabPhoto, 1000)
+        }
+
+        private fun appearanceFabsAddToChoiceFabCategory() {
+            Animator.transition(motion, appearanceFabsAdd, choiceFabCategory, 1000)
+        }
+
 
         override fun onLongClick(v: View?): Boolean {
             when (v?.id to motion.currentState) {
@@ -112,7 +119,10 @@ class DictionaryFragment : Fragment() {
             View.OnClickListener, TransitionListener {
 
             //Components layout_words_creation
-            private val motion = layoutWordsCreation.motion
+            private val motion = layoutWordsCreation.layoutWordsCreation
+            private val editWord = layoutWordsCreation.editWord
+            private val ibImgAdd = layoutWordsCreation.ibImgAdd
+            private val editTranslation = layoutWordsCreation.editTranslation
             private val ifvPromptAdd = layoutWordsCreation.ifvPromptAdd
 
             //ConstraintIds for dictionary_scene
@@ -129,7 +139,7 @@ class DictionaryFragment : Fragment() {
             override fun onClick(v: View?) {
                 //when use Pair<Int, Int> (v?.id, motion.currentState)
                 when (v?.id to motion.currentState) {
-                    ifvPromptAdd.id to start -> Animator.transition(motion, start, moveToTop, 5000)
+                    ifvPromptAdd.id to start -> startToMoveToTop()
                 }
             }
 
@@ -139,6 +149,12 @@ class DictionaryFragment : Fragment() {
                     layoutWordsCreation.layoutPrompt.editPrompt.defaultFocusAndKeyboard(true)
                 }
             }
+
+            private fun startToMoveToTop() {
+                Clickable.enabled(false, *arrayOf(ibImgAdd, editWord, editTranslation))
+                Animator.transition(motion, start, moveToTop, 3000)
+            }
+
         }
     }
 }
