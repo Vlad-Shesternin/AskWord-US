@@ -85,7 +85,7 @@ class DictionaryFragment : Fragment() {
         }
 
         private fun startToAppearanceLayoutWordsCreation() {
-            Animator.transition(motion, start, appearanceLayoutWordsCreation, 1000)
+            Animator.transition(motion, start, appearanceLayoutWordsCreation, 700)
         }
 
         private fun appearanceFabsAddToBackMoveToCenter() {
@@ -152,7 +152,7 @@ class DictionaryFragment : Fragment() {
 
             private fun startToMoveToTop() {
                 Clickable.enabled(false, *arrayOf(ibImgAdd, editWord, editTranslation))
-                Animator.transition(motion, start, moveToTop, 3000)
+                Animator.transition(motion, start, moveToTop, 500)
             }
 
         }

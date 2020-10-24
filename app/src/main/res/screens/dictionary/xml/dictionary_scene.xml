@@ -81,6 +81,14 @@
             <Layout app:layout_constraintGuide_percent="0" />
         </Constraint>
 
+        <Constraint android:id="@+id/no">
+            <PropertySet android:visibility="invisible"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/words">
+            <PropertySet android:visibility="invisible"/>
+        </Constraint>
+
         <Constraint android:id="@+id/fab_add">
             <CustomAttribute
                 app:attributeName="crossfade"
@@ -104,6 +112,14 @@
     <ConstraintSet android:id="@+id/move_to_center">
         <Constraint android:id="@+id/guideH_7">
             <Layout app:layout_constraintGuide_percent="0" />
+        </Constraint>
+
+        <Constraint android:id="@+id/no">
+            <PropertySet android:visibility="invisible"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/words">
+            <PropertySet android:visibility="invisible"/>
         </Constraint>
 
         <Constraint android:id="@+id/fab_add">

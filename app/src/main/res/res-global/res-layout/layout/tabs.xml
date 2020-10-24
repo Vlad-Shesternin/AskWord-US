@@ -1,32 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:layout_height="50dp"
-    tools:layout_width="match_parent">
+<layout>
 
-    <Button
-        android:id="@+id/btn_words"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/tab_state"
-        android:text="@string/words"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_phrases"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_height="50dp"
+        tools:layout_width="match_parent">
 
-    <Button
-        android:id="@+id/btn_phrases"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/tab_state"
-        android:text="@string/phrases"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_words"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btn_words"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/tab_state"
+            android:focusableInTouchMode="true"
+            android:text="@string/tab_words"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_phrases"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <requestFocus />
+        </Button>
+
+        <Button
+            android:id="@+id/btn_phrases"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/tab_state"
+            android:focusableInTouchMode="true"
+            android:text="@string/tab_phrases"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_words"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

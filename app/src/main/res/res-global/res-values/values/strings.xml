@@ -3,6 +3,6 @@
     <!--==============================-->
     <!--tabs-->
     <!--==============================-->
-    <string name="words">Слова</string>
-    <string name="phrases">Фрази</string>
+    <string name="tab_words">Слова</string>
+    <string name="tab_phrases">Фрази</string>
 </resources>

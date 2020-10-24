@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-//Safe-Args
+// Safe-Args
 apply plugin: "androidx.navigation.safeargs"
 // BindingAdapter
 apply plugin: 'kotlin-kapt'
@@ -69,6 +69,7 @@ dependencies {
     //2.0.1 - does not work [MotionScene : autoTransition]
     def constraintLayout_version = "2.0.0-beta6"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"
-
+    //CardView
+    implementation "androidx.cardview:cardview:1.0.0"
 }
 

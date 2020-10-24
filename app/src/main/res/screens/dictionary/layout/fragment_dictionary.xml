@@ -69,13 +69,40 @@
         <!--==============================-->
         <!--COMPONENTS-->
         <!--==============================-->
+
+        <TextView
+            android:id="@+id/no"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="bottom|start"
+            android:text="@string/dictionary_no"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/words"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideH_7" />
+
+        <TextView
+            android:id="@+id/words"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autoSizeTextType="uniform"
+            android:gravity="top|end"
+            android:text="@string/dictionary_words"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideH_80"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/no" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_list_words"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabs" />
+            app:layout_constraintTop_toBottomOf="@id/guideH_7" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/fab_add"
