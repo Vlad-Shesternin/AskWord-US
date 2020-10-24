@@ -1,2 +1,2 @@
-# AskWord-US from ___Vel__daN___
+# AskWord-US from Vel_daN
 1) Open application in project format.
