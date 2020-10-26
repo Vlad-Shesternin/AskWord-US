@@ -26,8 +26,10 @@ class DictionaryFragment : Fragment() {
     ): View? {
 
         binding = FragmentDictionaryBinding.inflate(inflater)
-
         DictionaryAnimation(binding)
+
+        val adapter = WordAdapter()
+        binding.rvListWords.adapter = adapter
 
         return binding.root
     }
