@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "788019925090",
+    "firebase_url": "https://askword-us.firebaseio.com",
+    "project_id": "askword-us",
+    "storage_bucket": "askword-us.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788019925090:android:661043f09fdfbf64c8413b",
+        "android_client_info": {
+          "package_name": "com.veldan.askword_us"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788019925090-6t8sipl25g1ektbknvcbk8i4k2i94jch.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.veldan.askword_us",
+            "certificate_hash": "e3c7c72da7fcc84e5f6604c1024f1141acaf27f7"
+          }
+        },
+        {
+          "client_id": "788019925090-3k00j11r4qpml0bkeukip6gt8r93vpqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6S7iewIjc8hepDyrLEJHMigpMnGJgDu0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788019925090-3k00j11r4qpml0bkeukip6gt8r93vpqk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
