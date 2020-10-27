@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+// Google-Services
+apply plugin: 'com.google.gms.google-services'
 // Safe-Args
 apply plugin: "androidx.navigation.safeargs"
 // BindingAdapter
@@ -43,33 +45,44 @@ android {
                            'src/main/res/screens/main',
                            'src/main/res/screens/start',
                            'src/main/res/screens/dictionary',
-                           'src/main/res/screens/dictionary/include_components']
+                           'src/main/res/screens/dictionary/include_components',
+                           'src/main/res/screens/authentication']
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    //Kotlin
+    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    //Coroutine
+    // Coroutine
     implementation 'androidx.core:core-ktx:1.3.2'
-    //Compat
+    // Compat
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    //Tests
+    // Tests
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    //Navigation
+    // Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
-    //RecyclerView
+    // RecyclerView
     def recycler_version = "1.1.0"
     implementation "androidx.recyclerview:recyclerview:$recycler_version"
-    //ConstraintLayout
-    //2.0.1 - does not work [MotionScene : autoTransition]
+    // ConstraintLayout
+    // 2.0.1 - does not work [MotionScene : autoTransition]
     def constraintLayout_version = '2.0.2'
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"
-    //CardView
+    // CardView
     implementation "androidx.cardview:cardview:1.0.0"
+
+    // Firebase ===============================
+    // BoM
+    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    // Authentication
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-auth:19.4.0'
+    // Realtime Database
+    implementation 'com.google.firebase:firebase-database:19.5.1'
+    // Firebase ===============================
 }
 

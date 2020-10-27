@@ -26,7 +26,7 @@ class StartFragment : Fragment() {
     }
 
     fun transitionToDictionary() {
-        val action = StartFragmentDirections.actionStartFragmentToDictionaryFragment()
+        val action = StartFragmentDirections.actionStartFragmentToRegistrationFragment()
         findNavController().navigate(action)
     }
 }

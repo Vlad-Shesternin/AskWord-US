@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--==============================-->
+    <!--fragment_authentication-->
+    <!--==============================-->
+    <string name="authentication_email">Електронна пошта</string>
+    <string name="authentication_password">Пароль</string>
+    <string name="authentication_sign_in">Ввiйти</string>
+    <string name="authentication_registration">Зареєструватися</string>
+</resources>

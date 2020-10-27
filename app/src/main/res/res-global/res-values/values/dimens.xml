@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--==============================-->
-    <!--tabs-->
+    <!--Radius-->
     <!--==============================-->
-    <dimen name="tab_bottomRadius">20dp</dimen>
+    <dimen name="bottom_radius">20dp</dimen>
     <!--==============================-->
-    <!--edit_text-->
+    <!--TextSize-->
     <!--==============================-->
     <dimen name="edit_text_size">25sp</dimen>
+    <dimen name="button_text_size">20sp</dimen>
 </resources>

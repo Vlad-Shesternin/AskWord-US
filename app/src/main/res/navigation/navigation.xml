@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_startFragment_to_dictionaryFragment"
             app:destination="@id/dictionaryFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/dictionaryFragment"
         android:name="com.veldan.askword_us.dictionary.DictionaryFragment"
         android:label="DictionaryFragment"
         tools:layout="@layout/fragment_dictionary"/>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.veldan.askword_us.authentication.AuthenticationFragment"
+        android:label="RegistrationFragment"
+        tools:layout="@layout/fragment_authentication"/>
 </navigation>
