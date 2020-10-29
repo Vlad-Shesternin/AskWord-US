@@ -64,7 +64,7 @@ class RegistrationFragment : Fragment() {
         ) {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
-                    val user = User(email, password)
+                    val user = User(name, surname, email, password)
                     users.child(FirebaseAuth.getInstance().currentUser!!.uid)
                         .setValue(user)
                         .addOnSuccessListener {
