@@ -17,4 +17,12 @@
     <string name="registration_surname">Прiзвище</string>
     <string name="registration_email">Електронна пошта</string>
     <string name="registration_password">Пароль</string>
+
+    <!--==============================
+        SignIn
+              TextView
+    ==============================-->
+    <string name="sign_in_forget_password">
+        <u>Забули пароль?</u>
+    </string>
 </resources>

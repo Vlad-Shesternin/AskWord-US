@@ -5,6 +5,9 @@ import com.veldan.askword_us.global.isEmail
 import com.veldan.askword_us.global.toast
 
 object Verification {
+    //==============================
+    //      EmailPassword
+    //==============================
     fun verifyEmailPassword(context: Context, email: String, password: String) = when {
         //Consistency is important
         email.isEmpty() && password.isEmpty() -> {
@@ -30,6 +33,9 @@ object Verification {
         else -> true
     }
 
+    //==============================
+    //      NameSurname
+    //==============================
     fun verifyNameSurname(context: Context, name: String, surname: String) = when {
         //Consistency is important
         name.isEmpty() && surname.isEmpty() -> {

@@ -23,18 +23,30 @@
         android:id="@+id/authenticationFragment"
         android:name="com.veldan.askword_us.authentication.AuthenticationFragment"
         android:label="AuthenticationFragment"
-        tools:layout="@layout/fragment_authentication" >
+        tools:layout="@layout/fragment_authentication">
         <action
             android:id="@+id/action_authenticationFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_authenticationFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.veldan.askword_us.authentication.RegistrationFragment"
         android:label="RegistrationFragment"
-        tools:layout="@layout/fragment_registration" >
+        tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_registrationFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.veldan.askword_us.authentication.SignInFragment"
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_startFragment"
             app:destination="@id/startFragment" />
     </fragment>
 </navigation>

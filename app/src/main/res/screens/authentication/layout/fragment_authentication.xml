@@ -34,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/authentication_margin_horizontal"
+            android:onClick="@{() -> authenticationFragment.transitionToSignIn()}"
             android:text="@string/authentication_sign_in"
             android:textSize="@dimen/button_text_size"
             app:layout_constraintBottom_toTopOf="@+id/btn_registration"
