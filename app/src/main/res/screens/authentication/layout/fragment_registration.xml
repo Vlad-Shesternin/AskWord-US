@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="registrationFragment"
+            type="com.veldan.askword_us.authentication.RegistrationFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_registration_with_google"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/colorShine"
+            android:text="G"
+            android:textColor="#62FF00"
+            android:textSize="50sp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_registration_with_facebook"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_registration_with_facebook"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/colorAccent"
+            android:text="F"
+            android:textColor="#3F51B5"
+            android:textSize="50sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_registration_with_google"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:hint="@string/registration_name"
+            android:inputType="textPersonName"
+            android:textSize="@dimen/edit_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_registration_with_google"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <EditText
+            android:id="@+id/edit_surname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:hint="@string/registration_surname"
+            android:inputType="textPersonName"
+            android:textSize="@dimen/edit_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_name"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <EditText
+            android:id="@+id/edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:hint="@string/registration_email"
+            android:inputType="textEmailAddress"
+            android:textSize="@dimen/edit_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_surname"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <EditText
+            android:id="@+id/edit_password"
+            focusAfterClickKeyDone="@{true}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:hint="@string/registration_password"
+            android:inputType="textPassword"
+            android:textSize="@dimen/edit_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_email"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <ImageButton
+            android:id="@+id/ib_done"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="100dp"
+            android:background="@drawable/fab_state"
+            android:onClick="@{() -> registrationFragment.registration()}"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_check"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_password" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -10,13 +10,15 @@
         android:nextFocusForward="@id/edit_word"
         app:layoutDescription="@xml/words_creation_scene">
 
-        <ImageButton
-            android:id="@+id/ib_img_add"
+        <ImageView
+            android:id="@+id/img_img_add"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginVertical="@dimen/words_creation_ib_margin"
+            android:background="@drawable/image_add_state"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toTopOf="@id/guideH_25"
-            app:layout_constraintDimensionRatio="2:1"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

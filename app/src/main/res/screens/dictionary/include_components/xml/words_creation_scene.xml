@@ -58,7 +58,7 @@
         android:id="@+id/move_to_top"
         app:deriveConstraintsFrom="@id/start">
 
-        <Constraint android:id="@+id/ib_img_add">
+        <Constraint android:id="@+id/img_img_add">
             <PropertySet android:visibility="invisible" />
         </Constraint>
         <Constraint android:id="@+id/edit_word">

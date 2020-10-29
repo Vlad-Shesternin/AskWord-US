@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,62 +14,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/edit_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:hint="@string/authentication_email"
-            android:inputType="textEmailAddress"
-            android:textSize="@dimen/edit_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <Button
+            android:id="@+id/btn_sign_in_without_password"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/authentication_margin_horizontal"
+            android:text="@string/authentication_sign_in_without_password"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/btn_sign_in"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2" />
-
-        <EditText
-            android:id="@+id/edit_password"
-            clickHideKeyboard="@{true}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:hint="@string/authentication_password"
-            android:inputType="textPassword"
-            android:textSize="@dimen/edit_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_email"
-            app:layout_constraintVertical_bias="0.05" />
+            app:layout_constraintVertical_chainStyle="spread" />
 
         <Button
             android:id="@+id/btn_sign_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> authenticationFragment.signIn()}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/authentication_margin_horizontal"
             android:text="@string/authentication_sign_in"
             android:textSize="@dimen/button_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/edit_password"
-            app:layout_constraintStart_toStartOf="@id/edit_password"
-            app:layout_constraintTop_toBottomOf="@id/edit_password"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintWidth_min="200dp" />
+            app:layout_constraintBottom_toTopOf="@+id/btn_registration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in_without_password"
+            app:layout_constraintVertical_bias="0.05" />
 
         <Button
             android:id="@+id/btn_registration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> authenticationFragment.registration()}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/authentication_margin_horizontal"
+            android:onClick="@{() -> authenticationFragment.transitionToRegistration()}"
             android:text="@string/authentication_registration"
             android:textSize="@dimen/button_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/btn_sign_in"
-            app:layout_constraintStart_toStartOf="@id/btn_sign_in"
-            app:layout_constraintTop_toBottomOf="@id/btn_sign_in"
-            app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintWidth_min="250dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in"
+            app:layout_constraintVertical_bias="0.05" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

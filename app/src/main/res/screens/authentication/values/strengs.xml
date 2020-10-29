@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--==============================-->
-    <!--fragment_authentication-->
-    <!--==============================-->
-    <string name="authentication_email">Електронна пошта</string>
-    <string name="authentication_password">Пароль</string>
+
+    <!--==============================
+        Authentication
+                      Button
+    ==============================-->
     <string name="authentication_sign_in">Ввiйти</string>
     <string name="authentication_registration">Зареєструватися</string>
+    <string name="authentication_sign_in_without_password">Ввiйти без реєстрацiї</string>
+
+    <!--==============================
+        Registration
+                    EditText
+    ==============================-->
+    <string name="registration_name">Iм`я</string>
+    <string name="registration_surname">Прiзвище</string>
+    <string name="registration_email">Електронна пошта</string>
+    <string name="registration_password">Пароль</string>
 </resources>

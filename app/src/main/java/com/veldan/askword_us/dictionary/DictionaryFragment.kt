@@ -123,7 +123,7 @@ class DictionaryFragment : Fragment() {
             //Components layout_words_creation
             private val motion = layoutWordsCreation.layoutWordsCreation
             private val editWord = layoutWordsCreation.editWord
-            private val ibImgAdd = layoutWordsCreation.ibImgAdd
+            private val imgImgAdd = layoutWordsCreation.imgImgAdd
             private val editTranslation = layoutWordsCreation.editTranslation
             private val ifvPromptAdd = layoutWordsCreation.ifvPromptAdd
 
@@ -153,7 +153,7 @@ class DictionaryFragment : Fragment() {
             }
 
             private fun startToMoveToTop() {
-                Clickable.enabled(false, *arrayOf(ibImgAdd, editWord, editTranslation))
+                Clickable.enabled(false, *arrayOf(imgImgAdd, editWord, editTranslation))
                 Animator.transition(motion, start, moveToTop, 500)
             }
 

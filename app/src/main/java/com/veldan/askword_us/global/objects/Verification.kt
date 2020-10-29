@@ -5,7 +5,7 @@ import com.veldan.askword_us.global.isEmail
 import com.veldan.askword_us.global.toast
 
 object Verification {
-    fun verify(context: Context, email: String, password: String) = when {
+    fun verifyEmailPassword(context: Context, email: String, password: String) = when {
         //Consistency is important
         email.isEmpty() && password.isEmpty() -> {
             "Введiть електронну адресу i пароль".toast(context)
@@ -25,6 +25,23 @@ object Verification {
         }
         password.length < 6 -> {
             "Короткий пароль".toast(context)
+            false
+        }
+        else -> true
+    }
+
+    fun verifyNameSurname(context: Context, name: String, surname: String) = when {
+        //Consistency is important
+        name.isEmpty() && surname.isEmpty() -> {
+            "Введiть Iм`я i Прiзвище".toast(context)
+            false
+        }
+        name.isEmpty() -> {
+            "Введiть Iм`я ".toast(context)
+            false
+        }
+        surname.isEmpty() -> {
+            "Введiть Прiзвище".toast(context)
             false
         }
         else -> true
