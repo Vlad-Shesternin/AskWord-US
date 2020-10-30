@@ -61,4 +61,18 @@ class SignInFragment : Fragment() {
                 }
         }
     }
+
+    fun forgetPassword() {
+        email = binding.editEmail.text.toString()
+        if (Verification.verifyEmail(requireContext(), email)) {
+            auth.sendPasswordResetEmail(email)
+                .addOnSuccessListener {
+                    "Инструкцию по восстановлению пароля отправлено на почту: $email".toast(
+                        requireContext())
+                }
+                .addOnFailureListener {
+                    "Нет такой почты".toast(requireContext())
+                }
+        }
+    }
 }
