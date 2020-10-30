@@ -13,6 +13,7 @@ import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator
 import com.veldan.askword_us.global.objects.Clickable
+import kotlinx.coroutines.*
 
 
 class DictionaryFragment : Fragment() {
@@ -148,7 +149,12 @@ class DictionaryFragment : Fragment() {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 super.onTransitionCompleted(motionLayout, currentId)
                 if (currentId == twistingShine) {
-                    layoutWordsCreation.layoutPrompt.editPrompt.defaultFocusAndKeyboard(true)
+                    CoroutineScope(Dispatchers.Default).launch {
+                        delay(500)
+                        withContext(Dispatchers.Main) {
+                            layoutWordsCreation.layoutPrompt.editPrompt.defaultFocusAndKeyboard(true)
+                        }
+                    }
                 }
             }
 
