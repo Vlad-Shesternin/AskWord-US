@@ -46,7 +46,8 @@ android {
                            'src/main/res/screens/start',
                            'src/main/res/screens/dictionary',
                            'src/main/res/screens/dictionary/include_components',
-                           'src/main/res/screens/authentication']
+                           'src/main/res/screens/authentication',
+                           'src/main/res/screens/authentication/include_components']
         }
     }
 }
@@ -69,7 +70,6 @@ dependencies {
     def recycler_version = "1.1.0"
     implementation "androidx.recyclerview:recyclerview:$recycler_version"
     // ConstraintLayout
-    // 2.0.1 - does not work [MotionScene : autoTransition]
     def constraintLayout_version = '2.0.2'
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"
     // CardView

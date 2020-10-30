@@ -12,6 +12,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        clickHideKeyboard="@{true}"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -44,6 +45,7 @@
 
         <EditText
             android:id="@+id/edit_name"
+            defaultFocusAndKeyboard="@{true}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"

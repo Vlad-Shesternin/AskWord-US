@@ -25,9 +25,11 @@ class AuthenticationFragment : Fragment() {
         return binding.root
     }
 
-    fun transitionToRegistration() {
+
+
+    fun transitionToStart() {
         val action =
-            AuthenticationFragmentDirections.actionAuthenticationFragmentToRegistrationFragment()
+            AuthenticationFragmentDirections.actionAuthenticationFragmentToStartFragment()
         findNavController().navigate(action)
     }
 
@@ -37,5 +39,9 @@ class AuthenticationFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-
+    fun transitionToRegistration() {
+        val action =
+            AuthenticationFragmentDirections.actionAuthenticationFragmentToRegistrationFragment()
+        findNavController().navigate(action)
+    }
 }

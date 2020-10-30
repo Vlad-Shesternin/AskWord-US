@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--==============================
+        Authentication
+                      TextView
+    ==============================-->
+    <string name="authentication_warning">
+        Створенi Вами слова буде не можливо вiдновити
+        при видаленнi додатку та на iншому пристрої.
+    </string>
+</resources>
