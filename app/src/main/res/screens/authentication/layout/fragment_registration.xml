@@ -78,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:hint="@string/registration_email"
+            android:imeOptions="flagForceAscii"
             android:inputType="textEmailAddress"
             android:textSize="@dimen/edit_text_size"
             app:layout_constraintBottom_toBottomOf="parent"

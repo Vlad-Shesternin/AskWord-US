@@ -73,6 +73,7 @@ class SignInFragment : Fragment() {
                 .addOnFailureListener {
                     "Нет такой почты".toast(requireContext())
                 }
+
         }
     }
 }
