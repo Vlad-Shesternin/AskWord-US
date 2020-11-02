@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "788019925090",
-    "firebase_url": "https://askword-us.firebaseio.com",
-    "project_id": "askword-us",
-    "storage_bucket": "askword-us.appspot.com"
+    "project_number": "928536308343",
+    "firebase_url": "https://askword-us-cc662.firebaseio.com",
+    "project_id": "askword-us-cc662",
+    "storage_bucket": "askword-us-cc662.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:788019925090:android:661043f09fdfbf64c8413b",
+        "mobilesdk_app_id": "1:928536308343:android:bff32f025004ee52adf472",
         "android_client_info": {
           "package_name": "com.veldan.askword_us"
         }
       },
       "oauth_client": [
         {
-          "client_id": "788019925090-6t8sipl25g1ektbknvcbk8i4k2i94jch.apps.googleusercontent.com",
+          "client_id": "928536308343-e1g9q1cbv11k6fsoluq1b4pl658qd30q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.veldan.askword_us",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "788019925090-3k00j11r4qpml0bkeukip6gt8r93vpqk.apps.googleusercontent.com",
+          "client_id": "928536308343-b3vs60edeo1l2e5nogvvtbt6ltgehrnk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA6S7iewIjc8hepDyrLEJHMigpMnGJgDu0"
+          "current_key": "AIzaSyCgI2uFY4ZEVaTq8CgR1n0B9CJmyq2sF7k"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "788019925090-3k00j11r4qpml0bkeukip6gt8r93vpqk.apps.googleusercontent.com",
+              "client_id": "928536308343-b3vs60edeo1l2e5nogvvtbt6ltgehrnk.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

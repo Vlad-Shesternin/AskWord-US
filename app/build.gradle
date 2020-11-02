@@ -77,7 +77,9 @@ dependencies {
 
     // Firebase ===============================
     // BoM
-    implementation platform('com.google.firebase:firebase-bom:25.12.0')
+    implementation platform('com.google.firebase:firebase-bom:26.0.0')
+    // Analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx'
     // Authentication
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-auth:19.4.0'

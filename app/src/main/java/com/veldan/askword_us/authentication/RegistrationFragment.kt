@@ -15,23 +15,25 @@ import com.google.firebase.database.FirebaseDatabase
 import com.veldan.askword_us.databinding.FragmentRegistrationBinding
 import com.veldan.askword_us.global.objects.Verification
 import com.veldan.askword_us.global.toast
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 private const val TAG = "RegistrationFragment"
 
 class RegistrationFragment : Fragment() {
 
+    // Binding
     private lateinit var binding: FragmentRegistrationBinding
 
-    // Firebase
-    private lateinit var auth: FirebaseAuth
-    private lateinit var fireDb: FirebaseDatabase
-    private lateinit var fireUser: FirebaseUser
-    private lateinit var users: DatabaseReference
+    // Coroutine
+    private val scope = CoroutineScope(Dispatchers.Default)
 
+    // Firebase
+    private val auth = FirebaseAuth.getInstance()
+    private val fireDb = FirebaseDatabase.getInstance()
+    private val users = fireDb.getReference("Users")
+    private var fireUser: FirebaseUser? = null
+
+    // Properties
     private lateinit var name: String
     private lateinit var surname: String
     private lateinit var email: String
@@ -46,14 +48,10 @@ class RegistrationFragment : Fragment() {
         binding = FragmentRegistrationBinding.inflate(inflater)
         binding.registrationFragment = this
 
-        auth = FirebaseAuth.getInstance()
-        fireDb = FirebaseDatabase.getInstance()
-        users = fireDb.getReference("Users")
-
         return binding.root
     }
 
-    fun transitionToStart() {
+    private fun transitionToStart() {
         val action =
             RegistrationFragmentDirections.actionRegistrationFragmentToStartFragment()
         findNavController().navigate(action)
@@ -77,27 +75,18 @@ class RegistrationFragment : Fragment() {
                 .addOnSuccessListener {
                     "Пользователя зарегистрировано".toast(requireContext())
 
-                    fireUser = auth.currentUser!!
-                    fireUser.sendEmailVerification()
+                    fireUser = auth.currentUser
+                    fireUser!!.sendEmailVerification()
                         .addOnSuccessListener {
                             "Подтвердите адрес: $email".toast(requireContext())
 
-                            while (!(fireUser.isEmailVerified)) {
-                                CoroutineScope(Dispatchers.IO).launch {
-                                    delay(1000)
-                                    fireUser.reload()
-                                    Log.i(TAG, "Подтвердите...")
-                                }
+                            // Checking email confirmation every one second
+                            scope.launch {
+                                verificationEmail()
+                                addUserFireDb()
+                                transitionToStart()
                             }
 
-                            val user = User(name, surname, email)
-                            users.child(FirebaseAuth.getInstance().currentUser!!.uid)
-                                .setValue(user)
-                                .addOnSuccessListener {
-                                    "Пользователя добавлено в БД".toast(requireContext())
-                                }
-
-                            transitionToStart()
                         }
                         .addOnFailureListener {
                             "Не удалось отправить: $email".toast(requireContext())
@@ -107,5 +96,53 @@ class RegistrationFragment : Fragment() {
                     "Пользователя не зарегистрировано".toast(requireContext())
                 }
         }
+    }
+
+    private suspend fun verificationEmail() {
+        val verifyJob = scope.launch {
+            var a = 0
+            fireUser?.let { user ->
+                while (!(user.isEmailVerified)) {
+                    delay(1000)
+                    user.reload()
+                    Log.i(TAG, "Подтвердите...${++a}")
+                }
+            }
+        }
+        verifyJob.join()
+    }
+
+    private suspend fun addUserFireDb() {
+        val addUserJob = scope.launch {
+            val user = User(name, surname, email)
+            users.child(FirebaseAuth.getInstance().currentUser!!.uid)
+                .setValue(user)
+                .addOnSuccessListener {
+                    "Пользователя добавлено в БД".toast(requireContext())
+                }
+        }
+        addUserJob.join()
+    }
+
+    private fun deleteUser() {
+
+        CoroutineScope(Dispatchers.Default).launch {
+            fireUser?.let {
+                it.delete()
+                    .addOnSuccessListener {
+                        Log.i(TAG, "Пользователя удалено")
+                    }
+            }
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        Log.i(TAG, "onDetach: ")
+
+        scope.cancel()
+        "Scope отменено".toast(requireContext())
+
+        deleteUser()
     }
 }
