@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.databinding.FragmentRegistrationBinding
 
@@ -30,10 +30,11 @@ class RegistrationFragment : Fragment() {
 
         binding = FragmentRegistrationBinding.inflate(inflater)
         binding.registrationFragment = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        Log.i(TAG, "viewModel = ViewModelProvider")
         viewModelFactory = RegistrationViewModelFactory(this)
         viewModel = ViewModelProvider(this, viewModelFactory).get(RegistrationViewModel::class.java)
+        binding.registrationViewModel = viewModel
 
         return binding.root
     }

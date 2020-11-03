@@ -21,7 +21,7 @@
 
         <KeyFrameSet>
             <KeyAttribute
-                android:elevation="@dimen/fab_elevation"
+                android:elevation="@dimen/dictionary_fab_elevation"
                 app:framePosition="90"
                 app:motionTarget="@id/fab_add" />
         </KeyFrameSet>
@@ -44,8 +44,8 @@
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/fab_margin_horizontal"
-                android:layout_marginEnd="@dimen/fab_margin_horizontal"
+                android:layout_marginStart="@dimen/dictionary_fab_margin_horizontal"
+                android:layout_marginEnd="@dimen/dictionary_fab_margin_horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
                 app:customFloatValue="0" />
             <Motion
                 app:pathMotionArc="startVertical" />
-            <Transform android:elevation="@dimen/fab_elevation" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
         </Constraint>
 
         <Constraint android:id="@+id/layout_words_creation">
@@ -94,7 +94,7 @@
                 app:attributeName="crossfade"
                 app:customFloatValue="1" />
             <Transform
-                android:elevation="@dimen/fab_elevation"
+                android:elevation="@dimen/dictionary_fab_elevation"
                 android:rotation="360" />
         </Constraint>
 
@@ -126,15 +126,15 @@
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/fab_margin_horizontal"
-                android:layout_marginEnd="@dimen/fab_margin_horizontal"
+                android:layout_marginStart="@dimen/dictionary_fab_margin_horizontal"
+                android:layout_marginEnd="@dimen/dictionary_fab_margin_horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/guideV_60"
                 app:layout_constraintStart_toEndOf="@id/guideV_40"
                 app:layout_constraintTop_toTopOf="parent" />
             <Transform
-                android:elevation="@dimen/fab_elevation"
+                android:elevation="@dimen/dictionary_fab_elevation"
                 android:rotation="-720" />
         </Constraint>
 
@@ -142,8 +142,8 @@
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/fab_margin_horizontal"
-                android:layout_marginEnd="@dimen/fab_margin_horizontal"
+                android:layout_marginStart="@dimen/dictionary_fab_margin_horizontal"
+                android:layout_marginEnd="@dimen/dictionary_fab_margin_horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/guideV_60"
@@ -156,8 +156,8 @@
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/fab_margin_horizontal"
-                android:layout_marginEnd="@dimen/fab_margin_horizontal"
+                android:layout_marginStart="@dimen/dictionary_fab_margin_horizontal"
+                android:layout_marginEnd="@dimen/dictionary_fab_margin_horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/guideV_60"
@@ -170,8 +170,8 @@
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/fab_margin_horizontal"
-                android:layout_marginEnd="@dimen/fab_margin_horizontal"
+                android:layout_marginStart="@dimen/dictionary_fab_margin_horizontal"
+                android:layout_marginEnd="@dimen/dictionary_fab_margin_horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/guideV_60"
@@ -208,43 +208,43 @@
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/fab_margin_horizontal"
-                android:layout_marginEnd="@dimen/fab_margin_horizontal"
-                android:layout_marginBottom="@dimen/fab_margin_bottom"
+                android:layout_marginStart="@dimen/dictionary_fab_margin_horizontal"
+                android:layout_marginEnd="@dimen/dictionary_fab_margin_horizontal"
+                android:layout_marginBottom="@dimen/dictionary_fab_margin_horizontal"
                 app:layout_constraintBottom_toTopOf="@id/fab_add"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/guideV_60"
                 app:layout_constraintStart_toEndOf="@id/guideV_40" />
             <PropertySet android:visibility="visible" />
-            <Transform android:elevation="@dimen/fab_elevation" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
         </Constraint>
 
         <Constraint android:id="@+id/fab_photo">
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/fab_margin_horizontal"
-                android:layout_marginEnd="@dimen/fab_margin_horizontal"
+                android:layout_marginStart="@dimen/dictionary_fab_margin_horizontal"
+                android:layout_marginEnd="@dimen/dictionary_fab_margin_horizontal"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/guideV_40"
                 app:layout_constraintStart_toEndOf="@id/guideV_20"
                 app:layout_constraintTop_toBottomOf="@+id/fab_add" />
             <PropertySet android:visibility="visible" />
-            <Transform android:elevation="@dimen/fab_elevation" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
         </Constraint>
 
         <Constraint android:id="@+id/fab_file">
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/fab_margin_horizontal"
-                android:layout_marginEnd="@dimen/fab_margin_horizontal"
+                android:layout_marginStart="@dimen/dictionary_fab_margin_horizontal"
+                android:layout_marginEnd="@dimen/dictionary_fab_margin_horizontal"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toStartOf="@id/guideV_80"
                 app:layout_constraintStart_toEndOf="@id/guideV_60"
                 app:layout_constraintTop_toBottomOf="@+id/fab_add" />
             <PropertySet android:visibility="visible" />
-            <Transform android:elevation="@dimen/fab_elevation" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
         </Constraint>
     </ConstraintSet>
 
@@ -256,7 +256,7 @@
         app:deriveConstraintsFrom="@id/move_to_center">
         <Constraint android:id="@id/fab_category">
             <PropertySet android:visibility="visible" />
-            <Transform android:elevation="@dimen/fab_elevation" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
         </Constraint>
 
         <Constraint android:id="@+id/fab_add">
@@ -272,7 +272,7 @@
         app:deriveConstraintsFrom="@id/move_to_center">
         <Constraint android:id="@id/fab_photo">
             <PropertySet android:visibility="visible" />
-            <Transform android:elevation="@dimen/fab_elevation" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
         </Constraint>
 
         <Constraint android:id="@+id/fab_add">
@@ -288,7 +288,7 @@
         app:deriveConstraintsFrom="@id/move_to_center">
         <Constraint android:id="@id/fab_file">
             <PropertySet android:visibility="visible" />
-            <Transform android:elevation="@dimen/fab_elevation" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
         </Constraint>
 
         <Constraint android:id="@+id/fab_add">

@@ -1,8 +1,8 @@
 package com.veldan.askword_us.authentication.registration
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.view.View
+import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -30,6 +30,16 @@ class RegistrationViewModel(
     // Properties
     private val context = fragment.requireContext()
 
+    private val _visibilityBooleanTextViewVerifyEmail = MutableLiveData<Boolean>()
+    val visibilityTextViewVerifyEmail: LiveData<Int> =
+        Transformations.map(_visibilityBooleanTextViewVerifyEmail) {
+            if (it) View.VISIBLE else View.INVISIBLE
+        }
+
+    // init LiveDates
+    init {
+        _visibilityBooleanTextViewVerifyEmail.value = false
+    }
 
     //==============================
     //          Registration
@@ -53,6 +63,8 @@ class RegistrationViewModel(
                         fireUser!!.sendEmailVerification()
                             .addOnSuccessListener {
                                 "Подтвердите адрес: $email".toast(context)
+
+                                _visibilityBooleanTextViewVerifyEmail.value = true
 
                                 // Checking email confirmation every one second
                                 scope.launch(Dispatchers.Default) {
