@@ -1,25 +1,23 @@
 package com.veldan.askword_us.authentication.sign_in
 
 import android.os.Bundle
+import android.os.UserHandle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
+import androidx.lifecycle.ViewModelProvider
+import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.databinding.FragmentSignInBinding
-import com.veldan.askword_us.global.objects.Verification
-import com.veldan.askword_us.global.toast
 
 class SignInFragment : Fragment() {
 
+    // Binding
     private lateinit var binding: FragmentSignInBinding
 
-    // Firebase
-    private lateinit var auth: FirebaseAuth
-
-    private lateinit var email: String
-    private lateinit var password: String
+    // ViewModel and Factory
+    private lateinit var viewModel: SignInViewModel
+    private lateinit var viewModelFactory: SignInViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,51 +25,26 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
 
+        // init Binding
         binding = FragmentSignInBinding.inflate(inflater)
         binding.signInFragment = this
 
-        auth = FirebaseAuth.getInstance()
+        // init ViewModel and Factory
+        viewModelFactory = SignInViewModelFactory(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SignInViewModel::class.java)
 
         return binding.root
     }
 
-    fun transitionToStart() {
-        val action =
-            SignInFragmentDirections.actionSignInFragmentToStartFragment()
-        findNavController().navigate(action)
+    private fun getUser() = User(
+        email = binding.editEmail.text.toString(),
+        password = binding.editPassword.text.toString())
+
+    fun signIn(){
+        viewModel.signIn(getUser())
     }
 
-    private fun getEmailPassword() {
-        email = binding.editEmail.text.toString()
-        password = binding.editPassword.text.toString()
-    }
-
-    fun signIn() {
-        getEmailPassword()
-        if (Verification.verifyEmailPassword(requireContext(), email, password)) {
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    "Пользователь вошёл".toast(requireContext())
-                    transitionToStart()
-                }
-                .addOnFailureListener {
-                    "Пользователь не вошёл".toast(requireContext())
-                }
-        }
-    }
-
-    fun forgetPassword() {
-        email = binding.editEmail.text.toString()
-        if (Verification.verifyEmail(requireContext(), email)) {
-            auth.sendPasswordResetEmail(email)
-                .addOnSuccessListener {
-                    "Инструкцию по восстановлению пароля отправлено на почту: $email".toast(
-                        requireContext())
-                }
-                .addOnFailureListener {
-                    "Нет такой почты".toast(requireContext())
-                }
-
-        }
+    fun forgetPassword(){
+        viewModel.forgetPassword(getUser())
     }
 }

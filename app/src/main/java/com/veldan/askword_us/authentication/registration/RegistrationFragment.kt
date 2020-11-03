@@ -18,14 +18,9 @@ class RegistrationFragment : Fragment() {
     // Binding
     private lateinit var binding: FragmentRegistrationBinding
 
-    // ViewModel
+    // ViewModel and Factory
     private lateinit var viewModel: RegistrationViewModel
-
-    // Properties
-    private lateinit var name: String
-    private lateinit var surname: String
-    private lateinit var email: String
-    private lateinit var password: String
+    private lateinit var viewModelFactory: RegistrationViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +32,8 @@ class RegistrationFragment : Fragment() {
         binding.registrationFragment = this
 
         Log.i(TAG, "viewModel = ViewModelProvider")
-        viewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
+        viewModelFactory = RegistrationViewModelFactory(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(RegistrationViewModel::class.java)
 
         return binding.root
     }
@@ -49,6 +45,6 @@ class RegistrationFragment : Fragment() {
         password = binding.editPassword.text.toString())
 
     fun registration() {
-        viewModel.registration(this, getUser())
+        viewModel.registration(getUser())
     }
 }

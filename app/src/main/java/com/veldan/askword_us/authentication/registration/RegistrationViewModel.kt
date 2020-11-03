@@ -1,9 +1,8 @@
 package com.veldan.askword_us.authentication.registration
 
-import android.content.Context
 import android.util.Log
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -15,10 +14,12 @@ import kotlinx.coroutines.*
 
 private const val TAG = "RegistrationViewModel"
 
-class RegistrationViewModel : ViewModel() {
+class RegistrationViewModel(
+    private val fragment: RegistrationFragment,
+) : ViewModel() {
 
     // Coroutine
-    private val scope = CoroutineScope(Dispatchers.Default)
+    private val scope = viewModelScope
 
     // Firebase
     private val auth = FirebaseAuth.getInstance()
@@ -26,44 +27,55 @@ class RegistrationViewModel : ViewModel() {
     private val users = fireDb.getReference("Users")
     private var fireUser: FirebaseUser? = null
 
-    fun registration(fragment: Fragment, user: User) {
+    // Properties
+    private val context = fragment.requireContext()
+
+
+    //==============================
+    //          Registration
+    //==============================
+    fun registration(user: User) {
         val name = user.name
         val surname = user.surname
         val email = user.email
         val password = user.password
 
-        if (Verification.verifyNameSurname(fragment.requireContext(), name, surname) &&
-            Verification.verifyEmailPassword(fragment.requireContext(), email, password)
+        if (Verification.verifyNameSurname(context, name, surname) &&
+            Verification.verifyEmailPassword(context, email, password)
         ) {
-            "Проверка пройдена".toast(fragment.requireContext())
+            "Проверка пройдена".toast(context)
+            scope.launch(Dispatchers.Default) {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnSuccessListener {
+                        "Пользователя зарегистрировано".toast(context)
 
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    "Пользователя зарегистрировано".toast(fragment.requireContext())
+                        fireUser = auth.currentUser
+                        fireUser!!.sendEmailVerification()
+                            .addOnSuccessListener {
+                                "Подтвердите адрес: $email".toast(context)
 
-                    fireUser = auth.currentUser
-                    fireUser!!.sendEmailVerification()
-                        .addOnSuccessListener {
-                            "Подтвердите адрес: $email".toast(fragment.requireContext())
-
-                            // Checking email confirmation every one second
-                            scope.launch {
-                                verificationEmail()
-                                val userWithoutPassword = User(name, surname, email)
-                                addUserFireDb(fragment.requireContext(), userWithoutPassword)
-                                transitionToStart(fragment)
+                                // Checking email confirmation every one second
+                                scope.launch(Dispatchers.Default) {
+                                    verificationEmail()
+                                    val userWithoutPassword = User(name, surname, email)
+                                    addUserFireDb(userWithoutPassword)
+                                    transitionToStart()
+                                }
                             }
-                        }
-                        .addOnFailureListener {
-                            "Не удалось отправить: $email".toast(fragment.requireContext())
-                        }
-                }
-                .addOnFailureListener {
-                    "Пользователя не зарегистрировано".toast(fragment.requireContext())
-                }
+                            .addOnFailureListener {
+                                "Не удалось отправить: $email".toast(context)
+                            }
+                    }
+                    .addOnFailureListener {
+                        "Пользователя не зарегистрировано".toast(context)
+                    }
+            }
         }
     }
 
+    //==============================
+    //          VerificationEmail
+    //==============================
     private suspend fun verificationEmail() {
         val verifyJob = scope.launch {
             var a = 0
@@ -78,7 +90,10 @@ class RegistrationViewModel : ViewModel() {
         verifyJob.join()
     }
 
-    private suspend fun addUserFireDb(context: Context, user: User) {
+    //==============================
+    //          AddUserFireDb
+    //==============================
+    private suspend fun addUserFireDb(user: User) {
         val addUserJob = scope.launch {
             users.child(FirebaseAuth.getInstance().currentUser!!.uid)
                 .setValue(user)
@@ -89,9 +104,12 @@ class RegistrationViewModel : ViewModel() {
         addUserJob.join()
     }
 
+    //==============================
+    //          DeleteUser
+    //==============================
     private fun deleteUser() {
-        CoroutineScope(Dispatchers.Default).launch {
-            fireUser?.let {
+        fireUser?.let {
+            CoroutineScope(Dispatchers.Default).launch {
                 it.delete()
                     .addOnSuccessListener {
                         Log.i(TAG, "Пользователя удалено")
@@ -100,18 +118,20 @@ class RegistrationViewModel : ViewModel() {
         }
     }
 
-    private fun transitionToStart(fragment: Fragment) {
+    //==============================
+    //          TransitionToStart
+    //==============================
+    private fun transitionToStart() {
         val action = RegistrationFragmentDirections.actionRegistrationFragmentToStartFragment()
         fragment.findNavController().navigate(action)
     }
 
+    //==============================
+    //          OnCleared
+    //==============================
     override fun onCleared() {
         super.onCleared()
         Log.i(TAG, "onDetach:")
-
-        scope.cancel()
-        Log.i(TAG, "Scope отменено")
-
         deleteUser()
     }
 
