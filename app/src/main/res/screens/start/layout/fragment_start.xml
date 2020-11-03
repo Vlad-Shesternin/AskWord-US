@@ -18,16 +18,16 @@
             android:id="@+id/dictionary"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/btn_margin"
+            android:layout_margin="@dimen/start_btn_margin"
             android:background="@drawable/btn_state"
             android:onClick="@{()-> startFragment.transitionToDictionary()}"
-            android:text="@string/dictionary"
+            android:text="@string/start_btn_dictionary"
             app:layout_constraintBottom_toTopOf="@id/guideH_50"
             app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintVertical_bias="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_50"
@@ -40,15 +40,15 @@
             android:id="@+id/study"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/btn_margin"
+            android:layout_margin="@dimen/start_btn_margin"
             android:background="@drawable/btn_state"
-            android:text="@string/study"
-            app:layout_constraintVertical_bias="0"
+            android:text="@string/start_btn_study"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideH_50" />
+            app:layout_constraintTop_toBottomOf="@id/guideH_50"
+            app:layout_constraintVertical_bias="0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

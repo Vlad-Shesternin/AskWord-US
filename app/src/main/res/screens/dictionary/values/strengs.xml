@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--==============================-->
-    <!--fragment_dictionary-->
-    <!--==============================-->
-    <string name="dictionary_no">Немає</string>
-    <string name="dictionary_words">слiв</string>
+    <!--==============================
+            Dictionary
+    ==============================-->
+    <!-- | TextView | -->
+    <string name="dictionary_tv_no">Немає</string>
+    <string name="dictionary_tv_words">слiв</string>
 </resources>

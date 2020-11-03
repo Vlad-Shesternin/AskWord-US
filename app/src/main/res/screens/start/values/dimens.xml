@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--==============================-->
-    <!--fab_add-->
-    <!--==============================-->
-    <dimen name="btn_margin">10dp</dimen>
+    <!--==============================
+                 Start
+    ==============================-->
+    <!-- | Button | -->
+    <dimen name="start_btn_margin">10dp</dimen>
 </resources>

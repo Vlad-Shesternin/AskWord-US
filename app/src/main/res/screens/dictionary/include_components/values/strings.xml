@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--==============================-->
-    <!--layout_words_creation-->
-    <!--==============================-->
-    <string name="format_english">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 0123456789</string>
-    <string name="enter_word">Введiть слово</string>
-    <string name="enter_translation">Введiть переклад</string>
+    <!--==============================
+            WordCreation
+    ==============================-->
+    <!-- | EditText | -->
+    <string name="word_creation_edit_format_english">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 0123456789</string>
+    <string name="word_creation_edit_enter_word">Введiть слово</string>
+    <string name="word_creation_edit_enter_translation">Введiть переклад</string>
 
-    <!--==============================-->
-    <!--layout_prompt-->
-    <!--==============================-->
-    <string name="enter_prompt">Введiть пiдказку…</string>
+    <!--==============================
+            Prompt
+    ==============================-->
+    <!-- | EditText | -->
+    <string name="prompt_edit_enter_prompt">Введiть пiдказку…</string>
 
 </resources>

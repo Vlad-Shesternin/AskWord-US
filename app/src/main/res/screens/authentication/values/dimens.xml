@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--==============================-->
-    <!--Button-->
-    <!--==============================-->
-<dimen name="authentication_margin_horizontal">10dp</dimen>
+    <!--==============================
+            Authentication
+    ==============================-->
+    <!-- | Button | -->
+<dimen name="authentication_btn_margin_horizontal">10dp</dimen>
 </resources>

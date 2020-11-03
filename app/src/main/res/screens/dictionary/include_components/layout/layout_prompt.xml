@@ -12,7 +12,7 @@
             android:id="@+id/edit_prompt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_prompt"
+            android:hint="@string/prompt_edit_enter_prompt"
             android:inputType="textCapSentences|textMultiLine"
             android:textSize="@dimen/edit_text_size"
             app:layout_constraintEnd_toEndOf="parent"

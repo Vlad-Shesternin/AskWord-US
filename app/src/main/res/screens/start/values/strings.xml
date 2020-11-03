@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="study">Вивчати</string>
-    <string name="dictionary">Словник</string>
+    <!--==============================
+                Start
+    ==============================-->
+    <!-- | Button | -->
+    <string name="start_btn_study">Вивчати</string>
+    <string name="start_btn_dictionary">Словник</string>
 </resources>

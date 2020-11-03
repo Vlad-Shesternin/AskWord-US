@@ -99,7 +99,7 @@
             <Transform
                 android:rotation="-180"
                 android:rotationY="360"
-                android:translationY="@dimen/prompt_level_twistingY" />
+                android:translationY="-25dp" />
             <CustomAttribute
                 app:attributeName="crossfade"
                 app:customFloatValue="1" />

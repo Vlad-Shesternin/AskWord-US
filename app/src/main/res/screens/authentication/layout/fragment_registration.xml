@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:hint="@string/registration_name"
+            android:hint="@string/registration_edit_name"
             android:inputType="textPersonName"
             android:textSize="@dimen/edit_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:hint="@string/registration_surname"
+            android:hint="@string/registration_edit_surname"
             android:inputType="textPersonName"
             android:textSize="@dimen/edit_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:hint="@string/registration_email"
+            android:hint="@string/registration_edit_email"
             android:imeOptions="flagForceAscii"
             android:inputType="textEmailAddress"
             android:textSize="@dimen/edit_text_size"
@@ -93,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:hint="@string/registration_password"
+            android:hint="@string/registration_edit_password"
             android:inputType="textPassword"
             android:textSize="@dimen/edit_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -101,6 +101,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edit_email"
             app:layout_constraintVertical_bias="0.05" />
+
+        <TextView
+            android:id="@+id/tv_verify_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_tv_verify_email"
+            android:textSize="20sp"
+            android:textColor="#FF0000"
+            app:layout_constraintBottom_toTopOf="@+id/ib_done"
+            app:layout_constraintEnd_toEndOf="@id/edit_password"
+            app:layout_constraintStart_toStartOf="@+id/edit_password"
+            app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
         <ImageButton
             android:id="@+id/ib_done"

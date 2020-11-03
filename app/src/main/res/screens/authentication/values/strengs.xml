@@ -2,27 +2,30 @@
 <resources>
 
     <!--==============================
-        Authentication
-                      Button
+            Authentication
     ==============================-->
-    <string name="authentication_sign_in">Ввiйти</string>
-    <string name="authentication_registration">Зареєструватися</string>
-    <string name="authentication_sign_in_without_password">Ввiйти без реєстрацiї</string>
+    <!-- | Button | -->
+    <string name="authentication_btn_sign_in">Ввiйти</string>
+    <string name="authentication_btn_registration">Зареєструватися</string>
+    <string name="authentication_btn_sign_in_without_password">Ввiйти без реєстрацiї</string>
 
     <!--==============================
-        Registration
-                    EditText
+            Registration
     ==============================-->
-    <string name="registration_name">Iм`я</string>
-    <string name="registration_surname">Прiзвище</string>
-    <string name="registration_email">Електронна пошта</string>
-    <string name="registration_password">Пароль</string>
+    <!-- | EditText | -->
+    <string name="registration_edit_name">Iм`я</string>
+    <string name="registration_edit_surname">Прiзвище</string>
+    <string name="registration_edit_email">Електронна адреса</string>
+    <string name="registration_edit_password">Пароль</string>
+
+    <!-- | TextView | -->
+    <string name="registration_tv_verify_email"><u>Пiдтвердiть електронну адресу</u></string>
 
     <!--==============================
-        SignIn
-              TextView
+            SignIn
     ==============================-->
-    <string name="sign_in_forget_password">
-        <u>Забули пароль?</u>
-    </string>
+    <!-- | TextView | -->
+    <string name="sign_in_edit_email">Електронна адреса</string>
+    <string name="sign_in_edit_password">Пароль</string>
+    <string name="sign_in_tv_forget_password"><u>Забули пароль?</u></string>
 </resources>
