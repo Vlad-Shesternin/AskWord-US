@@ -8,7 +8,7 @@
 
         <variable
             name="registrationFragment"
-            type="com.veldan.askword_us.authentication.RegistrationFragment" />
+            type="com.veldan.askword_us.authentication.registration.RegistrationFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

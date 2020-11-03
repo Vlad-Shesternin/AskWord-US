@@ -1,4 +1,4 @@
-package com.veldan.askword_us.authentication
+package com.veldan.askword_us.authentication.sign_in
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.veldan.askword_us.databinding.FragmentSignInBinding
 import com.veldan.askword_us.global.objects.Verification
 import com.veldan.askword_us.global.toast

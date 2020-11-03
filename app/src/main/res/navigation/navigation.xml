@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.veldan.askword_us.authentication.RegistrationFragment"
+        android:name="com.veldan.askword_us.authentication.registration.RegistrationFragment"
         android:label="RegistrationFragment"
         tools:layout="@layout/fragment_registration">
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.veldan.askword_us.authentication.SignInFragment"
+        android:name="com.veldan.askword_us.authentication.sign_in.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in" >
         <action

@@ -74,6 +74,9 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"
     // CardView
     implementation "androidx.cardview:cardview:1.0.0"
+    // ViewModel
+    def view_model = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$view_model"
 
     // Firebase ===============================
     // BoM
