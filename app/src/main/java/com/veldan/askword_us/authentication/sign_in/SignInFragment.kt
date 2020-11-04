@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.veldan.askword_us.authentication.User
+import com.veldan.askword_us.authentication.registration.RegistrationViewModel
+import com.veldan.askword_us.authentication.registration.RegistrationViewModelFactory
+import com.veldan.askword_us.databinding.FragmentRegistrationBinding
 import com.veldan.askword_us.databinding.FragmentSignInBinding
 
 class SignInFragment : Fragment() {
@@ -25,26 +28,31 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
 
-        // init Binding
-        binding = FragmentSignInBinding.inflate(inflater)
-        binding.signInFragment = this
-
-        // init ViewModel and Factory
-        viewModelFactory = SignInViewModelFactory(this)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(SignInViewModel::class.java)
+        initViewModel()
+        initBinding(inflater)
 
         return binding.root
+    }
+
+    private fun initViewModel() {
+        viewModelFactory = SignInViewModelFactory(this)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SignInViewModel::class.java)
+    }
+
+    private fun initBinding(inflater: LayoutInflater) {
+        binding = FragmentSignInBinding.inflate(inflater)
+        binding.signInFragment = this
     }
 
     private fun getUser() = User(
         email = binding.editEmail.text.toString(),
         password = binding.editPassword.text.toString())
 
-    fun signIn(){
+    fun signIn() {
         viewModel.signIn(getUser())
     }
 
-    fun forgetPassword(){
+    fun forgetPassword() {
         viewModel.forgetPassword(getUser())
     }
 }

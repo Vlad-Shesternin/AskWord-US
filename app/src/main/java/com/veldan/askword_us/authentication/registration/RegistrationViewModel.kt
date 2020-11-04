@@ -1,7 +1,15 @@
 package com.veldan.askword_us.authentication.registration
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.util.Log
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
@@ -36,7 +44,6 @@ class RegistrationViewModel(
             if (it) View.VISIBLE else View.INVISIBLE
         }
 
-    // init LiveDates
     init {
         _visibilityBooleanTextViewVerifyEmail.value = false
     }
@@ -66,7 +73,6 @@ class RegistrationViewModel(
 
                                 _visibilityBooleanTextViewVerifyEmail.value = true
 
-                                // Checking email confirmation every one second
                                 scope.launch(Dispatchers.Default) {
                                     verificationEmail()
                                     val userWithoutPassword = User(name, surname, email)
@@ -92,6 +98,7 @@ class RegistrationViewModel(
         val verifyJob = scope.launch {
             var a = 0
             fireUser?.let { user ->
+                // Checking email confirmation every one second
                 while (!(user.isEmailVerified)) {
                     delay(1000)
                     user.reload()
@@ -127,6 +134,35 @@ class RegistrationViewModel(
                         Log.i(TAG, "Пользователя удалено")
                     }
             }
+        }
+    }
+
+    //==============================
+    //          IsOnline
+    //==============================
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun isOnline(): Boolean {
+        val connectivityManager =
+            fragment.requireActivity()
+                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val capabilities: NetworkCapabilities =
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)!!
+
+        return when {
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+                Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                true
+            }
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
+                Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                true
+            }
+            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
+                Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                true
+            }
+            else -> false
         }
     }
 
