@@ -19,6 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/start_image_margin"
+            android:onClick="@{() -> startFragment.clickOnAccount()}"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_account_box"
             app:layout_constraintDimensionRatio="1:1"
@@ -26,8 +27,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.1" />
 
+        <include
+            android:id="@+id/layout_account"
+            layout="@layout/layout_account"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintHeight_percent="0.15"
+            app:layout_constraintStart_toEndOf="@+id/image_account"
+            app:layout_constraintTop_toTopOf="@+id/image_account"
+            app:layout_constraintWidth_percent="0.5" />
+
         <Button
-            android:id="@+id/dictionary"
+            android:id="@+id/btn_dictionary"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/start_btn_margin"
@@ -49,7 +61,7 @@
             app:layout_constraintGuide_percent="0.5" />
 
         <Button
-            android:id="@+id/study"
+            android:id="@+id/btn_study"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/start_btn_margin"

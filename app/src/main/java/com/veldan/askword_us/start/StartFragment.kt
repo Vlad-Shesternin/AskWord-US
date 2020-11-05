@@ -24,14 +24,19 @@ class StartFragment : Fragment() {
 
         binding.startFragment = this
 
-        val args = StartFragmentArgs.fromBundle(requireArguments())
-        Log.i(TAG, "${args.userName}, ${args.userSurname}, ${args.userEmail}")
-
         return binding.root
     }
 
     fun transitionToDictionary() {
         val action = StartFragmentDirections.actionStartFragmentToDictionaryFragment()
         findNavController().navigate(action)
+    }
+
+    fun clickOnAccount() {
+        val args = StartFragmentArgs.fromBundle(requireArguments())
+        binding.layoutAccount.also {
+            it.tvNameSurname.text = args.userName + " " + args.userSurname
+            it.layoutAccount.visibility = View.VISIBLE
+        }
     }
 }
