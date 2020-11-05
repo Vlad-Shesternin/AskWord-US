@@ -5,4 +5,6 @@
     ==============================-->
     <!-- | Button | -->
     <dimen name="start_btn_margin">10dp</dimen>
+    <!-- | ImageView | -->
+    <dimen name="start_image_margin">10dp</dimen>
 </resources>

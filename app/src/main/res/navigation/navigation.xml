@@ -13,6 +13,15 @@
         <action
             android:id="@+id/action_startFragment_to_dictionaryFragment"
             app:destination="@id/dictionaryFragment" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
+        <argument
+            android:name="userSurname"
+            app:argType="string" />
+        <argument
+            android:name="userEmail"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/dictionaryFragment"

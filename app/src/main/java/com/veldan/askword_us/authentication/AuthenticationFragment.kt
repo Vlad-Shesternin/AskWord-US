@@ -32,7 +32,7 @@ class AuthenticationFragment : Fragment() {
 
     fun transitionToStart() {
         val action =
-            AuthenticationFragmentDirections.actionAuthenticationFragmentToStartFragment()
+            AuthenticationFragmentDirections.actionAuthenticationFragmentToStartFragment("Нет имени", "Нет фамилии", "Нет адреса")
         findNavController().navigate(action)
     }
 

@@ -1,6 +1,7 @@
 package com.veldan.askword_us.start
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,18 +10,22 @@ import androidx.navigation.fragment.findNavController
 import com.veldan.askword_us.databinding.FragmentStartBinding
 
 class StartFragment : Fragment() {
+    private val TAG = "StartFragment"
 
     private lateinit var binding: FragmentStartBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         binding = FragmentStartBinding.inflate(inflater)
 
         binding.startFragment = this
+
+        val args = StartFragmentArgs.fromBundle(requireArguments())
+        Log.i(TAG, "${args.userName}, ${args.userSurname}, ${args.userEmail}")
 
         return binding.root
     }

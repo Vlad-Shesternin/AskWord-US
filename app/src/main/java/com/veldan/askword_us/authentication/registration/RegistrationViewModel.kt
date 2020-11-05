@@ -1,26 +1,25 @@
 package com.veldan.askword_us.authentication.registration
 
-import android.content.Context
-import android.graphics.Bitmap
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.webkit.WebView
-import android.webkit.WebViewClient
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.global.objects.Verification
 import com.veldan.askword_us.global.toast
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 private const val TAG = "RegistrationViewModel"
 
@@ -76,10 +75,10 @@ class RegistrationViewModel(
                                 _visibilityBooleanTextViewVerifyEmail.value = true
 
                                 scope.launch(Dispatchers.Default) {
-                                    verificationEmail()
+                                    // verificationEmail()
                                     val userWithoutPassword = User(name, surname, email)
                                     addUserFireDb(userWithoutPassword)
-                                    transitionToStart()
+                                    transitionToStart(name, surname, email)
                                 }
                             }
                             .addOnFailureListener {
@@ -116,7 +115,8 @@ class RegistrationViewModel(
     //==============================
     private suspend fun addUserFireDb(user: User) {
         val addUserJob = scope.launch {
-            users.child(FirebaseAuth.getInstance().currentUser!!.uid)
+            val id = users.push().key!!
+            users.child(id)
                 .setValue(user)
                 .addOnSuccessListener {
                     "Пользователя добавлено в БД".toast(context)
@@ -160,8 +160,11 @@ class RegistrationViewModel(
     //==============================
     //          TransitionToStart
     //==============================
-    private fun transitionToStart() {
-        val action = RegistrationFragmentDirections.actionRegistrationFragmentToStartFragment()
+    private fun transitionToStart(name: String, surname: String, email: String) {
+        val action =
+            RegistrationFragmentDirections.actionRegistrationFragmentToStartFragment(name,
+                surname,
+                email)
         fragment.findNavController().navigate(action)
     }
 
