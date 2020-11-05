@@ -6,6 +6,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
+import android.view.KeyEvent
+import android.view.MotionEvent
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -138,31 +140,20 @@ class RegistrationViewModel(
     }
 
     //==============================
-    //          IsOnline
+    //          WebViewOnClickBack
     //==============================
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun isOnline(): Boolean {
-        val connectivityManager =
-            fragment.requireActivity()
-                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        val capabilities: NetworkCapabilities =
-            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)!!
-
-        return when {
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
-                true
+    fun webViewOnClickBack(webView: WebView) {
+        webView.also {
+            it.setOnKeyListener { _, keyCode, event ->
+                if (keyCode == KeyEvent.KEYCODE_BACK
+                    && event.action == MotionEvent.ACTION_UP
+                    && it.canGoBack()
+                ) {
+                    it.goBack()
+                    return@setOnKeyListener true
+                }
+                return@setOnKeyListener false
             }
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
-                true
-            }
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
-                true
-            }
-            else -> false
         }
     }
 
