@@ -1,18 +1,25 @@
 package com.veldan.askword_us.start
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.databinding.FragmentStartBinding
+import com.veldan.askword_us.global.objects.SharedPreferences
 
 class StartFragment : Fragment() {
-    private val TAG = "StartFragment"
 
+    // Binding
     private lateinit var binding: FragmentStartBinding
+
+    // Firebase
+    private val auth = FirebaseAuth.getInstance()
+    private var user = auth.currentUser
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,30 +27,54 @@ class StartFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
 
-        binding = FragmentStartBinding.inflate(inflater)
-        binding.startFragment = this
+        initBinding(inflater)
+        transitionToDictionaryAndStudyOrAuthentication()
 
         return binding.root
     }
 
-    fun transitionToDictionary() {
-        val action = StartFragmentDirections.actionStartFragmentToDictionaryFragment()
+    // ==============================
+    //        Initializing
+    // ==============================
+    private fun initBinding(inflater: LayoutInflater) {
+        binding = FragmentStartBinding.inflate(inflater)
+    }
+
+    // ==============================
+    // DictionaryAndStudy Or Authentication
+    // ==============================
+    private fun transitionToDictionaryAndStudyOrAuthentication() {
+        if (currentUser() != null) {
+            val sharedPref = SharedPreferences.initSharedPref(this)
+            val name = sharedPref.getString(SharedPreferences.USER_NAME, "name")!!
+            val surname = sharedPref.getString(SharedPreferences.USER_SURNAME, "surname")!!
+            val email = user!!.email!!
+            transitionToDictionaryOrStudy(name, surname, email)
+        } else {
+            transitionToAuthentication()
+        }
+    }
+
+    // ==============================
+    //        CurrentUser
+    // ==============================
+    private fun currentUser(): FirebaseUser? {
+        user = auth.currentUser
+        return user
+    }
+
+    // ==============================
+    //        Transitions
+    // ==============================
+    private fun transitionToAuthentication() {
+        val action = StartFragmentDirections.actionStartFragmentToAuthenticationFragment()
         findNavController().navigate(action)
     }
 
-    private var visibility = View.INVISIBLE
-    fun clickOnAccount() {
-        if (visibility == View.INVISIBLE) {
-            visibility = View.VISIBLE
-            val args = StartFragmentArgs.fromBundle(requireArguments())
-            binding.layoutAccount.also {
-                it.tvNameSurname.text = args.userName + " " + args.userSurname
-                it.tvEmail.text = args.userEmail
-                it.layoutAccount.visibility = visibility
-            }
-        } else {
-            visibility = View.INVISIBLE
-            binding.layoutAccount.layoutAccount.visibility = visibility
-        }
+    private fun transitionToDictionaryOrStudy(name: String, surname: String, email: String) {
+        val action = StartFragmentDirections.actionStartFragmentToDictionaryOrStudyFragment(name,
+            surname,
+            email)
+        findNavController().navigate(action)
     }
 }

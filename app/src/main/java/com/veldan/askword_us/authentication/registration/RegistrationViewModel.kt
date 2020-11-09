@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.veldan.askword_us.authentication.User
+import com.veldan.askword_us.global.objects.SharedPreferences
 import com.veldan.askword_us.global.objects.Verification
 import com.veldan.askword_us.global.toast
 import kotlinx.coroutines.CoroutineScope
@@ -89,7 +90,13 @@ class RegistrationViewModel(
                     verificationEmail()
                     val userWithoutPassword = User(name, surname, email)
                     addUserFireDb(userWithoutPassword)
-                    transitionToStart(name, surname, email)
+
+                    val editor = SharedPreferences.getEdit(fragment)
+                    editor.putString(SharedPreferences.USER_NAME, name)
+                    editor.putString(SharedPreferences.USER_SURNAME, surname)
+                    editor.apply()
+
+                    transitionToDictionaryOrStudy(name, surname, email)
                 }
             }
             .addOnFailureListener {
@@ -131,20 +138,6 @@ class RegistrationViewModel(
     }
 
     // ==============================
-    //           DeleteUser
-    // ==============================
-    private fun deleteUser() {
-        fireUser?.let {
-            CoroutineScope(Dispatchers.Default).launch {
-                it.delete()
-                    .addOnSuccessListener {
-                        Log.i(TAG, "Пользователя удалено")
-                    }
-            }
-        }
-    }
-
-    // ==============================
     //           WebViewOnClickBack
     // ==============================
     fun webViewOnClickBack(webView: WebView) {
@@ -165,21 +158,12 @@ class RegistrationViewModel(
     // ==============================
     //           TransitionToStart
     // ==============================
-    private fun transitionToStart(name: String, surname: String, email: String) {
+    private fun transitionToDictionaryOrStudy(name: String, surname: String, email: String) {
         val action =
-            RegistrationFragmentDirections.actionRegistrationFragmentToStartFragment(name,
+            RegistrationFragmentDirections.actionRegistrationFragmentToDictionaryOrStudyFragment(
+                name,
                 surname,
                 email)
         fragment.findNavController().navigate(action)
     }
-
-    // ==============================
-    //           OnCleared
-    // ==============================
-    override fun onCleared() {
-        super.onCleared()
-        Log.i(TAG, "onDetach:")
-        deleteUser()
-    }
-
 }

@@ -87,7 +87,7 @@ class SignInViewModel(
                         val user = data.getValue(User::class.java)!!
                         user.also {
                             "Success getUserForAccount".toast(context)
-                            transitionToStart(it.name, it.surname, it.email)
+                            transitionToDictionaryOrStudy(it.name, it.surname, it.email)
                         }
                     }
                 }
@@ -101,9 +101,9 @@ class SignInViewModel(
     // ==============================
     //       TransitionToStart
     // ==============================
-    private fun transitionToStart(name: String, surname: String, email: String) {
+    private fun transitionToDictionaryOrStudy(name: String, surname: String, email: String) {
         val action =
-            SignInFragmentDirections.actionSignInFragmentToStartFragment(name, surname, email)
+            SignInFragmentDirections.actionSignInFragmentToDictionaryOrStudyFragment(name, surname, email)
         fragment.findNavController().navigate(action)
     }
 }

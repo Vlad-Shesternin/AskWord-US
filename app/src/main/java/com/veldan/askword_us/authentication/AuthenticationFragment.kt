@@ -30,9 +30,9 @@ class AuthenticationFragment : Fragment() {
         return binding.root
     }
 
-    fun transitionToStart() {
+    fun transitionToDictionaryOrStudy() {
         val action =
-            AuthenticationFragmentDirections.actionAuthenticationFragmentToStartFragment("Нет имени", "Нет фамилии", "Нет адреса")
+            AuthenticationFragmentDirections.actionAuthenticationFragmentToDictionaryOrStudyFragment("Нет имени", "Нет фамилии", "Нет адреса")
         findNavController().navigate(action)
     }
 
@@ -78,7 +78,7 @@ class AuthenticationFragment : Fragment() {
             when (v?.id to motion.currentState) {
                 btnSignInWithoutRegistration.id to start -> startToEnd()
                 btnCancel.id to end -> endToStart()
-                btnContinue.id to end -> transitionToStart()
+                btnContinue.id to end -> transitionToDictionaryOrStudy()
             }
         }
 

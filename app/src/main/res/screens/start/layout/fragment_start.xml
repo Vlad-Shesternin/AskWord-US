@@ -1,79 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-
-        <variable
-            name="startFragment"
-            type="com.veldan.askword_us.start.StartFragment" />
-    </data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image_account"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/start_image_margin"
-            android:onClick="@{() -> startFragment.clickOnAccount()}"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_account_box"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.1" />
-
-        <include
-            android:id="@+id/layout_account"
-            layout="@layout/layout_account"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone"
-            app:layout_constraintHeight_percent="0.15"
-            app:layout_constraintStart_toEndOf="@+id/image_account"
-            app:layout_constraintTop_toTopOf="@+id/image_account"
-            app:layout_constraintWidth_percent="0.5" />
-
-        <Button
-            android:id="@+id/btn_dictionary"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/start_btn_margin"
-            android:background="@drawable/btn_state"
-            android:onClick="@{()-> startFragment.transitionToDictionary()}"
-            android:text="@string/start_btn_dictionary"
-            app:layout_constraintBottom_toTopOf="@id/guideH_50"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideH_50"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" />
-
-        <Button
-            android:id="@+id/btn_study"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/start_btn_margin"
-            android:background="@drawable/btn_state"
-            android:text="@string/start_btn_study"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideH_50"
-            app:layout_constraintVertical_bias="0" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="start"
+            android:textSize="100sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

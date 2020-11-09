@@ -26,13 +26,20 @@ class DictionaryFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
 
-        binding = FragmentDictionaryBinding.inflate(inflater)
+        initBinding(inflater)
         DictionaryAnimation(binding)
 
         val adapter = WordAdapter()
         binding.rvListWords.adapter = adapter
 
         return binding.root
+    }
+
+    // ==============================
+    //        Initializing
+    // ==============================
+    private fun initBinding(inflater: LayoutInflater) {
+        binding = FragmentDictionaryBinding.inflate(inflater)
     }
 
     //==============================
@@ -162,7 +169,6 @@ class DictionaryFragment : Fragment() {
                 Components.enabled(false, *arrayOf(imgImgAdd, editWord, editTranslation))
                 Animator.transition(motion, start, moveToTop, 500)
             }
-
         }
     }
 }
