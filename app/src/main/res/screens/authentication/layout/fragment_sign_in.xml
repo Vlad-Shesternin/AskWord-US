@@ -6,6 +6,9 @@
         <variable
             name="signInFragment"
             type="com.veldan.askword_us.authentication.sign_in.SignInFragment" />
+        <variable
+            name="signInWithGoogle"
+            type="com.veldan.askword_us.authentication.sign_in.SignInWithGoogleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,9 +17,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/btn_sign_in_with_google"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/colorShine"
+            android:text="G"
+            android:textColor="#62FF00"
+            android:textSize="50sp"
+            android:onClick="@{() -> signInWithGoogle.signInWithGoogle()}"
+            app:layout_constraintEnd_toStartOf="@+id/btn_sign_in_with_facebook"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_sign_in_with_facebook"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/colorAccent"
+            android:text="F"
+            android:textColor="#3F51B5"
+            android:textSize="50sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_sign_in_with_google"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <EditText
             android:id="@+id/edit_email"
-            defaultFocusAndKeyboard="@{true}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
@@ -26,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in_with_google"
             app:layout_constraintVertical_bias="0.05" />
 
         <EditText

@@ -14,7 +14,7 @@ import com.veldan.askword_us.global.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SignInViewModel(
+class SignInWithEmailPasswordViewModel(
     private val fragment: SignInFragment,
 ) : ViewModel() {
 
@@ -29,20 +29,18 @@ class SignInViewModel(
     // Properties
     private val context = fragment.requireContext()
 
-
-    //==============================
-    //          SignIn
-    //==============================
+    // ==============================
+    //           SignIn
+    // ==============================
     fun signIn(user: User) {
         val email = user.email
         val password = user.password
-
 
         if (Verification.verifyEmailPassword(context, email, password)) {
             scope.launch(Dispatchers.Default) {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener {
-                        getUser(email)
+                        getUserForAccount(email)
                         "Пользователь вошёл".toast(context)
                     }
 
@@ -53,10 +51,9 @@ class SignInViewModel(
         }
     }
 
-
-    //==============================
-    //          ForgetPassword
-    //==============================
+    // ==============================
+    //           ForgetPassword
+    // ==============================
     fun forgetPassword(user: User) {
         val email = user.email
 
@@ -74,7 +71,10 @@ class SignInViewModel(
         }
     }
 
-    private fun getUser(email: String) {
+    // ==============================
+    //       GetUserForAccount
+    // ==============================
+    private fun getUserForAccount(email: String) {
 
         users.orderByChild("email").equalTo(email)
             .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -94,9 +94,9 @@ class SignInViewModel(
             })
     }
 
-    //==============================
-    //          TransitionToStart
-    //==============================
+    // ==============================
+    //       TransitionToStart
+    // ==============================
     private fun transitionToStart(name: String, surname: String, email: String) {
         val action =
             SignInFragmentDirections.actionSignInFragmentToStartFragment(name, surname, email)

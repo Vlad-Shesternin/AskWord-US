@@ -21,7 +21,6 @@ class StartFragment : Fragment() {
     ): View? {
 
         binding = FragmentStartBinding.inflate(inflater)
-
         binding.startFragment = this
 
         return binding.root
@@ -32,11 +31,19 @@ class StartFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+    private var visibility = View.INVISIBLE
     fun clickOnAccount() {
-        val args = StartFragmentArgs.fromBundle(requireArguments())
-        binding.layoutAccount.also {
-            it.tvNameSurname.text = args.userName + " " + args.userSurname
-            it.layoutAccount.visibility = View.VISIBLE
+        if (visibility == View.INVISIBLE) {
+            visibility = View.VISIBLE
+            val args = StartFragmentArgs.fromBundle(requireArguments())
+            binding.layoutAccount.also {
+                it.tvNameSurname.text = args.userName + " " + args.userSurname
+                it.tvEmail.text = args.userEmail
+                it.layoutAccount.visibility = visibility
+            }
+        } else {
+            visibility = View.INVISIBLE
+            binding.layoutAccount.layoutAccount.visibility = visibility
         }
     }
 }

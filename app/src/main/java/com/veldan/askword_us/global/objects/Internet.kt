@@ -18,23 +18,28 @@ object Internet {
         val connectivityManager =
             activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        val capabilities: NetworkCapabilities =
-            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)!!
+        val capabilities: NetworkCapabilities? =
+            connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
 
-        return when {
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
-                true
+        return if (capabilities != null) {
+            val connect = when {
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    true
+                }
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                    true
+                }
+                capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
+                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    true
+                }
+                else -> false
             }
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
-                true
-            }
-            capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
-                true
-            }
-            else -> false
+            connect
+        } else {
+            false
         }
     }
 }

@@ -12,7 +12,7 @@ import com.veldan.askword_us.databinding.LayoutWordsCreationBinding
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator
-import com.veldan.askword_us.global.objects.Clickable
+import com.veldan.askword_us.global.objects.Components
 import kotlinx.coroutines.*
 
 
@@ -159,7 +159,7 @@ class DictionaryFragment : Fragment() {
             }
 
             private fun startToMoveToTop() {
-                Clickable.enabled(false, *arrayOf(imgImgAdd, editWord, editTranslation))
+                Components.enabled(false, *arrayOf(imgImgAdd, editWord, editTranslation))
                 Animator.transition(motion, start, moveToTop, 500)
             }
 

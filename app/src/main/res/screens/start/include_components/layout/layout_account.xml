@@ -22,16 +22,29 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Name Surname" />
 
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_name_surname"
+            app:layout_constraintStart_toStartOf="@+id/tv_name_surname"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_surname"
+            tools:text="Name Surname" />
+
         <Button
             android:id="@+id/btn_change_account"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
+            android:textSize="10sp"
             android:text="Сменить акаунт"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name_surname"
+            app:layout_constraintTop_toBottomOf="@+id/tv_email"
             app:layout_constraintWidth_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
