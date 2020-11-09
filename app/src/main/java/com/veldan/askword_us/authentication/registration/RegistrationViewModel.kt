@@ -7,12 +7,11 @@ import android.view.View
 import android.webkit.WebView
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.global.objects.Verification
 import com.veldan.askword_us.global.toast
@@ -49,9 +48,9 @@ class RegistrationViewModel(
         _visibilityBooleanTextViewVerifyEmail.value = false
     }
 
-    //==============================
-    //          Registration
-    //==============================
+    // ==============================
+    //           Registration
+    // ==============================
     fun registration(user: User) {
         val name = user.name
         val surname = user.surname
@@ -66,24 +65,7 @@ class RegistrationViewModel(
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener {
                         "Пользователя зарегистрировано".toast(context)
-
-                        fireUser = auth.currentUser
-                        fireUser!!.sendEmailVerification()
-                            .addOnSuccessListener {
-                                "Подтвердите адрес: $email".toast(context)
-
-                                _visibilityBooleanTextViewVerifyEmail.value = true
-
-                                scope.launch(Dispatchers.Default) {
-                                    // verificationEmail()
-                                    val userWithoutPassword = User(name, surname, email)
-                                    addUserFireDb(userWithoutPassword)
-                                    transitionToStart(name, surname, email)
-                                }
-                            }
-                            .addOnFailureListener {
-                                "Не удалось отправить: $email".toast(context)
-                            }
+                        sendEmailVerification(name, surname, email)
                     }
                     .addOnFailureListener {
                         "Пользователя не зарегистрировано".toast(context)
@@ -92,9 +74,32 @@ class RegistrationViewModel(
         }
     }
 
-    //==============================
-    //          VerificationEmail
-    //==============================
+    // ==============================
+    //        SendEmailVerification
+    // ==============================
+    private fun sendEmailVerification(name: String, surname: String, email: String) {
+        fireUser = auth.currentUser
+        fireUser!!.sendEmailVerification()
+            .addOnSuccessListener {
+                "Подтвердите адрес: $email".toast(context)
+
+                _visibilityBooleanTextViewVerifyEmail.value = true
+
+                scope.launch(Dispatchers.Default) {
+                    verificationEmail()
+                    val userWithoutPassword = User(name, surname, email)
+                    addUserFireDb(userWithoutPassword)
+                    transitionToStart(name, surname, email)
+                }
+            }
+            .addOnFailureListener {
+                "Не удалось отправить: $email".toast(context)
+            }
+    }
+
+    // ==============================
+    //           VerificationEmail
+    // ==============================
     private suspend fun verificationEmail() {
         val verifyJob = scope.launch {
             var a = 0
@@ -110,9 +115,9 @@ class RegistrationViewModel(
         verifyJob.join()
     }
 
-    //==============================
-    //          AddUserFireDb
-    //==============================
+    // ==============================
+    //           AddUserFireDb
+    // ==============================
     private suspend fun addUserFireDb(user: User) {
         val addUserJob = scope.launch {
             val id = users.push().key!!
@@ -125,9 +130,9 @@ class RegistrationViewModel(
         addUserJob.join()
     }
 
-    //==============================
-    //          DeleteUser
-    //==============================
+    // ==============================
+    //           DeleteUser
+    // ==============================
     private fun deleteUser() {
         fireUser?.let {
             CoroutineScope(Dispatchers.Default).launch {
@@ -139,9 +144,9 @@ class RegistrationViewModel(
         }
     }
 
-    //==============================
-    //          WebViewOnClickBack
-    //==============================
+    // ==============================
+    //           WebViewOnClickBack
+    // ==============================
     fun webViewOnClickBack(webView: WebView) {
         webView.also {
             it.setOnKeyListener { _, keyCode, event ->
@@ -157,9 +162,9 @@ class RegistrationViewModel(
         }
     }
 
-    //==============================
-    //          TransitionToStart
-    //==============================
+    // ==============================
+    //           TransitionToStart
+    // ==============================
     private fun transitionToStart(name: String, surname: String, email: String) {
         val action =
             RegistrationFragmentDirections.actionRegistrationFragmentToStartFragment(name,
@@ -168,9 +173,9 @@ class RegistrationViewModel(
         fragment.findNavController().navigate(action)
     }
 
-    //==============================
-    //          OnCleared
-    //==============================
+    // ==============================
+    //           OnCleared
+    // ==============================
     override fun onCleared() {
         super.onCleared()
         Log.i(TAG, "onDetach:")

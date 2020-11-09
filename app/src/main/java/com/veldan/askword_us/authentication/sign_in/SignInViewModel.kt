@@ -1,5 +1,6 @@
 package com.veldan.askword_us.authentication.sign_in
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
@@ -11,10 +12,13 @@ import com.google.firebase.database.ValueEventListener
 import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.global.objects.Verification
 import com.veldan.askword_us.global.toast
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SignInWithEmailPasswordViewModel(
+private const val TAG = "SignInViewModel"
+
+class SignInViewModel(
     private val fragment: SignInFragment,
 ) : ViewModel() {
 
@@ -75,7 +79,6 @@ class SignInWithEmailPasswordViewModel(
     //       GetUserForAccount
     // ==============================
     private fun getUserForAccount(email: String) {
-
         users.orderByChild("email").equalTo(email)
             .addListenerForSingleValueEvent(object : ValueEventListener {
 
@@ -83,13 +86,14 @@ class SignInWithEmailPasswordViewModel(
                     for (data in snapshot.children) {
                         val user = data.getValue(User::class.java)!!
                         user.also {
+                            "Success getUserForAccount".toast(context)
                             transitionToStart(it.name, it.surname, it.email)
                         }
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-
+                    "Fail getUserForAccount".toast(context)
                 }
             })
     }

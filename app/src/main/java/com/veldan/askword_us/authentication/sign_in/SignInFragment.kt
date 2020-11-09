@@ -6,12 +6,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
+import com.veldan.askword_us.authentication.GoogleAccount
 import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.databinding.FragmentSignInBinding
+import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.emums.RequestCode
 
 private const val TAG = "SignInFragment"
@@ -22,10 +26,15 @@ class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
 
     // ViewModel and Factory
-    private lateinit var viewModelEmailPassword: SignInWithEmailPasswordViewModel
-    private lateinit var viewModelGoogle: SignInWithGoogleViewModel
-    private lateinit var viewModelEmailPasswordFactory: SignInWithEmailPasswordViewModelFactory
-    private lateinit var viewModelGoogleFactory: SignInWithGoogleViewModelFactory
+    private lateinit var viewModel: SignInViewModel
+    private lateinit var viewModelFactory: SignInViewModelFactory
+
+    // Properties
+    private lateinit var googleAccount: GoogleAccount
+
+    // Components UI
+    private lateinit var editEmail: EditText
+    private lateinit var editPassword: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +44,9 @@ class SignInFragment : Fragment() {
 
         initViewModels()
         initBinding(inflater)
+        initProperties()
+        initComponentsUI()
+
 
         return binding.root
     }
@@ -43,52 +55,78 @@ class SignInFragment : Fragment() {
     //        Initializing
     // ==============================
     private fun initViewModels() {
-        viewModelEmailPasswordFactory = SignInWithEmailPasswordViewModelFactory(this)
-        viewModelEmailPassword = ViewModelProvider(this,
-            viewModelEmailPasswordFactory).get(SignInWithEmailPasswordViewModel::class.java)
-
-        viewModelGoogleFactory = SignInWithGoogleViewModelFactory(this)
-        viewModelGoogle = ViewModelProvider(this,
-            viewModelGoogleFactory).get(SignInWithGoogleViewModel::class.java)
+        viewModelFactory = SignInViewModelFactory(this)
+        viewModel = ViewModelProvider(this,
+            viewModelFactory).get(SignInViewModel::class.java)
     }
 
     private fun initBinding(inflater: LayoutInflater) {
         binding = FragmentSignInBinding.inflate(inflater)
         binding.signInFragment = this
-        binding.signInWithGoogle = viewModelGoogle
+    }
+
+    private fun initProperties() {
+        googleAccount = GoogleAccount(this)
+    }
+
+    private fun initComponentsUI() {
+        binding.also {
+            editEmail = it.editEmail
+            editPassword = it.editPassword
+        }
     }
 
     // ==============================
-    //    signIn with EmailPassword
+    //          GetUser
     // ==============================
-    fun getUser() = User(
+    private fun getUser() = User(
         email = binding.editEmail.text.toString(),
         password = binding.editPassword.text.toString())
 
+    // ==============================
+    //          SignIn
+    // ==============================
     fun signIn() {
-        viewModelEmailPassword.signIn(getUser())
-    }
-
-    fun forgetPassword() {
-        viewModelEmailPassword.forgetPassword(getUser())
+        viewModel.signIn(getUser())
     }
 
     // ==============================
-    //    signIn with Google
+    //          SignInWithGoogle
     // ==============================
+    fun signInWithGoogle() {
+        googleAccount.signInWithGoogle()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RequestCode.RC_SIGN_IN.id) {
-            viewModelGoogle.signOutDefaultAccount()
+        if (requestCode == RequestCode.RC_GOOGLE.id) {
+            googleAccount.signOutDefaultAccount()
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 Log.i(TAG, "Account: ${account.email}")
-                viewModelGoogle.firebaseAuthWithGoogle(account)
+                setAccount(account)
+                editPassword.defaultFocusAndKeyboard(true)
             } catch (e: ApiException) {
                 Log.i(TAG, "Exception.!.!.")
             }
         }
+    }
+
+    // ==============================
+    //          SetAccount
+    // ==============================
+    private fun setAccount(account: GoogleSignInAccount) {
+        account.also {
+            editEmail.setText(it.email)
+        }
+    }
+
+    // ==============================
+    //          ForgetPassword
+    // ==============================
+    fun forgetPassword() {
+        viewModel.forgetPassword(getUser())
     }
 }
