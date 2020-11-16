@@ -67,8 +67,7 @@ class RegistrationViewModel(
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener {
                         "Пользователя зарегистрировано".toast(context)
-                        Components.enabled(false, *views)
-                        Components.background(null, *views)
+                        Components(*views).enabled(false).background(null)
                         sendEmailVerification(name, surname, email)
                     }
                     .addOnFailureListener {

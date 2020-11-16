@@ -3,25 +3,29 @@ package com.veldan.askword_us.global.objects
 import android.graphics.drawable.Drawable
 import android.view.View
 
-object Components {
+class Components(vararg views: View) {
+    private val views = views
     // ==============================
     //          Enabled
     // ==============================
-    fun enabled(isEnabled: Boolean, vararg views: View) {
+    fun enabled(isEnabled: Boolean): Components{
         views.map { it.isEnabled = isEnabled }
+        return this
     }
 
     // ==============================
     //          Visibility
     // ==============================
-    fun visibility(visibility: Int, vararg views: View) {
+    fun visibility(visibility: Int): Components {
         views.map { it.visibility = visibility }
+        return this
     }
 
     // ==============================
     //          Background
     // ==============================
-    fun background(background: Drawable?, vararg views: View) {
+    fun background(background: Drawable?): Components {
         views.map { it.background = background }
+        return this
     }
 }

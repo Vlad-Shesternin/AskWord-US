@@ -166,7 +166,8 @@ class DictionaryFragment : Fragment() {
             }
 
             private fun startToMoveToTop() {
-                Components.enabled(false, *arrayOf(imgImgAdd, editWord, editTranslation))
+                val views = arrayOf(imgImgAdd, editWord, editTranslation)
+                Components(*views).enabled(false)
                 Animator.transition(motion, start, moveToTop, 500)
             }
         }
