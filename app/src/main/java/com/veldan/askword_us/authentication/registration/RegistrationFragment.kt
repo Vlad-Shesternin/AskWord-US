@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -37,6 +38,8 @@ class RegistrationFragment : Fragment() {
     private lateinit var googleAccount: GoogleAccount
 
     // Components UI
+    private lateinit var btnGoogle: Button
+
     private lateinit var editName: EditText
     private lateinit var editSurname: EditText
     private lateinit var editEmail: EditText
@@ -78,6 +81,8 @@ class RegistrationFragment : Fragment() {
 
     private fun initComponentsUI() {
         binding.also {
+            btnGoogle = it.btnRegistrationWithGoogle
+
             editName = it.editName
             editSurname = it.editSurname
             editEmail = it.editEmail
@@ -99,7 +104,8 @@ class RegistrationFragment : Fragment() {
     // ==============================
     fun registration() {
         if (Internet.isOnline(requireActivity())) {
-            viewModel.registration(getUser())
+            val views = arrayOf(btnGoogle, editName, editSurname, editEmail, editPassword)
+            viewModel.registration(getUser(), *views)
         } else {
             noInternet()
         }

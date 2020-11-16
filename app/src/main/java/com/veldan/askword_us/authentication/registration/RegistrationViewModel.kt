@@ -5,14 +5,15 @@ import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.webkit.WebView
+import android.widget.EditText
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.veldan.askword_us.authentication.User
+import com.veldan.askword_us.global.objects.Components
 import com.veldan.askword_us.global.objects.SharedPreferences
 import com.veldan.askword_us.global.objects.Verification
 import com.veldan.askword_us.global.toast
@@ -37,6 +38,7 @@ class RegistrationViewModel(
 
     // Properties
     private val context = fragment.requireContext()
+    private var isDeleteUser = true
 
     private val _visibilityBooleanTextViewVerifyEmail = MutableLiveData<Boolean>()
     val visibilityTextViewVerifyEmail: LiveData<Int> =
@@ -51,7 +53,7 @@ class RegistrationViewModel(
     // ==============================
     //           Registration
     // ==============================
-    fun registration(user: User) {
+    fun registration(user: User, vararg views: View) {
         val name = user.name
         val surname = user.surname
         val email = user.email
@@ -65,6 +67,8 @@ class RegistrationViewModel(
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener {
                         "Пользователя зарегистрировано".toast(context)
+                        Components.enabled(false, *views)
+                        Components.background(null, *views)
                         sendEmailVerification(name, surname, email)
                     }
                     .addOnFailureListener {
@@ -87,6 +91,7 @@ class RegistrationViewModel(
 
                 scope.launch(Dispatchers.Default) {
                     verificationEmail()
+                    isDeleteUser = false
                     val userWithoutPassword = User(name, surname, email)
                     addUserFireDb(userWithoutPassword)
 
@@ -175,11 +180,19 @@ class RegistrationViewModel(
         fragment.findNavController().navigate(action)
     }
 
+    // ==============================
+    //           DeleteUser from DB
+    // ==============================
+    private fun deleteUserFromDB() {
+        if (isDeleteUser) {
+            auth.currentUser?.let {
+                it.delete()
+            }
+        }
+    }
+
     override fun onCleared() {
         super.onCleared()
-        auth.currentUser?.let {
-            if (!it.isEmailVerified)
-                it.delete()
-        }
+        deleteUserFromDB()
     }
 }

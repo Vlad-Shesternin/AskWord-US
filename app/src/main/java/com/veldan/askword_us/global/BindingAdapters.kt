@@ -8,7 +8,9 @@ import android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 
-
+// ==============================
+//         Focus click Done
+// ==============================
 @BindingAdapter("focusAfterClickKeyDone")
 fun EditText.focusAfterClickKeyDone(use: Boolean) {
     this.setOnEditorActionListener { v, actionId, _ ->
@@ -20,6 +22,9 @@ fun EditText.focusAfterClickKeyDone(use: Boolean) {
     }
 }
 
+// ==============================
+//         Hide Keyboard
+// ==============================
 @BindingAdapter("clickHideKeyboard")
 fun View.clickHideKeyboard(use: Boolean) {
     this.setOnClickListener {
@@ -29,6 +34,9 @@ fun View.clickHideKeyboard(use: Boolean) {
     }
 }
 
+// ==============================
+//         Focus and Keyboard
+// ==============================
 @BindingAdapter("defaultFocusAndKeyboard")
 fun View.defaultFocusAndKeyboard(use: Boolean) {
     this.requestFocus()
