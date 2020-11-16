@@ -45,7 +45,7 @@ class StartFragment : Fragment() {
     // ==============================
     private fun transitionToDictionaryAndStudyOrAuthentication() {
         if (currentUser() != null) {
-            val sharedPref = SharedPreferences.initSharedPref(this)
+            val sharedPref = SharedPreferences(this).initSharedPref()
             val name = sharedPref.getString(SharedPreferences.USER_NAME, "name")!!
             val surname = sharedPref.getString(SharedPreferences.USER_SURNAME, "surname")!!
             val email = user!!.email!!

@@ -22,10 +22,9 @@ import com.veldan.askword_us.global.emums.RequestCode
 import com.veldan.askword_us.global.objects.Animator
 import com.veldan.askword_us.global.objects.Internet
 
-private const val TAG = "RegistrationFragment"
-
 @RequiresApi(Build.VERSION_CODES.M)
 class RegistrationFragment : Fragment() {
+    private val TAG = "RegistrationFragment"
 
     // Binding
     private lateinit var binding: FragmentRegistrationBinding

@@ -38,6 +38,11 @@
         <action
             android:id="@+id/action_dictionaryOrStudyFragment_to_dictionaryFragment"
             app:destination="@id/dictionaryFragment" />
+        <action
+            android:id="@+id/action_dictionaryOrStudyFragment_to_authenticationFragment"
+            app:destination="@id/authentication"
+            app:popUpTo="@id/dictionaryOrStudyFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/dictionaryFragment"
@@ -91,6 +96,9 @@
             <action
                 android:id="@+id/action_dictionaryOrStudyFragment_to_dictionaryFragment"
                 app:destination="@id/dictionaryFragment" />
+            <action
+                android:id="@+id/action_dictionaryOrStudyFragment_to_authenticationFragment"
+                app:destination="@id/authenticationFragment" />
             <argument
                 android:name="userName"
                 app:argType="string" />

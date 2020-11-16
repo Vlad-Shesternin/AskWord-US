@@ -21,11 +21,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-private const val TAG = "RegistrationViewModel"
-
 class RegistrationViewModel(
     private val fragment: RegistrationFragment,
 ) : ViewModel() {
+    private val TAG = "RegistrationViewModel"
 
     // Coroutine
     private val scope = viewModelScope
@@ -91,10 +90,19 @@ class RegistrationViewModel(
                     val userWithoutPassword = User(name, surname, email)
                     addUserFireDb(userWithoutPassword)
 
-                    val editor = SharedPreferences.getEdit(fragment)
+                    val sharedPref = SharedPreferences(fragment).initSharedPref()
+                    var name1 = sharedPref.getString(SharedPreferences.USER_NAME, "name")!!
+                    var surname1 = sharedPref.getString(SharedPreferences.USER_SURNAME, "surname")!!
+                    Log.i(TAG, "1111111 --- $name1, $surname1")
+
+                    val editor = SharedPreferences(fragment).getEditor()
                     editor.putString(SharedPreferences.USER_NAME, name)
                     editor.putString(SharedPreferences.USER_SURNAME, surname)
                     editor.apply()
+
+                    name1 = sharedPref.getString(SharedPreferences.USER_NAME, "name")!!
+                    surname1 = sharedPref.getString(SharedPreferences.USER_SURNAME, "surname")!!
+                    Log.i(TAG, "2222222 --- $name1, $surname1")
 
                     transitionToDictionaryOrStudy(name, surname, email)
                 }
@@ -165,5 +173,13 @@ class RegistrationViewModel(
                 surname,
                 email)
         fragment.findNavController().navigate(action)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        auth.currentUser?.let {
+            if (!it.isEmailVerified)
+                it.delete()
+        }
     }
 }

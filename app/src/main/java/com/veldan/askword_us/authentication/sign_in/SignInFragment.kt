@@ -18,9 +18,8 @@ import com.veldan.askword_us.databinding.FragmentSignInBinding
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.emums.RequestCode
 
-private const val TAG = "SignInFragment"
-
 class SignInFragment : Fragment() {
+    private val TAG = "SignInFragment"
 
     // Binding
     private lateinit var binding: FragmentSignInBinding

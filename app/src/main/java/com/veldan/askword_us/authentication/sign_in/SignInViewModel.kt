@@ -1,6 +1,6 @@
 package com.veldan.askword_us.authentication.sign_in
 
-import android.util.Log
+import android.text.method.TextKeyListener.clear
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
@@ -10,17 +10,16 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.veldan.askword_us.authentication.User
+import com.veldan.askword_us.global.objects.SharedPreferences
 import com.veldan.askword_us.global.objects.Verification
 import com.veldan.askword_us.global.toast
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
-private const val TAG = "SignInViewModel"
 
 class SignInViewModel(
     private val fragment: SignInFragment,
 ) : ViewModel() {
+    private val TAG = "SignInFragment"
 
     // Coroutine
     private val scope = viewModelScope
@@ -87,6 +86,12 @@ class SignInViewModel(
                         val user = data.getValue(User::class.java)!!
                         user.also {
                             "Success getUserForAccount".toast(context)
+
+                            val editor = SharedPreferences(fragment).getEditor()
+                            editor.putString(SharedPreferences.USER_NAME, it.name)
+                            editor.putString(SharedPreferences.USER_SURNAME, it.surname)
+                            editor.apply()
+
                             transitionToDictionaryOrStudy(it.name, it.surname, it.email)
                         }
                     }
@@ -103,7 +108,9 @@ class SignInViewModel(
     // ==============================
     private fun transitionToDictionaryOrStudy(name: String, surname: String, email: String) {
         val action =
-            SignInFragmentDirections.actionSignInFragmentToDictionaryOrStudyFragment(name, surname, email)
+            SignInFragmentDirections.actionSignInFragmentToDictionaryOrStudyFragment(name,
+                surname,
+                email)
         fragment.findNavController().navigate(action)
     }
 }

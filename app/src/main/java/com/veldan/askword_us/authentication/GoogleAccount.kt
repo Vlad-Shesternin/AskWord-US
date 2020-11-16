@@ -7,9 +7,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.veldan.askword_us.R
 import com.veldan.askword_us.global.emums.RequestCode
 
-private const val TAG = "RequestGoogleAccount"
-
 class GoogleAccount(private val fragment: Fragment) {
+    private val TAG = "RequestGoogleAccount"
 
     // Google
     private lateinit var googleSignInClient: GoogleSignInClient
