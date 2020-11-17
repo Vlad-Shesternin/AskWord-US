@@ -27,10 +27,8 @@ class DictionaryFragment : Fragment() {
     ): View? {
 
         initBinding(inflater)
-        DictionaryAnimation(binding)
-
-        val adapter = WordAdapter()
-        binding.rvListWords.adapter = adapter
+        initAnimation()
+        initAdapter()
 
         return binding.root
     }
@@ -40,6 +38,15 @@ class DictionaryFragment : Fragment() {
     // ==============================
     private fun initBinding(inflater: LayoutInflater) {
         binding = FragmentDictionaryBinding.inflate(inflater)
+    }
+
+    private fun initAdapter() {
+        val adapter = WordAdapter()
+        binding.rvListWords.adapter = adapter
+    }
+
+    private fun initAnimation() {
+        DictionaryAnimation(binding)
     }
 
     //==============================
@@ -82,18 +89,6 @@ class DictionaryFragment : Fragment() {
             fabFile.setOnClickListener(this)
         }
 
-        override fun onClick(v: View?) {
-            //when use Pair<Int, Int> (v?.id, motion.currentState)
-            when (v?.id to motion.currentState) {
-                fabAdd.id to start -> startToAppearanceLayoutWordsCreation()
-                fabAdd.id to appearanceFabsAdd -> appearanceFabsAddToBackMoveToCenter()
-
-                fabFile.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabFile()
-                fabPhoto.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabPhoto()
-                fabCategory.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabCategory()
-            }
-        }
-
         private fun startToAppearanceLayoutWordsCreation() {
             Animator.transition(motion, start, appearanceLayoutWordsCreation, 700)
         }
@@ -114,6 +109,17 @@ class DictionaryFragment : Fragment() {
             Animator.transition(motion, appearanceFabsAdd, choiceFabCategory, 1000)
         }
 
+        override fun onClick(v: View?) {
+            //when use Pair<Int, Int> (v?.id, motion.currentState)
+            when (v?.id to motion.currentState) {
+                fabAdd.id to start -> startToAppearanceLayoutWordsCreation()
+                fabAdd.id to appearanceFabsAdd -> appearanceFabsAddToBackMoveToCenter()
+
+                fabFile.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabFile()
+                fabPhoto.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabPhoto()
+                fabCategory.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabCategory()
+            }
+        }
 
         override fun onLongClick(v: View?): Boolean {
             when (v?.id to motion.currentState) {

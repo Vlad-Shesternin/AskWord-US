@@ -7,6 +7,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.airbnb.lottie.LottieAnimationView
 import com.veldan.askword_us.global.objects.Animator
+import com.veldan.askword_us.global.objects.Internet
 
 class RegistrationWebViewClient(
     private val progress: LottieAnimationView,
@@ -21,7 +22,7 @@ class RegistrationWebViewClient(
         if (logIn || loggedIn) {
             progress.also {
                 it.visibility = View.VISIBLE
-                it.setAnimation(Animator.LOADING)
+                it.setAnimation(Internet.LOADING)
                 it.playAnimation()
             }
         }

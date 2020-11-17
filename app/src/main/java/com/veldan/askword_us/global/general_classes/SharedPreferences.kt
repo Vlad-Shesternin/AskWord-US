@@ -14,7 +14,4 @@ class SharedPreferences(private val fragment: Fragment) {
         fragment.requireContext().getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
 
     fun getEditor() = initSharedPref().edit()
-
-    fun clearSharedPref() = getEditor().clear().apply()
-
 }

@@ -1,6 +1,5 @@
 package com.veldan.askword_us.dictionary
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView

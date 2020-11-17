@@ -9,6 +9,9 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 
 object Internet {
+    const val NO_INTERNET = "no_internet.json"
+    const val LOADING = "loading_among_us.json"
+
     //==============================
     //          IsOnline
     //==============================

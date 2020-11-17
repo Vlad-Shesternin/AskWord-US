@@ -152,7 +152,7 @@ class RegistrationFragment : Fragment() {
     private fun noInternet() {
         binding.groupRegistration.visibility = View.INVISIBLE
         binding.lottieProgress.also {
-            it.setAnimation(Animator.NO_INTERNET)
+            it.setAnimation(Internet.NO_INTERNET)
             it.playAnimation()
         }
     }
