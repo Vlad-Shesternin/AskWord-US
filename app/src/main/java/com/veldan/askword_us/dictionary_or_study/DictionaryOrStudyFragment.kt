@@ -51,28 +51,10 @@ class DictionaryOrStudyFragment : Fragment() {
 
     fun transitionToAuthentication() {
         auth.signOut()
-//        val sharedPref = SharedPreferences(this).initSharedPref()
-//        var name = sharedPref.getString(SharedPreferences.USER_NAME, "name")!!
-//        var surname = sharedPref.getString(SharedPreferences.USER_SURNAME, "surname")!!
-//        Log.i(TAG, "1111111 --- $name, $surname")
-//
-//        clearUserFromSharedPreferences()
-//
-//        name = sharedPref.getString(SharedPreferences.USER_NAME, "name")!!
-//        surname = sharedPref.getString(SharedPreferences.USER_SURNAME, "surname")!!
-//        Log.i(TAG, "2222222 --- $name, $surname")
 
         val action =
             DictionaryOrStudyFragmentDirections.actionDictionaryOrStudyFragmentToAuthenticationFragment()
         findNavController().navigate(action)
-    }
-
-    // ==============================
-    // ClearUserFromSharedPreferences
-    // ==============================
-    private fun clearUserFromSharedPreferences() {
-        SharedPreferences(this).clearSharedPref()
-        Log.i(TAG, "clearUserFromSharedPreferences: success")
     }
 
     // ==============================

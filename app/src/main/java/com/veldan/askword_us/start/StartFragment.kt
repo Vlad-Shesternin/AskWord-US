@@ -1,6 +1,7 @@
 package com.veldan.askword_us.start
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.veldan.askword_us.databinding.FragmentStartBinding
 import com.veldan.askword_us.global.general_classes.SharedPreferences
 
 class StartFragment : Fragment() {
+    val TAG = "StartFragment"
 
     // Binding
     private lateinit var binding: FragmentStartBinding
@@ -44,11 +46,18 @@ class StartFragment : Fragment() {
     // ==============================
     private fun transitionToDictionaryAndStudyOrAuthentication() {
         if (currentUser() != null) {
-            val sharedPref = SharedPreferences(this).initSharedPref()
-            val name = sharedPref.getString(SharedPreferences.USER_NAME, "name")!!
-            val surname = sharedPref.getString(SharedPreferences.USER_SURNAME, "surname")!!
-            val email = user!!.email!!
-            transitionToDictionaryOrStudy(name, surname, email)
+            if (currentUser()!!.isEmailVerified) {
+                val sharedPref = SharedPreferences(this).initSharedPref()
+                val name = sharedPref.getString(SharedPreferences.USER_NAME, "name")!!
+                val surname = sharedPref.getString(SharedPreferences.USER_SURNAME, "surname")!!
+                val email = user!!.email!!
+                transitionToDictionaryOrStudy(name, surname, email)
+            } else {
+                currentUser()!!.delete().addOnSuccessListener {
+                    Log.i(TAG, "User was no Verificated DELETED")
+                }
+                transitionToAuthentication()
+            }
         } else {
             transitionToAuthentication()
         }
