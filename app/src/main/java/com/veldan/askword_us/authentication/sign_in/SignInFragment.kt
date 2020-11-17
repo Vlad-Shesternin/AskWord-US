@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
-import com.veldan.askword_us.authentication.GoogleAccount
+import com.veldan.askword_us.global.general_classes.GoogleAccount
 import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.databinding.FragmentSignInBinding
 import com.veldan.askword_us.global.defaultFocusAndKeyboard

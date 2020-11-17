@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.veldan.askword_us.authentication.AuthenticationFragmentDirections
-import com.veldan.askword_us.databinding.FragmentDictionaryBinding
 import com.veldan.askword_us.databinding.FragmentDictionaryOrStudyBinding
-import com.veldan.askword_us.global.objects.SharedPreferences
+import com.veldan.askword_us.global.general_classes.SharedPreferences
 
 class DictionaryOrStudyFragment : Fragment() {
     private val TAG = "DictionaryOrStudyFragment"

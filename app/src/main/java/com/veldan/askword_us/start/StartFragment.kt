@@ -8,9 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.databinding.FragmentStartBinding
-import com.veldan.askword_us.global.objects.SharedPreferences
+import com.veldan.askword_us.global.general_classes.SharedPreferences
 
 class StartFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.veldan.askword_us.global.objects
+package com.veldan.askword_us.global.general_classes
 
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -8,7 +8,7 @@ class Components(vararg views: View) {
     // ==============================
     //          Enabled
     // ==============================
-    fun enabled(isEnabled: Boolean): Components{
+    fun enabled(isEnabled: Boolean): Components {
         views.map { it.isEnabled = isEnabled }
         return this
     }

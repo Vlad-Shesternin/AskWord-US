@@ -1,4 +1,4 @@
-package com.veldan.askword_us.global.objects
+package com.veldan.askword_us.global.general_classes
 
 import android.content.Context
 import androidx.fragment.app.Fragment

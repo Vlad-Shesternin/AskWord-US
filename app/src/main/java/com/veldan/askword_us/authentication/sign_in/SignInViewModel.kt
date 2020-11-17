@@ -1,6 +1,5 @@
 package com.veldan.askword_us.authentication.sign_in
 
-import android.text.method.TextKeyListener.clear
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
@@ -10,7 +9,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.veldan.askword_us.authentication.User
-import com.veldan.askword_us.global.objects.SharedPreferences
+import com.veldan.askword_us.global.general_classes.SharedPreferences
 import com.veldan.askword_us.global.objects.Verification
 import com.veldan.askword_us.global.toast
 import kotlinx.coroutines.Dispatchers

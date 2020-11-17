@@ -12,7 +12,7 @@ import com.veldan.askword_us.databinding.LayoutWordsCreationBinding
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator
-import com.veldan.askword_us.global.objects.Components
+import com.veldan.askword_us.global.general_classes.Components
 import kotlinx.coroutines.*
 
 

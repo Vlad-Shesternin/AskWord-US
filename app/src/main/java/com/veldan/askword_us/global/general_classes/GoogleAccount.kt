@@ -1,4 +1,4 @@
-package com.veldan.askword_us.authentication
+package com.veldan.askword_us.global.general_classes
 
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
