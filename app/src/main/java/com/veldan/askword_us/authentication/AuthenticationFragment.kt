@@ -83,11 +83,11 @@ class AuthenticationFragment : Fragment() {
         }
 
         private fun startToEnd() {
-            Animator.transition(motion, start, end, 1000)
+            Animator.transition(motion, end, 1000)
         }
 
         private fun endToStart() {
-            Animator.transition(motion, end, start, 1000)
+            Animator.transition(motion, start, 1000)
         }
 
     }

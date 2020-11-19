@@ -1,4 +1,4 @@
-package com.veldan.askword_us.dictionary
+package com.veldan.askword_us.dictionary.animators
 
 import android.view.View
 import com.veldan.askword_us.R
@@ -9,14 +9,14 @@ class DictionaryAnimator(private val layoutDictionary: FragmentDictionaryBinding
     View.OnClickListener,
     View.OnLongClickListener {
 
-    //Components fragment_dictionary
+    // Components fragment_dictionary
     private val motion = layoutDictionary.layoutDictionary
     private val fabAdd = layoutDictionary.fabAdd
     private val fabCategory = layoutDictionary.fabCategory
     private val fabPhoto = layoutDictionary.fabPhoto
     private val fabFile = layoutDictionary.fabFile
 
-    //ConstraintIds for dictionary_scene
+    // ConstraintIds for dictionary_scene
     private val start = R.id.start
     private val moveToCenter = R.id.move_to_center
     private val backMoveToCenter = R.id.back_move_to_center
@@ -26,12 +26,12 @@ class DictionaryAnimator(private val layoutDictionary: FragmentDictionaryBinding
     private val choiceFabPhoto = R.id.choice_fab_photo
     private val choiceFabFile = R.id.choice_fab_file
 
-    //PromptAnimation(layout_words_creation)
+    // WordCreation(layout_words_creation)
     init {
-        PromptAnimation(layoutDictionary.layoutWordsCreation)
+        WordCreationAnimator(layoutDictionary.layoutWordsCreation)
     }
 
-    //Events (fragment_dictionary)
+    // Events (fragment_dictionary)
     init {
         //OnLongClick
         fabAdd.setOnLongClickListener(this)
@@ -43,7 +43,7 @@ class DictionaryAnimator(private val layoutDictionary: FragmentDictionaryBinding
     }
 
     override fun onClick(v: View?) {
-        //when use Pair<Int, Int> (v?.id, motion.currentState)
+        // when use Pair<Int, Int> (v?.id, motion.currentState)
         when (v?.id to motion.currentState) {
             fabAdd.id to start -> startToAppearanceLayoutWordsCreation()
             fabAdd.id to appearanceFabsAdd -> appearanceFabsAddToBackMoveToCenter()
@@ -56,28 +56,28 @@ class DictionaryAnimator(private val layoutDictionary: FragmentDictionaryBinding
 
     override fun onLongClick(v: View?): Boolean {
         when (v?.id to motion.currentState) {
-            fabAdd.id to start -> Animator.transition(motion, start, moveToCenter, 1000)
+            fabAdd.id to start -> Animator.transition(motion, moveToCenter, 1000)
         }
         return true
     }
 
     private fun startToAppearanceLayoutWordsCreation() {
-        Animator.transition(motion, start, appearanceLayoutWordsCreation, 700)
+        Animator.transition(motion, appearanceLayoutWordsCreation, 700)
     }
 
     private fun appearanceFabsAddToBackMoveToCenter() {
-        Animator.transition(motion, appearanceFabsAdd, backMoveToCenter, 1000)
+        Animator.transition(motion, backMoveToCenter, 1000)
     }
 
     private fun appearanceFabsAddToChoiceFabFile() {
-        Animator.transition(motion, appearanceFabsAdd, choiceFabFile, 1000)
+        Animator.transition(motion, choiceFabFile, 1000)
     }
 
     private fun appearanceFabsAddToChoiceFabPhoto() {
-        Animator.transition(motion, appearanceFabsAdd, choiceFabPhoto, 1000)
+        Animator.transition(motion, choiceFabPhoto, 1000)
     }
 
     private fun appearanceFabsAddToChoiceFabCategory() {
-        Animator.transition(motion, appearanceFabsAdd, choiceFabCategory, 1000)
+        Animator.transition(motion, choiceFabCategory, 1000)
     }
 }

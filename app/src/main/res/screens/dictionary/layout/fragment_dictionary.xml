@@ -148,7 +148,7 @@
 
         <include
             android:id="@+id/layout_words_creation"
-            layout="@layout/layout_words_creation"
+            layout="@layout/layout_word_creation"
             android:visibility="invisible" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>

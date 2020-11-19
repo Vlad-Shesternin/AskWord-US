@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.veldan.askword_us.databinding.FragmentDictionaryBinding
+import com.veldan.askword_us.dictionary.animators.DictionaryAnimator
 
 class DictionaryFragment : Fragment() {
 
@@ -32,8 +33,8 @@ class DictionaryFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val adapter = WordAdapter()
-        binding.rvListWords.adapter = adapter
+        // val adapter = WordAdapter()
+        // binding.rvListWords.adapter = adapter
     }
 
     private fun initAnimator() {

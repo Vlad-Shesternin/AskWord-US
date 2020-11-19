@@ -18,7 +18,6 @@ import com.veldan.askword_us.global.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class RegistrationViewModel(
     private val fragment: RegistrationFragment,
@@ -76,8 +75,8 @@ class RegistrationViewModel(
     }
 
     // ==============================
-//        SendEmailVerification
-// ==============================
+    //        SendEmailVerification
+    // ==============================
     private fun sendEmailVerification(name: String, surname: String, email: String) {
         fireUser = auth.currentUser
         fireUser!!.sendEmailVerification()
