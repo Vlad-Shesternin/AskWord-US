@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.veldan.askword_us.databinding.FragmentDictionaryBinding
+import com.veldan.askword_us.databinding.FragmentDictionaryStartBinding
 import com.veldan.askword_us.dictionary.animators.DictionaryAnimator
 
 class DictionaryFragment : Fragment() {
 
-    private lateinit var binding: FragmentDictionaryBinding
+    private lateinit var binding: FragmentDictionaryStartBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +29,7 @@ class DictionaryFragment : Fragment() {
     //        Initializing
     // ==============================
     private fun initBinding(inflater: LayoutInflater) {
-        binding = FragmentDictionaryBinding.inflate(inflater)
+        binding = FragmentDictionaryStartBinding.inflate(inflater)
     }
 
     private fun initAdapter() {
@@ -38,6 +38,6 @@ class DictionaryFragment : Fragment() {
     }
 
     private fun initAnimator() {
-        DictionaryAnimator(binding)
+        DictionaryAnimator(binding, requireContext())
     }
 }

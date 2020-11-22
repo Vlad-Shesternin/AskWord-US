@@ -4,8 +4,6 @@
             Dictionary
     ==============================-->
     <!-- | FAB | -->
-    <dimen name="dictionary_fab_margin_horizontal">10dp</dimen>
     <dimen name="dictionary_fab_padding">10dp</dimen>
-    <dimen name="dictionary_fab_margin_bottom">30dp</dimen>
     <dimen name="dictionary_fab_elevation">5dp</dimen>
 </resources>

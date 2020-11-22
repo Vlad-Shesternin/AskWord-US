@@ -4,12 +4,19 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 
 object Animator {
 
-    fun transition(motion: MotionLayout, end: Int, duration: Int) {
+    fun transitionToEnd(motion: MotionLayout, transitionId: Int, duration: Int) {
         motion.also {
-            val start = it.currentState
-            it.setTransition(start, end)
+            it.setTransition(transitionId)
             it.setTransitionDuration(duration)
             it.transitionToEnd()
+        }
+    }
+
+    fun transitionToStart(motion: MotionLayout, transitionId: Int, duration: Int) {
+        motion.also {
+            it.setTransition(transitionId)
+            it.setTransitionDuration(duration)
+            it.transitionToStart()
         }
     }
 }

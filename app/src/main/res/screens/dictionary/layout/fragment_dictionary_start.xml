@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/motion_dictionary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/dictionary_scene">
+
+    <!--==============================
+                  TABs
+    ==============================-->
+    <include
+        android:id="@+id/tabs"
+        layout="@layout/tabs"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--==============================
+              RecyclerView
+    ==============================-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_words"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs" />
+
+    <!--==============================
+                 Fab add
+    ==============================-->
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/fab_add"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:elevation="@dimen/dictionary_fab_elevation"
+        android:focusable="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_add"
+        app:altSrc="@drawable/ic_check"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintWidth_percent="0.15"
+        app:overlay="false" />
+
+    <!--==============================
+                  Fab category
+     ==============================-->
+    <ImageButton
+        android:id="@+id/fab_category"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dictionary_fab_padding"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_category_add"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/fab_add"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/fab_add"
+        app:layout_constraintStart_toStartOf="@id/fab_add"
+        app:layout_constraintTop_toTopOf="@id/fab_add"
+        app:layout_constraintWidth_percent="0.15" />
+
+    <!--==============================
+                  Fab photo
+     ==============================-->
+    <ImageButton
+        android:id="@+id/fab_photo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dictionary_fab_padding"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_photo_add"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/fab_add"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/fab_add"
+        app:layout_constraintStart_toStartOf="@id/fab_add"
+        app:layout_constraintTop_toTopOf="@id/fab_add"
+        app:layout_constraintWidth_percent="0.15" />
+
+    <!--==============================
+                  Fab file
+     ==============================-->
+    <ImageButton
+        android:id="@+id/fab_file"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/dictionary_fab_padding"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_file_add"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/fab_add"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/fab_add"
+        app:layout_constraintStart_toStartOf="@id/fab_add"
+        app:layout_constraintTop_toTopOf="@id/fab_add"
+        app:layout_constraintWidth_percent="0.15" />
+
+    <!--        <include-->
+    <!--            android:id="@+id/layout_words_creation"-->
+    <!--            layout="@layout/layout_word_creation"-->
+    <!--            android:visibility="invisible" />-->
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

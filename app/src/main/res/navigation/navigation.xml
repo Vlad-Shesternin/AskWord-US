@@ -48,7 +48,7 @@
         android:id="@+id/dictionaryFragment"
         android:name="com.veldan.askword_us.dictionary.DictionaryFragment"
         android:label="DictionaryFragment"
-        tools:layout="@layout/fragment_dictionary" />
+        tools:layout="@layout/fragment_dictionary_start" />
     <navigation android:id="@+id/authentication"
         app:startDestination="@id/authenticationFragment">
         <fragment
@@ -113,6 +113,6 @@
             android:id="@+id/dictionaryFragment"
             android:name="com.veldan.askword_us.dictionary.DictionaryFragment"
             android:label="DictionaryFragment"
-            tools:layout="@layout/fragment_dictionary"/>
+            tools:layout="@layout/fragment_dictionary_start"/>
     </navigation>
 </navigation>

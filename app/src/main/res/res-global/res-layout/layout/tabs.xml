@@ -20,7 +20,6 @@
             app:layout_constraintEnd_toStartOf="@id/btn_phrases"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
             <requestFocus />
         </Button>
 
@@ -35,6 +34,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btn_words"
             app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

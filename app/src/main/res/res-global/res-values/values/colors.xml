@@ -11,4 +11,5 @@
     <color name="colorFogging">#80000000</color>
     <color name="colorShine">#FFF200</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorRed">#FF0000</color>
 </resources>

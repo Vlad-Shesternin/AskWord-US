@@ -62,6 +62,17 @@
             <PropertySet android:visibility="visible" />
         </Constraint>
 
+        <Constraint android:id="@+id/layout_additional_translation">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_list_additional_translation"
+                app:layout_constraintEnd_toEndOf="@+id/iv_list_additional_translation"
+                app:layout_constraintStart_toStartOf="@+id/iv_list_additional_translation"
+                app:layout_constraintTop_toTopOf="@+id/iv_list_additional_translation" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
         <Constraint android:id="@+id/tv_translation">
             <Layout
                 android:layout_width="0dp"
@@ -99,13 +110,19 @@
         android:id="@+id/move_to_top"
         app:deriveConstraintsFrom="@id/start">
 
-        <Constraint android:id="@+id/img_img_add">
+        <Constraint android:id="@+id/iv_img_add">
             <PropertySet android:visibility="invisible" />
         </Constraint>
         <Constraint android:id="@+id/edit_word">
             <PropertySet android:visibility="invisible" />
         </Constraint>
         <Constraint android:id="@+id/edit_translation">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+        <Constraint android:id="@+id/btn_additional_translation">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+        <Constraint android:id="@+id/iv_list_additional_translation">
             <PropertySet android:visibility="invisible" />
         </Constraint>
 
@@ -166,6 +183,41 @@
         </Constraint>
         <Constraint android:id="@+id/edit_translation">
             <PropertySet android:visibility="invisible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================-->
+    <!--APPEARANCE LAYOUT_ADDITIONAL_TRANSLATION-->
+    <!--==============================-->
+    <ConstraintSet
+        android:id="@+id/appearance_layout_additional_translation"
+        app:deriveConstraintsFrom="@id/start">
+
+        <Constraint android:id="@+id/iv_img_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+        <Constraint android:id="@+id/edit_word">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+        <Constraint android:id="@+id/edit_translation">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+        <Constraint android:id="@+id/btn_additional_translation">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+        <Constraint android:id="@+id/ifv_prompt_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_additional_translation">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ifv_prompt_add"
+                app:layout_constraintEnd_toStartOf="@+id/guideV_85"
+                app:layout_constraintStart_toEndOf="@+id/guideV_15"
+                app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
+            <PropertySet android:visibility="visible" />
         </Constraint>
     </ConstraintSet>
 </MotionScene>

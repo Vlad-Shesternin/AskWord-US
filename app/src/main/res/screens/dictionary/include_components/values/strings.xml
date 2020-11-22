@@ -7,6 +7,8 @@
     <string name="word_creation_edit_format_english">ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz 0123456789</string>
     <string name="word_creation_edit_enter_word">Введiть слово</string>
     <string name="word_creation_edit_enter_translation">Введiть переклад</string>
+    <!-- | TextView | -->
+    <string name="word_creation_item_additional_translation">%1$s</string>
 
     <!--==============================
             Prompt

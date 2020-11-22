@@ -1,12 +1,15 @@
 package com.veldan.askword_us.global
 
+import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT
 import android.widget.EditText
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.veldan.askword_us.R
 
 // ==============================
 //         Focus click Done
@@ -35,12 +38,21 @@ fun View.clickHideKeyboard(use: Boolean) {
 }
 
 // ==============================
+//          Hide Underline
+// ==============================
+@BindingAdapter("textWithoutUnderline")
+fun TextView.textWithoutUnderline(text: String) {
+    val format = context.getString(R.string.word_creation_item_additional_translation)
+    this.text = String.format(format, text)
+}
+
+// ==============================
 //         Focus and Keyboard
 // ==============================
 @BindingAdapter("defaultFocusAndKeyboard")
 fun View.defaultFocusAndKeyboard(use: Boolean) {
-    this.requestFocus()
     val imm = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(this,
-        SHOW_IMPLICIT) //HIDE KEYBOARD //  imm.hideSoftInputFromWindow(this.windowToken, 0)
+        SHOW_IMPLICIT)
+    this.requestFocus()
 }
