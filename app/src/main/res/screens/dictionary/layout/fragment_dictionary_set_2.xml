@@ -2,6 +2,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motion_dictionary"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -38,17 +39,17 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/fab_state"
+        android:rotation="45"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_add"
         app:altSrc="@drawable/ic_check"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.15"
-        app:overlay="false"
-        android:rotation="360"/>
+        app:overlay="false" />
 
     <!--==============================
                   Fab category
@@ -59,17 +60,16 @@
         android:layout_height="0dp"
         android:background="@drawable/fab_state"
         android:clickable="true"
+        android:elevation="@dimen/dictionary_fab_elevation"
         android:focusable="true"
         android:padding="@dimen/dictionary_fab_padding"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_category_add"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/fab_add"
+        app:layout_constraintCircle="@+id/fab_add"
+        app:layout_constraintCircleRadius="100dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/fab_add"
-        app:layout_constraintStart_toStartOf="@id/fab_add"
-        app:layout_constraintTop_toTopOf="@id/fab_add"
-        app:layout_constraintWidth_percent="0.15" />
+        app:layout_constraintWidth_percent="0.15"
+        tools:ignore="MissingConstraints" />
 
     <!--==============================
                   Fab photo
@@ -80,17 +80,17 @@
         android:layout_height="0dp"
         android:background="@drawable/fab_state"
         android:clickable="true"
+        android:elevation="@dimen/dictionary_fab_elevation"
         android:focusable="true"
         android:padding="@dimen/dictionary_fab_padding"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_photo_add"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/fab_add"
+        app:layout_constraintCircle="@+id/fab_add"
+        app:layout_constraintCircleAngle="235"
+        app:layout_constraintCircleRadius="100dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/fab_add"
-        app:layout_constraintStart_toStartOf="@id/fab_add"
-        app:layout_constraintTop_toTopOf="@id/fab_add"
-        app:layout_constraintWidth_percent="0.15" />
+        app:layout_constraintWidth_percent="0.15"
+        tools:ignore="MissingConstraints" />
 
     <!--==============================
                   Fab file
@@ -101,16 +101,16 @@
         android:layout_height="0dp"
         android:background="@drawable/fab_state"
         android:clickable="true"
+        android:elevation="@dimen/dictionary_fab_elevation"
         android:focusable="true"
         android:padding="@dimen/dictionary_fab_padding"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_file_add"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/fab_add"
+        app:layout_constraintCircle="@+id/fab_add"
+        app:layout_constraintCircleAngle="125"
+        app:layout_constraintCircleRadius="100dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/fab_add"
-        app:layout_constraintStart_toStartOf="@id/fab_add"
-        app:layout_constraintTop_toTopOf="@id/fab_add"
-        app:layout_constraintWidth_percent="0.15" />
+        app:layout_constraintWidth_percent="0.15"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

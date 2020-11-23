@@ -6,14 +6,27 @@
         android:id="@+id/start_to_set_1"
         app:constraintSetEnd="@layout/fragment_dictionary_set_1"
         app:constraintSetStart="@layout/fragment_dictionary_start"
-        app:pathMotionArc="startVertical">
-        <KeyFrameSet>
-            <KeyAttribute
-                app:motionTarget="@+id/fab_add"
-                app:framePosition="99"
-                android:elevation="@dimen/dictionary_fab_elevation"/>
-        </KeyFrameSet>
-    </Transition>
+        app:pathMotionArc="startVertical" />
+
+    <Transition
+        android:id="@+id/set_1_to_set_2"
+        app:constraintSetEnd="@layout/fragment_dictionary_set_2"
+        app:constraintSetStart="@layout/fragment_dictionary_set_1" />
+
+    <Transition
+        android:id="@+id/set_2_to_set_3"
+        app:constraintSetEnd="@layout/fragment_dictionary_set_3"
+        app:constraintSetStart="@layout/fragment_dictionary_set_2" />
+
+    <Transition
+        android:id="@+id/set_2_to_set_4"
+        app:constraintSetEnd="@layout/fragment_dictionary_set_4"
+        app:constraintSetStart="@layout/fragment_dictionary_set_2" />
+
+    <Transition
+        android:id="@+id/set_2_to_set_5"
+        app:constraintSetEnd="@layout/fragment_dictionary_set_5"
+        app:constraintSetStart="@layout/fragment_dictionary_set_2" />
 
 </MotionScene>
 

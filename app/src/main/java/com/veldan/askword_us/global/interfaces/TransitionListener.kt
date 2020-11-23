@@ -7,7 +7,7 @@ interface TransitionListener : MotionLayout.TransitionListener {
 
     override fun onTransitionChange(motionLayout: MotionLayout?, start: Int, end: Int, progress: Float) {}
 
-    override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {}
+    override fun onTransitionCompleted(motionLayout: MotionLayout?, end: Int) {}
 
     override fun onTransitionTrigger(motionLayout: MotionLayout?, triggerId: Int, positive: Boolean, progress: Float) {}
 }

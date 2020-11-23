@@ -2,8 +2,10 @@ package com.veldan.askword_us.dictionary.animators
 
 import android.content.Context
 import android.view.View
+import androidx.constraintlayout.motion.widget.MotionLayout
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.FragmentDictionaryStartBinding
+import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator
 
 class DictionaryAnimator(
@@ -11,24 +13,27 @@ class DictionaryAnimator(
     val context: Context,
 ) :
     View.OnClickListener,
-    View.OnLongClickListener {
+    View.OnLongClickListener,
+    TransitionListener {
 
-    // Components fragment_dictionary
+    // Components
     private val motion = layoutDictionary.motionDictionary
     private val fabAdd = layoutDictionary.fabAdd
-//    private val fabCategory = layoutDictionary.fabCategory
-//    private val fabPhoto = layoutDictionary.fabPhoto
-//    private val fabFile = layoutDictionary.fabFile
+    private val fabCategory = layoutDictionary.fabCategory
+    private val fabPhoto = layoutDictionary.fabPhoto
+    private val fabFile = layoutDictionary.fabFile
 
-    // TransitionIds for dictionary_scene
+    // TransitionIds
+    private val start_To_set_1 = R.id.start_to_set_1
+    private val set_1_To_set_2 = R.id.set_1_to_set_2
+    private val set_2_To_set_3 = R.id.set_2_to_set_3
+    private val set_2_To_set_4 = R.id.set_2_to_set_4
+    private val set_2_To_set_5 = R.id.set_2_to_set_5
 
-    private val startToSet1 = R.id.start_to_set_1
-//    private val backMoveToCenter = R.id.back_move_to_center
-//    private val appearanceLayoutWordsCreation = R.id.appearance_layout_words_creation
-//    private val appearanceFabsAdd = R.id.appearance_fabs_add
-//    private val choiceFabCategory = R.id.choice_fab_category
-//    private val choiceFabPhoto = R.id.choice_fab_photo
-//    private val choiceFabFile = R.id.choice_fab_file
+    // States
+    private val start = R.layout.fragment_dictionary_start
+    private val set_1 = R.layout.fragment_dictionary_set_1
+    private val set_2 = R.layout.fragment_dictionary_set_2
 
     // WordCreation(layout_words_creation)
     init {
@@ -37,26 +42,35 @@ class DictionaryAnimator(
 
     // Events (fragment_dictionary)
     init {
-        //OnLongClick
-        fabAdd.setOnLongClickListener(this)
-        //OnClick
+        // OnClick
         fabAdd.setOnClickListener(this)
-//        fabCategory.setOnClickListener(this)
-//        fabPhoto.setOnClickListener(this)
-//        fabFile.setOnClickListener(this)
+        fabFile.setOnClickListener(this)
+        fabPhoto.setOnClickListener(this)
+        fabCategory.setOnClickListener(this)
+        // OnLongClick
+        fabAdd.setOnLongClickListener(this)
+        // OnTransition
+        motion.setTransitionListener(this)
     }
 
+    // ==============================
+    //          OnClick
+    // ==============================
     override fun onClick(v: View?) {
         // when use Pair<Int, Int> (v?.id, motion.currentState)
         when (v?.id to motion.currentState) {
-            fabAdd.id to R.layout.fragment_dictionary_start -> start_To_Set1()
-//
-//            fabFile.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabFile()
-//            fabPhoto.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabPhoto()
-//            fabCategory.id to appearanceFabsAdd -> appearanceFabsAddToChoiceFabCategory()
+            fabAdd.id to start -> start_To_Set_1()
+            fabAdd.id to set_2 -> set_2_To_Set_1()
+
+            fabCategory.id to set_2 -> set_2_To_Set_3()
+            fabPhoto.id to set_2 -> set_2_To_Set_4()
+            fabFile.id to set_2 -> set_2_To_Set_5()
         }
     }
 
+    // ==============================
+    //          OnLongClick
+    // ==============================
     override fun onLongClick(v: View?): Boolean {
         when (v?.id to motion.currentState) {
             //   fabAdd.id to start -> Animator.transition(motion, moveToCenter, 1000)
@@ -64,23 +78,69 @@ class DictionaryAnimator(
         return true
     }
 
-    private fun start_To_Set1() {
-        Animator.transitionToEnd(motion, startToSet1, 1000)
+    // ==============================
+    //          OnTransition
+    // ==============================
+    override fun onTransitionCompleted(motionLayout: MotionLayout?, end: Int) {
+        super.onTransitionCompleted(motionLayout, end)
+        when (Animator.previous to end) {
+            start to set_1 -> set_1_To_Set_2()
+            set_2 to set_1 -> set_1_To_Start()
+        }
     }
 
-//    private fun appearanceFabsAddToBackMoveToCenter() {
-//        Animator.transition(motion, backMoveToCenter, 1000)
-//    }
-//
-//    private fun appearanceFabsAddToChoiceFabFile() {
-//        Animator.transition(motion, choiceFabFile, 1000)
-//    }
-//
-//    private fun appearanceFabsAddToChoiceFabPhoto() {
-//        Animator.transition(motion, choiceFabPhoto, 1000)
-//    }
-//
-//    private fun appearanceFabsAddToChoiceFabCategory() {
-//        Animator.transition(motion, choiceFabCategory, 1000)
-//    }
+    // ==============================
+    //        transitionToEnd
+    // ==============================
+    private fun start_To_Set_1() {
+        Animator.apply {
+            transitionToEnd(motion, start_To_set_1, 1000)
+            previous = start
+        }
+    }
+
+    private fun set_1_To_Set_2() {
+        Animator.apply {
+            transitionToEnd(motion, set_1_To_set_2, 1000)
+            previous = set_1
+        }
+    }
+
+    private fun set_2_To_Set_3() {
+        Animator.apply {
+            transitionToEnd(motion, set_2_To_set_3, 1000)
+            previous = set_2
+        }
+    }
+
+    private fun set_2_To_Set_4() {
+        Animator.apply {
+            transitionToEnd(motion, set_2_To_set_4, 1000)
+            previous = set_2
+        }
+    }
+
+    private fun set_2_To_Set_5() {
+        Animator.apply {
+            transitionToEnd(motion, set_2_To_set_5, 1000)
+            previous = set_2
+        }
+    }
+
+    // ==============================
+    //        transitionToStart
+    // ==============================
+    private fun set_1_To_Start() {
+        Animator.apply {
+            transitionToStart(motion, start_To_set_1, 1000)
+            previous = set_1
+        }
+    }
+
+    private fun set_2_To_Set_1() {
+        Animator.apply {
+            transitionToStart(motion, set_1_To_set_2, 1000)
+            previous = set_2
+        }
+    }
 }
