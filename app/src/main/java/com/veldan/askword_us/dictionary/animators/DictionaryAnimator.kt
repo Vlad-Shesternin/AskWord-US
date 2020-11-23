@@ -6,11 +6,11 @@ import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.FragmentDictionaryStartBinding
-import com.veldan.askword_us.databinding.LayoutWordCreationBinding
+import com.veldan.askword_us.databinding.LayoutWordCreationStartBinding
 import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator
-import kotlinx.android.synthetic.main.fragment_dictionary_start.view.*
-import kotlinx.android.synthetic.main.layout_word_creation.view.*
+import kotlinx.android.synthetic.main.fragment_dictionary_set_6.view.*
+import kotlinx.android.synthetic.main.layout_word_creation_set_1.view.*
 
 class DictionaryAnimator(
     private val layoutDictionary: FragmentDictionaryStartBinding,
@@ -40,10 +40,10 @@ class DictionaryAnimator(
     private val set_1 = R.layout.fragment_dictionary_set_1
     private val set_2 = R.layout.fragment_dictionary_set_2
 
-    // WordCreation(layout_words_creation)
+    // WordCreation(layout_word_creation)
     init {
         WordCreationAnimator(
-            LayoutWordCreationBinding.inflate(LayoutInflater.from(context)),
+            layoutDictionary.layoutWordCreationStart,
             context
         )
     }

@@ -121,8 +121,8 @@
            Layout word creation
      ==============================-->
     <include
-        android:id="@+id/layout_words_creation"
-        layout="@layout/layout_word_creation"
+        android:id="@+id/layout_word_creation_start"
+        layout="@layout/layout_word_creation_start"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="invisible"

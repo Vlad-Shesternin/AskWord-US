@@ -4,7 +4,7 @@
             WordCreation
     ==============================-->
     <!-- | ImageButton | -->
-    <dimen name="words_creation_ib_margin">10dp</dimen>
+
     <!-- | EditText | -->
     <dimen name="words_creation_edit_margin">10dp</dimen>
 
