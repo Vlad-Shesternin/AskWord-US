@@ -1,12 +1,16 @@
 package com.veldan.askword_us.dictionary.animators
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.FragmentDictionaryStartBinding
+import com.veldan.askword_us.databinding.LayoutWordCreationBinding
 import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator
+import kotlinx.android.synthetic.main.fragment_dictionary_start.view.*
+import kotlinx.android.synthetic.main.layout_word_creation.view.*
 
 class DictionaryAnimator(
     private val layoutDictionary: FragmentDictionaryStartBinding,
@@ -29,6 +33,7 @@ class DictionaryAnimator(
     private val set_2_To_set_3 = R.id.set_2_to_set_3
     private val set_2_To_set_4 = R.id.set_2_to_set_4
     private val set_2_To_set_5 = R.id.set_2_to_set_5
+    private val start_To_set_6 = R.id.start_to_set_6
 
     // States
     private val start = R.layout.fragment_dictionary_start
@@ -37,7 +42,10 @@ class DictionaryAnimator(
 
     // WordCreation(layout_words_creation)
     init {
-        // WordCreationAnimator(layoutDictionary.layoutWordsCreation, context)
+        WordCreationAnimator(
+            LayoutWordCreationBinding.inflate(LayoutInflater.from(context)),
+            context
+        )
     }
 
     // Events (fragment_dictionary)
@@ -73,7 +81,7 @@ class DictionaryAnimator(
     // ==============================
     override fun onLongClick(v: View?): Boolean {
         when (v?.id to motion.currentState) {
-            //   fabAdd.id to start -> Animator.transition(motion, moveToCenter, 1000)
+            fabAdd.id to start -> start_To_Set_6()
         }
         return true
     }
@@ -124,6 +132,13 @@ class DictionaryAnimator(
         Animator.apply {
             transitionToEnd(motion, set_2_To_set_5, 1000)
             previous = set_2
+        }
+    }
+
+    private fun start_To_Set_6() {
+        Animator.apply {
+            transitionToEnd(motion, start_To_set_6, 1000)
+            previous = start
         }
     }
 

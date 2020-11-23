@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motion_dictionary"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutDescription="@xml/dictionary_scene">
+    android:layout_height="match_parent">
 
     <!--==============================
                   TABs
@@ -15,7 +15,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintHeight_percent="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +26,7 @@
         android:id="@+id/rv_list_words"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="invisible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabs" />
@@ -41,6 +42,7 @@
         android:clickable="true"
         android:elevation="@dimen/dictionary_fab_elevation"
         android:focusable="true"
+        android:rotation="360"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_add"
         app:altSrc="@drawable/ic_check"
@@ -52,7 +54,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.8"
         app:layout_constraintWidth_percent="0.15"
-        app:overlay="false" />
+        app:overlay="false"
+        tools:src="@drawable/ic_check" />
 
     <!--==============================
                   Fab category
@@ -123,12 +126,8 @@
     <include
         android:id="@+id/layout_words_creation"
         layout="@layout/layout_word_creation"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/fab_add"
-        app:layout_constraintEnd_toEndOf="@id/fab_add"
-        app:layout_constraintStart_toStartOf="@id/fab_add"
-        app:layout_constraintTop_toTopOf="@id/fab_add" />
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

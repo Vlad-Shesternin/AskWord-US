@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/layout_words_creation"
+        android:id="@+id/motion_words_creation"
         clickHideKeyboard="@{true}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -73,7 +73,7 @@
 
         <include
             android:id="@+id/layout_additional_translation"
-            layout="@layout/layout_additional_translation"/>
+            layout="@layout/layout_additional_translation" />
 
         <EditText
             android:id="@+id/edit_translation"

@@ -26,7 +26,7 @@ class WordCreationAnimator(
     val TAG = "WordCreationAnimator"
 
     // Components layout_words_creation
-    private val motion = layoutWordsCreation.layoutWordsCreation
+    private val motion = layoutWordsCreation.motionWordsCreation
     private val editWord = layoutWordsCreation.editWord
     private val ivImgAdd = layoutWordsCreation.ivImgAdd
     private val ifvPromptAdd = layoutWordsCreation.ifvPromptAdd
@@ -61,7 +61,7 @@ class WordCreationAnimator(
         // when use Pair<Int, Int> (v?.id, motion.currentState)
         when (v?.id to motion.currentState) {
             ifvPromptAdd.id to start -> startToMoveToTop()
-          //  btnAdditionalTranslation.id to start -> startToMoveTranslation()
+            //  btnAdditionalTranslation.id to start -> startToMoveTranslation()
             ivListAdditionalTranslation.id to start -> startToAppearanceAdditionalTranslation()
             ivListAdditionalTranslation.id to appearanceLayoutAdditionalTranslation -> appearanceAdditionalTranslationToStart()
         }
