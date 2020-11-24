@@ -5,17 +5,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.*
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator
-import com.veldan.askword_us.global.textWithoutUnderline
-import kotlinx.coroutines.*
+import kotlinx.android.synthetic.main.layout_prompt.view.*
+import kotlinx.android.synthetic.main.layout_word_creation_set_1.view.*
+import kotlin.math.log
 
 class WordCreationAnimator(
-    private val layoutWordsCreation: LayoutWordCreationStartBinding,
+    private val layoutWordCreation: LayoutWordCreationStartBinding,
     val context: Context,
 ) :
     View.OnClickListener,
@@ -24,59 +24,64 @@ class WordCreationAnimator(
     val TAG = "WordCreationAnimator"
 
     // Components layout_words_creation
-    private val motion = layoutWordsCreation.motionWordsCreation
-    private val ifvPromptAdd = layoutWordsCreation.ifvPromptAdd
-    private val ivImageAdd = layoutWordsCreation.ivImgAdd
+    private val motion = layoutWordCreation.motionWordCreation
+    private val ifvPromptAdd = layoutWordCreation.ifvPromptAdd
+    private val ivImageAdd = layoutWordCreation.ivImgAdd
 
+    // Layouts
+    private val start = R.layout.layout_word_creation_start
 
     // TransitionIds
     private val start_to_set_1 = R.id.start_to_set_1
 
     // Events (layout_words_creation)
     init {
-        ifvPromptAdd.setOnClickListener(this)
+        motion.setTransitionListener(this)
         ivImageAdd.setOnClickListener(this)
-        //motion.setTransitionListener(this)
-
+        ifvPromptAdd.setOnClickListener(this)
     }
 
     // ==============================
-    //          OnClick
+    //       OnTransitionChange
     // ==============================
-    override fun onClick(v: View?) {
-        Log.i(TAG, "onClick: sssssssssssssssssss")
-        // when use Pair<Int, Int>(v?.id, motion.currentState)
-        when (v?.id to motion.currentState) {
-            ifvPromptAdd to R.layout.layout_word_creation_start -> start_To_Set_1()
+    override fun onTransitionChange(
+        motionLayout: MotionLayout?,
+        start: Int,
+        end: Int,
+        progress: Float
+    ) {
+        super.onTransitionChange(motionLayout, start, end, progress)
+
+        if (R.layout.layout_word_creation_set_2 == end && 1.0f == progress) {
+            Log.i(TAG, "onTransitionChange: 000000000000000000000000")
+            motion.layout_prompt.edit_prompt.defaultFocusAndKeyboard(true)
         }
     }
 
-    // ==============================
-    //      OnTransitionCompleted
-    // ==============================
-    override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
-        super.onTransitionCompleted(motionLayout, currentId)
-//        if (currentId == twistingShine) {
-//            CoroutineScope(Dispatchers.Default).launch {
-//                delay(500)
-//                withContext(Dispatchers.Main) {
-//                    layoutWordsCreation.layoutPrompt.editPrompt.defaultFocusAndKeyboard(true)
-//                }
-//            }
-//        }
-    }
+        // ==============================
+        //          OnClick
+        // ==============================
+        override fun onClick(v: View?) {
+            // when use Pair<Int, Int>(v?.id, motion.currentState)
+            when (v?.id to motion.currentState) {
+                ifvPromptAdd.id to R.layout.layout_word_creation_start -> start_To_Set_1()
+            }
+        }
 
-    // ==============================
-    //      transitionToEnd
-    // ==============================
-    private fun start_To_Set_1() {
-        Animator.transitionToEnd(motion, start_to_set_1, 1000)
-    }
+        // ==============================
+        //      transitionToEnd
+        // ==============================
+        private fun start_To_Set_1() {
+            Log.i(TAG, "start_To_Set_1:")
+            Animator.apply {
+                transitionToEnd(motion, start_to_set_1, 1000)
+            }
+        }
 
-    // ==============================
-    //      StartToMoveTranslation
-    // ==============================
-    private val additionalTranslationList = arrayListOf<String>()
+        // ==============================
+        //      StartToMoveTranslation
+        // ==============================
+        val additionalTranslationList = arrayListOf<String>()
 //    private fun startToMoveTranslation() {
 //
 //        if (editTranslation.text.toString().isNotEmpty()) {
@@ -109,21 +114,4 @@ class WordCreationAnimator(
 //        }
 //        Log.i(TAG, "$additionalTranslationList")
 //    }
-
-    // ==============================
-    // StartToAppearanceAdditionalTranslation
-    // ==============================
-    private fun startToAppearanceAdditionalTranslation() {
-        if (additionalTranslationList.isNotEmpty()) {
-//            Animator.transitionToEnd(motion, appearanceLayoutAdditionalTranslation, 500)
-
-        }
     }
-
-    // ==============================
-    // AppearanceAdditionalTranslationToStart
-    // ==============================
-    private fun appearanceAdditionalTranslationToStart() {
-        //  Animator.transitionToEnd(motion, start, 500)
-    }
-}

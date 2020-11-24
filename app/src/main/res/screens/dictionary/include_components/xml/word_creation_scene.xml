@@ -7,4 +7,29 @@
         app:constraintSetEnd="@layout/layout_word_creation_set_1"
         app:constraintSetStart="@layout/layout_word_creation_start" />
 
+    <Transition
+        android:id="@+id/set_1_to_set_2"
+        app:autoTransition="animateToEnd"
+        app:constraintSetEnd="@layout/layout_word_creation_set_2"
+        app:constraintSetStart="@layout/layout_word_creation_set_1"
+        app:duration="3000">
+        <KeyFrameSet>
+            <KeyAttribute
+                app:framePosition="0"
+                app:motionTarget="@+id/ifv_prompt_add">
+                <CustomAttribute
+                    app:attributeName="crossfade"
+                    app:customFloatValue="0" />
+            </KeyAttribute>
+
+            <KeyAttribute
+                app:framePosition="100"
+                app:motionTarget="@+id/ifv_prompt_add">
+                <CustomAttribute
+                    app:attributeName="crossfade"
+                    app:customFloatValue="1" />
+            </KeyAttribute>
+        </KeyFrameSet>
+    </Transition>
+
 </MotionScene>

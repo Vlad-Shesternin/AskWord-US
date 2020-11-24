@@ -2,12 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/motion_words_creation"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/motion_word_creation"
         clickHideKeyboard="@{true}"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutDescription="@xml/word_creation_scene">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/iv_img_add"
@@ -17,11 +16,19 @@
             android:focusable="true"
             android:scaleType="centerCrop"
             android:src="@drawable/image_add_state"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/guideH_25"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideV_85"
             app:layout_constraintStart_toEndOf="@+id/guideV_15"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideH_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideH_25"
@@ -57,6 +64,7 @@
             android:nextFocusForward="@id/edit_translation"
             android:singleLine="true"
             android:textSize="@dimen/edit_text_size"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/guideH_40"
             app:layout_constraintEnd_toStartOf="@+id/guideV_85"
             app:layout_constraintStart_toEndOf="@+id/guideV_15"
@@ -81,6 +89,7 @@
             android:inputType="textCapSentences"
             android:singleLine="true"
             android:textSize="@dimen/edit_text_size"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/guideH_55"
             app:layout_constraintEnd_toStartOf="@+id/guideV_85"
             app:layout_constraintStart_toEndOf="@+id/guideV_15"
@@ -93,6 +102,7 @@
             android:layout_margin="@dimen/words_creation_edit_margin"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_list"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/guideH_55"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideV_15"
@@ -108,6 +118,7 @@
             android:layout_margin="@dimen/words_creation_edit_margin"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_add"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/guideH_55"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -126,26 +137,25 @@
             android:id="@+id/ifv_prompt_add"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:rotation="180"
             android:src="@drawable/ic_prompt_add"
             app:altSrc="@drawable/ic_prompt_add_shine"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideV_85"
             app:layout_constraintStart_toEndOf="@+id/guideV_15"
-            app:layout_constraintTop_toBottomOf="@+id/guideH_55"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.2" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/d"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:constraint_referenced_ids="iv_img_add, btn_additional_translation, iv_list_additional_translation" />
 
         <include
             android:id="@+id/layout_prompt"
             layout="@layout/layout_prompt"
-            android:visibility="gone" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintWidth_percent="0.999"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideH_15" />
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

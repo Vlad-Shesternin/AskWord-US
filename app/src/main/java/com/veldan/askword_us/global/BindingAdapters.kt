@@ -51,8 +51,8 @@ fun TextView.textWithoutUnderline(text: String) {
 // ==============================
 @BindingAdapter("defaultFocusAndKeyboard")
 fun View.defaultFocusAndKeyboard(use: Boolean) {
+    this.requestFocus()
     val imm = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(this,
         SHOW_IMPLICIT)
-    this.requestFocus()
 }

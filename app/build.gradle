@@ -49,6 +49,7 @@ android {
                            'src/main/res/screens/dictionary_or_study/include_components',
                            'src/main/res/screens/dictionary',
                            'src/main/res/screens/dictionary/include_components',
+                           'src/main/res/screens/dictionary/include_components/include_components',
                            'src/main/res/screens/authentication',
                            'src/main/res/screens/authentication/include_components']
         }
