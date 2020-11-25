@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/motion_word_creation"
@@ -105,7 +106,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/words_creation_edit_margin"
             android:gravity="center"
-            android:hint="@string/word_creation_edit_enter_translation"
             android:imeOptions="actionDone"
             android:inputType="textCapSentences"
             android:singleLine="true"
@@ -120,16 +120,16 @@
         ==============================-->
         <TextView
             android:id="@+id/tv_translation"
-            android:layout_width="0dp"
+            android:layout_width="1dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/words_creation_edit_margin"
-            android:gravity="center"
             android:lines="1"
             android:textSize="@dimen/edit_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_translation"
-            app:layout_constraintEnd_toEndOf="@+id/edit_translation"
-            app:layout_constraintStart_toStartOf="@+id/edit_translation"
-            app:layout_constraintTop_toTopOf="@+id/edit_translation" />
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/ifv_list_additional_translation"
+            app:layout_constraintEnd_toEndOf="@+id/ifv_list_additional_translation"
+            app:layout_constraintStart_toStartOf="@+id/ifv_list_additional_translation"
+            app:layout_constraintTop_toTopOf="@+id/ifv_list_additional_translation" />
 
         <!--==============================
                 ImageFilter list additional translation
@@ -142,6 +142,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ic_list_black"
             app:altSrc="@drawable/ic_list_blue"
+            app:crossfade="1"
             app:layout_constraintBottom_toTopOf="@+id/guideH_55"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideV_15"
@@ -153,7 +154,7 @@
                 ImageButton additional translation
         ==============================-->
         <ImageButton
-            android:id="@+id/ib_additional_translation"
+            android:id="@+id/btn_additional_translation"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/words_creation_edit_margin"

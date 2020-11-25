@@ -1,9 +1,13 @@
 package com.veldan.askword_us.dictionary.animators
 
 import android.content.Context
+import android.os.IBinder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageButton
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.utils.widget.ImageFilterView
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.FragmentDictionaryStartBinding
 import com.veldan.askword_us.databinding.LayoutWordCreationStartBinding
@@ -14,18 +18,20 @@ import kotlinx.android.synthetic.main.layout_word_creation_set_1.view.*
 
 class DictionaryAnimator(
     private val layoutDictionary: FragmentDictionaryStartBinding,
-    val context: Context,
+    val context: Context
 ) :
     View.OnClickListener,
     View.OnLongClickListener,
     TransitionListener {
 
+    val TAG = "DictionaryAnimator"
+
     // Components
-    private val motion = layoutDictionary.motionDictionary
-    private val fabAdd = layoutDictionary.fabAdd
-    private val fabCategory = layoutDictionary.fabCategory
-    private val fabPhoto = layoutDictionary.fabPhoto
-    private val fabFile = layoutDictionary.fabFile
+    private var motion: MotionLayout
+    private var fabAdd: ImageFilterView
+    private var fabFile: ImageButton
+    private var fabPhoto: ImageButton
+    private var fabCategory: ImageButton
 
     // TransitionIds
     private val start_To_set_1 = R.id.start_to_set_1
@@ -40,15 +46,22 @@ class DictionaryAnimator(
     private val set_1 = R.layout.fragment_dictionary_set_1
     private val set_2 = R.layout.fragment_dictionary_set_2
 
-    // WordCreation(layout_word_creation)
+    // WordCreation
     init {
-        WordCreationAnimator(
-            layoutDictionary.layoutWordCreationStart,
-            context
-        )
+        WordCreationAnimator(layoutDictionary.layoutWordCreationStart, context)
     }
 
-    // Events (fragment_dictionary)
+    init {
+        layoutDictionary.also {
+            motion = it.motionDictionary
+            fabAdd = it.fabAdd
+            fabFile = it.fabFile
+            fabPhoto = it.fabPhoto
+            fabCategory = it.fabCategory
+        }
+    }
+
+    // Events
     init {
         // OnClick
         fabAdd.setOnClickListener(this)
@@ -67,12 +80,7 @@ class DictionaryAnimator(
     override fun onClick(v: View?) {
         // when use Pair<Int, Int> (v?.id, motion.currentState)
         when (v?.id to motion.currentState) {
-            fabAdd.id to start -> start_To_Set_1()
-            fabAdd.id to set_2 -> set_2_To_Set_1()
-
-            fabCategory.id to set_2 -> set_2_To_Set_3()
-            fabPhoto.id to set_2 -> set_2_To_Set_4()
-            fabFile.id to set_2 -> set_2_To_Set_5()
+            fabAdd.id to start -> start_To_Set_6()
         }
     }
 
@@ -81,7 +89,12 @@ class DictionaryAnimator(
     // ==============================
     override fun onLongClick(v: View?): Boolean {
         when (v?.id to motion.currentState) {
-            fabAdd.id to start -> start_To_Set_6()
+            fabAdd.id to start -> start_To_Set_1()
+            fabAdd.id to set_2 -> set_2_To_Set_1()
+
+            fabCategory.id to set_2 -> set_2_To_Set_3()
+            fabPhoto.id to set_2 -> set_2_To_Set_4()
+            fabFile.id to set_2 -> set_2_To_Set_5()
         }
         return true
     }

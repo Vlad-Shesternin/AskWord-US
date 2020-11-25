@@ -20,7 +20,6 @@ class DictionaryFragment : Fragment() {
 
         initBinding(inflater)
         initAnimator()
-        initAdapter()
 
         return binding.root
     }
@@ -30,11 +29,6 @@ class DictionaryFragment : Fragment() {
     // ==============================
     private fun initBinding(inflater: LayoutInflater) {
         binding = FragmentDictionaryStartBinding.inflate(inflater)
-    }
-
-    private fun initAdapter() {
-        // val adapter = WordAdapter()
-        // binding.rvListWords.adapter = adapter
     }
 
     private fun initAnimator() {

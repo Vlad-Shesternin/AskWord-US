@@ -1,6 +1,5 @@
 package com.veldan.askword_us.global
 
-import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -53,6 +52,8 @@ fun TextView.textWithoutUnderline(text: String) {
 fun View.defaultFocusAndKeyboard(use: Boolean) {
     this.requestFocus()
     val imm = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.showSoftInput(this,
-        SHOW_IMPLICIT)
+    imm.showSoftInput(
+        this,
+        SHOW_IMPLICIT
+    )
 }
