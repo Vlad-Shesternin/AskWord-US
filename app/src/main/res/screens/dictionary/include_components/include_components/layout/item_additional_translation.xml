@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollH_item_additional_translation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
 
-    <HorizontalScrollView
-        android:id="@+id/scrollH_item_additional_translation"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/item_additional_translation"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
-
-        <TextView
-            android:id="@+id/item_additional_translation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="25sp"
-            tools:text="Text" />
-    </HorizontalScrollView>
-</layout>
+        android:textSize="25sp"
+        tools:text="Text" />
+</HorizontalScrollView>

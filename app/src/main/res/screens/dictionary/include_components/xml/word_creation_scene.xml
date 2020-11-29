@@ -38,28 +38,40 @@
         app:constraintSetStart="@layout/layout_word_creation_start">
         <KeyFrameSet>
             <KeyAttribute
-                app:motionTarget="@+id/ifv_list_additional_translation"
-                app:framePosition="0">
+                app:framePosition="0"
+                app:motionTarget="@+id/ifv_list_additional_translation">
                 <CustomAttribute
                     app:attributeName="crossfade"
                     app:customFloatValue="0" />
             </KeyAttribute>
 
             <KeyAttribute
-                app:motionTarget="@+id/ifv_list_additional_translation"
-                app:framePosition="1">
+                app:framePosition="1"
+                app:motionTarget="@+id/ifv_list_additional_translation">
                 <CustomAttribute
                     app:attributeName="crossfade"
                     app:customFloatValue="1" />
             </KeyAttribute>
 
             <KeyAttribute
-                app:motionTarget="@+id/ifv_list_additional_translation"
-                app:framePosition="100">
+                app:framePosition="100"
+                app:motionTarget="@+id/ifv_list_additional_translation">
                 <CustomAttribute
                     app:attributeName="crossfade"
                     app:customFloatValue="1" />
             </KeyAttribute>
+        </KeyFrameSet>
+    </Transition>
+
+    <Transition
+        android:id="@+id/start_to_set_4"
+        app:constraintSetEnd="@layout/layout_word_creation_set_4"
+        app:constraintSetStart="@layout/layout_word_creation_start">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="0"
+                app:motionTarget="@+id/layout_additional_translation" />
         </KeyFrameSet>
     </Transition>
 

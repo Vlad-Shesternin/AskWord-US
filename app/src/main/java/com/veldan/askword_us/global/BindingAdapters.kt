@@ -37,15 +37,6 @@ fun View.clickHideKeyboard(use: Boolean) {
 }
 
 // ==============================
-//          Hide Underline
-// ==============================
-@BindingAdapter("textWithoutUnderline")
-fun TextView.textWithoutUnderline(text: String) {
-    val format = context.getString(R.string.word_creation_item_additional_translation)
-    this.text = String.format(format, text)
-}
-
-// ==============================
 //         Focus and Keyboard
 // ==============================
 @BindingAdapter("defaultFocusAndKeyboard")
