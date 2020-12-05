@@ -121,14 +121,14 @@
            Layout word creation
      ==============================-->
     <include
-        android:id="@+id/layout_word_creation_start"
-        layout="@layout/layout_word_creation_start"
+        android:id="@+id/layout_word_creator_start"
+        layout="@layout/layout_word_creator_start"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/fab_add"
-        app:layout_constraintEnd_toEndOf="@id/fab_add"
-        app:layout_constraintStart_toStartOf="@id/fab_add"
-        app:layout_constraintTop_toTopOf="@id/fab_add" />
+        app:layout_constraintBottom_toBottomOf="@+id/fab_add"
+        app:layout_constraintEnd_toEndOf="@+id/fab_add"
+        app:layout_constraintStart_toStartOf="@+id/fab_add"
+        app:layout_constraintTop_toTopOf="@+id/fab_add" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

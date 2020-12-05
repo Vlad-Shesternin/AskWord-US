@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/motion_word_creation"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/motion_word_creator"
         clickHideKeyboard="@{true}"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutDescription="@xml/word_creation_scene">
+        android:layout_height="match_parent">
 
         <!--==============================
                   Guide horizontal
@@ -119,32 +119,16 @@
             app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
 
         <!--==============================
-                  Text translation
-        ==============================-->
-        <TextView
-            android:id="@+id/tv_translation"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="@dimen/words_creation_edit_margin"
-            android:gravity="center"
-            android:lines="1"
-            android:textSize="@dimen/edit_text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_translation"
-            app:layout_constraintEnd_toEndOf="@+id/edit_translation"
-            app:layout_constraintStart_toStartOf="@+id/edit_translation"
-            app:layout_constraintTop_toTopOf="@+id/edit_translation" />
-
-        <!--==============================
-                ImageFilter list additional translation
+                ImageFilter list translations
         ==============================-->
         <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/ifv_list_additional_translation"
+            android:id="@+id/ifv_list_translations"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/words_creation_edit_margin"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_list_black"
-            app:altSrc="@drawable/ic_list_blue"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/guideH_55"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideV_15"
@@ -153,10 +137,10 @@
             app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
 
         <!--==============================
-                ImageButton additional translation
+                ImageButton translations
         ==============================-->
         <ImageButton
-            android:id="@+id/ib_additional_translation"
+            android:id="@+id/ib_translations"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/words_creation_edit_margin"
@@ -177,15 +161,17 @@
             android:id="@+id/ifv_prompt_add"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:rotation="180"
+            android:rotationY="360"
             android:src="@drawable/ic_prompt_add"
-            android:visibility="invisible"
+            android:translationY="-25dp"
             app:altSrc="@drawable/ic_prompt_add_shine"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/guideV_85"
             app:layout_constraintStart_toEndOf="@+id/guideV_15"
-            app:layout_constraintTop_toBottomOf="@+id/guideH_55"
-            app:layout_constraintWidth_percent="0.2" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.2"
+            tools:src="@drawable/ic_prompt_add_shine" />
 
         <!--==============================
                     Layout prompt
@@ -195,25 +181,11 @@
             layout="@layout/layout_prompt"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideH_15"
-            app:layout_constraintWidth_percent="0.999" />
-
-        <!--==============================
-                Layout additional translation
-        ==============================-->
-        <include
-            android:id="@+id/layout_additional_translation"
-            layout="@layout/layout_additional_translation"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/ifv_prompt_add"
-            app:layout_constraintEnd_toStartOf="@+id/guideV_85"
-            app:layout_constraintStart_toEndOf="@+id/guideV_15"
-            app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideH_15" />
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

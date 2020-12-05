@@ -48,8 +48,11 @@ android {
                            'src/main/res/screens/dictionary_or_study',
                            'src/main/res/screens/dictionary_or_study/include_components',
                            'src/main/res/screens/dictionary',
+                           'src/main/res/screens/dictionary/animation_menu_dialog',
+                           'src/main/res/screens/dictionary/animation_word_creator_dialog',
                            'src/main/res/screens/dictionary/include_components',
-                           'src/main/res/screens/dictionary/include_components/include_components',
+                           'src/main/res/screens/dictionary/include_components/animation_prompt',
+                           'src/main/res/screens/dictionary/include_components/animation_translations',
                            'src/main/res/screens/authentication',
                            'src/main/res/screens/authentication/include_components']
         }
@@ -74,16 +77,18 @@ dependencies {
     def recycler_version = "1.1.0"
     implementation "androidx.recyclerview:recyclerview:$recycler_version"
     // ConstraintLayout
-    def constraintLayout_version = '2.0.2'
+    def constraintLayout_version = '2.0.4'
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"
     // CardView
     implementation "androidx.cardview:cardview:1.0.0"
     // ViewModel
     def view_model = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$view_model"
-    //Lottie
+    // Lottie
     def lottieVersion = "3.4.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+    def room_version = "2.2.5"
+    implementation "androidx.room:room-runtime:$room_version"
 
     // Firebase ===============================
     // BoM

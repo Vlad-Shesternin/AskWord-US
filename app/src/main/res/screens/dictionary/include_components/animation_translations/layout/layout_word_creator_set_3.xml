@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/motion_word_creation"
+        android:id="@+id/motion_word_creator"
         clickHideKeyboard="@{true}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutDescription="@xml/word_creation_scene">
+        app:layoutDescription="@xml/word_creator_scene">
 
         <!--==============================
                   Guide horizontal
@@ -126,16 +126,16 @@
             android:lines="1"
             android:textSize="@dimen/edit_text_size"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/ifv_list_additional_translation"
-            app:layout_constraintEnd_toEndOf="@+id/ifv_list_additional_translation"
-            app:layout_constraintStart_toStartOf="@+id/ifv_list_additional_translation"
-            app:layout_constraintTop_toTopOf="@+id/ifv_list_additional_translation" />
+            app:layout_constraintBottom_toBottomOf="@+id/ifv_list_translations"
+            app:layout_constraintEnd_toEndOf="@+id/ifv_list_translations"
+            app:layout_constraintStart_toStartOf="@+id/ifv_list_translations"
+            app:layout_constraintTop_toTopOf="@+id/ifv_list_translations" />
 
         <!--==============================
-                ImageFilter list additional translation
+               ImageFilter list translations
         ==============================-->
         <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/ifv_list_additional_translation"
+            android:id="@+id/ifv_list_translations"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/words_creation_edit_margin"
@@ -151,10 +151,10 @@
             app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
 
         <!--==============================
-                ImageButton additional translation
+                ImageButton translations
         ==============================-->
         <ImageButton
-            android:id="@+id/btn_additional_translation"
+            android:id="@+id/ib_translations"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="@dimen/words_creation_edit_margin"

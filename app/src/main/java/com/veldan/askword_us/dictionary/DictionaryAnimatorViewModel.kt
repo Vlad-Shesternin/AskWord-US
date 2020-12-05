@@ -1,32 +1,24 @@
-package com.veldan.askword_us.dictionary.animators
+package com.veldan.askword_us.dictionary
 
-import android.content.Context
-import android.os.IBinder
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageButton
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.utils.widget.ImageFilterView
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.FragmentDictionaryStartBinding
-import com.veldan.askword_us.databinding.LayoutWordCreationStartBinding
-import com.veldan.askword_us.global.interfaces.TransitionListener
+import com.veldan.askword_us.dictionary.worc_creator.WordCreatorAnimatorViewModel
+import com.veldan.askword_us.dictionary.worc_creator.WordCreatorAnimatorViewModelFactory
+import com.veldan.askword_us.dictionary.worc_creator.WordCreatorDialog
 import com.veldan.askword_us.global.objects.Animator
-import kotlinx.android.synthetic.main.fragment_dictionary_set_6.view.*
-import kotlinx.android.synthetic.main.layout_word_creation_set_1.view.*
 
-class DictionaryAnimator(
+class DictionaryAnimatorViewModel(
     private val layoutDictionary: FragmentDictionaryStartBinding,
-    val context: Context
-) :
-    View.OnClickListener,
-    View.OnLongClickListener,
-    TransitionListener {
+    private val fragment: DictionaryFragment
+) : ViewModel() {
 
-    val TAG = "DictionaryAnimator"
-
-    // Components
+    // Components UI
     private var motion: MotionLayout
     private var fabAdd: ImageFilterView
     private var fabFile: ImageButton
@@ -46,11 +38,7 @@ class DictionaryAnimator(
     private val set_1 = R.layout.fragment_dictionary_set_1
     private val set_2 = R.layout.fragment_dictionary_set_2
 
-    // WordCreation
-    init {
-        WordCreationAnimator(layoutDictionary.layoutWordCreationStart, context)
-    }
-
+    // init ComponentsUI
     init {
         layoutDictionary.also {
             motion = it.motionDictionary
@@ -61,49 +49,39 @@ class DictionaryAnimator(
         }
     }
 
-    // Events
-    init {
-        // OnClick
-        fabAdd.setOnClickListener(this)
-        fabFile.setOnClickListener(this)
-        fabPhoto.setOnClickListener(this)
-        fabCategory.setOnClickListener(this)
-        // OnLongClick
-        fabAdd.setOnLongClickListener(this)
-        // OnTransition
-        motion.setTransitionListener(this)
+    // init WordCreator
+    private fun initWordCreator() {
+        WordCreatorDialog(layoutDictionary.layoutWordCreatorStart, fragment)
     }
 
     // ==============================
-    //          OnClick
+    //    onClick
     // ==============================
-    override fun onClick(v: View?) {
+    fun onClick(view: View) {
         // when use Pair<Int, Int> (v?.id, motion.currentState)
-        when (v?.id to motion.currentState) {
-            fabAdd.id to start -> start_To_Set_6()
-        }
-    }
+        when (view.id to motion.currentState) {
+            fabAdd.id to start -> {
+                initWordCreator()
+                start_To_Set_6()
+            }
 
-    // ==============================
-    //          OnLongClick
-    // ==============================
-    override fun onLongClick(v: View?): Boolean {
-        when (v?.id to motion.currentState) {
-            fabAdd.id to start -> start_To_Set_1()
             fabAdd.id to set_2 -> set_2_To_Set_1()
-
             fabCategory.id to set_2 -> set_2_To_Set_3()
             fabPhoto.id to set_2 -> set_2_To_Set_4()
             fabFile.id to set_2 -> set_2_To_Set_5()
         }
-        return true
     }
 
     // ==============================
-    //          OnTransition
+    //    onLongClick
     // ==============================
-    override fun onTransitionCompleted(motionLayout: MotionLayout?, end: Int) {
-        super.onTransitionCompleted(motionLayout, end)
+    fun onLongClick(view: View) {
+        when (view.id to motion.currentState) {
+            fabAdd.id to start -> start_To_Set_1()
+        }
+    }
+
+    fun onTransitionCompleted(end: Int) {
         when (Animator.previous to end) {
             start to set_1 -> set_1_To_Set_2()
             set_2 to set_1 -> set_1_To_Start()
