@@ -2,77 +2,281 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--==============================
+           TRA: start_to_set_1
+    ==============================-->
     <Transition
         android:id="@+id/start_to_set_1"
-        app:constraintSetEnd="@layout/layout_word_creator_set_1"
-        app:constraintSetStart="@layout/layout_word_creator_start" />
+        app:constraintSetEnd="@+id/set_1"
+        app:constraintSetStart="@+id/start" />
 
+    <!--==============================
+           TRA: set_1_to_set_2
+    ==============================-->
     <Transition
         android:id="@+id/set_1_to_set_2"
         app:autoTransition="animateToEnd"
-        app:constraintSetEnd="@layout/layout_word_creator_set_2"
-        app:constraintSetStart="@layout/layout_word_creator_set_1"
-        app:duration="1000">
-        <KeyFrameSet>
-            <KeyAttribute
-                app:framePosition="0"
-                app:motionTarget="@+id/ifv_prompt_add">
-                <CustomAttribute
-                    app:attributeName="crossfade"
-                    app:customFloatValue="0" />
-            </KeyAttribute>
+        app:constraintSetEnd="@+id/set_2"
+        app:constraintSetStart="@+id/set_1"
+        app:duration="1000" />
 
-            <KeyAttribute
-                app:framePosition="100"
-                app:motionTarget="@+id/ifv_prompt_add">
-                <CustomAttribute
-                    app:attributeName="crossfade"
-                    app:customFloatValue="1" />
-            </KeyAttribute>
-        </KeyFrameSet>
-    </Transition>
-
+    <!--==============================
+           TRA: set_2_to_set_3
+    ==============================-->
     <Transition
         android:id="@+id/start_to_set_3"
-        app:constraintSetEnd="@layout/layout_word_creator_set_3"
-        app:constraintSetStart="@layout/layout_word_creator_start">
-        <KeyFrameSet>
-            <KeyAttribute
-                app:framePosition="0"
-                app:motionTarget="@+id/ifv_list_translations">
-                <CustomAttribute
-                    app:attributeName="crossfade"
-                    app:customFloatValue="0" />
-            </KeyAttribute>
+        app:constraintSetEnd="@+id/set_3"
+        app:constraintSetStart="@+id/start" />
 
-            <KeyAttribute
-                app:framePosition="1"
-                app:motionTarget="@+id/ifv_list_translations">
-                <CustomAttribute
-                    app:attributeName="crossfade"
-                    app:customFloatValue="1" />
-            </KeyAttribute>
-
-            <KeyAttribute
-                app:framePosition="100"
-                app:motionTarget="@+id/ifv_list_translations">
-                <CustomAttribute
-                    app:attributeName="crossfade"
-                    app:customFloatValue="1" />
-            </KeyAttribute>
-        </KeyFrameSet>
-    </Transition>
-
+    <!--==============================
+           TRA: start_to_set_4
+    ==============================-->
     <Transition
         android:id="@+id/start_to_set_4"
-        app:constraintSetEnd="@layout/layout_word_creator_set_4"
-        app:constraintSetStart="@layout/layout_word_creator_start">
-        <KeyFrameSet>
-            <KeyAttribute
-                android:alpha="1"
-                app:framePosition="0"
-                app:motionTarget="@+id/layout_translations" />
-        </KeyFrameSet>
-    </Transition>
+        app:constraintSetEnd="@+id/set_4"
+        app:constraintSetStart="@+id/start" />
+
+    <!--==============================
+           SET: start
+    ==============================-->
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint android:id="@+id/iv_img_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_25"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guideV_85"
+                app:layout_constraintStart_toEndOf="@+id/guideV_15"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/edit_word">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_40"
+                app:layout_constraintEnd_toStartOf="@+id/guideV_85"
+                app:layout_constraintStart_toEndOf="@+id/guideV_15"
+                app:layout_constraintTop_toBottomOf="@+id/guideH_25" />
+        </Constraint>
+
+        <Constraint android:id="@+id/edit_translation">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_55"
+                app:layout_constraintEnd_toStartOf="@+id/guideV_85"
+                app:layout_constraintStart_toEndOf="@+id/guideV_15"
+                app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_translation">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_translation"
+                app:layout_constraintEnd_toEndOf="@+id/edit_translation"
+                app:layout_constraintStart_toStartOf="@+id/edit_translation"
+                app:layout_constraintTop_toTopOf="@id/edit_translation" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ifv_list_translations">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_55"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guideV_15"
+                app:layout_constraintHeight_percent="0.07"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
+            <CustomAttribute
+                app:attributeName="crossfade"
+                app:customFloatValue="0.0" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ib_translations">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_55"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.07"
+                app:layout_constraintStart_toEndOf="@+id/guideV_85"
+                app:layout_constraintTop_toBottomOf="@id/guideH_40" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ifv_prompt_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guideV_85"
+                app:layout_constraintStart_toEndOf="@+id/guideV_15"
+                app:layout_constraintTop_toBottomOf="@+id/guideH_55"
+                app:layout_constraintWidth_percent="0.2" />
+            <CustomAttribute
+                app:attributeName="crossfade"
+                app:customFloatValue="0.0" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_translations">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ifv_list_translations"
+                app:layout_constraintEnd_toEndOf="@+id/ifv_list_translations"
+                app:layout_constraintStart_toStartOf="@+id/ifv_list_translations"
+                app:layout_constraintTop_toTopOf="@+id/ifv_list_translations" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_prompt">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guideH_15"
+                app:layout_constraintWidth_percent="0.999" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_1
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_1"
+        app:deriveConstraintsFrom="@+id/start">
+
+        <Constraint android:id="@+id/iv_img_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/edit_word">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/edit_translation">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ifv_list_translations">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ib_translations">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ifv_prompt_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guideV_85"
+                app:layout_constraintStart_toEndOf="@+id/guideV_15"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.2" />
+            <Transform android:rotation="180" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_2
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_2"
+        app:deriveConstraintsFrom="@+id/set_1">
+
+        <Constraint android:id="@id/ifv_prompt_add">
+            <Transform
+                android:rotation="180"
+                android:rotationY="360"
+                android:translationY="-25dp" />
+            <CustomAttribute
+                app:attributeName="crossfade"
+                app:customFloatValue="1.0" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_prompt">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guideH_15" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_3
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_3"
+        app:deriveConstraintsFrom="@+id/start">
+
+        <Constraint android:id="@id/ifv_list_translations">
+            <CustomAttribute
+                app:attributeName="crossfade"
+                app:customFloatValue="1.0" />
+        </Constraint>
+
+        <Constraint
+            android:id="@+id/tv_translation"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ifv_list_translations"
+            app:layout_constraintEnd_toEndOf="@+id/ifv_list_translations"
+            app:layout_constraintStart_toStartOf="@+id/ifv_list_translations"
+            app:layout_constraintTop_toTopOf="@+id/ifv_list_translations" />
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_4
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_4"
+        app:deriveConstraintsFrom="@+id/start">
+
+        <Constraint android:id="@+id/iv_img_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/edit_word">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/edit_translation">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ib_translations">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ifv_prompt_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_translations">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ifv_prompt_add"
+                app:layout_constraintEnd_toStartOf="@+id/guideV_85"
+                app:layout_constraintStart_toEndOf="@+id/guideV_15"
+                app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
+
 
 </MotionScene>

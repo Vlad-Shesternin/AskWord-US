@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="authenticationFragment"
             type="com.veldan.askword_us.authentication.AuthenticationFragment" />

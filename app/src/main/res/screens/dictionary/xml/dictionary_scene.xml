@@ -2,52 +2,362 @@
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--==============================
+           TRA: start to set_1
+    ==============================-->
     <Transition
         android:id="@+id/start_to_set_1"
-        app:constraintSetEnd="@layout/fragment_dictionary_set_1"
-        app:constraintSetStart="@layout/fragment_dictionary_start"
+        app:constraintSetEnd="@id/set_1"
+        app:constraintSetStart="@id/start"
         app:pathMotionArc="startVertical" />
 
+    <!--==============================
+           TRA: set_1 to set_2
+    ==============================-->
     <Transition
         android:id="@+id/set_1_to_set_2"
-        app:constraintSetEnd="@layout/fragment_dictionary_set_2"
-        app:constraintSetStart="@layout/fragment_dictionary_set_1" />
+        app:constraintSetEnd="@+id/set_2"
+        app:constraintSetStart="@+id/set_1" />
 
+    <!--==============================
+           TRA: set_2 to set_3
+    ==============================-->
     <Transition
         android:id="@+id/set_2_to_set_3"
-        app:constraintSetEnd="@layout/fragment_dictionary_set_3"
-        app:constraintSetStart="@layout/fragment_dictionary_set_2" />
+        app:constraintSetEnd="@+id/set_3"
+        app:constraintSetStart="@+id/set_2" />
 
+    <!--==============================
+           TRA: set_2 to set_4
+    ==============================-->
     <Transition
         android:id="@+id/set_2_to_set_4"
-        app:constraintSetEnd="@layout/fragment_dictionary_set_4"
-        app:constraintSetStart="@layout/fragment_dictionary_set_2" />
+        app:constraintSetEnd="@+id/set_4"
+        app:constraintSetStart="@+id/set_2" />
 
+    <!--==============================
+           TRA: set_2 to set_5
+    ==============================-->
     <Transition
         android:id="@+id/set_2_to_set_5"
-        app:constraintSetEnd="@layout/fragment_dictionary_set_5"
-        app:constraintSetStart="@layout/fragment_dictionary_set_2" />
+        app:constraintSetEnd="@+id/set_5"
+        app:constraintSetStart="@+id/set_2" />
 
+    <!--==============================
+           TRA: start to set_6
+    ==============================-->
     <Transition
         android:id="@+id/start_to_set_6"
-        app:constraintSetEnd="@layout/fragment_dictionary_set_6"
-        app:constraintSetStart="@layout/fragment_dictionary_start">
-        <KeyFrameSet>
-            <KeyAttribute
-                app:framePosition="0"
-                app:motionTarget="@+id/fab_add">
-                <CustomAttribute
-                    app:attributeName="crossfade"
-                    app:customFloatValue="0" />
-            </KeyAttribute>
+        app:constraintSetEnd="@+id/set_6"
+        app:constraintSetStart="@+id/start" />
 
-            <KeyAttribute
-                app:framePosition="100"
-                app:motionTarget="@+id/fab_add">
-                <CustomAttribute
-                    app:attributeName="crossfade"
-                    app:customFloatValue="1" />
-            </KeyAttribute>
-        </KeyFrameSet>
-    </Transition>
+    <!--==============================
+           SET: start
+    ==============================-->
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint android:id="@+id/tabs">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.07"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/rv_list_words">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabs" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintWidth_percent="0.15" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+            <CustomAttribute
+                app:attributeName="crossfade"
+                app:customFloatValue="0.0" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_category">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/fab_add"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="@id/fab_add"
+                app:layout_constraintStart_toStartOf="@id/fab_add"
+                app:layout_constraintTop_toTopOf="@id/fab_add"
+                app:layout_constraintWidth_percent="0.15" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_photo">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/fab_add"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="@id/fab_add"
+                app:layout_constraintStart_toStartOf="@id/fab_add"
+                app:layout_constraintTop_toTopOf="@id/fab_add"
+                app:layout_constraintWidth_percent="0.15" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_file">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/fab_add"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="@id/fab_add"
+                app:layout_constraintStart_toStartOf="@id/fab_add"
+                app:layout_constraintTop_toTopOf="@id/fab_add"
+                app:layout_constraintWidth_percent="0.15" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_word_creator">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_add"
+                app:layout_constraintEnd_toEndOf="@+id/fab_add"
+                app:layout_constraintStart_toStartOf="@+id/fab_add"
+                app:layout_constraintTop_toTopOf="@+id/fab_add" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_1
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_1"
+        app:deriveConstraintsFrom="@id/start">
+
+        <Constraint android:id="@+id/tabs">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/rv_list_words">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.15" />
+            <Transform
+                android:elevation="@dimen/dictionary_fab_elevation"
+                android:rotation="405" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_2
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_2"
+        app:deriveConstraintsFrom="@+id/set_1">
+        <Constraint android:id="@+id/fab_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.15" />
+            <Transform
+                android:elevation="0dp"
+                android:rotation="45" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_category">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintCircle="@+id/fab_add"
+                app:layout_constraintCircleRadius="100dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.15" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_photo">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintCircle="@+id/fab_add"
+                app:layout_constraintCircleAngle="235"
+                app:layout_constraintCircleRadius="100dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.15" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_file">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintCircle="@+id/fab_add"
+                app:layout_constraintCircleAngle="125"
+                app:layout_constraintCircleRadius="100dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.15" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_3_4_5
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_3_4_5"
+        app:deriveConstraintsFrom="@+id/set_2">
+
+        <Constraint android:id="@+id/fab_add">
+            <Transform android:rotation="405" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_category">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_add"
+                app:layout_constraintEnd_toEndOf="@+id/fab_add"
+                app:layout_constraintStart_toStartOf="@+id/fab_add"
+                app:layout_constraintTop_toTopOf="@+id/fab_add" />
+            <PropertySet android:visibility="invisible" />
+            <Transform android:elevation="0dp" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_photo">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_add"
+                app:layout_constraintEnd_toEndOf="@+id/fab_add"
+                app:layout_constraintStart_toStartOf="@+id/fab_add"
+                app:layout_constraintTop_toTopOf="@+id/fab_add" />
+            <PropertySet android:visibility="invisible" />
+            <Transform android:elevation="0dp" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_file">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_add"
+                app:layout_constraintEnd_toEndOf="@+id/fab_add"
+                app:layout_constraintStart_toStartOf="@+id/fab_add"
+                app:layout_constraintTop_toTopOf="@+id/fab_add" />
+            <PropertySet android:visibility="invisible" />
+            <Transform android:elevation="0dp" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_3
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_3"
+        app:deriveConstraintsFrom="@+id/set_3_4_5">
+        <Constraint android:id="@+id/fab_category">
+            <PropertySet android:visibility="visible" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_4
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_4"
+        app:deriveConstraintsFrom="@+id/set_3_4_5">
+        <Constraint android:id="@+id/fab_photo">
+            <PropertySet android:visibility="visible" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_5
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_5"
+        app:deriveConstraintsFrom="@+id/set_3_4_5">
+        <Constraint android:id="@+id/fab_file">
+            <PropertySet android:visibility="visible" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_6
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_6"
+        app:deriveConstraintsFrom="@+id/start">
+
+        <Constraint android:id="@+id/tabs">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/rv_list_words">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
+            <Transform android:rotation="360" />
+            <CustomAttribute
+                app:attributeName="crossfade"
+                app:customFloatValue="1.0" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_word_creator">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
 </MotionScene>

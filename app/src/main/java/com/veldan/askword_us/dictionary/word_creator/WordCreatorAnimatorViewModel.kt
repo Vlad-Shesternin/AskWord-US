@@ -1,4 +1,4 @@
-package com.veldan.askword_us.dictionary.worc_creator
+package com.veldan.askword_us.dictionary.word_creator
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,16 +13,16 @@ import androidx.lifecycle.ViewModel
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.DeleteBinding
 import com.veldan.askword_us.databinding.ItemTranslationBinding
-import com.veldan.askword_us.databinding.LayoutWordCreatorStartBinding
+import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
 import com.veldan.askword_us.dictionary.DictionaryFragment
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.objects.Animator
 import kotlinx.android.synthetic.main.layout_prompt.view.*
 import kotlinx.android.synthetic.main.layout_translations.view.*
-import kotlinx.android.synthetic.main.layout_word_creator_set_1.view.*
+import kotlinx.android.synthetic.main.layout_word_creator.view.*
 
 class WordCreatorAnimatorViewModel(
-    private val layoutWordCreator: LayoutWordCreatorStartBinding,
+    private val layoutWordCreator: LayoutWordCreatorBinding,
     fragment: DictionaryFragment
 ) : ViewModel() {
 
@@ -34,10 +34,10 @@ class WordCreatorAnimatorViewModel(
     private var increment = 0
 
     // Layouts
-    private val start = R.layout.layout_word_creator_start
-    private val set_2 = R.layout.layout_word_creator_set_2
-    private val set_3 = R.layout.layout_word_creator_set_3
-    private val set_4 = R.layout.layout_word_creator_set_4
+    private val start = R.id.start
+    private val set_2 = R.id.set_2
+    private val set_3 = R.id.set_3
+    private val set_4 = R.id.set_4
 
     // TransitionIds
     private val start_to_set_1 = R.id.start_to_set_1

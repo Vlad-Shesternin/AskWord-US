@@ -1,14 +1,14 @@
-package com.veldan.askword_us.dictionary.worc_creator
+package com.veldan.askword_us.dictionary.word_creator
 
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.ViewModelProvider
-import com.veldan.askword_us.databinding.LayoutWordCreatorStartBinding
+import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
 import com.veldan.askword_us.dictionary.DictionaryFragment
 import com.veldan.askword_us.global.interfaces.TransitionListener
 
 class WordCreatorDialog(
-    private val layoutWordCreation: LayoutWordCreatorStartBinding,
+    private val layoutWordCreation: LayoutWordCreatorBinding,
     fragment: DictionaryFragment
 ) :
     View.OnClickListener,

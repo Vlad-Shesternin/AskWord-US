@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/motion_dictionary"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/dictionary_scene">
 
     <!--==============================
-                      TABs
-     ==============================-->
+                  TABs
+    ==============================-->
     <include
         android:id="@+id/tabs"
         layout="@layout/tabs"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0"
+        app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--==============================
-                  RecyclerView
-     ==============================-->
+              RecyclerView
+    ==============================-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_words"
         android:layout_width="match_parent"
@@ -31,24 +31,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tabs" />
 
     <!--==============================
-                  Fab add
-     ==============================-->
+                 Fab add
+    ==============================-->
     <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/fab_add"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/fab_state"
-        android:elevation="@dimen/dictionary_fab_elevation"
-        android:rotation="405"
+        android:clickable="true"
+        android:focusable="true"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_add"
         app:altSrc="@drawable/ic_check"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.15"
         app:overlay="false" />
 
     <!--==============================
@@ -63,14 +57,7 @@
         android:focusable="true"
         android:padding="@dimen/dictionary_fab_padding"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_category_add"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/fab_add"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/fab_add"
-        app:layout_constraintStart_toStartOf="@id/fab_add"
-        app:layout_constraintTop_toTopOf="@id/fab_add"
-        app:layout_constraintWidth_percent="0.15" />
+        android:src="@drawable/ic_category_add" />
 
     <!--==============================
                   Fab photo
@@ -84,14 +71,7 @@
         android:focusable="true"
         android:padding="@dimen/dictionary_fab_padding"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_photo_add"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/fab_add"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/fab_add"
-        app:layout_constraintStart_toStartOf="@id/fab_add"
-        app:layout_constraintTop_toTopOf="@id/fab_add"
-        app:layout_constraintWidth_percent="0.15" />
+        android:src="@drawable/ic_photo_add" />
 
     <!--==============================
                   Fab file
@@ -105,13 +85,13 @@
         android:focusable="true"
         android:padding="@dimen/dictionary_fab_padding"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_file_add"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@id/fab_add"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/fab_add"
-        app:layout_constraintStart_toStartOf="@id/fab_add"
-        app:layout_constraintTop_toTopOf="@id/fab_add"
-        app:layout_constraintWidth_percent="0.15" />
+        android:src="@drawable/ic_file_add" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--==============================
+           Layout word creation
+     ==============================-->
+    <include
+        android:id="@+id/layout_word_creator"
+        layout="@layout/layout_word_creator" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

@@ -5,18 +5,16 @@ import android.widget.ImageButton
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.veldan.askword_us.R
-import com.veldan.askword_us.databinding.FragmentDictionaryStartBinding
-import com.veldan.askword_us.dictionary.worc_creator.WordCreatorAnimatorViewModel
-import com.veldan.askword_us.dictionary.worc_creator.WordCreatorAnimatorViewModelFactory
-import com.veldan.askword_us.dictionary.worc_creator.WordCreatorDialog
+import com.veldan.askword_us.databinding.FragmentDictionaryBinding
+import com.veldan.askword_us.dictionary.word_creator.WordCreatorDialog
 import com.veldan.askword_us.global.objects.Animator
 
 class DictionaryAnimatorViewModel(
-    private val layoutDictionary: FragmentDictionaryStartBinding,
+    private val layoutDictionary: FragmentDictionaryBinding,
     private val fragment: DictionaryFragment
 ) : ViewModel() {
+    val TAG = "ccc"
 
     // Components UI
     private var motion: MotionLayout
@@ -34,9 +32,9 @@ class DictionaryAnimatorViewModel(
     private val start_To_set_6 = R.id.start_to_set_6
 
     // States
-    private val start = R.layout.fragment_dictionary_start
-    private val set_1 = R.layout.fragment_dictionary_set_1
-    private val set_2 = R.layout.fragment_dictionary_set_2
+    private val start = R.id.start
+    private val set_1 = R.id.set_1
+    private val set_2 = R.id.set_2
 
     // init ComponentsUI
     init {
@@ -51,7 +49,7 @@ class DictionaryAnimatorViewModel(
 
     // init WordCreator
     private fun initWordCreator() {
-        WordCreatorDialog(layoutDictionary.layoutWordCreatorStart, fragment)
+        WordCreatorDialog(layoutDictionary.layoutWordCreator, fragment)
     }
 
     // ==============================
