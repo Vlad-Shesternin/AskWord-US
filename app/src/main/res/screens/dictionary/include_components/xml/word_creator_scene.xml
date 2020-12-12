@@ -37,6 +37,14 @@
         app:constraintSetStart="@+id/start" />
 
     <!--==============================
+           TRA: start_to_set_5
+    ==============================-->
+    <Transition
+        android:id="@+id/start_to_set_5"
+        app:constraintSetEnd="@+id/set_5"
+        app:constraintSetStart="@+id/start" />
+
+    <!--==============================
            SET: start
     ==============================-->
     <ConstraintSet android:id="@+id/start">
@@ -88,10 +96,10 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideH_55"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toStartOf="@+id/guideV_15"
+                app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintHeight_percent="0.07"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
+            <PropertySet android:visibility="invisible" />
             <CustomAttribute
                 app:attributeName="crossfade"
                 app:customFloatValue="0.0" />
@@ -103,10 +111,10 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@+id/guideH_55"
                 app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.07"
-                app:layout_constraintStart_toEndOf="@+id/guideV_85"
+                app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/guideH_40" />
+            <PropertySet android:visibility="invisible" />
         </Constraint>
 
         <Constraint android:id="@+id/ifv_prompt_add">
@@ -278,5 +286,37 @@
         </Constraint>
     </ConstraintSet>
 
+    <!--==============================
+           SET: set_5
+    ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_5"
+        app:deriveConstraintsFrom="@+id/start">
 
+        <Constraint android:id="@id/ifv_list_translations">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_55"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@+id/guideV_15"
+                app:layout_constraintHeight_percent="0.07"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
+            <PropertySet android:visibility="visible"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/ib_translations">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_55"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.07"
+                app:layout_constraintStart_toEndOf="@+id/guideV_85"
+                app:layout_constraintTop_toBottomOf="@id/guideH_40" />
+            <PropertySet android:visibility="visible"/>
+        </Constraint>
+    </ConstraintSet>
 </MotionScene>

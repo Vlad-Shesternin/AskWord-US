@@ -103,7 +103,7 @@
             android:textSize="@dimen/edit_text_size" />
 
         <!--==============================
-               Text translation
+               TextChangeListener translation
         ==============================-->
         <TextView
             android:id="@+id/tv_translation"

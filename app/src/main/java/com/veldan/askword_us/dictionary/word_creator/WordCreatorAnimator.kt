@@ -1,5 +1,8 @@
 package com.veldan.askword_us.dictionary.word_creator
 
+import android.annotation.SuppressLint
+import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
@@ -15,16 +18,21 @@ import com.veldan.askword_us.databinding.ItemTranslationBinding
 import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
 import com.veldan.askword_us.dictionary.DictionaryFragment
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
+import com.veldan.askword_us.global.interfaces.TextChangeListener
 import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator
 import kotlinx.android.synthetic.main.layout_translations.view.*
-import kotlinx.android.synthetic.main.layout_word_creator.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class WordCreatorAnimator(
     private val layoutWordCreator: LayoutWordCreatorBinding,
     private val fragment: DictionaryFragment
 ) : View.OnClickListener,
     TransitionListener {
+
+    val TAG = "HOMOSAPIENC"
 
     // Components
     private val context = fragment.requireContext()
@@ -37,11 +45,13 @@ class WordCreatorAnimator(
     private val set_2 = R.id.set_2
     private val set_3 = R.id.set_3
     private val set_4 = R.id.set_4
+    private val set_5 = R.id.set_5
 
     // TransitionIds
     private val start_to_set_1 = R.id.start_to_set_1
     private val start_to_set_3 = R.id.start_to_set_3
     private val start_to_set_4 = R.id.start_to_set_4
+    private val start_to_set_5 = R.id.start_to_set_5
 
     // Components UI
     private lateinit var motion: MotionLayout
@@ -58,6 +68,9 @@ class WordCreatorAnimator(
         initListeners()
     }
 
+    // ==============================
+    //     Init Components UI
+    // ==============================
     private fun initComponentUI() {
         layoutWordCreator.also {
             motion = it.motionWordCreator
@@ -70,14 +83,29 @@ class WordCreatorAnimator(
         }
     }
 
+    // ==============================
+    //     Init Listeners
+    // ==============================
     private fun initListeners() {
-        layoutWordCreator.also {
-            // onClick
-            it.ifvPromptAdd.setOnClickListener(this)
-            it.ibTranslations.setOnClickListener(this)
-            it.ifvListTranslations.setOnClickListener(this)
-            // onTransition
-            it.motionWordCreator.setTransitionListener(this)
+        // onClick
+        ifvPromptAdd.setOnClickListener(this)
+        ibTranslation.setOnClickListener(this)
+        ifvListTranslation.setOnClickListener(this)
+        // onTransition
+        motion.setTransitionListener(this)
+
+        // onChangeText
+        if (WordCreatorDialog.translations.isEmpty()) {
+            editTranslation.addTextChangedListener(object : TextChangeListener {
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    super.onTextChanged(s, start, before, count)
+                    Log.i(TAG, "onTextChanged: s = $s, start = $start, count = $count")
+                    when {
+                        count > 0 -> start_To_Set_5()
+                        count == 0 -> set_5_To_Start()
+                    }
+                }
+            })
         }
     }
 
@@ -219,6 +247,12 @@ class WordCreatorAnimator(
         }
     }
 
+    private fun start_To_Set_5() {
+        Animator.apply {
+            transitionToEnd(motion, start_to_set_5, 300)
+        }
+    }
+
     // ==============================
     //    transitionToStart
     // ==============================
@@ -228,11 +262,24 @@ class WordCreatorAnimator(
         }
     }
 
+    private fun set_5_To_Start() {
+        Animator.apply {
+            transitionToStart(motion, start_to_set_5, 300)
+        }
+    }
+
+    // ==============================
+    //    Event Handlers
+    // ==============================
     override fun onClick(view: View?) {
         // when use Pair<Int, Int>(v?.id, motion.currentState)
         when (view!!.id to motion.currentState) {
             ifvPromptAdd.id to start -> start_To_Set_1()
+            ifvPromptAdd.id to set_5 -> start_To_Set_1()
+
             ibTranslation.id to start -> start_To_Set_3()
+            ibTranslation.id to set_5 -> start_To_Set_3()
+
             ifvListTranslation.id to start -> start_To_Set_4()
             ifvListTranslation.id to set_4 -> set_4_To_Start()
         }
