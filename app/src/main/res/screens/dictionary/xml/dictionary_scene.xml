@@ -347,7 +347,9 @@
         </Constraint>
 
         <Constraint android:id="@+id/fab_add">
-            <Transform android:rotation="360" />
+            <Transform
+                android:elevation="@dimen/dictionary_fab_elevation"
+                android:rotation="360" />
             <CustomAttribute
                 app:attributeName="crossfade"
                 app:customFloatValue="1.0" />

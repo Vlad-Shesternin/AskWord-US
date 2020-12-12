@@ -1,8 +1,6 @@
 package com.veldan.askword_us.database
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(tableName = "word_table")
 data class WordModel(
@@ -12,8 +10,9 @@ data class WordModel(
     @ColumnInfo(name = "word")
     val word: String,
 
-    @ColumnInfo(name = "translation")
-    val translation: String,
+    @ColumnInfo(name = "translations")
+    @TypeConverters(ConverterListString::class)
+    val translations: List<String>,
 
     @ColumnInfo(name = "prompt")
     val prompt: String,

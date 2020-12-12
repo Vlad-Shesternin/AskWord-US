@@ -9,11 +9,11 @@ import androidx.room.Query
 interface WordDatabaseDao {
 
     @Insert
-    fun insert(word: WordModel)
+    suspend fun insert(word: WordModel)
+
+    @Query("DELETE FROM word_table")
+    suspend fun clear()
 
     @Query("SELECT * FROM word_table")
     fun getAllWords(): LiveData<List<WordModel>>?
-
-    @Query("DELETE FROM word_table")
-    fun clear()
 }

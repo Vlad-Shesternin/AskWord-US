@@ -9,27 +9,26 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.lifecycle.ViewModel
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.DeleteBinding
 import com.veldan.askword_us.databinding.ItemTranslationBinding
 import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
 import com.veldan.askword_us.dictionary.DictionaryFragment
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
+import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator
-import kotlinx.android.synthetic.main.layout_prompt.view.*
 import kotlinx.android.synthetic.main.layout_translations.view.*
 import kotlinx.android.synthetic.main.layout_word_creator.view.*
 
-class WordCreatorAnimatorViewModel(
+class WordCreatorAnimator(
     private val layoutWordCreator: LayoutWordCreatorBinding,
-    fragment: DictionaryFragment
-) : ViewModel() {
+    private val fragment: DictionaryFragment
+) : View.OnClickListener,
+    TransitionListener {
 
     // Components
     private val context = fragment.requireContext()
     private val inflater = LayoutInflater.from(context)
-    private val translations = mutableListOf<String>()
     private val scrollIds = mutableListOf<Int>()
     private var increment = 0
 
@@ -45,24 +44,40 @@ class WordCreatorAnimatorViewModel(
     private val start_to_set_4 = R.id.start_to_set_4
 
     // Components UI
-    private var motion: MotionLayout
-    private var ifvPromptAdd: ImageFilterView
-    private var tvTranslation: TextView
-    private var editTranslation: EditText
-    private var layoutTranslations: ConstraintLayout
-    private var ibAdditionalTranslation: ImageButton
-    private var ifvListAdditionalTranslation: ImageFilterView
+    private lateinit var motion: MotionLayout
+    private lateinit var ifvPromptAdd: ImageFilterView
+    private lateinit var tvTranslation: TextView
+    private lateinit var editTranslation: EditText
+    private lateinit var layoutTranslations: ConstraintLayout
+    private lateinit var ibTranslation: ImageButton
+    private lateinit var ifvListTranslation: ImageFilterView
 
-    // init Components UI
+    // init
     init {
+        initComponentUI()
+        initListeners()
+    }
+
+    private fun initComponentUI() {
         layoutWordCreator.also {
             motion = it.motionWordCreator
             ifvPromptAdd = it.ifvPromptAdd
             tvTranslation = it.tvTranslation
             editTranslation = it.editTranslation
             layoutTranslations = it.layoutTranslations.layoutTranslations
-            ibAdditionalTranslation = it.ibTranslations
-            ifvListAdditionalTranslation = it.ifvListTranslations
+            ibTranslation = it.ibTranslations
+            ifvListTranslation = it.ifvListTranslations
+        }
+    }
+
+    private fun initListeners() {
+        layoutWordCreator.also {
+            // onClick
+            it.ifvPromptAdd.setOnClickListener(this)
+            it.ibTranslations.setOnClickListener(this)
+            it.ifvListTranslations.setOnClickListener(this)
+            // onTransition
+            it.motionWordCreator.setTransitionListener(this)
         }
     }
 
@@ -163,7 +178,7 @@ class WordCreatorAnimatorViewModel(
     //    afterEndSets
     // ==============================
     private fun afterEndSet_2() {
-        motion.layout_prompt.edit_prompt.defaultFocusAndKeyboard(true)
+        layoutWordCreator.editPrompt.defaultFocusAndKeyboard(true)
     }
 
     private fun afterEndSet_3() {
@@ -184,7 +199,7 @@ class WordCreatorAnimatorViewModel(
     private fun start_To_Set_3() {
         if (editTranslation.text.toString() != "") {
             editTranslation.also { edit ->
-                translations.add(edit.text.toString())
+                WordCreatorDialog.translations.add(edit.text.toString())
                 fillLayoutTranslations(edit.text.toString())
                 tvTranslation.text = edit.text
                 edit.hint = ""
@@ -197,7 +212,7 @@ class WordCreatorAnimatorViewModel(
     }
 
     private fun start_To_Set_4() {
-        if (translations.isNotEmpty()) {
+        if (scrollIds.isNotEmpty()) {
             Animator.apply {
                 transitionToEnd(motion, start_to_set_4, 1000)
             }
@@ -213,23 +228,23 @@ class WordCreatorAnimatorViewModel(
         }
     }
 
-    // ==============================
-    //    onClick
-    // ==============================
-    fun onClick(view: View) {
+    override fun onClick(view: View?) {
         // when use Pair<Int, Int>(v?.id, motion.currentState)
-        when (view.id to motion.currentState) {
+        when (view!!.id to motion.currentState) {
             ifvPromptAdd.id to start -> start_To_Set_1()
-            ibAdditionalTranslation.id to start -> start_To_Set_3()
-            ifvListAdditionalTranslation.id to start -> start_To_Set_4()
-            ifvListAdditionalTranslation.id to set_4 -> set_4_To_Start()
+            ibTranslation.id to start -> start_To_Set_3()
+            ifvListTranslation.id to start -> start_To_Set_4()
+            ifvListTranslation.id to set_4 -> set_4_To_Start()
         }
     }
 
-    // ==============================
-    //    OnTransitionChange
-    // ==============================
-    fun onTransitionChange(end: Int, progress: Float) {
+    override fun onTransitionChange(
+        motionLayout: MotionLayout?,
+        start: Int,
+        end: Int,
+        progress: Float
+    ) {
+        super.onTransitionChange(motionLayout, start, end, progress)
         when (end to progress) {
             set_2 to 1.0f ->
                 afterEndSet_2()

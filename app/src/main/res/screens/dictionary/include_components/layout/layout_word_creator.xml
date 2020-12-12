@@ -148,18 +148,26 @@
             app:altSrc="@drawable/ic_prompt_add_shine" />
 
         <!--==============================
+               Layout prompt
+        ==============================-->
+        <FrameLayout
+            android:id="@+id/layout_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/edit_prompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/prompt_edit_enter_prompt"
+                android:inputType="textCapSentences|textMultiLine"
+                android:textSize="@dimen/edit_text_size" />
+        </FrameLayout>
+
+        <!--==============================
                Layout translations
         ==============================-->
         <include
             android:id="@+id/layout_translations"
             layout="@layout/layout_translations" />
 
-        <!--==============================
-               Layout prompt
-        ==============================-->
-        <include
-            android:id="@+id/layout_prompt"
-            layout="@layout/layout_prompt" />
-
-    </androidx.constraintlayout.motion.widget.MotionLayout>
-</layout>
+</androidx.constraintlayout.motion.widget.MotionLayout></layout>

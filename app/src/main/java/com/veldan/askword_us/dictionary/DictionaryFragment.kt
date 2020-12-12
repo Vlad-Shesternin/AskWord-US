@@ -11,16 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.veldan.askword_us.databinding.FragmentDictionaryBinding
 import com.veldan.askword_us.global.interfaces.TransitionListener
 
-class DictionaryFragment :
-    Fragment(),
-    View.OnClickListener,
-    View.OnLongClickListener,
-    TransitionListener {
+class DictionaryFragment : Fragment() {
 
     // Components
-    private lateinit var binding: FragmentDictionaryBinding
-
-    private lateinit var viewModel: DictionaryAnimatorViewModel
+    lateinit var binding: FragmentDictionaryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,60 +23,22 @@ class DictionaryFragment :
     ): View? {
 
         initBinding(inflater)
-        initViewModel()
-        initListeners()
+        initAnimator()
 
         return binding.root
     }
 
-    // init Binding
+    // ==============================
+    //    Init Binding
+    // ==============================
     private fun initBinding(inflater: LayoutInflater) {
         binding = FragmentDictionaryBinding.inflate(inflater)
     }
 
-    // init ViewModel
-    private fun initViewModel() {
-        val viewModelFactory = DictionaryAnimatorViewModelFactory(binding, this)
-        viewModel =
-            ViewModelProvider(this, viewModelFactory).get(DictionaryAnimatorViewModel::class.java)
-    }
-
-    // init Listeners
-    private fun initListeners() {
-        // onClick
-        binding.also {
-            it.fabAdd.setOnClickListener(this)
-            it.fabCategory.setOnClickListener(this)
-            it.fabPhoto.setOnClickListener(this)
-            it.fabFile.setOnClickListener(this)
-        }
-        // onLongClick
-        binding.fabAdd.setOnLongClickListener(this)
-        // onTransition
-        binding.motionDictionary.setTransitionListener(this)
-    }
-
     // ==============================
-    //    onClick
+    //    Init Animator
     // ==============================
-    override fun onClick(v: View?) {
-        viewModel.onClick(v!!)
-    }
-
-    // ==============================
-    //    onLongClick
-    // ==============================
-    override fun onLongClick(v: View?): Boolean {
-        viewModel.onLongClick(v!!)
-        Log.i("ccc", "onLongClick: ")
-        return true
-    }
-
-    // ==============================
-    //    OnTransition
-    // ==============================
-    override fun onTransitionCompleted(motionLayout: MotionLayout?, end: Int) {
-        super.onTransitionCompleted(motionLayout, end)
-        viewModel.onTransitionCompleted(end)
+    private fun initAnimator() {
+        DictionaryAnimator(binding, this)
     }
 }
