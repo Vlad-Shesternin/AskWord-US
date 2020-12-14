@@ -12,6 +12,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.widget.addTextChangedListener
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.DeleteBinding
 import com.veldan.askword_us.databinding.ItemTranslationBinding
@@ -30,7 +31,8 @@ class WordCreatorAnimator(
     private val layoutWordCreator: LayoutWordCreatorBinding,
     private val fragment: DictionaryFragment
 ) : View.OnClickListener,
-    TransitionListener {
+    TransitionListener,
+    TextChangeListener {
 
     val TAG = "HOMOSAPIENC"
 
@@ -50,8 +52,9 @@ class WordCreatorAnimator(
     // TransitionIds
     private val start_to_set_1 = R.id.start_to_set_1
     private val start_to_set_3 = R.id.start_to_set_3
-    private val start_to_set_4 = R.id.start_to_set_4
-    private val start_to_set_5 = R.id.start_to_set_5
+    private val set_3_to_set_1 = R.id.set_3_to_set_1
+    private val set_3_to_set_4 = R.id.set_3_to_set_4
+    private val set_3_to_set_5 = R.id.set_3_to_set_5
 
     // Components UI
     private lateinit var motion: MotionLayout
@@ -93,20 +96,8 @@ class WordCreatorAnimator(
         ifvListTranslation.setOnClickListener(this)
         // onTransition
         motion.setTransitionListener(this)
-
         // onChangeText
-        if (WordCreatorDialog.translations.isEmpty()) {
-            editTranslation.addTextChangedListener(object : TextChangeListener {
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    super.onTextChanged(s, start, before, count)
-                    Log.i(TAG, "onTextChanged: s = $s, start = $start, count = $count")
-                    when {
-                        count > 0 -> start_To_Set_5()
-                        count == 0 -> set_5_To_Start()
-                    }
-                }
-            })
-        }
+        editTranslation.addTextChangedListener(this)
     }
 
     // ==============================
@@ -169,7 +160,12 @@ class WordCreatorAnimator(
                     )
                     // connect delete
                     set.connect(delete.id, ConstraintSet.TOP, scroll.id, ConstraintSet.TOP)
-                    set.connect(delete.id, ConstraintSet.BOTTOM, scroll.id, ConstraintSet.BOTTOM)
+                    set.connect(
+                        delete.id,
+                        ConstraintSet.BOTTOM,
+                        scroll.id,
+                        ConstraintSet.BOTTOM
+                    )
                 } else {
                     // connect scroll
                     set.connect(
@@ -179,7 +175,12 @@ class WordCreatorAnimator(
                     )
                     // connect delete
                     set.connect(delete.id, ConstraintSet.TOP, scroll.id, ConstraintSet.TOP)
-                    set.connect(delete.id, ConstraintSet.BOTTOM, scroll.id, ConstraintSet.BOTTOM)
+                    set.connect(
+                        delete.id,
+                        ConstraintSet.BOTTOM,
+                        scroll.id,
+                        ConstraintSet.BOTTOM
+                    )
                 }
                 // add ids to list
                 scrollIds.add(scroll.id)
@@ -196,7 +197,7 @@ class WordCreatorAnimator(
                 }
                 if (scrollIds.isEmpty()) {
                     layoutTranslations.visibility = View.INVISIBLE
-                    set_4_To_Start()
+                    set_5_To_Set_3()
                 }
             }
         }
@@ -209,7 +210,7 @@ class WordCreatorAnimator(
         layoutWordCreator.editPrompt.defaultFocusAndKeyboard(true)
     }
 
-    private fun afterEndSet_3() {
+    private fun afterEndSet_4() {
         tvTranslation.text = ""
         editTranslation.hint = context.getString(R.string.word_creation_edit_enter_translation)
         motion.progress = 0F
@@ -225,6 +226,18 @@ class WordCreatorAnimator(
     }
 
     private fun start_To_Set_3() {
+        Animator.apply {
+            transitionToEnd(motion, start_to_set_3, 300)
+        }
+    }
+
+    private fun set_3_To_Set_1() {
+        Animator.apply {
+            transitionToEnd(motion, set_3_to_set_1, 1000)
+        }
+    }
+
+    private fun set_3_To_Set_4() {
         if (editTranslation.text.toString() != "") {
             editTranslation.also { edit ->
                 WordCreatorDialog.translations.add(edit.text.toString())
@@ -234,37 +247,31 @@ class WordCreatorAnimator(
                 edit.text.clear()
             }
             Animator.apply {
-                transitionToEnd(motion, start_to_set_3, 400)
+                transitionToEnd(motion, set_3_to_set_4, 300)
             }
         }
     }
 
-    private fun start_To_Set_4() {
+    private fun set_3_To_Set_5() {
         if (scrollIds.isNotEmpty()) {
             Animator.apply {
-                transitionToEnd(motion, start_to_set_4, 1000)
+                transitionToEnd(motion, set_3_to_set_5, 1000)
             }
-        }
-    }
-
-    private fun start_To_Set_5() {
-        Animator.apply {
-            transitionToEnd(motion, start_to_set_5, 300)
         }
     }
 
     // ==============================
     //    transitionToStart
     // ==============================
-    private fun set_4_To_Start() {
+    private fun set_3_To_Start() {
         Animator.apply {
-            transitionToStart(motion, start_to_set_4, 1000)
+            transitionToStart(motion, start_to_set_3, 300)
         }
     }
 
-    private fun set_5_To_Start() {
+    private fun set_5_To_Set_3() {
         Animator.apply {
-            transitionToStart(motion, start_to_set_5, 300)
+            transitionToStart(motion, set_3_to_set_5, 1000)
         }
     }
 
@@ -275,13 +282,12 @@ class WordCreatorAnimator(
         // when use Pair<Int, Int>(v?.id, motion.currentState)
         when (view!!.id to motion.currentState) {
             ifvPromptAdd.id to start -> start_To_Set_1()
-            ifvPromptAdd.id to set_5 -> start_To_Set_1()
+            ifvPromptAdd.id to set_3 -> set_3_To_Set_1()
 
-            ibTranslation.id to start -> start_To_Set_3()
-            ibTranslation.id to set_5 -> start_To_Set_3()
+            ibTranslation.id to set_3 -> set_3_To_Set_4()
 
-            ifvListTranslation.id to start -> start_To_Set_4()
-            ifvListTranslation.id to set_4 -> set_4_To_Start()
+            ifvListTranslation.id to set_3 -> set_3_To_Set_5()
+            ifvListTranslation.id to set_5 -> set_5_To_Set_3()
         }
     }
 
@@ -295,8 +301,25 @@ class WordCreatorAnimator(
         when (end to progress) {
             set_2 to 1.0f ->
                 afterEndSet_2()
-            set_3 to 1.0f -> {
-                afterEndSet_3()
+            set_4 to 1.0f -> {
+                afterEndSet_4()
+            }
+        }
+    }
+
+    override fun afterTextChanged(s: Editable?) {
+        super.afterTextChanged(s)
+
+        if (WordCreatorDialog.translations.isEmpty()) {
+            when (s!!.length) {
+                1 -> {
+                    Log.i(TAG, "s to 3: ${WordCreatorDialog.translations}")
+                    start_To_Set_3()
+                }
+                0 -> {
+                    Log.i(TAG, "3 to s: ${WordCreatorDialog.translations}")
+                    set_3_To_Start()
+                }
             }
         }
     }
