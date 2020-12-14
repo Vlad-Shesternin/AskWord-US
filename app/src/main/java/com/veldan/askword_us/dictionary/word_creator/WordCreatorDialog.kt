@@ -12,8 +12,8 @@ import com.veldan.askword_us.dictionary.DictionaryFragment
 import kotlin.math.log
 
 class WordCreatorDialog(
-    private val layoutWordCreation: LayoutWordCreatorBinding,
-    private val fragment: DictionaryFragment
+    private val fragment: DictionaryFragment,
+    private val layoutWordCreation: LayoutWordCreatorBinding
 ) : View.OnClickListener {
 
     // Components
@@ -52,7 +52,7 @@ class WordCreatorDialog(
     // ==============================
     private fun initListeners() {
         layoutWordCreation.ibTranslations.setOnClickListener(this)
-        fragment.binding.fabAdd.setOnClickListener(this)
+        //fragment.binding.fabAdd.setOnClickListener(this)
 
         layoutWordCreation.ivImgAdd.setOnClickListener(this)
     }
@@ -108,9 +108,9 @@ class WordCreatorDialog(
     // ==============================
     override fun onClick(view: View?) {
         when (view!!.id) {
-            fragment.binding.fabAdd.id -> {
-                getWordModel()?.let { viewModel.insert(it) }
-            }
+            //fragment.binding.fabAdd.id -> {
+             //   getWordModel()?.let { viewModel.insert(it) }
+           // }
         }
     }
 }
