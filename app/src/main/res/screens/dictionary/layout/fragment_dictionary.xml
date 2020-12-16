@@ -4,7 +4,7 @@
     android:id="@+id/motion_dictionary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/motion_scene">
+    app:layoutDescription="@xml/dictionary_scene">
 
     <!--==============================
                   TABs

@@ -2,6 +2,7 @@ package com.veldan.askword_us.dictionary.word_creator
 
 import android.text.Editable
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
@@ -13,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.veldan.askword_us.R
 import com.veldan.askword_us.database.WordDatabase
 import com.veldan.askword_us.database.WordModel
+import com.veldan.askword_us.databinding.ItemTranslationsBinding
 import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
 import com.veldan.askword_us.dictionary.DictionaryAnimator
 import com.veldan.askword_us.dictionary.DictionaryFragment
@@ -132,7 +134,7 @@ class WordCreatorDialog(
             val editText = edit.text.toString()
             if (editText != "") {
                 translations.add(editText)
-                listTranslations.addItemToLayoutTranslations(editText)
+                listTranslations.addItemToLayoutTranslations(editText, layoutTranslations)
                 tvTranslation.text = editText
                 edit.hint = ""
                 edit.text.clear()
@@ -204,9 +206,7 @@ class WordCreatorDialog(
         if (translations.isEmpty()) {
             when (s!!.length) {
                 1 -> animator.start_To_Set_3()
-
                 0 -> animator.set_3_To_Start()
-
             }
         }
     }

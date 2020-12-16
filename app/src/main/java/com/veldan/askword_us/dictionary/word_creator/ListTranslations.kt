@@ -1,22 +1,19 @@
 package com.veldan.askword_us.dictionary.word_creator
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.widget.HorizontalScrollView
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.constraintlayout.widget.ConstraintSet.*
 import com.veldan.askword_us.databinding.DeleteBinding
-import com.veldan.askword_us.databinding.ItemListTranslationsBinding
-import com.veldan.askword_us.databinding.LayoutTranslationsBinding
+import com.veldan.askword_us.databinding.ItemTranslationsBinding
 import kotlinx.android.synthetic.main.layout_translations.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ListTranslations(
     private val inflater: LayoutInflater
 ) {
-    val TAG = "sss"
 
     // Components
     private var increment = 0
@@ -26,76 +23,56 @@ class ListTranslations(
     // ==============================
     //     Add Item to List
     // ==============================
-    fun addItemToLayoutTranslations(translation: String) {
-        val layoutTranslations: ConstraintLayout
-        val scroll: HorizontalScrollView
-        val delete = DeleteBinding.inflate(inflater).ivDelete
+    fun addItemToLayoutTranslations(translation: String, layout: ConstraintLayout) {
+        val delete = DeleteBinding.inflate(inflater).root
+        val item = ItemTranslationsBinding.inflate(inflater)
+        val scroll = item.scrollHItemTranslation
+        item.itemTranslation.text = translation
 
-        LayoutTranslationsBinding.inflate(inflater).also {
-            layoutTranslations = it.layoutTranslations
-        }
-        ItemListTranslationsBinding.inflate(inflater).also {
-            scroll = it.scrollHItemTranslation
-            it.itemTranslation.text = translation
-            Log.i(TAG, "addItemToLayoutTranslations: text = ${it.itemTranslation.text}")
-        }
+        scroll.id = increment
+        delete.id = increment
 
-
-        scroll.id = ("1${increment}").toInt()
-        Log.i(TAG, "addItemToLayoutTranslations: inc_1 = ${scroll.id}")
-        delete.id = ("2${increment}").toInt()
-        Log.i(TAG, "addItemToLayoutTranslations: inc_2 = ${delete.id}")
+        layout.addView(scroll)
+        layout.addView(delete)
 
         val set = ConstraintSet()
 
-        layoutTranslations.also { layout ->
-            layout.addView(scroll)
-            layout.addView(delete)
-
-            set.clone(layout)
-
-            // connect scroll
-            set.constrainWidth(scroll.id, 0)
-            set.connect(scroll.id, START, PARENT_ID, START, 10)
-            set.connect(scroll.id, END, layout.guideV_80.id, START, 10)
-
-            // connect delete
-            set.constrainHeight(delete.id, 0)
-            set.constrainWidth(delete.id, 0)
-            set.setDimensionRatio(delete.id, "1:1")
-            set.connect(delete.id, START, layout.guideV_80.id, END, 10)
-            set.connect(delete.id, END, PARENT_ID, END, 10)
-
-            if (ids.isEmpty()) {
-                // connect scroll
-                set.connect(scroll.id, TOP, PARENT_ID, TOP, 10)
-                // connect delete
-                set.connect(delete.id, TOP, scroll.id, TOP)
-                set.connect(delete.id, BOTTOM, scroll.id, BOTTOM)
-            } else {
-                // connect scroll
-                set.connect(scroll.id, TOP, ids.last(), BOTTOM)
-                // connect delete
-                set.connect(delete.id, TOP, scroll.id, TOP)
-                set.connect(delete.id, BOTTOM, scroll.id, BOTTOM)
-            }
-            // add id
-            ids.add(scroll.id)
-            // apply changes
-            set.applyTo(layout)
+        set.clone(layout)
+        // scroll [width = 0]
+        set.constrainWidth(scroll.id, 0)
+        // scroll [horizontal connect]
+        set.connect(scroll.id, START, layout.id, START, 10)
+        set.connect(scroll.id, END, layout.guideV_80.id, START, 10)
+        // delete [size = 0]
+        set.constrainHeight(delete.id, 0)
+        set.constrainWidth(delete.id, 0)
+        // delete [ratio = 1:1]
+        set.setDimensionRatio(delete.id, "1:1")
+        // delete [horizontal connect]
+        set.connect(delete.id, START, layout.guideV_80.id, END, 10)
+        set.connect(delete.id, END, layout.id, END, 10)
+        // scroll [vertical connect]
+        if (ids.isEmpty()) {
+            set.connect(scroll.id, TOP, layout.id, TOP, 10)
+        } else {
+            set.connect(scroll.id, TOP, ids.last(), BOTTOM)
         }
-
+        // delete [vertical connect]
+        set.connect(delete.id, TOP, scroll.id, TOP)
+        set.connect(delete.id, BOTTOM, scroll.id, BOTTOM)
+        // add id
+        ids.add(scroll.id)
+        // apply changes
+        set.applyTo(layout)
 
         delete.setOnClickListener {
-            layoutTranslations.also { layout ->
-                set.clone(layout)
-                set.constrainHeight(scroll.id, 0)
-                ids.remove(scroll.id)
-                set.applyTo(layout)
-            }
+            set.clone(layout)
+            set.constrainHeight(scroll.id, 0)
+            ids.remove(scroll.id)
+            set.applyTo(layout)
 
             if (ids.isEmpty()) {
-                WordCreatorAnimator.set_5_To_Set_3()
+                    WordCreatorAnimator.set_5_To_Set_3()
             }
         }
     }

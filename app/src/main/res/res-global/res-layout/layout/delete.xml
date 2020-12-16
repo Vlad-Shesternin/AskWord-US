@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/iv_delete"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/state_delete"
-        android:scaleType="centerCrop"
-        android:clickable="true"
-        android:focusable="true"
-        tools:layout_gravity="center"
-        tools:layout_height="100dp"
-        tools:layout_width="100dp" />
-</layout>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/iv_delete"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/state_delete"
+    android:clickable="true"
+    android:focusable="true"
+    android:scaleType="centerCrop"
+    tools:layout_gravity="center"
+    tools:layout_height="100dp"
+    tools:layout_width="100dp" />
