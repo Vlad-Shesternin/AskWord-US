@@ -140,6 +140,20 @@
                 app:customFloatValue="0.0" />
         </Constraint>
 
+        <Constraint android:id="@+id/fab_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintWidth_percent="0.15" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
         <Constraint android:id="@+id/layout_translations">
             <Layout
                 android:layout_width="0dp"
@@ -179,6 +193,10 @@
         </Constraint>
 
         <Constraint android:id="@+id/edit_translation">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
             <PropertySet android:visibility="invisible" />
         </Constraint>
 
@@ -256,6 +274,22 @@
                 app:layout_constraintTop_toBottomOf="@id/guideH_40" />
             <PropertySet android:visibility="visible" />
         </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintWidth_percent="0.15" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
     </ConstraintSet>
 
     <!--==============================
@@ -306,6 +340,10 @@
         </Constraint>
 
         <Constraint android:id="@+id/ifv_prompt_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
             <PropertySet android:visibility="invisible" />
         </Constraint>
 

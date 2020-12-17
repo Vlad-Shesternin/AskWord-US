@@ -33,7 +33,7 @@
     <!--==============================
                  Fab add
     ==============================-->
-    <androidx.constraintlayout.utils.widget.ImageFilterView
+    <ImageButton
         android:id="@+id/fab_add"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -41,9 +41,7 @@
         android:clickable="true"
         android:focusable="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_add"
-        app:altSrc="@drawable/ic_check"
-        app:overlay="false" />
+        android:src="@drawable/ic_add" />
 
     <!--==============================
                   Fab category

@@ -148,6 +148,19 @@
             app:altSrc="@drawable/ic_prompt_add_shine" />
 
         <!--==============================
+                 Fab add
+        ==============================-->
+        <ImageButton
+            android:id="@+id/fab_add"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/fab_state"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_add" />
+
+        <!--==============================
                Layout prompt
         ==============================-->
         <FrameLayout

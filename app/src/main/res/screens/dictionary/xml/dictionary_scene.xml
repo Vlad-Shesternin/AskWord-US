@@ -87,9 +87,6 @@
                 app:layout_constraintVertical_bias="0.8"
                 app:layout_constraintWidth_percent="0.15" />
             <Transform android:elevation="@dimen/dictionary_fab_elevation" />
-            <CustomAttribute
-                app:attributeName="crossfade"
-                app:customFloatValue="0.0" />
         </Constraint>
 
         <Constraint android:id="@+id/fab_category">
@@ -347,12 +344,8 @@
         </Constraint>
 
         <Constraint android:id="@+id/fab_add">
-            <Transform
-                android:elevation="@dimen/dictionary_fab_elevation"
-                android:rotation="360" />
-            <CustomAttribute
-                app:attributeName="crossfade"
-                app:customFloatValue="1.0" />
+            <Transform android:rotation="360" />
+            <PropertySet android:visibility="invisible" />
         </Constraint>
 
         <Constraint android:id="@+id/layout_word_creator">

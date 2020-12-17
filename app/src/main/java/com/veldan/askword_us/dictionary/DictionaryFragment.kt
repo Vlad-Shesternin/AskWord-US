@@ -27,7 +27,7 @@ class DictionaryFragment :
 
     // Components UI
     lateinit var motion: MotionLayout
-    private lateinit var fabAdd: ImageFilterView
+    private lateinit var fabAdd: ImageButton
     private lateinit var fabFile: ImageButton
     private lateinit var fabPhoto: ImageButton
     private lateinit var fabCategory: ImageButton
