@@ -104,10 +104,9 @@ class WordCreatorDialog(
         editTranslation.addTextChangedListener(this)
     }
 
-//
-//    // ==============================
-//    //    Get WordModel
-//    // ==============================
+    // ==============================
+    //    Get WordModel
+    // ==============================
 //    private fun getWordModel(): WordModel? {
 //        // word
 //        val word = editWord.text.toString()
@@ -171,10 +170,12 @@ class WordCreatorDialog(
                 animator.set_3_To_Set_4()
             }
 
-            ifvListTranslation.id to animator.set_3 -> if (translations.isNotEmpty()) {
+            ifvListTranslation.id to animator.set_3 -> if (listTranslations.ids.isNotEmpty()) {
                 animator.set_3_To_Set_5()
             }
             ifvListTranslation.id to animator.set_5 -> animator.set_5_To_Set_3()
+
+
         }
     }
 

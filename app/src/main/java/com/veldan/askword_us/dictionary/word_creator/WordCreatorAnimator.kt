@@ -2,6 +2,9 @@ package com.veldan.askword_us.dictionary.word_creator
 
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.veldan.askword_us.R
+import com.veldan.askword_us.global.emums.Direction
+import com.veldan.askword_us.global.emums.Direction.toEND
+import com.veldan.askword_us.global.emums.Direction.toSTART
 import com.veldan.askword_us.global.objects.Animator
 
 object WordCreatorAnimator {
@@ -28,31 +31,31 @@ object WordCreatorAnimator {
     // ==============================
     fun start_To_Set_1() {
         Animator.apply {
-            transitionToEnd(motion, start_to_set_1, 1000)
+            transition(motion, start_to_set_1, 1000, toEND)
         }
     }
 
     fun start_To_Set_3() {
         Animator.apply {
-            transitionToEnd(motion, start_to_set_3, 300)
+            transition(motion, start_to_set_3, 300, toEND)
         }
     }
 
     fun set_3_To_Set_1() {
         Animator.apply {
-            transitionToEnd(motion, set_3_to_set_1, 1000)
+            transition(motion, set_3_to_set_1, 1000, toEND)
         }
     }
 
     fun set_3_To_Set_4() {
         Animator.apply {
-            transitionToEnd(motion, set_3_to_set_4, 300)
+            transition(motion, set_3_to_set_4, 300, toEND)
         }
     }
 
     fun set_3_To_Set_5() {
         Animator.apply {
-            transitionToEnd(motion, set_3_to_set_5, 1000)
+            transition(motion, set_3_to_set_5, 1000, toEND)
         }
     }
 
@@ -61,13 +64,13 @@ object WordCreatorAnimator {
     // ==============================
     fun set_3_To_Start() {
         Animator.apply {
-            transitionToStart(motion, start_to_set_3, 300)
+            transition(motion, start_to_set_3, 300, toSTART)
         }
     }
 
     fun set_5_To_Set_3() {
         Animator.apply {
-            transitionToStart(motion, set_3_to_set_5, 1000)
+            transition(motion, set_3_to_set_5, 1000, toSTART)
         }
     }
 }

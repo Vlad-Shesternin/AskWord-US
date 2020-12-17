@@ -10,6 +10,9 @@ import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.FragmentAuthenticationBinding
 import com.veldan.askword_us.databinding.LayoutWarningBinding
 import com.veldan.askword_us.dictionary.DictionaryFragment
+import com.veldan.askword_us.global.emums.Direction
+import com.veldan.askword_us.global.emums.Direction.toEND
+import com.veldan.askword_us.global.emums.Direction.toSTART
 import com.veldan.askword_us.global.objects.Animator
 
 
@@ -32,7 +35,11 @@ class AuthenticationFragment : Fragment() {
 
     fun transitionToDictionaryOrStudy() {
         val action =
-            AuthenticationFragmentDirections.actionAuthenticationFragmentToDictionaryOrStudyFragment("Нет имени", "Нет фамилии", "Нет адреса")
+            AuthenticationFragmentDirections.actionAuthenticationFragmentToDictionaryOrStudyFragment(
+                "Нет имени",
+                "Нет фамилии",
+                "Нет адреса"
+            )
         findNavController().navigate(action)
     }
 
@@ -83,12 +90,11 @@ class AuthenticationFragment : Fragment() {
         }
 
         private fun startToEnd() {
-            Animator.transitionToEnd(motion, end, 1000)
+            Animator.transition(motion, end, 1000, toEND)
         }
 
         private fun endToStart() {
-            Animator.transitionToEnd(motion, start, 1000)
+            Animator.transition(motion, start, 1000, toSTART)
         }
-
     }
 }

@@ -7,9 +7,6 @@ import androidx.constraintlayout.widget.ConstraintSet.*
 import com.veldan.askword_us.databinding.DeleteBinding
 import com.veldan.askword_us.databinding.ItemTranslationsBinding
 import kotlinx.android.synthetic.main.layout_translations.view.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class ListTranslations(
     private val inflater: LayoutInflater
@@ -18,7 +15,7 @@ class ListTranslations(
     // Components
     private var increment = 0
         get() = field++
-    private val ids = mutableListOf<Int>()
+    val ids = mutableListOf<Int>()
 
     // ==============================
     //     Add Item to List
@@ -72,7 +69,7 @@ class ListTranslations(
             set.applyTo(layout)
 
             if (ids.isEmpty()) {
-                    WordCreatorAnimator.set_5_To_Set_3()
+                WordCreatorAnimator.set_5_To_Set_3()
             }
         }
     }
