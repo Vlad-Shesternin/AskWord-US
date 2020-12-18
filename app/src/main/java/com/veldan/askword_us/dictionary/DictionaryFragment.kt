@@ -81,14 +81,15 @@ class DictionaryFragment :
     private fun initListeners() {
         binding.also {
             // onClick
-            it.fabAdd.setOnClickListener(this)
-            it.fabCategory.setOnClickListener(this)
-            it.fabPhoto.setOnClickListener(this)
-            it.fabFile.setOnClickListener(this)
+            fabAdd.setOnClickListener(this)
+            fabCategory.setOnClickListener(this)
+            fabPhoto.setOnClickListener(this)
+            fabFile.setOnClickListener(this)
+            fabBack.setOnClickListener(this)
             // onLongClick
-            it.fabAdd.setOnLongClickListener(this)
+            fabAdd.setOnLongClickListener(this)
             // onTransition
-            it.motionDictionary.setTransitionListener(this)
+            motion.setTransitionListener(this)
         }
     }
 
@@ -100,7 +101,7 @@ class DictionaryFragment :
     }
 
     // ==============================
-    //    OnClick
+    //    onClick
     // ==============================
     override fun onClick(view: View) {
         // when use Pair<Int, Int> (v?.id, motion.currentState)
@@ -109,16 +110,26 @@ class DictionaryFragment :
                 initWordCreatorDialog()
                 animator.start_To_Set_6()
             }
-
-            fabAdd.id to animator.set_2 -> animator.set_2_To_Set_1()
-            fabCategory.id to animator.set_2 -> animator.set_2_To_Set_3()
-            fabPhoto.id to animator.set_2 -> animator.set_2_To_Set_4()
-            fabFile.id to animator.set_2 -> animator.set_2_To_Set_5()
+            fabAdd.id to animator.set_2 -> {
+                animator.set_2_To_Set_1()
+            }
+            fabCategory.id to animator.set_2 -> {
+                animator.set_2_To_Set_3()
+            }
+            fabPhoto.id to animator.set_2 -> {
+                animator.set_2_To_Set_4()
+            }
+            fabFile.id to animator.set_2 -> {
+                animator.set_2_To_Set_5()
+            }
+            fabBack.id to animator.set_6 -> {
+                animator.set_6_To_Start()
+            }
         }
     }
 
     // ==============================
-    //    OnLongClick
+    //    onLongClick
     // ==============================
     override fun onLongClick(view: View): Boolean {
         when (view.id to motion.currentState) {
@@ -128,7 +139,7 @@ class DictionaryFragment :
     }
 
     // ==============================
-    //    OnTransitionCompleted
+    //    onTransitionCompleted
     // ==============================
     override fun onTransitionCompleted(motionLayout: MotionLayout?, end: Int) {
         when (motionLayout!!.startState to end) {

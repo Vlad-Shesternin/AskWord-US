@@ -96,7 +96,6 @@ class WordCreatorDialog(
     // ==============================
     private fun initListeners() {
         // onClick
-        fabBack.setOnClickListener(this)
         ifvPromptAdd.setOnClickListener(this)
         ibTranslation.setOnClickListener(this)
         ifvListTranslation.setOnClickListener(this)
@@ -203,9 +202,11 @@ class WordCreatorDialog(
             }
             animator.set_1 to animator.set_2 -> {
                 afterEndSet_2()
+                fabBack.setOnClickListener(this)
             }
             animator.set_2 to animator.set_1 -> {
                 animatorDictionary.set_7_To_set_6()
+                fabBack.setOnClickListener(fragment)
                 if (listTranslations.listTranslations.isEmpty() && editTranslation.text.toString() == "") {
                     animator.set_1_To_Start()
                 } else {

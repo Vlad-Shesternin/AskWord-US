@@ -68,6 +68,14 @@
         app:constraintSetStart="@+id/set_2" />
 
     <!--==============================
+           TRA: set_6 to start
+    ==============================-->
+    <Transition
+        android:id="@+id/set_6_to_start"
+        app:constraintSetEnd="@+id/start"
+        app:constraintSetStart="@+id/set_6" />
+
+    <!--==============================
            TRA: set_6 to set_7
     ==============================-->
     <Transition
