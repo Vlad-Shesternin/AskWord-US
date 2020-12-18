@@ -8,11 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.veldan.askword_us.R
 import com.veldan.askword_us.databinding.FragmentAuthenticationBinding
-import com.veldan.askword_us.databinding.LayoutWarningBinding
-import com.veldan.askword_us.dictionary.DictionaryFragment
-import com.veldan.askword_us.global.emums.Direction
-import com.veldan.askword_us.global.emums.Direction.toEND
-import com.veldan.askword_us.global.emums.Direction.toSTART
 import com.veldan.askword_us.global.objects.Animator
 
 
@@ -90,11 +85,11 @@ class AuthenticationFragment : Fragment() {
         }
 
         private fun startToEnd() {
-            Animator.transition(motion, end, 1000, toEND)
+            Animator.transition(motion, end, 1000)
         }
 
         private fun endToStart() {
-            Animator.transition(motion, start, 1000, toSTART)
+            Animator.transition(motion, start, 1000)
         }
     }
 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--==============================
-           TRA: start_to_set_1
+           TRA: start to set_1
     ==============================-->
     <Transition
         android:id="@+id/start_to_set_1"
@@ -11,17 +11,7 @@
         app:constraintSetStart="@+id/start" />
 
     <!--==============================
-           TRA: set_1_to_set_2
-    ==============================-->
-    <Transition
-        android:id="@+id/set_1_to_set_2"
-        app:autoTransition="animateToEnd"
-        app:constraintSetEnd="@+id/set_2"
-        app:constraintSetStart="@+id/set_1"
-        app:duration="1000" />
-
-    <!--==============================
-           TRA: start_to_set_3
+           TRA: start to set_3
     ==============================-->
     <Transition
         android:id="@+id/start_to_set_3"
@@ -29,7 +19,39 @@
         app:constraintSetStart="@+id/start" />
 
     <!--==============================
-           TRA: set_3_to_set_1
+           TRA: set_1 to start
+    ==============================-->
+    <Transition
+        android:id="@+id/set_1_to_start"
+        app:constraintSetEnd="@+id/start"
+        app:constraintSetStart="@+id/set_1" />
+
+    <!--==============================
+           TRA: set_1 to set_2
+    ==============================-->
+    <Transition
+        android:id="@+id/set_1_to_set_2"
+        app:constraintSetEnd="@+id/set_2"
+        app:constraintSetStart="@+id/set_1" />
+
+    <!--==============================
+           TRA: set_2 to set_1
+    ==============================-->
+    <Transition
+        android:id="@+id/set_2_to_set_1"
+        app:constraintSetEnd="@+id/set_1"
+        app:constraintSetStart="@+id/set_2" />
+
+    <!--==============================
+           TRA: set_3 to start
+    ==============================-->
+    <Transition
+        android:id="@+id/set_3_to_start"
+        app:constraintSetEnd="@+id/start"
+        app:constraintSetStart="@+id/set_3" />
+
+    <!--==============================
+           TRA: set_3 to set_1
     ==============================-->
     <Transition
         android:id="@+id/set_3_to_set_1"
@@ -37,7 +59,7 @@
         app:constraintSetStart="@+id/set_3" />
 
     <!--==============================
-           TRA: set_3_to_set_4
+           TRA: set_3 to set_4
     ==============================-->
     <Transition
         android:id="@+id/set_3_to_set_4"
@@ -45,12 +67,20 @@
         app:constraintSetStart="@+id/set_3" />
 
     <!--==============================
-           TRA: set_3_to_set_5
+           TRA: set_3 to set_5
     ==============================-->
     <Transition
         android:id="@+id/set_3_to_set_5"
         app:constraintSetEnd="@+id/set_5"
         app:constraintSetStart="@+id/set_3" />
+
+    <!--==============================
+           TRA: set_5 to set_3
+    ==============================-->
+    <Transition
+        android:id="@+id/set_5_to_set_3"
+        app:constraintSetEnd="@+id/set_3"
+        app:constraintSetStart="@+id/set_5" />
 
     <!--==============================
            SET: start
@@ -240,6 +270,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/guideH_15" />
             <PropertySet android:visibility="visible" />
         </Constraint>
+
     </ConstraintSet>
 
     <!--==============================
@@ -344,6 +375,10 @@
         </Constraint>
 
         <Constraint android:id="@+id/fab_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_back">
             <PropertySet android:visibility="invisible" />
         </Constraint>
 

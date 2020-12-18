@@ -26,11 +26,12 @@ class DictionaryFragment :
     private val animator = DictionaryAnimator
 
     // Components UI
-    lateinit var motion: MotionLayout
+    private lateinit var motion: MotionLayout
     private lateinit var fabAdd: ImageButton
     private lateinit var fabFile: ImageButton
     private lateinit var fabPhoto: ImageButton
     private lateinit var fabCategory: ImageButton
+    private lateinit var fabBack: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,6 +61,7 @@ class DictionaryFragment :
         binding.also {
             motion = it.motionDictionary
             fabAdd = it.fabAdd
+            fabBack = it.fabBack
             fabFile = it.fabFile
             fabPhoto = it.fabPhoto
             fabCategory = it.fabCategory
@@ -94,7 +96,7 @@ class DictionaryFragment :
     //    Init WordCreator
     // ==============================
     private fun initWordCreatorDialog() {
-        WordCreatorDialog(this, binding.layoutWordCreator)
+        WordCreatorDialog(this, binding.layoutWordCreator, fabBack)
     }
 
     // ==============================
@@ -129,7 +131,7 @@ class DictionaryFragment :
     //    OnTransitionCompleted
     // ==============================
     override fun onTransitionCompleted(motionLayout: MotionLayout?, end: Int) {
-        when (Animator.previous to end) {
+        when (motionLayout!!.startState to end) {
             animator.start to animator.set_1 -> animator.set_1_To_Set_2()
             animator.set_2 to animator.set_1 -> animator.set_1_To_Start()
         }

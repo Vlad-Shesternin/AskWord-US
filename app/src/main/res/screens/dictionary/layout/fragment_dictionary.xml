@@ -7,7 +7,7 @@
     app:layoutDescription="@xml/dictionary_scene">
 
     <!--==============================
-                  TABs
+           TABs
     ==============================-->
     <include
         android:id="@+id/tabs"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--==============================
-              RecyclerView
+           RecyclerView
     ==============================-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list_words"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tabs" />
 
     <!--==============================
-                 Fab add
+           Fab add
     ==============================-->
     <ImageButton
         android:id="@+id/fab_add"
@@ -44,7 +44,7 @@
         android:src="@drawable/ic_add" />
 
     <!--==============================
-                  Fab category
+            Fab category
      ==============================-->
     <ImageButton
         android:id="@+id/fab_category"
@@ -58,7 +58,7 @@
         android:src="@drawable/ic_category_add" />
 
     <!--==============================
-                  Fab photo
+           Fab photo
      ==============================-->
     <ImageButton
         android:id="@+id/fab_photo"
@@ -72,7 +72,7 @@
         android:src="@drawable/ic_photo_add" />
 
     <!--==============================
-                  Fab file
+           Fab file
      ==============================-->
     <ImageButton
         android:id="@+id/fab_file"
@@ -84,6 +84,19 @@
         android:padding="@dimen/dictionary_fab_padding"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_file_add" />
+
+    <!--==============================
+           Fab back
+    ==============================-->
+    <ImageButton
+        android:id="@+id/fab_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_back" />
 
     <!--==============================
            Layout word creation

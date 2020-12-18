@@ -2,7 +2,6 @@ package com.veldan.askword_us.dictionary.word_creator
 
 import android.text.Editable
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
@@ -13,27 +12,30 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import com.veldan.askword_us.R
 import com.veldan.askword_us.database.WordDatabase
-import com.veldan.askword_us.database.WordModel
-import com.veldan.askword_us.databinding.ItemTranslationsBinding
 import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
 import com.veldan.askword_us.dictionary.DictionaryAnimator
 import com.veldan.askword_us.dictionary.DictionaryFragment
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.interfaces.TextChangeListener
 import com.veldan.askword_us.global.interfaces.TransitionListener
+import com.veldan.askword_us.global.objects.Animator
 
 class WordCreatorDialog(
     private val fragment: DictionaryFragment,
-    private val binding: LayoutWordCreatorBinding
+    private val binding: LayoutWordCreatorBinding,
+    private val fabBack: ImageButton,
 ) : View.OnClickListener,
     TransitionListener,
     TextChangeListener {
+
+    val TAG = "ddd"
 
     // Components
     private lateinit var viewModel: WordCreatorViewModel
     private val listTranslations = ListTranslations(fragment.layoutInflater)
     private val translations = mutableListOf<String>()
     private val animator = WordCreatorAnimator
+    private val animatorDictionary = DictionaryAnimator
 
     // Components UI
     private lateinit var motion: MotionLayout
@@ -95,6 +97,7 @@ class WordCreatorDialog(
     // ==============================
     private fun initListeners() {
         // onClick
+        fabBack.setOnClickListener(this)
         ifvPromptAdd.setOnClickListener(this)
         ibTranslation.setOnClickListener(this)
         ifvListTranslation.setOnClickListener(this)
@@ -158,48 +161,70 @@ class WordCreatorDialog(
     }
 
     // ==============================
-    //    OnClick
+    //    onClick
     // ==============================
     override fun onClick(view: View?) {
         // when use Pair<Int, Int>(v?.id, motion.currentState)
         when (view!!.id to motion.currentState) {
-            ifvPromptAdd.id to animator.start -> animator.start_To_Set_1()
-            ifvPromptAdd.id to animator.set_3 -> animator.set_3_To_Set_1()
-
-            ibTranslation.id to animator.set_3 -> if (addTranslation()) {
-                animator.set_3_To_Set_4()
+            ifvPromptAdd.id to animator.start -> {
+                animator.start_To_Set_1()
+                animatorDictionary.set_6_To_set_7()
             }
-
-            ifvListTranslation.id to animator.set_3 -> if (listTranslations.ids.isNotEmpty()) {
-                animator.set_3_To_Set_5()
+            ifvPromptAdd.id to animator.set_3 -> {
+                animator.set_3_To_Set_1()
             }
-            ifvListTranslation.id to animator.set_5 -> animator.set_5_To_Set_3()
-
+            ibTranslation.id to animator.set_3 -> {
+                if (addTranslation())
+                    animator.set_3_To_Set_4()
+            }
+            ifvListTranslation.id to animator.set_3 -> {
+                if (listTranslations.ids.isNotEmpty())
+                    animator.set_3_To_Set_5()
+            }
+            ifvListTranslation.id to animator.set_5 -> {
+                animator.set_5_To_Set_3()
+            }
+            fabBack.id to animator.set_2 -> {
+                animator.set_2_To_Set_1()
+            }
 
         }
     }
 
     // ==============================
-    //    OnTransitionChange
+    //    onTransitionChange
     // ==============================
-    override fun onTransitionChange(
-        motionLayout: MotionLayout?,
-        start: Int,
-        end: Int,
-        progress: Float
-    ) {
-        super.onTransitionChange(motionLayout, start, end, progress)
-        when (end to progress) {
-            animator.set_2 to 1.0f ->
+    override fun onTransitionCompleted(motionLayout: MotionLayout?, end: Int) {
+        super.onTransitionCompleted(motionLayout, end)
+
+        when (motionLayout!!.startState to end) {
+            animator.start to animator.set_1 -> {
+                animator.set_1_To_Set_2()
+                animatorDictionary.set_7_To_set_6()
+            }
+            animator.set_3 to animator.set_1 -> {
+                animator.set_1_To_Set_2()
+                animatorDictionary.set_7_To_set_6()
+            }
+            animator.set_2 to animator.set_1 -> {
+                Log.i(TAG, "onTransitionCompleted: asdfdsafdsfs")
+                animator.set_1_To_Start()
+            }
+            animator.set_1 to animator.start -> {
+                Log.i(TAG, "onsadg0fas0g0sag0f0g0asfg0a0sgd")
+                //animator.set_1_To_Start()
+            }
+            animator.set_1 to animator.set_2 -> {
                 afterEndSet_2()
-            animator.set_4 to 1.0f -> {
+            }
+            animator.set_3 to animator.set_4 -> {
                 afterEndSet_4()
             }
         }
     }
 
     // ==============================
-    //    AfterTextChanged
+    //    afterTextChanged
     // ==============================
     override fun afterTextChanged(s: Editable?) {
         super.afterTextChanged(s)
