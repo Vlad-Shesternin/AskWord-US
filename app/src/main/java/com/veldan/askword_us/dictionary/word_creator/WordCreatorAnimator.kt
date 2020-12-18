@@ -20,8 +20,9 @@ object WordCreatorAnimator {
     // TransitionIds
     private const val start_to_set_1 = R.id.start_to_set_1
     private const val start_to_set_3 = R.id.start_to_set_3
-    private const val set_1_to_set_2 = R.id.set_1_to_set_2
     private const val set_1_to_start = R.id.set_1_to_start
+    private const val set_1_to_set_2 = R.id.set_1_to_set_2
+    private const val set_1_to_set_3 = R.id.set_1_to_set_3
     private const val set_2_to_set_1 = R.id.set_2_to_set_1
     private const val set_3_to_start = R.id.set_3_to_start
     private const val set_3_to_set_1 = R.id.set_3_to_set_1
@@ -47,6 +48,10 @@ object WordCreatorAnimator {
 
     fun set_1_To_Set_2() {
         Animator.transition(motion, set_1_to_set_2, 1000)
+    }
+
+    fun set_1_To_Set_3() {
+        Animator.transition(motion, set_1_to_set_3, 1000)
     }
 
     fun set_2_To_Set_1() {

@@ -35,6 +35,14 @@
         app:constraintSetStart="@+id/set_1" />
 
     <!--==============================
+           TRA: set_1 to set_3
+    ==============================-->
+    <Transition
+        android:id="@+id/set_1_to_set_3"
+        app:constraintSetEnd="@+id/set_3"
+        app:constraintSetStart="@+id/set_1" />
+
+    <!--==============================
            TRA: set_2 to set_1
     ==============================-->
     <Transition
@@ -230,6 +238,14 @@
             <PropertySet android:visibility="invisible" />
         </Constraint>
 
+        <Constraint android:id="@+id/ib_translations">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ifv_list_translations">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
         <Constraint android:id="@+id/ifv_prompt_add">
             <Layout
                 android:layout_width="0dp"
@@ -318,7 +334,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.8"
                 app:layout_constraintWidth_percent="0.15" />
-            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation"
+                android:rotation="360"/>
             <PropertySet android:visibility="visible" />
         </Constraint>
     </ConstraintSet>

@@ -33,7 +33,6 @@ class WordCreatorDialog(
     // Components
     private lateinit var viewModel: WordCreatorViewModel
     private val listTranslations = ListTranslations(fragment.layoutInflater)
-    private val translations = mutableListOf<String>()
     private val animator = WordCreatorAnimator
     private val animatorDictionary = DictionaryAnimator
 
@@ -135,7 +134,6 @@ class WordCreatorDialog(
         editTranslation.also { edit ->
             val editText = edit.text.toString()
             if (editText != "") {
-                translations.add(editText)
                 listTranslations.addItemToLayoutTranslations(editText, layoutTranslations)
                 tvTranslation.text = editText
                 edit.hint = ""
@@ -172,13 +170,14 @@ class WordCreatorDialog(
             }
             ifvPromptAdd.id to animator.set_3 -> {
                 animator.set_3_To_Set_1()
+                animatorDictionary.set_6_To_set_7()
             }
             ibTranslation.id to animator.set_3 -> {
                 if (addTranslation())
                     animator.set_3_To_Set_4()
             }
             ifvListTranslation.id to animator.set_3 -> {
-                if (listTranslations.ids.isNotEmpty())
+                if (listTranslations.listTranslations.isNotEmpty())
                     animator.set_3_To_Set_5()
             }
             ifvListTranslation.id to animator.set_5 -> {
@@ -186,8 +185,8 @@ class WordCreatorDialog(
             }
             fabBack.id to animator.set_2 -> {
                 animator.set_2_To_Set_1()
+                animatorDictionary.set_6_To_set_7()
             }
-
         }
     }
 
@@ -202,23 +201,27 @@ class WordCreatorDialog(
                 animator.set_1_To_Set_2()
                 animatorDictionary.set_7_To_set_6()
             }
+            animator.set_1 to animator.set_2 -> {
+                afterEndSet_2()
+            }
+            animator.set_2 to animator.set_1 -> {
+                animatorDictionary.set_7_To_set_6()
+                if (listTranslations.listTranslations.isEmpty() && editTranslation.text.toString() == "") {
+                    animator.set_1_To_Start()
+                } else {
+                    animator.set_1_To_Set_3()
+                }
+            }
             animator.set_3 to animator.set_1 -> {
                 animator.set_1_To_Set_2()
                 animatorDictionary.set_7_To_set_6()
             }
-            animator.set_2 to animator.set_1 -> {
-                Log.i(TAG, "onTransitionCompleted: asdfdsafdsfs")
-                animator.set_1_To_Start()
-            }
-            animator.set_1 to animator.start -> {
-                Log.i(TAG, "onsadg0fas0g0sag0f0g0asfg0a0sgd")
-                //animator.set_1_To_Start()
-            }
-            animator.set_1 to animator.set_2 -> {
-                afterEndSet_2()
-            }
             animator.set_3 to animator.set_4 -> {
                 afterEndSet_4()
+            }
+            animator.set_5 to animator.set_3 -> {
+                if (listTranslations.listTranslations.isEmpty())
+                    animator.set_3_To_Start()
             }
         }
     }
@@ -229,7 +232,7 @@ class WordCreatorDialog(
     override fun afterTextChanged(s: Editable?) {
         super.afterTextChanged(s)
 
-        if (translations.isEmpty()) {
+        if (listTranslations.listTranslations.isEmpty()) {
             when (s!!.length) {
                 1 -> animator.start_To_Set_3()
                 0 -> animator.set_3_To_Start()

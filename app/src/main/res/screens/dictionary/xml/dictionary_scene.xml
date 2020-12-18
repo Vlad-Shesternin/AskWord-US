@@ -12,12 +12,36 @@
         app:pathMotionArc="startVertical" />
 
     <!--==============================
+           TRA: start to set_6
+    ==============================-->
+    <Transition
+        android:id="@+id/start_to_set_6"
+        app:constraintSetEnd="@+id/set_6"
+        app:constraintSetStart="@+id/start" />
+
+    <!--==============================
            TRA: set_1 to set_2
     ==============================-->
     <Transition
         android:id="@+id/set_1_to_set_2"
         app:constraintSetEnd="@+id/set_2"
         app:constraintSetStart="@+id/set_1" />
+
+    <!--==============================
+           TRA: set_1 to start
+    ==============================-->
+    <Transition
+        android:id="@+id/set_1_to_start"
+        app:constraintSetEnd="@+id/start"
+        app:constraintSetStart="@+id/set_1" />
+
+    <!--==============================
+           TRA: set_2 to set_1
+    ==============================-->
+    <Transition
+        android:id="@+id/set_2_to_set_1"
+        app:constraintSetEnd="@+id/set_1"
+        app:constraintSetStart="@+id/set_2" />
 
     <!--==============================
            TRA: set_2 to set_3
@@ -44,20 +68,20 @@
         app:constraintSetStart="@+id/set_2" />
 
     <!--==============================
-           TRA: start to set_6
-    ==============================-->
-    <Transition
-        android:id="@+id/start_to_set_6"
-        app:constraintSetEnd="@+id/set_6"
-        app:constraintSetStart="@+id/start" />
-
-    <!--==============================
            TRA: set_6 to set_7
     ==============================-->
     <Transition
         android:id="@+id/set_6_to_set_7"
         app:constraintSetEnd="@+id/set_7"
         app:constraintSetStart="@+id/set_6" />
+
+    <!--==============================
+           TRA: set_7 to set_6
+    ==============================-->
+    <Transition
+        android:id="@+id/set_7_to_set_6"
+        app:constraintSetEnd="@+id/set_6"
+        app:constraintSetStart="@+id/set_7" />
 
     <!--==============================
            SET: start
