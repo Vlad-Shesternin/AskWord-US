@@ -32,7 +32,7 @@ object DictionaryAnimator {
     // ==============================
     //    transitions
     // ==============================
-    fun start_To_Set_1(motion: MotionLayout) {
+    fun start_To_Set_1() {
         Animator.transition(motion, start_to_set_1, 1000)
     }
 

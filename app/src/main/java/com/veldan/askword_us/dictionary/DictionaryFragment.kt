@@ -10,9 +10,11 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.veldan.askword_us.databinding.FragmentAuthenticationBinding
 import com.veldan.askword_us.databinding.FragmentDictionaryBinding
 import com.veldan.askword_us.dictionary.word_creator.WordCreatorDialog
+import com.veldan.askword_us.dictionary_or_study.DictionaryOrStudyFragmentDirections
 import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator
 
@@ -104,6 +106,13 @@ class DictionaryFragment :
     }
 
     // ==============================
+    //    Transition to DictionaryOrStudy
+    // ==============================
+    private fun transitionToDictionaryOrStudy() {
+        findNavController().popBackStack()
+    }
+
+    // ==============================
     //    onClick
     // ==============================
     override fun onClick(view: View) {
@@ -125,6 +134,12 @@ class DictionaryFragment :
             fabFile.id to animator.set_2 -> {
                 animator.set_2_To_Set_5()
             }
+            fabBack.id to animator.start -> {
+                transitionToDictionaryOrStudy()
+            }
+            fabBack.id to animator.set_2 -> {
+                transitionToDictionaryOrStudy()
+            }
             fabBack.id to animator.set_6 -> {
                 animator.set_6_To_Start()
             }
@@ -136,7 +151,7 @@ class DictionaryFragment :
     // ==============================
     override fun onLongClick(view: View): Boolean {
         when (view.id to motion.currentState) {
-            fabAdd.id to animator.start -> animator.start_To_Set_1(motion)
+            fabAdd.id to animator.start -> animator.start_To_Set_1()
         }
         return true
     }

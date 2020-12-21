@@ -33,7 +33,8 @@
     <Transition
         android:id="@+id/set_1_to_start"
         app:constraintSetEnd="@+id/start"
-        app:constraintSetStart="@+id/set_1" />
+        app:constraintSetStart="@+id/set_1"
+        app:pathMotionArc="startHorizontal" />
 
     <!--==============================
            TRA: set_2 to set_1
