@@ -45,15 +45,14 @@ class SignInFragment : Fragment() {
 
         initViewModels()
         initBinding(inflater)
-        initProperties()
+        initComponents()
         initComponentsUI()
-
 
         return binding.root
     }
 
     // ==============================
-    //        Initializing
+    //    Init ViewModel
     // ==============================
     private fun initViewModels() {
         viewModelFactory = SignInViewModelFactory(this)
@@ -61,6 +60,9 @@ class SignInFragment : Fragment() {
             viewModelFactory).get(SignInViewModel::class.java)
     }
 
+    // ==============================
+    //    Init Binding
+    // ==============================
     private fun initBinding(inflater: LayoutInflater) {
         binding = FragmentSignInBinding.inflate(inflater)
         binding.signInFragment = this
@@ -68,10 +70,16 @@ class SignInFragment : Fragment() {
         binding.lifecycleOwner = this
     }
 
-    private fun initProperties() {
+    // ==============================
+    //    Init Components
+    // ==============================
+    private fun initComponents() {
         googleAccount = GoogleAccount(this)
     }
 
+    // ==============================
+    //    Init Components UI
+    // ==============================
     private fun initComponentsUI() {
         binding.also {
             editEmail = it.editEmail
@@ -80,21 +88,21 @@ class SignInFragment : Fragment() {
     }
 
     // ==============================
-    //          GetUser
+    //    GetUser
     // ==============================
     private fun getUser() = User(
         email = binding.editEmail.text.toString(),
         password = binding.editPassword.text.toString())
 
     // ==============================
-    //          SignIn
+    //    SignIn
     // ==============================
     fun signIn() {
         viewModel.signIn(getUser())
     }
 
     // ==============================
-    //          SignInWithGoogle
+    //    SignInWithGoogle
     // ==============================
     fun signInWithGoogle() {
         googleAccount.signInWithGoogle()
@@ -118,7 +126,7 @@ class SignInFragment : Fragment() {
     }
 
     // ==============================
-    //          SetAccount
+    //    SetAccount
     // ==============================
     private fun setAccount(account: GoogleSignInAccount) {
         account.also {
@@ -127,7 +135,7 @@ class SignInFragment : Fragment() {
     }
 
     // ==============================
-    //          ForgetPassword
+    //    ForgetPassword
     // ==============================
     fun forgetPassword() {
         viewModel.forgetPassword(getUser())

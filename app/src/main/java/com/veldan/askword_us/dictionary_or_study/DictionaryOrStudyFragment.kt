@@ -20,11 +20,14 @@ class DictionaryOrStudyFragment : Fragment() {
     // Firebase
     private val auth = FirebaseAuth.getInstance()
 
+    // Components
+    private var visibility = View.INVISIBLE
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
 
         initBinding(inflater)
 
@@ -32,7 +35,7 @@ class DictionaryOrStudyFragment : Fragment() {
     }
 
     // ==============================
-    //        Initializing
+    //    Init Binding
     // ==============================
     private fun initBinding(inflater: LayoutInflater) {
         binding = FragmentDictionaryOrStudyBinding.inflate(inflater)
@@ -41,7 +44,7 @@ class DictionaryOrStudyFragment : Fragment() {
     }
 
     // ==============================
-    //        Transition
+    //    to Dictionary
     // ==============================
     fun transitionToDictionary() {
         val action =
@@ -49,24 +52,25 @@ class DictionaryOrStudyFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+    // ==============================
+    //    to Authentication
+    // ==============================
     fun transitionToAuthentication() {
         auth.signOut()
-
         val action =
             DictionaryOrStudyFragmentDirections.actionDictionaryOrStudyFragmentToAuthenticationFragment()
         findNavController().navigate(action)
     }
 
     // ==============================
-    //          ClickOnAccount
+    //    ClickOnAccount
     // ==============================
-    private var visibility = View.INVISIBLE
     fun clickOnAccount() {
         if (visibility == View.INVISIBLE) {
             visibility = View.VISIBLE
             val args = DictionaryOrStudyFragmentArgs.fromBundle(requireArguments())
             binding.layoutAccount.also {
-                it.tvNameSurname.text = args.userName + " " + args.userSurname
+                it.tvNameSurname.text = "${args.userName} ${args.userSurname}"
                 it.tvEmail.text = args.userEmail
                 it.layoutAccount.visibility = visibility
             }

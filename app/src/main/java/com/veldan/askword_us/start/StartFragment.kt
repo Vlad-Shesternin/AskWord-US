@@ -26,7 +26,7 @@ class StartFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
 
         initBinding(inflater)
         transitionToDictionaryAndStudyOrAuthentication()
@@ -35,14 +35,14 @@ class StartFragment : Fragment() {
     }
 
     // ==============================
-    //        Initializing
+    //    Init Binding
     // ==============================
     private fun initBinding(inflater: LayoutInflater) {
         binding = FragmentStartBinding.inflate(inflater)
     }
 
     // ==============================
-    // DictionaryAndStudy Or Authentication
+    //    DictionaryOrStudy Or Authentication
     // ==============================
     private fun transitionToDictionaryAndStudyOrAuthentication() {
         if (currentUser() != null) {
@@ -64,7 +64,7 @@ class StartFragment : Fragment() {
     }
 
     // ==============================
-    //        CurrentUser
+    //    CurrentUser
     // ==============================
     private fun currentUser(): FirebaseUser? {
         user = auth.currentUser
@@ -72,13 +72,16 @@ class StartFragment : Fragment() {
     }
 
     // ==============================
-    //        Transitions
+    //    to Authentication
     // ==============================
     private fun transitionToAuthentication() {
         val action = StartFragmentDirections.actionStartFragmentToAuthenticationFragment()
         findNavController().navigate(action)
     }
 
+    // ==============================
+    //    to DictionaryOrStudy
+    // ==============================
     private fun transitionToDictionaryOrStudy(name: String, surname: String, email: String) {
         val action = StartFragmentDirections.actionStartFragmentToDictionaryOrStudyFragment(name,
             surname,
