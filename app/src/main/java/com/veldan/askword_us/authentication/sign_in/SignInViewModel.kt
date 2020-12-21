@@ -1,7 +1,7 @@
 package com.veldan.askword_us.authentication.sign_in
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.view.View
+import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -28,11 +28,20 @@ class SignInViewModel(
     private val fireDb = FirebaseDatabase.getInstance()
     private val users = fireDb.getReference("Users")
 
-    // Properties
+    // Components
     private val context = fragment.requireContext()
+    private val _visibilityBooleanTextViewVerifyEmail = MutableLiveData<Boolean>()
+    val visibilityTextViewVerifyEmail: LiveData<Int> =
+        Transformations.map(_visibilityBooleanTextViewVerifyEmail) {
+            if (it) View.VISIBLE else View.INVISIBLE
+        }
+
+    init {
+        _visibilityBooleanTextViewVerifyEmail.value = false
+    }
 
     // ==============================
-    //           SignIn
+    //    SignIn
     // ==============================
     fun signIn(user: User) {
         val email = user.email
@@ -54,7 +63,7 @@ class SignInViewModel(
     }
 
     // ==============================
-    //           ForgetPassword
+    //    ForgetPassword
     // ==============================
     fun forgetPassword(user: User) {
         val email = user.email
@@ -65,6 +74,7 @@ class SignInViewModel(
                     .addOnSuccessListener {
                         "Инструкцию по восстановлению пароля отправлено на почту: $email".toast(
                             context)
+                        _visibilityBooleanTextViewVerifyEmail.value = true
                     }
                     .addOnFailureListener {
                         "Нет такой почты".toast(context)
@@ -74,7 +84,7 @@ class SignInViewModel(
     }
 
     // ==============================
-    //       GetUserForAccount
+    //    GetUserForAccount
     // ==============================
     private fun getUserForAccount(email: String) {
         users.orderByChild("email").equalTo(email)
@@ -103,7 +113,7 @@ class SignInViewModel(
     }
 
     // ==============================
-    //       TransitionToStart
+    //    TransitionToStart
     // ==============================
     private fun transitionToDictionaryOrStudy(name: String, surname: String, email: String) {
         val action =

@@ -1,5 +1,6 @@
 package com.veldan.askword_us.global.objects
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
@@ -9,40 +10,37 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 
 object Internet {
+    private val TAG = "Internet"
+
     const val NO_INTERNET = "no_internet.json"
     const val LOADING = "loading_among_us.json"
 
     //==============================
     //          IsOnline
     //==============================
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun isOnline(activity: Activity): Boolean {
-
+    @SuppressLint("NewApi")
+    fun isOnline(context: Context): Boolean {
         val connectivityManager =
-            activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        val capabilities: NetworkCapabilities? =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val capabilities =
             connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-
-        return if (capabilities != null) {
-            val connect = when {
+        if (capabilities != null) {
+            when {
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
-                    true
+                    Log.i(TAG, "NetworkCapabilities.TRANSPORT_CELLULAR")
+                    return true
                 }
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
-                    true
+                    Log.i(TAG, "NetworkCapabilities.TRANSPORT_WIFI")
+                    return true
                 }
                 capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                    Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
-                    true
+                    Log.i(TAG, "NetworkCapabilities.TRANSPORT_ETHERNET")
+                    return true
                 }
-                else -> false
             }
-            connect
-        } else {
-            false
         }
+        Log.i(TAG, "No NETWORK")
+        return false
     }
 }

@@ -10,6 +10,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.veldan.askword_us.databinding.FragmentAuthenticationBinding
 import com.veldan.askword_us.databinding.FragmentDictionaryBinding
 import com.veldan.askword_us.dictionary.word_creator.WordCreatorDialog
 import com.veldan.askword_us.global.interfaces.TransitionListener
@@ -21,8 +22,10 @@ class DictionaryFragment :
     View.OnLongClickListener,
     TransitionListener {
 
-    // Components
+    // Binding
     private lateinit var binding: FragmentDictionaryBinding
+
+    // Components
     private val animator = DictionaryAnimator
 
     // Components UI

@@ -31,7 +31,6 @@ class RegistrationWebViewClient(
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
         Log.i("onPageFinished", "onPageFinishedEND: $url")
-
         val accountSelection = url!!.contains("https://accounts.google.com/ServiceLogin/")
         val accountSelected = url.contains("https://mail.google.com/mail/mu/mp")
         if (accountSelection || accountSelected) {

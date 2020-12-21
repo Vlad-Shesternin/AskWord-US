@@ -1,5 +1,6 @@
 package com.veldan.askword_us.authentication.sign_in
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.common.api.ApiException
 import com.veldan.askword_us.global.general_classes.GoogleAccount
 import com.veldan.askword_us.authentication.User
+import com.veldan.askword_us.authentication.registration.RegistrationWebViewClient
 import com.veldan.askword_us.databinding.FragmentSignInBinding
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.emums.RequestCode
@@ -28,7 +30,7 @@ class SignInFragment : Fragment() {
     private lateinit var viewModel: SignInViewModel
     private lateinit var viewModelFactory: SignInViewModelFactory
 
-    // Properties
+    // Components
     private lateinit var googleAccount: GoogleAccount
 
     // Components UI
@@ -39,7 +41,7 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
 
         initViewModels()
         initBinding(inflater)
@@ -62,6 +64,8 @@ class SignInFragment : Fragment() {
     private fun initBinding(inflater: LayoutInflater) {
         binding = FragmentSignInBinding.inflate(inflater)
         binding.signInFragment = this
+        binding.signInViewModel = viewModel
+        binding.lifecycleOwner = this
     }
 
     private fun initProperties() {
@@ -127,5 +131,18 @@ class SignInFragment : Fragment() {
     // ==============================
     fun forgetPassword() {
         viewModel.forgetPassword(getUser())
+    }
+
+    // ==============================
+    //    Verification
+    // ==============================
+    @SuppressLint("SetJavaScriptEnabled")
+    fun verification() {
+        binding.webGmail.also {
+            it.visibility = View.VISIBLE
+            it.settings.javaScriptEnabled = true
+            it.loadUrl("https://mail.google.com/mail")
+            it.webViewClient = RegistrationWebViewClient(binding.lottieProgress)
+        }
     }
 }

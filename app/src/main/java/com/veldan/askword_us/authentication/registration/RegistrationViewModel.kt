@@ -48,7 +48,7 @@ class RegistrationViewModel(
     }
 
     // ==============================
-    //           Registration
+    //    Registration
     // ==============================
     fun registration(user: User, vararg views: View) {
         val name = user.name
@@ -75,7 +75,7 @@ class RegistrationViewModel(
     }
 
     // ==============================
-    //        SendEmailVerification
+    //    SendEmailVerification
     // ==============================
     private fun sendEmailVerification(name: String, surname: String, email: String) {
         fireUser = auth.currentUser
@@ -105,7 +105,7 @@ class RegistrationViewModel(
     }
 
     // ==============================
-    //           VerificationEmail
+    //    VerificationEmail
     // ==============================
     private suspend fun verificationEmail() {
         val verifyJob = scope.launch {
@@ -123,7 +123,7 @@ class RegistrationViewModel(
     }
 
     // ==============================
-    //           AddUserFireDb
+    //    AddUserFireDb
     // ==============================
     private suspend fun addUserFireDb(user: User) {
         val addUserJob = scope.launch {
@@ -138,7 +138,7 @@ class RegistrationViewModel(
     }
 
     // ==============================
-    //           WebViewOnClickBack
+    //    WebViewOnClickBack
     // ==============================
     fun webViewOnClickBack(webView: WebView) {
         webView.also {
@@ -156,7 +156,7 @@ class RegistrationViewModel(
     }
 
     // ==============================
-    //           TransitionToStart
+    //    TransitionToStart
     // ==============================
     private fun transitionToDictionaryOrStudy(name: String, surname: String, email: String) {
         val action =
@@ -168,7 +168,7 @@ class RegistrationViewModel(
     }
 
     // ==============================
-    //           DeleteUser from DB
+    //    DeleteUser from DB
     // ==============================
     private fun deleteUserFromDB() {
         if (isDeleteUser) {

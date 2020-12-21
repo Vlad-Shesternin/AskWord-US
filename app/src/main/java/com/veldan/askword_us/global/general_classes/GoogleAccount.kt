@@ -10,21 +10,19 @@ import com.veldan.askword_us.global.emums.RequestCode
 class GoogleAccount(private val fragment: Fragment) {
     private val TAG = "RequestGoogleAccount"
 
-    // Google
+    // Components
     private lateinit var googleSignInClient: GoogleSignInClient
-
-    // Properties
     private val context = fragment.requireContext()
 
     // ==============================
-    //       InitGoogleSignInClient
+    //    InitGoogleSignInClient
     // ==============================
     private fun initGoogleSignInClient() {
         googleSignInClient = GoogleSignIn.getClient(context, getGSO())
     }
 
     // ==============================
-    //       GetGoogleSignInOptions
+    //    GetGoogleSignInOptions
     // ==============================
     private fun getGSO() = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
         .requestIdToken(context.getString(R.string.default_web_client_id))
@@ -32,7 +30,7 @@ class GoogleAccount(private val fragment: Fragment) {
         .build()
 
     // ==============================
-    //       SignInWithGoogle
+    //    SignInWithGoogle
     // ==============================
     fun signInWithGoogle() {
         initGoogleSignInClient()
@@ -41,7 +39,7 @@ class GoogleAccount(private val fragment: Fragment) {
     }
 
     // ==============================
-    //       SignOutDefaultAccount
+    //    SignOutDefaultAccount
     // ==============================
     fun signOutDefaultAccount() {
         googleSignInClient.signOut()

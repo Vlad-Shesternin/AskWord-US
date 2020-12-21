@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "928536308343-e1g9q1cbv11k6fsoluq1b4pl658qd30q.apps.googleusercontent.com",
+          "client_id": "928536308343-b4taquace1dbq71rpqbhuik47d7q7trl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.veldan.askword_us",
-            "certificate_hash": "e3c7c72da7fcc84e5f6604c1024f1141acaf27f7"
+            "certificate_hash": "2eda05ad361093a969eb00aa63eafe2c83199e45"
           }
         },
         {

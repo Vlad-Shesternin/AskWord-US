@@ -9,6 +9,10 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.veldan.askword_us.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // ==============================
 //         Focus click Done
@@ -41,10 +45,15 @@ fun View.clickHideKeyboard(use: Boolean) {
 // ==============================
 @BindingAdapter("defaultFocusAndKeyboard")
 fun View.defaultFocusAndKeyboard(use: Boolean) {
-    this.requestFocus()
-    val imm = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.showSoftInput(
-        this,
-        SHOW_IMPLICIT
-    )
+    this.also { view ->
+        view.requestFocus()
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(100)
+            val imm = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(
+                view,
+                SHOW_IMPLICIT
+            )
+        }
+    }
 }

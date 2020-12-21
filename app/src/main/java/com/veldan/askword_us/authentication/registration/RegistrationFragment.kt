@@ -1,5 +1,6 @@
 package com.veldan.askword_us.authentication.registration
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -22,8 +23,11 @@ import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.emums.RequestCode
 import com.veldan.askword_us.global.objects.Animator
 import com.veldan.askword_us.global.objects.Internet
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-@RequiresApi(Build.VERSION_CODES.M)
 class RegistrationFragment : Fragment() {
     private val TAG = "RegistrationFragment"
 
@@ -34,33 +38,33 @@ class RegistrationFragment : Fragment() {
     private lateinit var viewModel: RegistrationViewModel
     private lateinit var viewModelFactory: RegistrationViewModelFactory
 
-    // Properties
+    // Components
     private lateinit var googleAccount: GoogleAccount
 
     // Components UI
-    private lateinit var btnGoogle: Button
-
     private lateinit var editName: EditText
-    private lateinit var editSurname: EditText
     private lateinit var editEmail: EditText
+    private lateinit var btnGoogle: Button
+    private lateinit var editSurname: EditText
     private lateinit var editPassword: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
 
         initViewModel()
         initBinding(inflater)
-        initProperties()
         initComponentsUI()
+        initComponents()
+        checkInternet()
 
         return binding.root
     }
 
     // ==============================
-    //        Initializing
+    //    Init ViewModel
     // ==============================
     private fun initViewModel() {
         viewModelFactory = RegistrationViewModelFactory(this)
@@ -68,6 +72,9 @@ class RegistrationFragment : Fragment() {
             RegistrationViewModel::class.java)
     }
 
+    // ==============================
+    //    Init Binding
+    // ==============================
     private fun initBinding(inflater: LayoutInflater) {
         binding = FragmentRegistrationBinding.inflate(inflater)
         binding.registrationFragment = this
@@ -75,23 +82,48 @@ class RegistrationFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
     }
 
-    private fun initProperties() {
-        googleAccount = GoogleAccount(this)
-    }
-
+    // ==============================
+    //    Init Components UI
+    // ==============================
     private fun initComponentsUI() {
         binding.also {
-            btnGoogle = it.btnRegistrationWithGoogle
-
             editName = it.editName
-            editSurname = it.editSurname
             editEmail = it.editEmail
+            btnGoogle = it.btnRegistrationWithGoogle
+            editSurname = it.editSurname
             editPassword = it.editPassword
         }
     }
 
     // ==============================
-    //          GetUser
+    //    Init Components
+    // ==============================
+    private fun initComponents() {
+        googleAccount = GoogleAccount(this)
+    }
+
+    // ==============================
+    //    Check Internet
+    // ==============================
+    private fun checkInternet() {
+        if (!Internet.isOnline(requireContext())) {
+            noInternet()
+        }
+    }
+
+    // ==============================
+    //    No Internet
+    // ==============================
+    private fun noInternet() {
+        binding.groupRegistration.visibility = View.INVISIBLE
+        binding.lottieProgress.also {
+            it.setAnimation(Internet.NO_INTERNET)
+            it.playAnimation()
+        }
+    }
+
+    // ==============================
+    //    GetUser
     // ==============================
     private fun getUser() = User(
         name = binding.editName.text.toString(),
@@ -99,25 +131,25 @@ class RegistrationFragment : Fragment() {
         email = binding.editEmail.text.toString(),
         password = binding.editPassword.text.toString())
 
+
     // ==============================
-    //          Registration
+    //    Registration
     // ==============================
     fun registration() {
-        if (Internet.isOnline(requireActivity())) {
-            val views = arrayOf(btnGoogle, editName, editSurname, editEmail, editPassword)
-            viewModel.registration(getUser(), *views)
-        } else {
-            noInternet()
-        }
+        val views = arrayOf(btnGoogle, editName, editSurname, editEmail, editPassword)
+        viewModel.registration(getUser(), *views)
     }
 
     // ==============================
-    //     RegistrationWithGoogle
+    //    RegistrationWithGoogle
     // ==============================
     fun registrationWithGoogle() {
         googleAccount.signInWithGoogle()
     }
 
+    // ==============================
+    //    OnActivityResult
+    // ==============================
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -130,13 +162,13 @@ class RegistrationFragment : Fragment() {
                 setAccount(account)
                 editPassword.defaultFocusAndKeyboard(true)
             } catch (e: ApiException) {
-                Log.i(TAG, "Exception.!.!.")
+                Log.i(TAG, "Exception.!.!. $e")
             }
         }
     }
 
     // ==============================
-    //          SetAccount
+    //    SetAccount
     // ==============================
     private fun setAccount(account: GoogleSignInAccount) {
         account.also {
@@ -147,19 +179,9 @@ class RegistrationFragment : Fragment() {
     }
 
     // ==============================
-    //          NoInternet
+    //    Verification
     // ==============================
-    private fun noInternet() {
-        binding.groupRegistration.visibility = View.INVISIBLE
-        binding.lottieProgress.also {
-            it.setAnimation(Internet.NO_INTERNET)
-            it.playAnimation()
-        }
-    }
-
-    // ==============================
-    //          Verification
-    // ==============================
+    @SuppressLint("SetJavaScriptEnabled")
     fun verification() {
         binding.webGmail.also {
             it.visibility = View.VISIBLE

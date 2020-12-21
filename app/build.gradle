@@ -100,9 +100,9 @@ dependencies {
     // Authentication
     implementation 'com.google.firebase:firebase-auth-ktx'
     // Authentication Service
-    implementation 'com.google.android.gms:play-services-auth:18.1.0'
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
     // Realtime Database
-    implementation 'com.google.firebase:firebase-database:19.5.1'
+    implementation 'com.google.firebase:firebase-database:19.6.0'
     // Firebase ===============================
 }
 
