@@ -34,9 +34,9 @@ class DictionaryFragment :
     private lateinit var motion: MotionLayout
     private lateinit var fabAdd: ImageButton
     private lateinit var fabFile: ImageButton
+    private lateinit var fabBack: ImageButton
     private lateinit var fabPhoto: ImageButton
     private lateinit var fabCategory: ImageButton
-    private lateinit var fabBack: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,10 +87,10 @@ class DictionaryFragment :
         binding.also {
             // onClick
             fabAdd.setOnClickListener(this)
-            fabCategory.setOnClickListener(this)
-            fabPhoto.setOnClickListener(this)
             fabFile.setOnClickListener(this)
             fabBack.setOnClickListener(this)
+            fabPhoto.setOnClickListener(this)
+            fabCategory.setOnClickListener(this)
             // onLongClick
             fabAdd.setOnLongClickListener(this)
             // onTransition
@@ -102,7 +102,7 @@ class DictionaryFragment :
     //    Init WordCreator
     // ==============================
     private fun initWordCreatorDialog() {
-        WordCreatorDialog(this, binding.layoutWordCreator, fabBack)
+        WordCreatorDialog(this, binding.layoutWordCreator)
     }
 
     // ==============================

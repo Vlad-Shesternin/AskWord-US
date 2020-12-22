@@ -25,9 +25,6 @@ object DictionaryAnimator {
     private const val set_2_to_set_4 = R.id.set_2_to_set_4
     private const val set_2_to_set_5 = R.id.set_2_to_set_5
     private const val set_6_to_start = R.id.set_6_to_start
-    private const val set_6_to_set_7 = R.id.set_6_to_set_7
-    private const val set_7_to_set_6 = R.id.set_7_to_set_6
-
 
     // ==============================
     //    transitions
@@ -66,13 +63,5 @@ object DictionaryAnimator {
 
     fun set_6_To_Start() {
         Animator.transition(motion, set_6_to_start, 1000)
-    }
-
-    fun set_6_To_set_7() {
-        Animator.transition(motion, set_6_to_set_7, 1000)
-    }
-
-    fun set_7_To_set_6() {
-        Animator.transition(motion, set_7_to_set_6, 1000)
     }
 }

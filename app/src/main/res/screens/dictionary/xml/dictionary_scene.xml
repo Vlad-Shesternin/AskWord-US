@@ -77,22 +77,6 @@
         app:constraintSetStart="@+id/set_6" />
 
     <!--==============================
-           TRA: set_6 to set_7
-    ==============================-->
-    <Transition
-        android:id="@+id/set_6_to_set_7"
-        app:constraintSetEnd="@+id/set_7"
-        app:constraintSetStart="@+id/set_6" />
-
-    <!--==============================
-           TRA: set_7 to set_6
-    ==============================-->
-    <Transition
-        android:id="@+id/set_7_to_set_6"
-        app:constraintSetEnd="@+id/set_6"
-        app:constraintSetStart="@+id/set_7" />
-
-    <!--==============================
            SET: start
     ==============================-->
     <ConstraintSet android:id="@+id/start">
@@ -400,14 +384,31 @@
         </Constraint>
 
         <Constraint android:id="@+id/fab_add">
-            <Transform android:rotation="360" />
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintWidth_percent="0.15" />
             <PropertySet android:visibility="invisible" />
+            <Transform android:rotation="360" />
         </Constraint>
 
         <Constraint android:id="@+id/fab_back">
-            <Transform
-                android:elevation="@dimen/dictionary_fab_elevation"
-                android:rotation="360" />
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintWidth_percent="0.15" />
+            <PropertySet android:visibility="invisible" />
+            <Transform android:rotation="-360" />
         </Constraint>
 
         <Constraint android:id="@+id/layout_word_creator">
@@ -416,20 +417,5 @@
                 android:layout_height="match_parent" />
             <PropertySet android:visibility="visible" />
         </Constraint>
-    </ConstraintSet>
-
-    <!--==============================
-           SET: set_7
-    ==============================-->
-    <ConstraintSet
-        android:id="@+id/set_7"
-        app:deriveConstraintsFrom="@+id/set_6">
-
-        <Constraint android:id="@+id/fab_back">
-            <Transform
-                android:elevation="@dimen/dictionary_fab_elevation"
-                android:rotation="0" />
-        </Constraint>
-
     </ConstraintSet>
 </MotionScene>

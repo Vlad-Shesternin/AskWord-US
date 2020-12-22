@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.utils.widget.ImageFilterView
@@ -18,27 +19,32 @@ import com.veldan.askword_us.dictionary.DictionaryFragment
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.interfaces.TextChangeListener
 import com.veldan.askword_us.global.interfaces.TransitionListener
-import com.veldan.askword_us.global.objects.Animator
 
 class WordCreatorDialog(
     private val fragment: DictionaryFragment,
     private val binding: LayoutWordCreatorBinding,
-    private val fabBack: ImageButton,
 ) : View.OnClickListener,
     TransitionListener,
     TextChangeListener {
 
-    val TAG = "ddd"
+    val TAG = "WordCreatorDialog"
 
-    // Components
+    // ViewModel
     private lateinit var viewModel: WordCreatorViewModel
-    private val listTranslations = ListTranslations(fragment.layoutInflater)
+
+    // Animators
     private val animator = WordCreatorAnimator
     private val animatorDictionary = DictionaryAnimator
 
+    // Components
+    private val listTranslations = ListTranslations(fragment.layoutInflater)
+
     // Components UI
     private lateinit var motion: MotionLayout
+    private lateinit var fabAdd: ImageButton
+    private lateinit var fabBack: ImageButton
     private lateinit var editWord: EditText
+    private lateinit var ivImgAdd: ImageView
     private lateinit var editPrompt: EditText
     private lateinit var ifvPromptAdd: ImageFilterView
     private lateinit var tvTranslation: TextView
@@ -73,7 +79,10 @@ class WordCreatorDialog(
     private fun initComponentsUI() {
         binding.also {
             motion = it.motionWordCreator
+            fabAdd = it.fabAdd
+            fabBack = it.fabBack
             editWord = it.editWord
+            ivImgAdd = it.ivImgAdd
             editPrompt = it.editPrompt
             ifvPromptAdd = it.ifvPromptAdd
             tvTranslation = it.tvTranslation
@@ -96,6 +105,8 @@ class WordCreatorDialog(
     // ==============================
     private fun initListeners() {
         // onClick
+        fabAdd.setOnClickListener(this)
+        fabBack.setOnClickListener(this)
         ifvPromptAdd.setOnClickListener(this)
         ibTranslation.setOnClickListener(this)
         ifvListTranslation.setOnClickListener(this)
@@ -104,27 +115,6 @@ class WordCreatorDialog(
         // onChangeText
         editTranslation.addTextChangedListener(this)
     }
-
-    // ==============================
-    //    Get WordModel
-    // ==============================
-//    private fun getWordModel(): WordModel? {
-//        // word
-//        val word = editWord.text.toString()
-//        // translation
-//        editTranslation.text.toString().also {
-//            if (it != "")
-//                translations.add(it)
-//        }
-//        // prompt
-//        val prompt = editPrompt.text.toString()
-//
-//        return if (word != "" && translations.isNotEmpty()) {
-//            WordModel(word = word, translations = translations, prompt = prompt)
-//        } else {
-//            null
-//        }
-//    }
 
     // ==============================
     //    Add Translation
@@ -165,11 +155,9 @@ class WordCreatorDialog(
         when (view!!.id to motion.currentState) {
             ifvPromptAdd.id to animator.start -> {
                 animator.start_To_Set_1()
-                animatorDictionary.set_6_To_set_7()
             }
             ifvPromptAdd.id to animator.set_3 -> {
                 animator.set_3_To_Set_1()
-                animatorDictionary.set_6_To_set_7()
             }
             ibTranslation.id to animator.set_3 -> {
                 if (addTranslation())
@@ -182,9 +170,11 @@ class WordCreatorDialog(
             ifvListTranslation.id to animator.set_5 -> {
                 animator.set_5_To_Set_3()
             }
+            fabBack.id to animator.start -> {
+                animatorDictionary.set_6_To_Start()
+            }
             fabBack.id to animator.set_2 -> {
                 animator.set_2_To_Set_1()
-                animatorDictionary.set_6_To_set_7()
             }
         }
     }
@@ -198,16 +188,14 @@ class WordCreatorDialog(
         when (motionLayout!!.startState to end) {
             animator.start to animator.set_1 -> {
                 animator.set_1_To_Set_2()
-                animatorDictionary.set_7_To_set_6()
             }
             animator.set_1 to animator.set_2 -> {
                 afterEndSet_2()
-                fabBack.setOnClickListener(this)
             }
             animator.set_2 to animator.set_1 -> {
-                animatorDictionary.set_7_To_set_6()
-                fabBack.setOnClickListener(fragment)
-                if (listTranslations.listTranslations.isEmpty() && editTranslation.text.toString() == "") {
+                if (listTranslations.listTranslations.isEmpty()
+                    && editTranslation.text.toString() == ""
+                ) {
                     animator.set_1_To_Start()
                 } else {
                     animator.set_1_To_Set_3()
@@ -215,7 +203,6 @@ class WordCreatorDialog(
             }
             animator.set_3 to animator.set_1 -> {
                 animator.set_1_To_Set_2()
-                animatorDictionary.set_7_To_set_6()
             }
             animator.set_3 to animator.set_4 -> {
                 afterEndSet_4()
