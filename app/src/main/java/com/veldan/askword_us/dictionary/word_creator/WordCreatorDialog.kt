@@ -13,12 +13,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import com.veldan.askword_us.R
 import com.veldan.askword_us.database.WordDatabase
+import com.veldan.askword_us.database.WordModel
 import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
 import com.veldan.askword_us.dictionary.DictionaryAnimator
 import com.veldan.askword_us.dictionary.DictionaryFragment
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.interfaces.TextChangeListener
 import com.veldan.askword_us.global.interfaces.TransitionListener
+import com.veldan.askword_us.global.toast
 
 class WordCreatorDialog(
     private val fragment: DictionaryFragment,
@@ -56,6 +58,7 @@ class WordCreatorDialog(
     // init
     init {
         initViewModel()
+        initBinding()
         initComponentsUI()
         initComponents()
         initListeners()
@@ -72,6 +75,14 @@ class WordCreatorDialog(
         viewModel = ViewModelProvider(fragment, viewModelFactory)
             .get(WordCreatorViewModel::class.java)
     }
+
+    // ==============================
+    //    Init Binding
+    // ==============================
+    private fun initBinding() {
+        binding.dialogWordCreator = this
+    }
+
 
     // ==============================
     //    Init Components UI
@@ -105,7 +116,6 @@ class WordCreatorDialog(
     // ==============================
     private fun initListeners() {
         // onClick
-        fabAdd.setOnClickListener(this)
         fabBack.setOnClickListener(this)
         ifvPromptAdd.setOnClickListener(this)
         ibTranslation.setOnClickListener(this)
@@ -132,6 +142,38 @@ class WordCreatorDialog(
             return false
         }
     }
+
+    // ==============================
+    //    Get WordModel
+    // ==============================
+    private fun getWordModel(): WordModel? {
+        val word = editWord.text.toString()
+        val prompt = editPrompt.text.toString()
+        val translation = editTranslation.text.toString()
+        val translations = listTranslations.listTranslations.apply { add(translation) }
+
+        return if (word != "") {
+            WordModel(
+                word = word,
+                translations = translations,
+                prompt = prompt,
+            )
+        } else {
+            "Введите Слово".toast(fragment.requireContext())
+            null
+        }
+    }
+
+    // ==============================
+    //    Insert to DB
+    // ==============================
+    fun insert() {
+        val wordModel = getWordModel()
+        wordModel?.let {
+            viewModel.insert(it)
+        }
+    }
+
 
     // ==============================
     //    After end set

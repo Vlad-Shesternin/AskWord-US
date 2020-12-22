@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="dialogWordCreator"
+            type="com.veldan.askword_us.dictionary.word_creator.WordCreatorDialog" />
+    </data>
+
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/motion_word_creator"
         clickHideKeyboard="@{true}"
@@ -157,6 +164,7 @@
             android:background="@drawable/fab_state"
             android:clickable="true"
             android:focusable="true"
+            android:onClick="@{() -> dialogWordCreator.insert()}"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_add" />
 
