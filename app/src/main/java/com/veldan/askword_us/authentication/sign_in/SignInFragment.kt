@@ -18,7 +18,7 @@ import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.authentication.registration.RegistrationWebViewClient
 import com.veldan.askword_us.databinding.FragmentSignInBinding
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
-import com.veldan.askword_us.global.emums.RequestCode
+import com.veldan.askword_us.global.objects.RequestCode
 
 class SignInFragment : Fragment() {
     private val TAG = "SignInFragment"
@@ -111,7 +111,7 @@ class SignInFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RequestCode.RC_GOOGLE.id) {
+        if (requestCode == RequestCode.RC_GOOGLE) {
             googleAccount.signOutDefaultAccount()
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {

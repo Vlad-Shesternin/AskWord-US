@@ -83,12 +83,28 @@
         app:constraintSetStart="@+id/set_3" />
 
     <!--==============================
+           TRA: set_3 to set_6
+    ==============================-->
+    <Transition
+        android:id="@+id/set_3_to_set_6"
+        app:constraintSetEnd="@+id/set_6"
+        app:constraintSetStart="@+id/set_3" />
+
+    <!--==============================
            TRA: set_5 to set_3
     ==============================-->
     <Transition
         android:id="@+id/set_5_to_set_3"
         app:constraintSetEnd="@+id/set_3"
         app:constraintSetStart="@+id/set_5" />
+
+    <!--==============================
+           TRA: start to set_6
+    ==============================-->
+    <Transition
+        android:id="@+id/start_to_set_6"
+        app:constraintSetEnd="@+id/set_6"
+        app:constraintSetStart="@+id/start" />
 
     <!--==============================
            SET: start
@@ -104,6 +120,26 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideV_85"
                 app:layout_constraintStart_toEndOf="@+id/guideV_15"
                 app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/view_curtain">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/preview"
+                app:layout_constraintEnd_toEndOf="@+id/preview"
+                app:layout_constraintStart_toStartOf="@+id/preview"
+                app:layout_constraintTop_toTopOf="@+id/preview" />
+        </Constraint>
+
+        <Constraint android:id="@+id/preview">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_img_add"
+                app:layout_constraintEnd_toEndOf="@+id/iv_img_add"
+                app:layout_constraintStart_toStartOf="@+id/iv_img_add"
+                app:layout_constraintTop_toTopOf="@+id/iv_img_add" />
         </Constraint>
 
         <Constraint android:id="@+id/edit_word">
@@ -418,6 +454,46 @@
                 app:layout_constraintStart_toEndOf="@+id/guideV_15"
                 app:layout_constraintTop_toBottomOf="@+id/guideH_40" />
             <PropertySet android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_6
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_6"
+        app:deriveConstraintsFrom="@id/start">
+
+        <Constraint android:id="@+id/preview">
+            <Transform android:elevation="1dp" />
+        </Constraint>
+
+        <Constraint android:id="@+id/edit_word">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/edit_translation">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ifv_prompt_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_back">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ib_translations">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/ifv_list_translations">
+            <PropertySet android:visibility="invisible" />
         </Constraint>
     </ConstraintSet>
 </MotionScene>

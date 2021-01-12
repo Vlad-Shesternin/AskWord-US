@@ -7,16 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.veldan.askword_us.databinding.FragmentAuthenticationBinding
 import com.veldan.askword_us.databinding.FragmentDictionaryBinding
+import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
 import com.veldan.askword_us.dictionary.word_creator.WordCreatorDialog
-import com.veldan.askword_us.dictionary_or_study.DictionaryOrStudyFragmentDirections
+import com.veldan.askword_us.global.general_classes.Camera
 import com.veldan.askword_us.global.interfaces.TransitionListener
-import com.veldan.askword_us.global.objects.Animator
+import com.veldan.askword_us.global.objects.RequestCode
 
 class DictionaryFragment :
     Fragment(),
@@ -28,6 +26,7 @@ class DictionaryFragment :
     private lateinit var binding: FragmentDictionaryBinding
 
     // Components
+    private val TAG = this::class.simpleName
     private val animator = DictionaryAnimator
 
     // Components UI
@@ -37,6 +36,7 @@ class DictionaryFragment :
     private lateinit var fabBack: ImageButton
     private lateinit var fabPhoto: ImageButton
     private lateinit var fabCategory: ImageButton
+    private lateinit var layoutWordCreator: LayoutWordCreatorBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,6 +70,7 @@ class DictionaryFragment :
             fabFile = it.fabFile
             fabPhoto = it.fabPhoto
             fabCategory = it.fabCategory
+            layoutWordCreator = it.layoutWordCreator
         }
     }
 
@@ -102,7 +103,7 @@ class DictionaryFragment :
     //    Init WordCreator
     // ==============================
     private fun initWordCreatorDialog() {
-        WordCreatorDialog(this, binding.layoutWordCreator)
+        WordCreatorDialog(this, layoutWordCreator)
     }
 
     // ==============================
@@ -110,6 +111,23 @@ class DictionaryFragment :
     // ==============================
     private fun transitionToDictionaryOrStudy() {
         findNavController().popBackStack()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray,
+    ) {
+        if (requestCode == RequestCode.RC_CAMERA) {
+            val camera = Camera(this)
+            if (camera.cameraPermissionGranted()) {
+                camera.startCamera(layoutWordCreator.preview)
+                layoutWordCreator.preview.also {
+                    it.visibility = View.VISIBLE
+                }
+
+            }
+        }
     }
 
     // ==============================

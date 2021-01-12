@@ -65,6 +65,23 @@
             app:layout_constraintGuide_percent="0.85" />
 
         <!--==============================
+               Preview
+        ==============================-->
+        <androidx.camera.view.PreviewView
+            android:id="@+id/preview"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+
+        <!--==============================
+               View curtain
+            ==============================-->
+        <View
+            android:id="@+id/view_curtain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite" />
+
+        <!--==============================
                Image add
         ==============================-->
         <ImageView

@@ -7,10 +7,13 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.camera.view.PreviewView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
+import com.veldan.askword_us.MainActivity
 import com.veldan.askword_us.R
 import com.veldan.askword_us.database.WordDatabase
 import com.veldan.askword_us.database.WordModel
@@ -18,8 +21,10 @@ import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
 import com.veldan.askword_us.dictionary.DictionaryAnimator
 import com.veldan.askword_us.dictionary.DictionaryFragment
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
+import com.veldan.askword_us.global.general_classes.Camera
 import com.veldan.askword_us.global.interfaces.TextChangeListener
 import com.veldan.askword_us.global.interfaces.TransitionListener
+import com.veldan.askword_us.global.objects.RequestCode
 import com.veldan.askword_us.global.toast
 
 class WordCreatorDialog(
@@ -27,9 +32,7 @@ class WordCreatorDialog(
     private val binding: LayoutWordCreatorBinding,
 ) : View.OnClickListener,
     TransitionListener,
-    TextChangeListener {
-
-    val TAG = "WordCreatorDialog"
+    TextChangeListener, View.OnLongClickListener {
 
     // ViewModel
     private lateinit var viewModel: WordCreatorViewModel
@@ -39,12 +42,14 @@ class WordCreatorDialog(
     private val animatorDictionary = DictionaryAnimator
 
     // Components
+    private val TAG = this::class.simpleName
     private val listTranslations = ListTranslations(fragment.layoutInflater)
 
     // Components UI
     private lateinit var motion: MotionLayout
     private lateinit var fabAdd: ImageButton
     private lateinit var fabBack: ImageButton
+    private lateinit var preview: PreviewView
     private lateinit var editWord: EditText
     private lateinit var ivImgAdd: ImageView
     private lateinit var editPrompt: EditText
@@ -92,6 +97,7 @@ class WordCreatorDialog(
             motion = it.motionWordCreator
             fabAdd = it.fabAdd
             fabBack = it.fabBack
+            preview = it.preview
             editWord = it.editWord
             ivImgAdd = it.ivImgAdd
             editPrompt = it.editPrompt
@@ -117,6 +123,7 @@ class WordCreatorDialog(
     private fun initListeners() {
         // onClick
         fabBack.setOnClickListener(this)
+        ivImgAdd.setOnClickListener(this)
         ifvPromptAdd.setOnClickListener(this)
         ibTranslation.setOnClickListener(this)
         ifvListTranslation.setOnClickListener(this)
@@ -124,6 +131,9 @@ class WordCreatorDialog(
         motion.setTransitionListener(this)
         // onChangeText
         editTranslation.addTextChangedListener(this)
+
+
+        fabAdd.setOnLongClickListener(this)
     }
 
     // ==============================
@@ -192,9 +202,21 @@ class WordCreatorDialog(
     // ==============================
     //    onClick
     // ==============================
-    override fun onClick(view: View?) {
+    override fun onClick(view: View) {
+        when (view.id) {
+            ivImgAdd.id -> {
+                val camera = Camera(fragment)
+                camera.startCamera(preview)
+                when (motion.currentState) {
+                    animator.start -> animator.start_To_Set_6()
+                    animator.set_3 -> animator.set_3_To_Set_6()
+                }
+            }
+        }
+
+        // Animation
         // when use Pair<Int, Int>(v?.id, motion.currentState)
-        when (view!!.id to motion.currentState) {
+        when (view.id to motion.currentState) {
             ifvPromptAdd.id to animator.start -> {
                 animator.start_To_Set_1()
             }
@@ -268,6 +290,16 @@ class WordCreatorDialog(
                 0 -> animator.set_3_To_Start()
             }
         }
+    }
+
+    override fun onLongClick(v: View?): Boolean {
+//        val db = viewModel.words
+//        if (db != null) {
+//            Log.i(TAG, "onLongClick: ${db.value}")
+//        } else {
+//            Log.i(TAG, "onLongClick: nuuuuuul")
+//        }
+        return true
     }
 }
 

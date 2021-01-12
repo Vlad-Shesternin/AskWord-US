@@ -2,7 +2,6 @@ package com.veldan.askword_us.authentication.registration
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -20,13 +18,8 @@ import com.veldan.askword_us.global.general_classes.GoogleAccount
 import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.databinding.FragmentRegistrationBinding
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
-import com.veldan.askword_us.global.emums.RequestCode
-import com.veldan.askword_us.global.objects.Animator
 import com.veldan.askword_us.global.objects.Internet
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.veldan.askword_us.global.objects.RequestCode
 
 class RegistrationFragment : Fragment() {
     private val TAG = "RegistrationFragment"
@@ -153,7 +146,7 @@ class RegistrationFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RequestCode.RC_GOOGLE.id) {
+        if (requestCode == RequestCode.RC_GOOGLE) {
             googleAccount.signOutDefaultAccount()
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {

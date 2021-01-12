@@ -5,7 +5,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.veldan.askword_us.R
-import com.veldan.askword_us.global.emums.RequestCode
+import com.veldan.askword_us.global.objects.RequestCode
 
 class GoogleAccount(private val fragment: Fragment) {
     private val TAG = "RequestGoogleAccount"
@@ -35,7 +35,7 @@ class GoogleAccount(private val fragment: Fragment) {
     fun signInWithGoogle() {
         initGoogleSignInClient()
         val signInIntent = googleSignInClient.signInIntent
-        fragment.startActivityForResult(signInIntent, RequestCode.RC_GOOGLE.id)
+        fragment.startActivityForResult(signInIntent, RequestCode.RC_GOOGLE)
     }
 
     // ==============================
