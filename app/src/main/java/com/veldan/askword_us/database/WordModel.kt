@@ -7,6 +7,9 @@ data class WordModel(
     @PrimaryKey(autoGenerate = true)
     val wordId: Long = 0L,
 
+    @ColumnInfo(name = "image")
+    val image: String,
+
     @ColumnInfo(name = "word")
     val word: String,
 

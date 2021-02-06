@@ -1,6 +1,5 @@
 package com.veldan.askword_us.dictionary.word_creator
 
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -8,9 +7,7 @@ import androidx.constraintlayout.widget.ConstraintSet.*
 import com.veldan.askword_us.databinding.DeleteBinding
 import com.veldan.askword_us.databinding.ItemTranslationsBinding
 import com.veldan.askword_us.global.toast
-import kotlinx.android.synthetic.main.item_translations.view.*
 import kotlinx.android.synthetic.main.layout_translations.view.*
-import kotlin.math.log
 
 class ListTranslations(
     private val inflater: LayoutInflater,
@@ -21,6 +18,7 @@ class ListTranslations(
     private var increment = 0
         get() = ++field
     private var id = 0
+    private val animator = WordCreatorAnimator
 
     // ==============================
     //     Add Item to List
@@ -34,49 +32,58 @@ class ListTranslations(
         if (!listTranslations.contains(translation)) {
             listTranslations.add(translation)
 
-            scroll.id = increment
             delete.id = increment
+            scroll.id = increment
 
-            layout.addView(scroll)
             layout.addView(delete)
+            layout.addView(scroll)
 
             val set = ConstraintSet()
 
             set.clone(layout)
-            // scroll [width = 0]
-            set.constrainWidth(scroll.id, 0)
-            // scroll [horizontal connect]
-            set.connect(scroll.id, START, layout.id, START, 10)
-            set.connect(scroll.id, END, layout.guideV_80.id, START, 10)
             // delete [size = 0]
             set.constrainHeight(delete.id, 0)
             set.constrainWidth(delete.id, 0)
+            set.constrainPercentWidth(delete.id, 0.2F)
             // delete [ratio = 1:1]
             set.setDimensionRatio(delete.id, "1:1")
             // delete [horizontal connect]
-            set.connect(delete.id, START, layout.guideV_80.id, END, 10)
             set.connect(delete.id, END, layout.id, END, 10)
+            // scroll [width = 0]
+            set.constrainWidth(scroll.id, 0)
+            set.constrainHeight(scroll.id, 0)
+            // scroll [horizontal connect]
+            set.connect(scroll.id, START, layout.id, START, 10)
+            set.connect(scroll.id, END, delete.id, START, 10)
             // scroll [vertical connect]
             if (id == 0) {
-                set.connect(scroll.id, TOP, layout.id, TOP, 10)
+                set.connect(delete.id, TOP, layout.id, TOP, 10)
             } else {
-                set.connect(scroll.id, TOP, id, BOTTOM)
+                set.connect(delete.id, TOP, id, BOTTOM)
             }
-            // delete [vertical connect]
-            set.connect(delete.id, TOP, scroll.id, TOP)
-            set.connect(delete.id, BOTTOM, scroll.id, BOTTOM)
+            set.connect(scroll.id, TOP, delete.id, TOP)
+            set.connect(scroll.id, BOTTOM, delete.id, BOTTOM)
             // add id
-            id = scroll.id
+            id = delete.id
             // apply changes
             set.applyTo(layout)
 
             delete.setOnClickListener {
                 set.clone(layout)
-                set.constrainHeight(scroll.id, 0)
+                set.setDimensionRatio(delete.id, "0:0")
                 set.applyTo(layout)
                 listTranslations.remove(translation)
                 if (listTranslations.isEmpty()) {
-                    WordCreatorAnimator.set_5_To_Set_3()
+                    animator.apply {
+                        when (motion.currentState) {
+                            set_5 -> {
+                                set_5_To_Set_3()
+                            }
+                            set_13 -> {
+                                set_13_To_Set_11()
+                            }
+                        }
+                    }
                 }
             }
         } else {

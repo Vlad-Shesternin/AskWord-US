@@ -1,6 +1,10 @@
 package com.veldan.askword_us.dictionary
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +15,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.veldan.askword_us.databinding.FragmentDictionaryBinding
 import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
+import com.veldan.askword_us.dictionary.word_creator.WordCreatorAnimator
 import com.veldan.askword_us.dictionary.word_creator.WordCreatorDialog
 import com.veldan.askword_us.global.general_classes.Camera
 import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.RequestCode
+import com.veldan.askword_us.global.toast
+import java.io.IOException
 
 class DictionaryFragment :
     Fragment(),
@@ -28,6 +35,8 @@ class DictionaryFragment :
     // Components
     private val TAG = this::class.simpleName
     private val animator = DictionaryAnimator
+    private val animatorWordCreator = WordCreatorAnimator
+    private lateinit var wordCreator: WordCreatorDialog
 
     // Components UI
     private lateinit var motion: MotionLayout
@@ -103,7 +112,7 @@ class DictionaryFragment :
     //    Init WordCreator
     // ==============================
     private fun initWordCreatorDialog() {
-        WordCreatorDialog(this, layoutWordCreator)
+        wordCreator = WordCreatorDialog(this, layoutWordCreator)
     }
 
     // ==============================
@@ -126,6 +135,59 @@ class DictionaryFragment :
                     it.visibility = View.VISIBLE
                 }
 
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RequestCode.RC_PICK_IMAGE && resultCode == RESULT_OK) {
+            val imageUri = data?.data
+            wordCreator.savedUri = imageUri
+            try {
+                val bitmap =
+                    MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, imageUri)
+                layoutWordCreator.apply {
+                    ivCapture.setImageBitmap(bitmap)
+
+                    animatorWordCreator.apply {
+                        when (motion.currentState) {
+                            set_7 -> {
+                                trigger = set_7
+                                set_7_To_Set_9()
+                            }
+                            set_8 -> {
+                                trigger = set_8
+                                set_8_To_Set_9()
+                            }
+                        }
+                    }
+
+                    ivCheckCapture.setOnClickListener {
+                        animator.apply {
+                            when (WordCreatorAnimator.trigger) {
+                                WordCreatorAnimator.set_7 -> WordCreatorAnimator.set_9_To_Set_10()
+                                WordCreatorAnimator.set_8 -> WordCreatorAnimator.set_9_To_Set_11()
+                            }
+                        }
+                    }
+
+                    ivCancelCapture.setOnClickListener {
+                        Camera(this@DictionaryFragment).deleteImage(imageUri!!.path!!)
+                        ivCapture.setImageResource(0)
+                        animator.apply {
+                            when (WordCreatorAnimator.trigger) {
+                                WordCreatorAnimator.set_7 -> WordCreatorAnimator.set_9_To_Set_7()
+                                WordCreatorAnimator.set_8 -> WordCreatorAnimator.set_9_To_Set_8()
+                            }
+                        }
+                    }
+                }
+
+
+            } catch (e: IOException) {
+                "Error: $e".toast(requireContext())
             }
         }
     }

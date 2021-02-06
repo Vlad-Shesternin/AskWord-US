@@ -11,9 +11,9 @@
 
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/motion_word_creator"
-        clickHideKeyboard="@{true}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        clickHideKeyboard="@{true}"
         app:layoutDescription="@xml/word_creator_scene">
 
         <!--==============================
@@ -80,6 +80,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite" />
+
+        <!--==============================
+               ImageView capture
+            ==============================-->
+        <ImageView
+            android:id="@+id/iv_capture"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop" />
 
         <!--==============================
                Image add
@@ -172,6 +183,51 @@
             app:altSrc="@drawable/ic_prompt_add_shine" />
 
         <!--==============================
+               ImageView camera click
+            ==============================-->
+        <ImageView
+            android:id="@+id/iv_camera_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/state_camera_click"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="centerCrop" />
+
+        <!--==============================
+               ImageView gallery
+            ==============================-->
+        <ImageView
+            android:id="@+id/iv_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/state_galery"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!--==============================
+               ImageView cancel capture
+            ==============================-->
+        <ImageView
+            android:id="@+id/iv_cancel_capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/state_cancel"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!--==============================
+               ImageView check capture
+            ==============================-->
+        <ImageView
+            android:id="@+id/iv_check_capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/state_check_capture"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <!--==============================
                Fab add
             ==============================-->
         <ImageButton
@@ -181,7 +237,6 @@
             android:background="@drawable/fab_state"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{() -> dialogWordCreator.insert()}"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_add" />
 

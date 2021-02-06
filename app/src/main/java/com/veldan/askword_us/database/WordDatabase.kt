@@ -3,7 +3,7 @@ package com.veldan.askword_us.database
 import android.content.Context
 import androidx.room.*
 
-@Database(entities = [WordModel::class], version = 2, exportSchema = false)
+@Database(entities = [WordModel::class], version = 3, exportSchema = false)
 @TypeConverters(ConverterListString::class)
 abstract class WordDatabase : RoomDatabase() {
     abstract val wordDatabaseDao: WordDatabaseDao
