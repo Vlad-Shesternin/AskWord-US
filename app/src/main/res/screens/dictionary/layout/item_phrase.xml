@@ -8,27 +8,29 @@
     android:layout_margin="10dp">
 
     <TextView
-        android:id="@+id/tv_item_word"
+        android:id="@+id/tv_item_phrase"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="100dp"
         android:background="@drawable/item_state"
-        android:gravity="center"
+        android:gravity="start"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:padding="10dp"
+        android:paddingEnd="40dp"
         tools:ignore="MissingConstraints"
-        tools:text="Word" />
+        tools:text="Phrase phrase phrase Phrase phrase phrase Phrase phrase phrase" />
 
     <ImageButton
-        android:id="@+id/ib_drop_item"
+        android:id="@+id/ib_drop_item_phrase"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="50dp"
         android:layout_margin="2dp"
         android:background="@drawable/drop_state"
         android:elevation="2dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_item_phrase"
+        app:layout_constraintTop_toTopOf="@id/tv_item_phrase"
+        app:layout_constraintBottom_toBottomOf="@id/tv_item_phrase"
         android:src="@drawable/ic_delete"
-        app:layout_constraintBottom_toBottomOf="@id/tv_item_word"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/tv_item_word"
-        app:layout_constraintTop_toTopOf="@id/tv_item_word" />
+        app:layout_constraintDimensionRatio="1:1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

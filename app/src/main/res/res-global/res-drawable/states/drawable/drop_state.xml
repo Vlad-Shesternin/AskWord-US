@@ -6,7 +6,7 @@
     <item android:state_pressed="true">
         <shape android:shape="oval">
             <size tools:height="100dp" tools:width="100dp" />
-            <solid android:color="@color/colorPrimary" />
+            <solid android:color="@color/colorWhite" />
         </shape>
     </item>
 
@@ -16,7 +16,7 @@
     <item>
         <shape android:shape="oval">
             <size tools:height="100dp" tools:width="100dp" />
-            <solid android:color="@color/colorAccent" />
+            <solid android:color="@color/colorRed" />
             <stroke android:width="2dp" android:color="@color/colorPrimary" />
         </shape>
     </item>

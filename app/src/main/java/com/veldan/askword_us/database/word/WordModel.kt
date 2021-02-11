@@ -1,4 +1,4 @@
-package com.veldan.askword_us.database
+package com.veldan.askword_us.database.word
 
 import androidx.room.*
 

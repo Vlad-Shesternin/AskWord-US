@@ -20,6 +20,22 @@
         app:constraintSetStart="@+id/start" />
 
     <!--==============================
+           TRA: start to set_7
+    ==============================-->
+    <Transition
+        android:id="@+id/start_to_set_7"
+        app:constraintSetEnd="@+id/set_7"
+        app:constraintSetStart="@+id/start" />
+
+    <!--==============================
+           TRA: start to set_8
+    ==============================-->
+    <Transition
+        android:id="@+id/start_to_set_8"
+        app:constraintSetEnd="@+id/set_8"
+        app:constraintSetStart="@+id/start" />
+
+    <!--==============================
            TRA: set_1 to set_2
     ==============================-->
     <Transition
@@ -77,6 +93,54 @@
         app:constraintSetStart="@+id/set_6" />
 
     <!--==============================
+           TRA: set_7 to start
+    ==============================-->
+    <Transition
+        android:id="@+id/set_7_to_start"
+        app:constraintSetEnd="@+id/start"
+        app:constraintSetStart="@+id/set_7" />
+
+    <!--==============================
+           TRA: set_8 to start
+    ==============================-->
+    <Transition
+        android:id="@+id/set_8_to_start"
+        app:constraintSetEnd="@+id/start"
+        app:constraintSetStart="@+id/set_8" />
+
+    <!--==============================
+          TRA: set_8 to set_9
+    ==============================-->
+    <Transition
+        android:id="@+id/set_8_to_set_9"
+        app:constraintSetEnd="@+id/set_9"
+        app:constraintSetStart="@+id/set_8" />
+
+    <!--==============================
+           TRA: set_8 to set_10
+    ==============================-->
+    <Transition
+        android:id="@+id/set_8_to_set_10"
+        app:constraintSetEnd="@+id/set_10"
+        app:constraintSetStart="@+id/set_8" />
+
+    <!--==============================
+          TRA: set_9 to set_8
+    ==============================-->
+    <Transition
+        android:id="@+id/set_9_to_set_8"
+        app:constraintSetEnd="@+id/set_8"
+        app:constraintSetStart="@+id/set_9" />
+
+    <!--==============================
+          TRA: set_10 to set_8
+    ==============================-->
+    <Transition
+        android:id="@+id/set_10_to_set_8"
+        app:constraintSetEnd="@+id/set_8"
+        app:constraintSetStart="@+id/set_10" />
+
+    <!--==============================
            SET: start
     ==============================-->
     <ConstraintSet android:id="@+id/start">
@@ -97,6 +161,7 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tabs" />
+            <Transform android:elevation="5dp" />
         </Constraint>
 
         <Constraint android:id="@+id/fab_add">
@@ -178,6 +243,47 @@
                 app:layout_constraintTop_toTopOf="@+id/fab_add" />
             <PropertySet android:visibility="invisible" />
         </Constraint>
+
+        <Constraint android:id="@+id/layout_phrase_creator">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_add"
+                app:layout_constraintEnd_toEndOf="@+id/fab_add"
+                app:layout_constraintStart_toStartOf="@+id/fab_add"
+                app:layout_constraintTop_toTopOf="@+id/fab_add" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_detailed_information_word">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintHeight_percent=".999"
+                app:layout_constraintWidth_percent=".999" />
+            <Transform android:elevation="7dp" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_detailed_information_phrase">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintHeight_percent=".999"
+                app:layout_constraintWidth_percent=".999" />
+            <Transform android:elevation="7dp" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_phrases">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabs"
+                app:layout_constraintWidth_percent=".999" />
+        </Constraint>
     </ConstraintSet>
 
     <!--==============================
@@ -191,10 +297,10 @@
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintHeight_percent="0.07"
+                app:layout_constraintStart_toStartOf="parent" />
         </Constraint>
 
         <Constraint android:id="@+id/rv_list_words">
@@ -373,10 +479,10 @@
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintHeight_percent="0.07"
+                app:layout_constraintStart_toStartOf="parent" />
         </Constraint>
 
         <Constraint android:id="@+id/rv_list_words">
@@ -416,6 +522,130 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
             <PropertySet android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_7
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_7"
+        app:deriveConstraintsFrom="@id/start">
+        <Constraint android:id="@+id/layout_detailed_information_word">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_back">
+            <Transform android:elevation="8dp" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_8
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_8"
+        app:deriveConstraintsFrom="@id/start">
+        <Constraint android:id="@+id/layout_phrases">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabs" />
+        </Constraint>
+
+        <Constraint android:id="@+id/rv_list_words">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabs"
+                app:layout_constraintWidth_percent=".999" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_9
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_9"
+        app:deriveConstraintsFrom="@+id/set_8">
+        <Constraint android:id="@+id/tabs">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.07"
+                app:layout_constraintStart_toStartOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/rv_list_phrases">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintWidth_percent="0.15" />
+            <PropertySet android:visibility="invisible" />
+            <Transform android:rotation="360" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_back">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintWidth_percent="0.15" />
+            <PropertySet android:visibility="invisible" />
+            <Transform android:rotation="-360" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_phrase_creator">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:visibility="visible" />
+            <Transform android:elevation="10dp" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: set_10
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/set_10"
+        app:deriveConstraintsFrom="@id/set_8">
+        <Constraint android:id="@+id/layout_detailed_information_phrase">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_back">
+            <Transform android:elevation="8dp" />
         </Constraint>
     </ConstraintSet>
 </MotionScene>

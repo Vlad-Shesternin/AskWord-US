@@ -11,30 +11,21 @@ import androidx.camera.view.PreviewView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.veldan.askword_us.MainActivity
 import com.veldan.askword_us.R
-import com.veldan.askword_us.database.WordDatabase
-import com.veldan.askword_us.database.WordModel
+import com.veldan.askword_us.database.MyDatabase
+import com.veldan.askword_us.database.word.WordModel
 import com.veldan.askword_us.databinding.LayoutWordCreatorBinding
 import com.veldan.askword_us.dictionary.DictionaryAnimator
 import com.veldan.askword_us.dictionary.DictionaryFragment
-import com.veldan.askword_us.global.clickHideKeyboard
 import com.veldan.askword_us.global.defaultFocusAndKeyboard
 import com.veldan.askword_us.global.general_classes.Camera
 import com.veldan.askword_us.global.interfaces.TextChangeListener
 import com.veldan.askword_us.global.interfaces.TransitionListener
-import com.veldan.askword_us.global.objects.Internet
 import com.veldan.askword_us.global.objects.RequestCode
 import com.veldan.askword_us.global.toast
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.io.File
 
 class WordCreatorDialog(
     private val fragment: DictionaryFragment,
@@ -89,7 +80,7 @@ class WordCreatorDialog(
     // ==============================
     private fun initViewModel() {
         val application = requireNotNull(fragment.activity).application
-        val databaseDao = WordDatabase.getInstance(application).wordDatabaseDao
+        val databaseDao = MyDatabase.getInstance(application).wordDatabaseDao
 
         val viewModelFactory = WordCreatorViewModelFactory(databaseDao, application)
         viewModel = ViewModelProvider(fragment, viewModelFactory)
@@ -179,10 +170,14 @@ class WordCreatorDialog(
         val image = savedUri ?: ""
         val word = editWord.text.toString()
         val translation = editTranslation.text.toString()
-        val translations = listTranslations.listTranslations.apply { add(translation) }
+        val translations = listTranslations.listTranslations.apply {
+            if (editTranslation.text.toString() != "")
+                add(translation)
+        }
         val prompt = editPrompt.text.toString()
 
         return if (word != "" && translations.isNotEmpty()) {
+            Log.i(TAG, "IF: $translations")
             WordModel(
                 image = image.toString(),
                 word = word,
@@ -201,6 +196,7 @@ class WordCreatorDialog(
     private fun insert() {
         val wordModel = getWordModel()
         wordModel?.let {
+            Log.i(TAG, "insert: ${wordModel.translations}")
             viewModel.insert(it)
             clearAll()
         }
@@ -213,6 +209,7 @@ class WordCreatorDialog(
         WordCreatorAnimator.motion.transitionToState(WordCreatorAnimator.start)
         ivCapture.setImageResource(0)
 
+        savedUri = null
         layoutTranslations.removeAllViews()
         editPrompt.text.clear()
         editTranslation.text.clear()
@@ -352,14 +349,14 @@ class WordCreatorDialog(
                     when (motion.currentState) {
                         set_3 -> {
                             if (listTranslations.listTranslations.isNotEmpty()) {
+                                set_3_To_Set_5()
                             }
-                            set_3_To_Set_5()
                         }
                         set_5 -> set_5_To_Set_3()
                         set_11 -> {
                             if (listTranslations.listTranslations.isNotEmpty()) {
+                                set_11_To_Set_13()
                             }
-                            set_11_To_Set_13()
                         }
                         set_13 -> set_13_To_Set_11()
                     }
@@ -392,13 +389,13 @@ class WordCreatorDialog(
                     when (motion.currentState) {
                         set_3 -> {
                             if (addTranslation()) {
+                                set_3_To_Set_4()
                             }
-                            set_3_To_Set_4()
                         }
                         set_11 -> {
                             if (addTranslation()) {
+                                set_11_To_Set_12()
                             }
-                            set_11_To_Set_12()
                         }
                     }
                 }

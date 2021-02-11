@@ -105,4 +105,32 @@
         android:id="@+id/layout_word_creator"
         layout="@layout/layout_word_creator" />
 
+    <!--==============================
+           Layout phrase creation
+     ==============================-->
+    <include
+        android:id="@+id/layout_phrase_creator"
+        layout="@layout/layout_phrase_creator" />
+
+    <!--==============================
+           Layout phrases
+     ==============================-->
+    <include
+        android:id="@+id/layout_phrases"
+        layout="@layout/layout_phrases" />
+
+    <!--==============================
+           Layout detailed information
+        ==============================-->
+    <include
+        android:id="@+id/layout_detailed_information_word"
+        layout="@layout/layout_detailed_information_word" />
+
+    <!--==============================
+           Layout detailed information
+        ==============================-->
+    <include
+        android:id="@+id/layout_detailed_information_phrase"
+        layout="@layout/layout_detailed_information_phrase" />
+
 </androidx.constraintlayout.motion.widget.MotionLayout>

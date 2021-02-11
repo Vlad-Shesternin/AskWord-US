@@ -1,23 +1,21 @@
 package com.veldan.askword_us.dictionary.word_creator
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.veldan.askword_us.database.WordDatabaseDao
-import com.veldan.askword_us.database.WordModel
+import com.veldan.askword_us.database.word.WordDatabaseDao
+import com.veldan.askword_us.database.word.WordModel
 import kotlinx.coroutines.launch
 
 class WordCreatorViewModel(
     private val databaseDao: WordDatabaseDao,
-    application: Application
+    application: Application,
 ) : AndroidViewModel(application) {
-
-    val words = databaseDao.getAllWords()
 
     fun insert(word: WordModel) {
         viewModelScope.launch {
+            Log.i("WordCreatorDialog", "launch: ${word.translations}")
             databaseDao.insert(word)
         }
     }

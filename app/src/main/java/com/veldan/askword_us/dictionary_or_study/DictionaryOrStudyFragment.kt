@@ -8,8 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.veldan.askword_us.database.DatabaseDao
+import com.veldan.askword_us.database.MyDatabase
 import com.veldan.askword_us.databinding.FragmentDictionaryOrStudyBinding
 import com.veldan.askword_us.global.general_classes.SharedPreferences
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DictionaryOrStudyFragment : Fragment() {
     private val TAG = "DictionaryOrStudyFragment"
@@ -22,6 +27,7 @@ class DictionaryOrStudyFragment : Fragment() {
 
     // Components
     private var visibility = View.INVISIBLE
+    private lateinit var databaseDao: DatabaseDao
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +36,7 @@ class DictionaryOrStudyFragment : Fragment() {
     ): View {
 
         initBinding(inflater)
+        initDatabase()
 
         return binding.root
     }
@@ -41,6 +48,14 @@ class DictionaryOrStudyFragment : Fragment() {
         binding = FragmentDictionaryOrStudyBinding.inflate(inflater)
         binding.dictionaryOrStudyFragment = this
         binding.layoutAccount.dictionaryOrStudyFragment = this
+    }
+
+    // ==============================
+    //    Init Database
+    // ==============================
+    private fun initDatabase() {
+        val application = requireNotNull(activity).application
+        databaseDao = MyDatabase.getInstance(application).databaseDao
     }
 
     // ==============================
@@ -56,6 +71,12 @@ class DictionaryOrStudyFragment : Fragment() {
     //    to Authentication
     // ==============================
     fun transitionToAuthentication() {
+        databaseDao.apply {
+            CoroutineScope(Dispatchers.Default).launch {
+                wordsDelete()
+                phrasesDelete()
+            }
+        }
         auth.signOut()
         val action =
             DictionaryOrStudyFragmentDirections.actionDictionaryOrStudyFragmentToAuthenticationFragment()

@@ -3,7 +3,7 @@ package com.veldan.askword_us.dictionary.word_creator
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.veldan.askword_us.database.WordDatabaseDao
+import com.veldan.askword_us.database.word.WordDatabaseDao
 import java.lang.IllegalArgumentException
 
 class WordCreatorViewModelFactory(
