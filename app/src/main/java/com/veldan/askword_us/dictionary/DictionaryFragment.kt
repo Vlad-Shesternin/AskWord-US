@@ -124,7 +124,6 @@ class DictionaryFragment :
     //    Init Components
     // ==============================
     private fun initComponents() {
-        binding.tabs.btnWords.background = resources.getDrawable(R.drawable.tab_press)
         DictionaryAnimator.motion = this.motion
 
         initWordAdapter()

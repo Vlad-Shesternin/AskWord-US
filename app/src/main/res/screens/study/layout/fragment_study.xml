@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/study_scene">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--==============================
+           TABs
+        ==============================-->
+    <include
+        android:id="@+id/tabs"
+        layout="@layout/tabs" />
+
+    <!--==============================
+           RecyclerView
+        ==============================-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_words"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <!--==============================
+           Fab add
+        ==============================-->
+    <ImageButton
+        android:id="@+id/fab_add"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_add" />
+
+    <!--==============================
+           Fab back
+        ==============================-->
+    <ImageButton
+        android:id="@+id/fab_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_back" />
+
+    <!--==============================
+           Layout phrases
+        ==============================-->
+    <include
+        android:id="@+id/layout_phrases"
+        layout="@layout/layout_phrases" />
+
+    <!--==============================
+           Layout detailed information word
+        ==============================-->
+    <include
+        android:id="@+id/layout_detailed_information_word"
+        layout="@layout/layout_detailed_information_word" />
+
+    <!--==============================
+           Layout detailed information phrase
+        ==============================-->
+    <include
+        android:id="@+id/layout_detailed_information_phrase"
+        layout="@layout/layout_detailed_information_phrase" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

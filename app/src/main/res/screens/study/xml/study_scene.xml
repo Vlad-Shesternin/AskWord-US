@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--==============================
+           TRA: start to end
+        ==============================-->
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@id/start" />
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/tabs">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent=".07"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/rv_list_words">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tabs" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintWidth_percent="0.15" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_back">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintWidth_percent="0.15" />
+            <Transform android:elevation="@dimen/dictionary_fab_elevation" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_phrases">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tabs"
+                app:layout_constraintWidth_percent=".999" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_detailed_information_word">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintHeight_percent=".999"
+                app:layout_constraintWidth_percent=".999" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_detailed_information_phrase">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="parent"
+                app:layout_constraintHeight_percent=".999"
+                app:layout_constraintWidth_percent=".999" />
+        </Constraint>
+    </ConstraintSet>
+</MotionScene>

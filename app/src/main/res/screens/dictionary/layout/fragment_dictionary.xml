@@ -120,14 +120,14 @@
         layout="@layout/layout_phrases" />
 
     <!--==============================
-           Layout detailed information
+           Layout detailed information word
         ==============================-->
     <include
         android:id="@+id/layout_detailed_information_word"
         layout="@layout/layout_detailed_information_word" />
 
     <!--==============================
-           Layout detailed information
+           Layout detailed information phrase
         ==============================-->
     <include
         android:id="@+id/layout_detailed_information_phrase"
