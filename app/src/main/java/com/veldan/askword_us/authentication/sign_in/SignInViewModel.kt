@@ -117,9 +117,11 @@ class SignInViewModel(
     // ==============================
     private fun transitionToDictionaryOrStudy(name: String, surname: String, email: String) {
         val action =
-            SignInFragmentDirections.actionSignInFragmentToDictionaryOrStudyFragment(name,
+            SignInFragmentDirections.actionSignInFragmentToDictionaryOrStudy(
+                name,
                 surname,
-                email)
+                email
+            )
         fragment.findNavController().navigate(action)
     }
 }

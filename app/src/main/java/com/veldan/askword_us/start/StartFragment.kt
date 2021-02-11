@@ -75,7 +75,7 @@ class StartFragment : Fragment() {
     //    to Authentication
     // ==============================
     private fun transitionToAuthentication() {
-        val action = StartFragmentDirections.actionStartFragmentToAuthenticationFragment()
+        val action = StartFragmentDirections.actionStartFragmentToAuthentication()
         findNavController().navigate(action)
     }
 
@@ -83,9 +83,11 @@ class StartFragment : Fragment() {
     //    to DictionaryOrStudy
     // ==============================
     private fun transitionToDictionaryOrStudy(name: String, surname: String, email: String) {
-        val action = StartFragmentDirections.actionStartFragmentToDictionaryOrStudyFragment(name,
+        val action = StartFragmentDirections.actionStartFragmentToDictionaryOrStudy(
+            name,
             surname,
-            email)
+            email
+        )
         findNavController().navigate(action)
     }
 }

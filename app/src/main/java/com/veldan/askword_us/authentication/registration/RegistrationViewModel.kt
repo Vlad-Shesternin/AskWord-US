@@ -160,10 +160,11 @@ class RegistrationViewModel(
     // ==============================
     private fun transitionToDictionaryOrStudy(name: String, surname: String, email: String) {
         val action =
-            RegistrationFragmentDirections.actionRegistrationFragmentToDictionaryOrStudyFragment(
+            RegistrationFragmentDirections.actionRegistrationFragmentToDictionaryOrStudy(
                 name,
                 surname,
-                email)
+                email
+            )
         fragment.findNavController().navigate(action)
     }
 

@@ -92,9 +92,9 @@ class AuthenticationFragment :
     private fun transitionToDictionaryOrStudy() {
         val action =
             AuthenticationFragmentDirections.actionAuthenticationFragmentToDictionaryOrStudyFragment(
-                "Нет имени",
-                "Нет фамилии",
-                "Нет адреса"
+                "---",
+                "---",
+                "---"
             )
         findNavController().navigate(action)
     }

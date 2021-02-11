@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.veldan.askword_us.DictionaryOrStudyArgs
 import com.veldan.askword_us.database.DatabaseDao
 import com.veldan.askword_us.database.MyDatabase
 import com.veldan.askword_us.databinding.FragmentDictionaryOrStudyBinding
 import com.veldan.askword_us.global.general_classes.SharedPreferences
+import com.veldan.askword_us.start.StartFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -68,6 +70,15 @@ class DictionaryOrStudyFragment : Fragment() {
     }
 
     // ==============================
+    //    to Study
+    // ==============================
+    fun transitionToStudy() {
+        val action =
+            DictionaryOrStudyFragmentDirections.actionDictionaryOrStudyFragmentToStudyFragment()
+        findNavController().navigate(action)
+    }
+
+    // ==============================
     //    to Authentication
     // ==============================
     fun transitionToAuthentication() {
@@ -79,7 +90,7 @@ class DictionaryOrStudyFragment : Fragment() {
         }
         auth.signOut()
         val action =
-            DictionaryOrStudyFragmentDirections.actionDictionaryOrStudyFragmentToAuthenticationFragment()
+            DictionaryOrStudyFragmentDirections.actionDictionaryOrStudyFragmentToAuthentication()
         findNavController().navigate(action)
     }
 
@@ -89,7 +100,7 @@ class DictionaryOrStudyFragment : Fragment() {
     fun clickOnAccount() {
         if (visibility == View.INVISIBLE) {
             visibility = View.VISIBLE
-            val args = DictionaryOrStudyFragmentArgs.fromBundle(requireArguments())
+            val args = DictionaryOrStudyArgs.fromBundle(requireArguments())
             binding.layoutAccount.also {
                 it.tvNameSurname.text = "${args.userName} ${args.userSurname}"
                 it.tvEmail.text = args.userEmail
