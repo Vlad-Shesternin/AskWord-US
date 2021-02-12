@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--==============================
+           TRA: start_To_hide_item_word
+        ==============================-->
+    <Transition
+        android:id="@+id/start_To_hide_item_word"
+        app:constraintSetEnd="@id/hide_item_word"
+        app:constraintSetStart="@id/start" />
+
+    <!--==============================
+           SET: start
+        ==============================-->
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/tv_item_word">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: hide_item_word
+        ==============================-->
+    <ConstraintSet android:id="@+id/hide_item_word">
+        <Constraint android:id="@+id/tv_item_word">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="parent" />
+        </Constraint>
+    </ConstraintSet>
+</MotionScene>

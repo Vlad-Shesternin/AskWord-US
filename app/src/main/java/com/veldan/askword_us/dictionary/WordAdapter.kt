@@ -46,7 +46,7 @@ class WordAdapter(
                 setOnClickListener {
                     binding.layoutDetailedInformationWord.apply {
                         Glide.with(root)
-                            .load(if (word.image != "") word.image else resources.getDrawable(R.drawable.no_image))
+                            .load(word.image)
                             .into(ivDetailedImage)
 
                         tvDetailedWord.text = word.word
