@@ -4,10 +4,88 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import com.veldan.askword_us.R
 import com.veldan.askword_us.global.objects.Animator2
 import com.veldan.askword_us.global.objects.Direction
+import java.util.*
 
 object StudyAnimator {
 
-    // MotionLayout
+
+    // ==========================================================================================
+    //    My Perfect Work
+    // ==========================================================================================
+
+
+    var start_X_ShowCountSelectedWords: Pair<Int, Direction> = 1000 to Direction.TO_END
+        set(value) {
+            field = value
+            Animator2.transition(
+                motion,
+                start to show_count_selected_words,
+                value.first,
+                value.second
+            )
+        }
+
+
+    // ==========================================================================================
+    //    My Bad Work
+    // ==========================================================================================
+
+
+    fun start_X_ShowCountSelectedWords(
+        duration: Int = 1000,
+        direction: Direction = Direction.TO_END,
+    ) {
+        Animator2.transition(
+            motion,
+            show_list_phrases to show_detailed_info_phrase,
+            duration,
+            direction
+        )
+    }
+
+
+    fun call() {
+        // My Perfect Work
+        start_X_ShowCountSelectedWords = 1000 to Direction.TO_END
+        // My Bad Work
+        start_X_ShowCountSelectedWords(1000, Direction.TO_END)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Components
     lateinit var motion: MotionLayout
 
     // States
@@ -19,56 +97,63 @@ object StudyAnimator {
     const val show_count_selected_phrases = R.id.show_count_selected_phrases
 
     // ==============================
-    //    Transitions TO_END
+    //    Transitions
     // ==============================
-    fun start_To_ShowListPhrases() {
-        Animator2.transition(motion,
-            start, show_list_phrases,
-            direction = Direction.TO_END)
+    fun start_X_ShowListPhrases(
+        duration: Int = 1000,
+        direction: Direction = Direction.TO_END,
+    ) {
+        Animator2.transition(
+            motion,
+            start to show_list_phrases,
+            duration,
+            direction
+        )
     }
 
-    fun start_To_ShowDetailedInfoWord() {
-        Animator2.transition(motion,
-            start, show_detailed_info_word,
-            direction = Direction.TO_END)
+    fun start_X_ShowDetailedInfoWord(
+        duration: Int = 1000,
+        direction: Direction = Direction.TO_END,
+    ) {
+        Animator2.transition(
+            motion,
+            start to show_detailed_info_word,
+            duration,
+            direction
+        )
+
+        start_X_ShowCountSelectedWords
     }
 
-    fun start_To_ShowCountSelectedWords() {
-        Animator2.transition(motion,
-            start, show_count_selected_words,
-            direction = Direction.TO_END)
-    }
 
-    fun showListPhrases_To_ShowCountSelectedPhrases() {
-        Animator2.transition(motion,
-            show_list_phrases, show_count_selected_phrases,
-            direction = Direction.TO_END)
-    }
+//        duration: Int = 1000,
+//        direction: Direction = Direction.TO_END,
+//    ) {
+//        Animator2.transition(
+//            motion,
+//            start to show_count_selected_words,
+//
+//        )
+//    }
 
-    fun showListPhrases_To_ShowDetailedInfoPhrase() {
-        Animator2.transition(motion,
-            show_list_phrases, show_detailed_info_phrase,
-            direction = Direction.TO_END)
-    }
+//    fun showListPhrases_X_ShowCountSelectedPhrases(
+//        duration: Int = 1000,
+//        direction: Direction = Direction.TO_END,
+//    ) {
+//        Animator2.transition(
+//            motion,
+//            show_list_phrases, show_count_selected_phrases,
+//        )
+//    }
 
-    // ==============================
-    //    Transitions TO_START
-    // ==============================
-    fun showListPhrases_To_Start() {
-        Animator2.transition(motion,
-            show_list_phrases, start,
-            direction = Direction.TO_START)
-    }
-
-    fun showDetailedInfoWord_To_Start() {
-        Animator2.transition(motion,
-            show_detailed_info_word, start,
-            direction = Direction.TO_START)
-    }
-
-    fun showDetailedInfoPhrase_To_ShowListPhrases() {
-        Animator2.transition(motion,
-            show_detailed_info_phrase, show_list_phrases,
-            direction = Direction.TO_START)
-    }
+//    fun showListPhrases_X_ShowDetailedInfoPhrase(
+//        duration: Int = 1000,
+//        direction: Direction = Direction.TO_END,
+//    ) {
+//        Animator2.transition(
+//            motion,
+//            show_list_phrases, show_detailed_info_phrase,
+//        )
+//    }
 }
+

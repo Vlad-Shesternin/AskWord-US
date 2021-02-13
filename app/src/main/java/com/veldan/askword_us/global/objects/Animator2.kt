@@ -1,6 +1,9 @@
 package com.veldan.askword_us.global.objects
 
 import androidx.constraintlayout.motion.widget.MotionLayout
+import com.veldan.askword_us.global.objects.Direction.*
+
+typealias StartEnd = Pair<Int, Int>
 
 enum class Direction {
     TO_START, TO_END
@@ -9,17 +12,16 @@ enum class Direction {
 object Animator2 {
     fun transition(
         motion: MotionLayout,
-        startId: Int,
-        endId: Int,
-        duration: Int = 1000,
+        start_end: StartEnd,
+        duration: Int,
         direction: Direction,
     ) {
-        motion.also {
-            it.setTransition(startId, endId)
-            it.setTransitionDuration(duration)
+        motion.apply {
+            setTransition(start_end.first, start_end.second)
+            setTransitionDuration(duration)
             when (direction) {
-                Direction.TO_END -> it.transitionToEnd()
-                Direction.TO_START -> it.transitionToStart()
+                TO_END -> transitionToEnd()
+                TO_START -> transitionToStart()
             }
         }
     }

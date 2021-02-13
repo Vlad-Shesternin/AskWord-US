@@ -157,14 +157,24 @@ class StudyFragment :
                 resources.apply {
                     tabWord.background = getDrawable(R.drawable.tab_press)
                     tabPhrase.background = getDrawable(R.drawable.tab_enable)
-                    animator.showListPhrases_To_Start()
+                }
+                animator.apply {
+                    when (motion.currentState) {
+                        show_list_phrases -> showListPhrases_To_Start()
+
+                    }
                 }
             }
             tabPhrase.id -> {
                 resources.apply {
                     tabPhrase.background = getDrawable(R.drawable.tab_press)
                     tabWord.background = getDrawable(R.drawable.tab_enable)
-                    animator.start_To_ShowListPhrases()
+                }
+                animator.apply {
+                    when (motion.currentState) {
+                        start -> start_To_ShowListPhrases()
+
+                    }
                 }
             }
             fabBack.id -> {
