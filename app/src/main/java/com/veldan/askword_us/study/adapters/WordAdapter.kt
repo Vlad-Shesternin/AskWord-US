@@ -1,10 +1,7 @@
 package com.veldan.askword_us.study.adapters
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.veldan.askword_us.R
@@ -13,14 +10,11 @@ import com.veldan.askword_us.databinding.FragmentStudyBinding
 import com.veldan.askword_us.global.inflate
 import com.veldan.askword_us.global.objects.Animator2
 import com.veldan.askword_us.global.objects.Direction
-import com.veldan.askword_us.study.StudyAnimator
+import com.veldan.askword_us.study.StudyAnimations
 import kotlinx.android.synthetic.main.item_word.view.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class WordAdapter(
-    val animatorStudy: StudyAnimator,
+    val animations: StudyAnimations,
     val bindingStudy: FragmentStudyBinding,
 ) : RecyclerView.Adapter<WordAdapter.WordViewHolder>() {
     private val TAG = this::class.simpleName
@@ -53,18 +47,41 @@ class WordAdapter(
             layout.tv_item_word.apply {
                 text = word.word
 
+                // ==============================
+                //    onClick
+                // ==============================
+
                 setOnClickListener {
-                    listSelectedWords.add(word)
-                    bindingStudy.tvCountSelectedWords.text = listSelectedWords.size.toString()
+                    bindingStudy.layoutCountsSelectedWp.root.also { motionCounter ->
+                        Animator2.apply {
+                            this.motion = motionCounter
+                            animations.apply {
+                                if (motion.currentState == start) {
+                                    previous.add(show_count_selected_words)
+                                    transition(start to show_count_selected_words)
+                                }
+                            }
+                        }
+                    }
 
-                    animatorStudy.start_To_ShowCountSelectedWords()
-
-                    Animator2.transition(this@WordViewHolder.layout,
-                        R.id.start, R.id.hide_item_word,
-                        duration = 500,
-                        Direction.TO_END)
+                    this@WordViewHolder.layout.also { motionWord ->
+                        if (motionWord.currentState == R.id.start) {
+                            Animator2.apply {
+                                this.motion = motionWord
+                                transition(R.id.start to R.id.hide_item_word)
+                            }
+                            listSelectedWords.apply {
+                                add(word)
+                                bindingStudy.layoutCountsSelectedWp.tvCountSelectedWords.text =
+                                    this.size.toString()
+                            }
+                        }
+                    }
                 }
 
+                // ==============================
+                //    onLongClick
+                // ==============================
                 setOnLongClickListener {
                     bindingStudy.layoutDetailedInformationWord.apply {
                         Glide.with(root)
@@ -78,7 +95,18 @@ class WordAdapter(
                         }
                         tvDetailedPrompt.text = word.prompt
                     }
-                    StudyAnimator.start_To_ShowDetailedInfoWord()
+                    Animator2.apply {
+                        this.motion = bindingStudy.root
+                        animations.apply {
+                            transition(start to show_detailed_info_word)
+                        }
+                        this.motion = bindingStudy.layoutCountsSelectedWp.root
+                        animations.apply {
+                            if (motion.currentState == show_count_selected_words) {
+                                transition(show_count_selected_words to start)
+                            }
+                        }
+                    }
                     return@setOnLongClickListener true
                 }
             }

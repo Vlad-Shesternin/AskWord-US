@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--==============================
+           Default
+        ==============================-->
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@id/start" />
+
+    <!--==============================
+           TRA: start TO show_count_selected_words
+        ==============================-->
+    <Transition
+        app:constraintSetEnd="@id/show_count_selected_words"
+        app:constraintSetStart="@id/start">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:elevation="0dp"
+                app:framePosition="99"
+                app:motionTarget="@+id/tv_count_selected_words" />
+        </KeyFrameSet>
+    </Transition>
+
+    <!--==============================
+           TRA: show_count_selected_words TO start
+        ==============================-->
+    <Transition
+        app:constraintSetEnd="@id/start"
+        app:constraintSetStart="@id/show_count_selected_words">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:elevation="0dp"
+                app:framePosition="1"
+                app:motionTarget="@+id/tv_count_selected_words" />
+        </KeyFrameSet>
+    </Transition>
+
+    <!--==============================
+           TRA: start TO show_count_selected_phrases
+        ==============================-->
+    <Transition
+        app:constraintSetEnd="@id/show_count_selected_phrases"
+        app:constraintSetStart="@id/start">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:elevation="0dp"
+                app:framePosition="99"
+                app:motionTarget="@+id/tv_count_selected_phrases" />
+        </KeyFrameSet>
+    </Transition>
+
+    <!--==============================
+           TRA: show_count_selected_phrases TO start
+        ==============================-->
+    <Transition
+        app:constraintSetEnd="@id/start"
+        app:constraintSetStart="@id/show_count_selected_phrases">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:elevation="0dp"
+                app:framePosition="1"
+                app:motionTarget="@+id/tv_count_selected_phrases" />
+        </KeyFrameSet>
+    </Transition>
+
+    <!--==============================
+           TRA: show_count_selected_words TO show_count_selected_phrases
+        ==============================-->
+    <Transition
+        app:constraintSetEnd="@id/show_count_selected_phrases"
+        app:constraintSetStart="@id/show_count_selected_words">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:elevation="0dp"
+                app:framePosition="1"
+                app:motionTarget="@+id/tv_count_selected_words" />
+            <KeyAttribute
+                android:elevation="0dp"
+                app:framePosition="99"
+                app:motionTarget="@+id/tv_count_selected_phrases" />
+        </KeyFrameSet>
+    </Transition>
+
+    <!--==============================
+           TRA: show_count_selected_phrases TO show_count_selected_words
+        ==============================-->
+    <Transition
+        app:constraintSetEnd="@id/show_count_selected_words"
+        app:constraintSetStart="@id/show_count_selected_phrases">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:elevation="0dp"
+                app:framePosition="1"
+                app:motionTarget="@+id/tv_count_selected_phrases" />
+            <KeyAttribute
+                android:elevation="0dp"
+                app:framePosition="99"
+                app:motionTarget="@+id/tv_count_selected_words" />
+        </KeyFrameSet>
+    </Transition>
+
+
+    <!--==============================
+           SET: start
+        ==============================-->
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/tv_count_selected_words">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp" />
+            <Transform android:rotationX="90" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_count_selected_phrases">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp" />
+            <Transform android:rotationX="90" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: show_count_selected_words
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/show_count_selected_words"
+        app:deriveConstraintsFrom="@id/start">
+        <Constraint android:id="@+id/tv_count_selected_words">
+            <Transform
+                android:elevation="5dp"
+                android:rotationX="0" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: show_count_selected_phrases
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/show_count_selected_phrases"
+        app:deriveConstraintsFrom="@id/start">
+        <Constraint android:id="@+id/tv_count_selected_phrases">
+            <Transform
+                android:elevation="5dp"
+                android:rotationX="0" />
+        </Constraint>
+    </ConstraintSet>
+</MotionScene>

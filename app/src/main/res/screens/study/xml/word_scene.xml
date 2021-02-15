@@ -18,8 +18,8 @@
             <Layout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintTop_toTopOf="parent" />
         </Constraint>
@@ -33,7 +33,11 @@
             <Layout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintBottom_toTopOf="parent" />
+            <PropertySet android:visibility="invisible" />
         </Constraint>
     </ConstraintSet>
 </MotionScene>

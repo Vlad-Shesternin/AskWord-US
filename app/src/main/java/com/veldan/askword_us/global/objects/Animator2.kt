@@ -10,11 +10,18 @@ enum class Direction {
 }
 
 object Animator2 {
+
+    // Components
+    lateinit var motion: MotionLayout
+    val previous = ArrayDeque<Int>()
+
+    // ==============================
+    //    Transition
+    // ==============================
     fun transition(
-        motion: MotionLayout,
         start_end: StartEnd,
-        duration: Int,
-        direction: Direction,
+        duration: Int = 1000,
+        direction: Direction = TO_END,
     ) {
         motion.apply {
             setTransition(start_end.first, start_end.second)

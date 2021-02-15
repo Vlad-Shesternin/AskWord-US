@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layoutDescription="@xml/counts_selected_wp_scene">
+
+    <!--==============================
+           TextView count selected words
+        ==============================-->
+    <TextView
+        android:id="@+id/tv_count_selected_words"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="1"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <!--==============================
+           TextView count selected phrases
+        ==============================-->
+    <TextView
+        android:id="@+id/tv_count_selected_phrases"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="1"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+</androidx.constraintlayout.motion.widget.MotionLayout>
