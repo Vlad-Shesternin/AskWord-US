@@ -22,6 +22,8 @@ import com.veldan.askword_us.global.objects.Animator2
 import com.veldan.askword_us.global.objects.Direction
 import com.veldan.askword_us.study.StudyAnimations.show_list_phrases
 import com.veldan.askword_us.study.adapters.PhraseAdapter
+import com.veldan.askword_us.study.adapters.SelectedPhraseAdapter
+import com.veldan.askword_us.study.adapters.SelectedWordAdapter
 import com.veldan.askword_us.study.adapters.WordAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -240,6 +242,44 @@ class StudyFragment :
                 }
             }
             // ==============================
+            //    TextView counter word
+            // ==============================
+            tvCountSelectedWords.id -> {
+                animator.apply {
+                    this.motion = motionStudy
+                    animations.apply {
+                        when (motion.currentState) {
+                            start -> {
+                                SelectedWordAdapter(animations, binding).apply {
+                                    words = adapterWord.listSelectedWords
+                                    binding.layoutSelectedWords.rvListSelectedWords.adapter = this
+                                }
+                                transition(start to show_selected_words)
+                            }
+                        }
+                    }
+                }
+            }
+            // ==============================
+            //    TextView counter phrase
+            // ==============================
+            tvCountSelectedPhrases.id -> {
+                animator.apply {
+                    this.motion = motionStudy
+                    animations.apply {
+                        when (motion.currentState) {
+                            show_list_phrases -> {
+                                SelectedPhraseAdapter(animations, binding).apply {
+                                    phrases = adapterPhrase.listSelectedPhrases
+                                    binding.layoutSelectedPhrases.rvListSelectedPhrases.adapter = this
+                                }
+                                transition(show_list_phrases to show_selected_phrases)
+                            }
+                        }
+                    }
+                }
+            }
+            // ==============================
             //    FabBack
             // ==============================
             fabBack.id -> {
@@ -261,37 +301,13 @@ class StudyFragment :
                                     transition(start to show_count_selected_phrases)
                                 }
                             }
-                            else -> transitionToDictionaryOrStudy()
-                        }
-                    }
-                }
-            }
-            // ==============================
-            //    TextView counter word
-            // ==============================
-            tvCountSelectedWords.id -> {
-                animator.apply {
-                    this.motion = motionStudy
-                    animations.apply {
-                        when (motion.currentState) {
-                            start -> {
-                                transition(start to show_selected_wp)
+                            show_selected_words -> {
+                                transition(show_selected_words to start)
                             }
-                        }
-                    }
-                }
-            }
-            // ==============================
-            //    TextView counter phrase
-            // ==============================
-            tvCountSelectedPhrases.id -> {
-                animator.apply {
-                    this.motion = motionStudy
-                    animations.apply {
-                        when (motion.currentState) {
-//                            sh -> {
-//                                transition(start to show_selected_wp)
-//                            }
+                            show_selected_phrases -> {
+                                transition(show_selected_phrases to show_list_phrases)
+                            }
+                            else -> transitionToDictionaryOrStudy()
                         }
                     }
                 }

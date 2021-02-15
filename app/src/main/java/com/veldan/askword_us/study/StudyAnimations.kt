@@ -11,6 +11,7 @@ object StudyAnimations {
     const val show_detailed_info_phrase = R.id.show_detailed_info_phrase
     const val show_count_selected_words = R.id.show_count_selected_words
     const val show_count_selected_phrases = R.id.show_count_selected_phrases
-    const val show_selected_wp = R.id.show_selected_wp
+    const val show_selected_words = R.id.show_selected_words
+    const val show_selected_phrases = R.id.show_selected_phrases
 }
 

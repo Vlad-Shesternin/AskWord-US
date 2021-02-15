@@ -59,7 +59,18 @@
             <Transform android:elevation="@dimen/dictionary_fab_elevation" />
         </Constraint>
 
-        <Constraint android:id="@+id/layout_selected_wp">
+        <Constraint android:id="@+id/layout_selected_words">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/layout_counts_selected_wp"
+                app:layout_constraintEnd_toEndOf="@+id/layout_counts_selected_wp"
+                app:layout_constraintStart_toStartOf="@+id/layout_counts_selected_wp"
+                app:layout_constraintTop_toTopOf="@+id/layout_counts_selected_wp" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_selected_phrases">
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -173,13 +184,56 @@
     </ConstraintSet>
 
     <!--==============================
-           SET: show_selected_wp
+           SET: show_selected_words
         ==============================-->
-    <ConstraintSet android:id="@+id/show_selected_wp">
-        <Constraint android:id="@+id/layout_selected_wp">
+    <ConstraintSet
+        android:id="@+id/show_selected_words"
+        app:deriveConstraintsFrom="@id/start">
+        <Constraint android:id="@+id/layout_selected_words">
             <Layout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/rv_list_words">
+            <PropertySet android:visibility="invisible"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_counts_selected_wp">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
+            <PropertySet android:visibility="invisible" />
+            <Transform android:rotation="360" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: show_selected_phrases
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/show_selected_phrases"
+        app:deriveConstraintsFrom="@id/show_list_phrases">
+        <Constraint android:id="@+id/layout_selected_phrases">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_phrases">
+            <PropertySet android:visibility="invisible"/>
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_counts_selected_wp">
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/fab_add">
+            <PropertySet android:visibility="invisible" />
+            <Transform android:rotation="360" />
         </Constraint>
     </ConstraintSet>
 </MotionScene>

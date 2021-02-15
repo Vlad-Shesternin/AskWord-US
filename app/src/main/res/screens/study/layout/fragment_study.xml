@@ -51,15 +51,15 @@
            Layout selected words
         ==============================-->
     <include
-        android:id="@+id/layout_selected_wp"
-        layout="@layout/layout_selected_wp" />
+        android:id="@+id/layout_selected_words"
+        layout="@layout/layout_selected_words" />
 
     <!--==============================
-           Layout Counts Selected (Word | Phrase)
+           Layout selected phrases
         ==============================-->
     <include
-        android:id="@+id/layout_counts_selected_wp"
-        layout="@layout/layout_counts_selected_wp" />
+        android:id="@+id/layout_selected_phrases"
+        layout="@layout/layout_selected_phrases" />
 
     <!--==============================
            Layout phrases
@@ -67,6 +67,13 @@
     <include
         android:id="@+id/layout_phrases"
         layout="@layout/layout_phrases" />
+
+    <!--==============================
+           Layout Counts Selected (Word | Phrase)
+        ==============================-->
+    <include
+        android:id="@+id/layout_counts_selected_wp"
+        layout="@layout/layout_counts_selected_wp" />
 
     <!--==============================
            Layout detailed information word

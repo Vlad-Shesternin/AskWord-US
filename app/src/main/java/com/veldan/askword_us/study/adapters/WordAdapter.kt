@@ -20,7 +20,7 @@ class WordAdapter(
     private val TAG = this::class.simpleName
 
     // Components
-    private val listSelectedWords = mutableListOf<WordModel>()
+    val listSelectedWords = mutableListOf<WordModel>()
 
     var words = listOf<WordModel>()
         set(value) {

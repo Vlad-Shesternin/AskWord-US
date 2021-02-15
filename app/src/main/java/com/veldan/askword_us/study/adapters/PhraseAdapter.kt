@@ -21,7 +21,7 @@ class PhraseAdapter(
     private val TAG = this::class.simpleName
 
     // Components
-    private val listSelectedPhrases = mutableListOf<PhraseModel>()
+    val listSelectedPhrases = mutableListOf<PhraseModel>()
 
     var phrases = listOf<PhraseModel>()
         set(value) {
