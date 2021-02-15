@@ -48,6 +48,13 @@
         android:src="@drawable/ic_back" />
 
     <!--==============================
+           Layout selected words
+        ==============================-->
+    <include
+        android:id="@+id/layout_selected_wp"
+        layout="@layout/layout_selected_wp" />
+
+    <!--==============================
            Layout Counts Selected (Word | Phrase)
         ==============================-->
     <include

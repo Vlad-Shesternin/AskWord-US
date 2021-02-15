@@ -104,6 +104,8 @@ class StudyFragment :
         tabPhrase.setOnClickListener(this)
         fabAdd.setOnClickListener(this)
         fabBack.setOnClickListener(this)
+        tvCountSelectedWords.setOnClickListener(this)
+        tvCountSelectedPhrases.setOnClickListener(this)
     }
 
     // ==============================
@@ -201,6 +203,8 @@ class StudyFragment :
                                     && previous.contains(show_count_selected_words)
                                 ) {
                                     transition(show_count_selected_phrases to show_count_selected_words)
+                                } else if (previous.contains(show_count_selected_words)) {
+                                    transition(start to show_count_selected_words)
                                 } else {
                                     transition(motion.currentState to start)
                                 }
@@ -225,6 +229,8 @@ class StudyFragment :
                                     && previous.contains(show_count_selected_phrases)
                                 ) {
                                     transition(show_count_selected_words to show_count_selected_phrases)
+                                } else if (previous.contains(show_count_selected_phrases)) {
+                                    transition(start to show_count_selected_phrases)
                                 } else {
                                     transition(motion.currentState to start)
                                 }
@@ -256,6 +262,36 @@ class StudyFragment :
                                 }
                             }
                             else -> transitionToDictionaryOrStudy()
+                        }
+                    }
+                }
+            }
+            // ==============================
+            //    TextView counter word
+            // ==============================
+            tvCountSelectedWords.id -> {
+                animator.apply {
+                    this.motion = motionStudy
+                    animations.apply {
+                        when (motion.currentState) {
+                            start -> {
+                                transition(start to show_selected_wp)
+                            }
+                        }
+                    }
+                }
+            }
+            // ==============================
+            //    TextView counter phrase
+            // ==============================
+            tvCountSelectedPhrases.id -> {
+                animator.apply {
+                    this.motion = motionStudy
+                    animations.apply {
+                        when (motion.currentState) {
+//                            sh -> {
+//                                transition(start to show_selected_wp)
+//                            }
                         }
                     }
                 }
