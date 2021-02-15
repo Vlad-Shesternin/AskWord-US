@@ -50,7 +50,6 @@ class WordAdapter(
                 // ==============================
                 //    onClick
                 // ==============================
-
                 setOnClickListener {
                     bindingStudy.layoutCountsSelectedWp.root.also { motionCounter ->
                         Animator2.apply {

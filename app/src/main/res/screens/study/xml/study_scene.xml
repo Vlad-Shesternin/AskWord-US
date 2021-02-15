@@ -197,7 +197,7 @@
         </Constraint>
 
         <Constraint android:id="@+id/rv_list_words">
-            <PropertySet android:visibility="invisible"/>
+            <PropertySet android:visibility="invisible" />
         </Constraint>
 
         <Constraint android:id="@+id/layout_counts_selected_wp">
@@ -224,7 +224,7 @@
         </Constraint>
 
         <Constraint android:id="@+id/layout_phrases">
-            <PropertySet android:visibility="invisible"/>
+            <PropertySet android:visibility="invisible" />
         </Constraint>
 
         <Constraint android:id="@+id/layout_counts_selected_wp">
@@ -234,6 +234,32 @@
         <Constraint android:id="@+id/fab_add">
             <PropertySet android:visibility="invisible" />
             <Transform android:rotation="360" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: show_detailed_info_word_selected
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/show_detailed_info_word_selected"
+        app:deriveConstraintsFrom="@id/show_selected_words">
+        <Constraint android:id="@+id/layout_detailed_information_word">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: show_detailed_info_phrase_selected
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/show_detailed_info_phrase_selected"
+        app:deriveConstraintsFrom="@id/show_selected_phrases">
+        <Constraint android:id="@+id/layout_detailed_information_phrase">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </Constraint>
     </ConstraintSet>
 </MotionScene>

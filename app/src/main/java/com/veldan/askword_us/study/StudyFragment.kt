@@ -271,7 +271,8 @@ class StudyFragment :
                             show_list_phrases -> {
                                 SelectedPhraseAdapter(adapterPhrase, animations, binding).apply {
                                     phrases = adapterPhrase.listSelectedPhrases
-                                    binding.layoutSelectedPhrases.rvListSelectedPhrases.adapter = this
+                                    binding.layoutSelectedPhrases.rvListSelectedPhrases.adapter =
+                                        this
                                 }
                                 transition(show_list_phrases to show_selected_phrases)
                             }
@@ -306,6 +307,12 @@ class StudyFragment :
                             }
                             show_selected_phrases -> {
                                 transition(show_selected_phrases to show_list_phrases)
+                            }
+                            show_detailed_info_word_selected -> {
+                                transition(show_detailed_info_word_selected to show_selected_words)
+                            }
+                            show_detailed_info_phrase_selected -> {
+                                transition(show_detailed_info_phrase_selected to show_selected_phrases)
                             }
                             else -> transitionToDictionaryOrStudy()
                         }

@@ -45,7 +45,34 @@ class SelectedWordAdapter(
         fun bind(word: WordModel, position: Int) {
             layout.tv_item_word.apply {
                 text = word.word
+
+                // ==============================
+                //    onClick
+                // ==============================
+                setOnClickListener {
+                    bindingStudy.layoutDetailedInformationWord.apply {
+                        Glide.with(root)
+                            .load(word.image)
+                            .into(ivDetailedImage)
+
+                        tvDetailedWord.text = word.word
+                        tvDetailedTranslation.text = ""// очищаем прошлый текст
+                        word.translations.forEach {
+                            tvDetailedTranslation.append("$it;\n")
+                        }
+                        tvDetailedPrompt.text = word.prompt
+                    }
+                    Animator2.apply {
+                        motion = bindingStudy.root
+                        animations.apply {
+                            transition(show_selected_words to show_detailed_info_word_selected)
+                        }
+                    }
+                }
             }
+            // ==============================
+            //    onClick Remove
+            // ==============================
             layout.ib_drop_item.setOnClickListener {
                 words.remove(word)
                 adapterWord.words.add(word)

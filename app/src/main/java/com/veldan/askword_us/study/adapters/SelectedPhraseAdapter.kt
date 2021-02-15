@@ -15,12 +15,13 @@ import com.veldan.askword_us.global.objects.Direction
 import com.veldan.askword_us.study.StudyAnimations
 import kotlinx.android.synthetic.main.item_phrase.view.*
 import kotlinx.android.synthetic.main.item_word.view.*
+import kotlinx.android.synthetic.main.layout_detailed_information_phrase.view.*
 
 class SelectedPhraseAdapter(
     val adapterPhrase: PhraseAdapter,
     val animations: StudyAnimations,
     val bindingStudy: FragmentStudyBinding,
-) : RecyclerView.Adapter<SelectedPhraseAdapter.WordViewHolder>() {
+) : RecyclerView.Adapter<SelectedPhraseAdapter.PhraseViewHolder>() {
     private val TAG = this::class.simpleName
 
     var phrases = mutableListOf<PhraseModel>()
@@ -29,25 +30,44 @@ class SelectedPhraseAdapter(
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhraseViewHolder {
         val layout = parent.inflate(R.layout.item_phrase) as ConstraintLayout
-        return WordViewHolder(layout)
+        return PhraseViewHolder(layout)
     }
 
-    override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PhraseViewHolder, position: Int) {
         val phrase = phrases[position]
         holder.bind(phrase, position)
     }
 
     override fun getItemCount() = phrases.count()
 
-    inner class WordViewHolder(private val layout: ConstraintLayout) :
+    inner class PhraseViewHolder(private val layout: ConstraintLayout) :
         RecyclerView.ViewHolder(layout) {
 
         fun bind(phrase: PhraseModel, position: Int) {
             layout.tv_item_phrase.apply {
                 text = phrase.phrase
+
+                // ==============================
+                //    onClick
+                // ==============================
+                setOnClickListener {
+                    bindingStudy.layoutDetailedInformationPhrase.apply {
+                        svDetailedPhrase.tv_detailed_phrase.text = phrase.phrase
+                        svDetailedTranslation.tv_detailed_translation.text = phrase.translation
+                    }
+                    Animator2.apply {
+                        motion = bindingStudy.root
+                        animations.apply {
+                            transition(show_selected_phrases to show_detailed_info_phrase_selected)
+                        }
+                    }
+                }
             }
+            // ==============================
+            //    onClick Remove
+            // ==============================
             layout.ib_drop_item_phrase.setOnClickListener {
                 phrases.remove(phrase)
                 adapterPhrase.phrases.add(phrase)
