@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.item_phrase.view.*
 import kotlinx.android.synthetic.main.item_word.view.*
 
 class SelectedPhraseAdapter(
+    val adapterPhrase: PhraseAdapter,
     val animations: StudyAnimations,
     val bindingStudy: FragmentStudyBinding,
 ) : RecyclerView.Adapter<SelectedPhraseAdapter.WordViewHolder>() {
@@ -49,8 +50,11 @@ class SelectedPhraseAdapter(
             }
             layout.ib_drop_item_phrase.setOnClickListener {
                 phrases.remove(phrase)
+                adapterPhrase.phrases.add(phrase)
                 notifyItemRemoved(position)
                 notifyDataSetChanged()
+                bindingStudy.layoutCountsSelectedWp.tvCountSelectedPhrases.text =
+                    phrases.size.toString()
 
                 if (phrases.isEmpty()) {
                     Animator2.apply {

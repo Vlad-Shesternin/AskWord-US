@@ -16,5 +16,5 @@ interface WordDatabaseDao {
     suspend fun delete(word: WordModel)
 
     @Query("SELECT * FROM word_table")
-    fun getAllWords(): LiveData<List<WordModel>>?
+    fun getAllWords(): LiveData<MutableList<WordModel>>?
 }

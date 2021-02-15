@@ -250,7 +250,7 @@ class StudyFragment :
                     animations.apply {
                         when (motion.currentState) {
                             start -> {
-                                SelectedWordAdapter(animations, binding).apply {
+                                SelectedWordAdapter(adapterWord, animations, binding).apply {
                                     words = adapterWord.listSelectedWords
                                     binding.layoutSelectedWords.rvListSelectedWords.adapter = this
                                 }
@@ -269,7 +269,7 @@ class StudyFragment :
                     animations.apply {
                         when (motion.currentState) {
                             show_list_phrases -> {
-                                SelectedPhraseAdapter(animations, binding).apply {
+                                SelectedPhraseAdapter(adapterPhrase, animations, binding).apply {
                                     phrases = adapterPhrase.listSelectedPhrases
                                     binding.layoutSelectedPhrases.rvListSelectedPhrases.adapter = this
                                 }

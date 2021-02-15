@@ -15,6 +15,7 @@ import com.veldan.askword_us.study.StudyAnimations
 import kotlinx.android.synthetic.main.item_word.view.*
 
 class SelectedWordAdapter(
+    val adapterWord: WordAdapter,
     val animations: StudyAnimations,
     val bindingStudy: FragmentStudyBinding,
 ) : RecyclerView.Adapter<SelectedWordAdapter.WordViewHolder>() {
@@ -47,8 +48,11 @@ class SelectedWordAdapter(
             }
             layout.ib_drop_item.setOnClickListener {
                 words.remove(word)
+                adapterWord.words.add(word)
                 notifyItemRemoved(position)
                 notifyDataSetChanged()
+                bindingStudy.layoutCountsSelectedWp.tvCountSelectedWords.text =
+                    words.size.toString()
 
                 if (words.isEmpty()) {
                     Animator2.apply {

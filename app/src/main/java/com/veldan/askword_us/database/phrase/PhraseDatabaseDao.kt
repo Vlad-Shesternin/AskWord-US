@@ -16,5 +16,5 @@ interface PhraseDatabaseDao {
     suspend fun delete(phrase: PhraseModel)
 
     @Query("SELECT * FROM phrase_table")
-    fun getAllPhrase(): LiveData<List<PhraseModel>>?
+    fun getAllPhrase(): LiveData<MutableList<PhraseModel>>?
 }

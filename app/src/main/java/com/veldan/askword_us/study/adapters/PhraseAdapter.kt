@@ -23,7 +23,7 @@ class PhraseAdapter(
     // Components
     val listSelectedPhrases = mutableListOf<PhraseModel>()
 
-    var phrases = listOf<PhraseModel>()
+    var phrases = mutableListOf<PhraseModel>()
         set(value) {
             field = value
             notifyDataSetChanged()

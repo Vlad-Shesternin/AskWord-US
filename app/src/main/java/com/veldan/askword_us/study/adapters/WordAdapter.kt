@@ -22,7 +22,7 @@ class WordAdapter(
     // Components
     val listSelectedWords = mutableListOf<WordModel>()
 
-    var words = listOf<WordModel>()
+    var words = mutableListOf<WordModel>()
         set(value) {
             field = value
             notifyDataSetChanged()
