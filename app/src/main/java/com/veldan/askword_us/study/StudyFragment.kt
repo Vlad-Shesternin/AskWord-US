@@ -294,6 +294,7 @@ class StudyFragment :
             //    FabAdd
             // ==============================
             fabAdd.id -> {
+
                 transitionToStudyFormat()
             }
             // ==============================
