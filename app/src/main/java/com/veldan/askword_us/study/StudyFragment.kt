@@ -16,10 +16,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.veldan.askword_us.R
 import com.veldan.askword_us.database.MyDatabase
 import com.veldan.askword_us.database.phrase.PhraseDatabaseDao
+import com.veldan.askword_us.database.phrase.PhraseModel
+import com.veldan.askword_us.database.selected_phrase.SelectedPhraseDatabaseDao
+import com.veldan.askword_us.database.selected_phrase.SelectedPhraseModel
+import com.veldan.askword_us.database.selected_word.SelectedWordDatabaseDao
+import com.veldan.askword_us.database.selected_word.SelectedWordModel
 import com.veldan.askword_us.database.word.WordDatabaseDao
+import com.veldan.askword_us.database.word.WordModel
 import com.veldan.askword_us.databinding.FragmentStudyBinding
 import com.veldan.askword_us.global.objects.Animator2
 import com.veldan.askword_us.global.objects.Direction
+import com.veldan.askword_us.global.objects.WordsPhrases
+import com.veldan.askword_us.global.toast
 import com.veldan.askword_us.start.StartFragmentDirections
 import com.veldan.askword_us.study.StudyAnimations.show_list_phrases
 import com.veldan.askword_us.study.adapters.PhraseAdapter
@@ -54,6 +62,8 @@ class StudyFragment :
     // Components
     private lateinit var wordDatabaseDao: WordDatabaseDao
     private lateinit var phraseDatabaseDao: PhraseDatabaseDao
+    private lateinit var selectedWordDatabaseDao: SelectedWordDatabaseDao
+    private lateinit var selectedPhraseDatabaseDao: SelectedPhraseDatabaseDao
     private lateinit var adapterWord: WordAdapter
     private lateinit var adapterPhrase: PhraseAdapter
     private val animations = StudyAnimations
@@ -128,6 +138,8 @@ class StudyFragment :
         MyDatabase.getInstance(application).also {
             wordDatabaseDao = it.wordDatabaseDao
             phraseDatabaseDao = it.phraseDatabaseDao
+            selectedWordDatabaseDao = it.selectedWordDatabaseDao
+            selectedPhraseDatabaseDao = it.selectedPhraseDatabaseDao
         }
     }
 
@@ -168,9 +180,9 @@ class StudyFragment :
     // ==============================
     //    to Study Format
     // ==============================
-    private fun transitionToStudyFormat() {
+    private fun transitionToStudyFormat(wordsPhrases: Int) {
         Animator2.previous.clear()
-        val action = StudyFragmentDirections.actionStudyFragmentToStudyFormatFragment()
+        val action = StudyFragmentDirections.actionStudyFragmentToStudyFormatFragment(wordsPhrases)
         findNavController().navigate(action)
     }
 
@@ -191,6 +203,36 @@ class StudyFragment :
         resources.apply {
             tabPhrase.background = getDrawable(R.drawable.tab_press)
             tabWord.background = getDrawable(R.drawable.tab_enable)
+        }
+    }
+
+    // ==============================
+    //    insert SelectedWords
+    // ==============================
+    private fun insertSelectedWords(listSelectedWords: MutableList<WordModel>) {
+        listSelectedWords.forEach {
+            CoroutineScope(Dispatchers.IO).launch {
+                selectedWordDatabaseDao.insert(SelectedWordModel(
+                    image = it.image,
+                    word = it.word,
+                    translations = it.translations,
+                    prompt = it.prompt
+                ))
+            }
+        }
+    }
+
+    // ==============================
+    //    insert SelectedPhrases
+    // ==============================
+    private fun insertSelectedPhrases(listSelectedPhrases: MutableList<PhraseModel>) {
+        listSelectedPhrases.forEach {
+            CoroutineScope(Dispatchers.IO).launch {
+                selectedPhraseDatabaseDao.insert(SelectedPhraseModel(
+                    phrase = it.phrase,
+                    translation = it.translation
+                ))
+            }
         }
     }
 
@@ -294,8 +336,26 @@ class StudyFragment :
             //    FabAdd
             // ==============================
             fabAdd.id -> {
-
-                transitionToStudyFormat()
+                adapterWord.listSelectedWords.also { listSelectedWords ->
+                    adapterPhrase.listSelectedPhrases.also { listSelectedPhrases ->
+                        if (listSelectedWords.isNotEmpty() && listSelectedPhrases.isNotEmpty()) {
+                            insertSelectedWords(listSelectedWords)
+                            insertSelectedPhrases(listSelectedPhrases)
+                            transitionToStudyFormat(WordsPhrases.WORDS_PHRASES)
+                            return
+                        } else if (listSelectedWords.isNotEmpty()) {
+                            insertSelectedWords(listSelectedWords)
+                            transitionToStudyFormat(WordsPhrases.WORDS)
+                            return
+                        } else if (listSelectedPhrases.isNotEmpty()) {
+                            insertSelectedPhrases(listSelectedPhrases)
+                            transitionToStudyFormat(WordsPhrases.PHRASES)
+                            return
+                        } else {
+                            "Оберiть слова або фрази".toast(requireContext())
+                        }
+                    }
+                }
             }
             // ==============================
             //    FabBack

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--==============================
+           Default
+        ==============================-->
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start" />
+
+    <!--==============================
+           SET: start
+        ==============================-->
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/tv_format_question"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/tv_question_word"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/cb_question_word"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/tv_question_phrase"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/cb_question_phrase"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/tv_format_answer"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/scrollH_answers"
+            android:visibility="invisible" />
+    </ConstraintSet>
+
+    <!--==============================
+           SET: start_words_phrases
+        ==============================-->
+    <ConstraintSet android:id="@+id/start_words_phrases">
+        <Constraint android:id="@+id/tv_format_question">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/tv_question_word"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_question_word">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_35"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toStartOf="@id/tv_question_phrase"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/cb_question_word">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/tv_question_word"
+                app:layout_constraintEnd_toEndOf="@id/tv_question_word"
+                app:layout_constraintStart_toStartOf="@id/tv_question_word"
+                app:layout_constraintTop_toTopOf="@+id/tv_question_word"
+                app:layout_constraintVertical_bias=".8" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_question_phrase">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_35"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_question_word"
+                app:layout_constraintTop_toTopOf="parent" />
+        </Constraint>
+
+        <Constraint android:id="@+id/cb_question_phrase">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/tv_question_phrase"
+                app:layout_constraintEnd_toEndOf="@id/tv_question_phrase"
+                app:layout_constraintStart_toStartOf="@id/tv_question_phrase"
+                app:layout_constraintTop_toTopOf="@+id/tv_question_phrase"
+                app:layout_constraintVertical_bias=".8" />
+        </Constraint>
+
+        <Constraint android:id="@+id/tv_format_answer">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_35"
+                app:layout_constraintTop_toBottomOf="@id/tv_question_word" />
+        </Constraint>
+
+        <Constraint android:id="@+id/scrollH_answers">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/fab_back"
+                app:layout_constraintTop_toBottomOf="@+id/guideH_35" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: start_words
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/start_words"
+        app:deriveConstraintsFrom="@id/start">
+        <Constraint android:id="@+id/tv_format_answer">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/scrollH_answers"
+                app:layout_constraintTop_toTopOf="parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/scrollH_answers">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent=".4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
+</MotionScene>

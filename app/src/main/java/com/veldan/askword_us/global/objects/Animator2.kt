@@ -32,4 +32,11 @@ object Animator2 {
             }
         }
     }
+
+    // ==============================
+    //    Jump to state
+    // ==============================
+    fun jumpToState(state: Int) {
+        motion.transitionToState(state)
+    }
 }

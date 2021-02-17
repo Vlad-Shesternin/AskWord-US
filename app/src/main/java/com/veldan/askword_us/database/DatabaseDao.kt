@@ -11,4 +11,10 @@ interface DatabaseDao {
 
     @Query("DELETE FROM phrase_table")
     suspend fun phrasesDelete()
+
+    @Query("DELETE FROM selected_word_table")
+    suspend fun selectedWordsDelete()
+
+    @Query("DELETE FROM selected_phrase_table")
+    suspend fun selectedPhrasesDelete()
 }

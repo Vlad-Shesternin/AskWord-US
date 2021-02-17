@@ -21,7 +21,7 @@ class StudyingFragment :
     private lateinit var binding: FragmentStudyingBinding
 
     // ComponentsUI
-    private lateinit var fabBack: ImageButton
+    private lateinit var fabSettings: ImageButton
     private lateinit var fabNext: ImageButton
 
     // Components
@@ -54,7 +54,7 @@ class StudyingFragment :
     // ==============================
     private fun initComponentsUI() {
         binding.also {
-            fabBack = it.fabBack
+            fabSettings = it.fabSettings
             fabNext = it.fabNext
         }
     }
@@ -63,7 +63,7 @@ class StudyingFragment :
     //    init Listeners
     // ==============================
     private fun initListeners() {
-        fabBack.setOnClickListener(this)
+        fabSettings.setOnClickListener(this)
         fabNext.setOnClickListener(this)
     }
 
@@ -93,13 +93,16 @@ class StudyingFragment :
     //    on Click
     // ==============================
     override fun onClick(v: View) {
-        when (v.id) {
-            fabBack.id -> {
-                transitionToStudy()
-            }
-            fabNext.id -> {
-                animations.apply {
-                    animator.transition(start to next_word)
+        animator.apply {
+            animations.apply {
+                when (v.id) {
+                    fabSettings.id -> {
+                        transition(start to show_settings)
+                        // transitionToStudy()
+                    }
+                    fabNext.id -> {
+                        transition(start to next_word)
+                    }
                 }
             }
         }

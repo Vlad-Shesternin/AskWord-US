@@ -137,11 +137,13 @@
             android:id="@+id/studyFormatFragment"
             android:name="com.veldan.askword_us.study_format.StudyFormatFragment"
             android:label="StudyFormatFragment"
-            tools:layout="@layout/fragment_study_format" >
+            tools:layout="@layout/fragment_study_format">
+            <argument
+                android:name="WordsPhrases"
+                app:argType="integer" />
             <action
                 android:id="@+id/action_studyFormatFragment_to_studyingFragment"
-                app:destination="@id/studyingFragment"
-                app:popUpTo="@id/studyFragment" />
+                app:destination="@id/studyingFragment" />
         </fragment>
 
         <!--==============================
