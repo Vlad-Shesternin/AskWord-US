@@ -17,13 +17,12 @@
             android:id="@+id/action_startFragment_to_authentication"
             app:destination="@id/authentication"
             app:popUpTo="@id/startFragment"
-            app:popUpToInclusive="true">
-        </action>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_startFragment_to_dictionaryOrStudy"
             app:destination="@id/dictionaryOrStudy"
             app:popUpTo="@id/startFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
     <!--==============================
@@ -109,16 +108,49 @@
                 app:destination="@id/studyFragment" />
         </fragment>
 
+        <!--==============================
+               Dictionary
+            ==============================-->
         <fragment
             android:id="@+id/dictionaryFragment"
             android:name="com.veldan.askword_us.dictionary.DictionaryFragment"
             android:label="DictionaryFragment"
             tools:layout="@layout/fragment_dictionary" />
 
+        <!--==============================
+               Study
+            ==============================-->
         <fragment
             android:id="@+id/studyFragment"
             android:name="com.veldan.askword_us.study.StudyFragment"
             android:label="StudyFragment"
-            tools:layout="@layout/fragment_study" />
+            tools:layout="@layout/fragment_study">
+            <action
+                android:id="@+id/action_studyFragment_to_studyFormatFragment"
+                app:destination="@id/studyFormatFragment" />
+        </fragment>
+
+        <!--==============================
+               StudyFormat
+            ==============================-->
+        <fragment
+            android:id="@+id/studyFormatFragment"
+            android:name="com.veldan.askword_us.study_format.StudyFormatFragment"
+            android:label="StudyFormatFragment"
+            tools:layout="@layout/fragment_study_format" >
+            <action
+                android:id="@+id/action_studyFormatFragment_to_studyingFragment"
+                app:destination="@id/studyingFragment"
+                app:popUpTo="@id/studyFragment" />
+        </fragment>
+
+        <!--==============================
+               Studying
+            ==============================-->
+        <fragment
+            android:id="@+id/studyingFragment"
+            android:name="com.veldan.askword_us.studying.StudyingFragment"
+            android:label="fragment_studying"
+            tools:layout="@layout/fragment_studying" />
     </navigation>
 </navigation>

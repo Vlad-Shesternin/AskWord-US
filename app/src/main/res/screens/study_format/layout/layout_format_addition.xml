@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:layout_gravity="center"
+    android:background="@drawable/format_answer_state"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/tv_answer_fill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ДОПОВНЕННЯ"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".2" />
+
+    <View
+        android:id="@+id/a"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_answer_rect"
+        app:layout_constraintBottom_toBottomOf="@+id/b"
+        app:layout_constraintEnd_toStartOf="@+id/b"
+        app:layout_constraintTop_toTopOf="@+id/b" />
+
+
+    <TextView
+        android:id="@+id/b"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_answer_rect"
+        android:gravity="center"
+        android:text="A"
+        android:textSize="30dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/c"
+        app:layout_constraintEnd_toStartOf="@+id/c"
+        app:layout_constraintTop_toTopOf="@+id/c" />
+
+    <View
+        android:id="@+id/c"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/shape_answer_rect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/d"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_answer_rect"
+        android:gravity="center"
+        android:text="N"
+        android:textSize="30dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/c"
+        app:layout_constraintStart_toEndOf="@+id/c"
+        app:layout_constraintTop_toTopOf="@+id/c" />
+
+    <TextView
+        android:id="@+id/e"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="Y"
+        android:textSize="30dp"
+        android:textStyle="bold|italic"
+        android:background="@drawable/shape_answer_rect"
+        app:layout_constraintBottom_toBottomOf="@+id/d"
+        app:layout_constraintStart_toEndOf="@+id/d"
+        app:layout_constraintTop_toTopOf="@+id/d" />
+
+    <!--==============================
+           CheckBox answer
+        ==============================-->
+    <CheckBox
+        android:id="@+id/cb_answer_additional"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/colorPrimary"
+        android:scaleX="2"
+        android:scaleY="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".8" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

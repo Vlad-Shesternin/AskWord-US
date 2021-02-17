@@ -20,6 +20,7 @@ import com.veldan.askword_us.database.word.WordDatabaseDao
 import com.veldan.askword_us.databinding.FragmentStudyBinding
 import com.veldan.askword_us.global.objects.Animator2
 import com.veldan.askword_us.global.objects.Direction
+import com.veldan.askword_us.start.StartFragmentDirections
 import com.veldan.askword_us.study.StudyAnimations.show_list_phrases
 import com.veldan.askword_us.study.adapters.PhraseAdapter
 import com.veldan.askword_us.study.adapters.SelectedPhraseAdapter
@@ -165,6 +166,15 @@ class StudyFragment :
     }
 
     // ==============================
+    //    to Study Format
+    // ==============================
+    private fun transitionToStudyFormat() {
+        Animator2.previous.clear()
+        val action = StudyFragmentDirections.actionStudyFragmentToStudyFormatFragment()
+        findNavController().navigate(action)
+    }
+
+    // ==============================
     //    Click Tab Word
     // ==============================
     private fun clickTabWord() {
@@ -279,6 +289,12 @@ class StudyFragment :
                         }
                     }
                 }
+            }
+            // ==============================
+            //    FabAdd
+            // ==============================
+            fabAdd.id -> {
+                transitionToStudyFormat()
             }
             // ==============================
             //    FabBack

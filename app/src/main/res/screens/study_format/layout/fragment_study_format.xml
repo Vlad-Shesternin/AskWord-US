@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--==============================
+           TextView format question
+        ==============================-->
+    <TextView
+        android:id="@+id/tv_format_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Формат ЗАПИТАННЯ"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/tv_question_word"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--==============================
+           TextView question word
+        ==============================-->
+    <TextView
+        android:id="@+id/tv_question_word"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="СЛОВА"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@id/guideH_35"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/tv_question_phrase"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--==============================
+           CheckBox question work
+        ==============================-->
+    <CheckBox
+        android:id="@+id/cb_question_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/tv_question_word"
+        app:layout_constraintEnd_toEndOf="@id/tv_question_word"
+        app:layout_constraintStart_toStartOf="@id/tv_question_word"
+        app:layout_constraintTop_toTopOf="@+id/tv_question_word"
+        app:layout_constraintVertical_bias=".8" />
+
+    <!--==============================
+           TextView question phrase
+        ==============================-->
+    <TextView
+        android:id="@+id/tv_question_phrase"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="30dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:text="ФРАЗИ"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@id/guideH_35"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_question_word"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--==============================
+           CheckBox question translation
+        ==============================-->
+    <CheckBox
+        android:id="@+id/cb_question_phrase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:buttonTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/tv_question_phrase"
+        app:layout_constraintEnd_toEndOf="@id/tv_question_phrase"
+        app:layout_constraintStart_toStartOf="@id/tv_question_phrase"
+        app:layout_constraintTop_toTopOf="@+id/tv_question_phrase"
+        app:layout_constraintVertical_bias=".8" />
+
+    <!--==============================
+           TextView format answer
+        ==============================-->
+    <TextView
+        android:id="@+id/tv_format_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Формат ВIДПОВIДI"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/guideH_35"
+        app:layout_constraintTop_toBottomOf="@id/tv_question_word" />
+
+    <!--==============================
+           Guide H 35
+        ==============================-->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideH_35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".35" />
+
+    <!--==============================
+           Scroll H formats answers
+        ==============================-->
+
+    <!--==============================
+           Fab add
+        ==============================-->
+    <HorizontalScrollView
+        android:id="@+id/scrollH_answers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/fab_back"
+        app:layout_constraintTop_toBottomOf="@id/guideH_35"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="176dp">
+
+        <LinearLayout
+            android:id="@+id/linearH_answers"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <include
+                android:id="@+id/layout_format_fill"
+                layout="@layout/layout_format_fill"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp" />
+
+            <include
+                android:id="@+id/layout_format_selection"
+                layout="@layout/layout_format_selection"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp" />
+
+            <include
+                android:id="@+id/layout_format_addition"
+                layout="@layout/layout_format_addition"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!--==============================
+           Fab next
+        ==============================-->
+    <ImageButton
+        android:id="@+id/fab_next"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:elevation="5dp"
+        android:focusable="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintWidth_percent="0.15" />
+
+    <!--==============================
+           Fab back
+        ==============================-->
+    <ImageButton
+        android:id="@+id/fab_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/fab_state"
+        android:clickable="true"
+        android:elevation="5dp"
+        android:focusable="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintWidth_percent="0.15" />
+</androidx.constraintlayout.widget.ConstraintLayout>
