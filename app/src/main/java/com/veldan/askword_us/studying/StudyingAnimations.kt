@@ -6,6 +6,6 @@ object StudyingAnimations {
 
     // States
     const val start = R.id.start
+    const val start_word = R.id.start_word
     const val show_settings = R.id.show_settings
-    const val next_word = R.id.next_word
 }

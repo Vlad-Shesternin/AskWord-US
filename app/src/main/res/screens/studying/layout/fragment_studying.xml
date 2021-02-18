@@ -12,12 +12,12 @@
         android:id="@+id/layout_studying_word_first"
         layout="@layout/layout_studying_word" />
 
-    <!--==============================
-           Layout studying word second
-        ==============================-->
-    <include
-        android:id="@+id/layout_studying_word_second"
-        layout="@layout/layout_studying_word" />
+    <!--    &lt;!&ndash;==============================-->
+    <!--           Layout studying word second-->
+    <!--        ==============================&ndash;&gt;-->
+    <!--    <include-->
+    <!--        android:id="@+id/layout_studying_word_second"-->
+    <!--        layout="@layout/layout_studying_word" />-->
 
     <!--==============================
            Fab next
@@ -28,9 +28,18 @@
         android:layout_height="0dp"
         android:background="@drawable/fab_state"
         android:clickable="true"
+        android:elevation="5dp"
         android:focusable="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_next" />
+        android:src="@drawable/ic_next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintWidth_percent="0.15" />
 
     <!--==============================
            Fab settings
@@ -41,10 +50,19 @@
         android:layout_height="0dp"
         android:background="@drawable/fab_state"
         android:clickable="true"
+        android:elevation="5dp"
         android:focusable="true"
         android:padding="10dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_settings" />
+        android:src="@drawable/ic_settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintWidth_percent="0.15" />
 
     <!--==============================
            TextView update words | phrase
@@ -75,4 +93,5 @@
         android:text="Змiнити формат вивчення"
         android:textSize="15sp"
         android:textStyle="bold" />
+
 </androidx.constraintlayout.motion.widget.MotionLayout>

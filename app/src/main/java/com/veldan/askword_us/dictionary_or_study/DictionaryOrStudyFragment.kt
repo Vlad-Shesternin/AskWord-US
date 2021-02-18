@@ -13,6 +13,8 @@ import com.veldan.askword_us.database.DatabaseDao
 import com.veldan.askword_us.database.MyDatabase
 import com.veldan.askword_us.databinding.FragmentDictionaryOrStudyBinding
 import com.veldan.askword_us.global.general_classes.SharedPreferences
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.AUTH
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.STUDY_FORMAT
 import com.veldan.askword_us.start.StartFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -82,16 +84,25 @@ class DictionaryOrStudyFragment : Fragment() {
     //    to Authentication
     // ==============================
     fun transitionToAuthentication() {
+        clearAllDataUser()
+        auth.signOut()
+        val action =
+            DictionaryOrStudyFragmentDirections.actionDictionaryOrStudyFragmentToAuthentication()
+        findNavController().navigate(action)
+    }
+
+    // ==============================
+    //    Clear all data User
+    // ==============================
+    private fun clearAllDataUser() {
         databaseDao.apply {
             CoroutineScope(Dispatchers.Default).launch {
                 wordsDelete()
                 phrasesDelete()
             }
         }
-        auth.signOut()
-        val action =
-            DictionaryOrStudyFragmentDirections.actionDictionaryOrStudyFragmentToAuthentication()
-        findNavController().navigate(action)
+        SharedPreferences(this).initSharedPref(AUTH).edit().clear().apply()
+        SharedPreferences(this).initSharedPref(STUDY_FORMAT).edit().clear().apply()
     }
 
     // ==============================

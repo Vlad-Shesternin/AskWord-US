@@ -13,49 +13,25 @@
            SET: start
         ==============================-->
     <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/layout_studying_word_first"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/tv_update_wp"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/tv_update_format"
+            android:visibility="invisible" />
+    </ConstraintSet>
+
+    <!--==============================
+           SET: start_word
+        ==============================-->
+    <ConstraintSet android:id="@+id/start_word">
         <Constraint android:id="@+id/layout_studying_word_first">
             <Layout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </Constraint>
-
-        <Constraint android:id="@+id/layout_studying_word_second">
-            <Layout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintHeight_percent=".999"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintWidth_percent=".999" />
-        </Constraint>
-
-        <Constraint android:id="@+id/fab_next">
-            <Layout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.95"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.8"
-                app:layout_constraintWidth_percent="0.15" />
-            <Transform android:elevation="5dp" />
-        </Constraint>
-
-        <Constraint android:id="@+id/fab_settings">
-            <Layout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.05"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.8"
-                app:layout_constraintWidth_percent="0.15" />
-            <Transform android:elevation="5dp" />
         </Constraint>
 
         <Constraint android:id="@+id/tv_update_wp">
@@ -84,7 +60,7 @@
         ==============================-->
     <ConstraintSet
         android:id="@+id/show_settings"
-        app:deriveConstraintsFrom="@id/start">
+        app:deriveConstraintsFrom="@id/start_word">
         <Constraint android:id="@+id/tv_update_wp">
             <Layout
                 android:layout_width="wrap_content"
@@ -101,32 +77,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                app:layout_constraintTop_toBottomOf="@id/fab_settings"
-                app:layout_constraintStart_toEndOf="@id/fab_settings" />
+                app:layout_constraintStart_toEndOf="@id/fab_settings"
+                app:layout_constraintTop_toBottomOf="@id/fab_settings" />
             <PropertySet android:visibility="visible" />
             <Transform android:elevation="5dp" />
-        </Constraint>
-    </ConstraintSet>
-
-    <!--==============================
-           SET: Next word
-        ==============================-->
-    <ConstraintSet
-        android:id="@+id/next_word"
-        app:deriveConstraintsFrom="@id/start">
-        <Constraint android:id="@+id/layout_studying_word_first">
-            <Layout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintHeight_percent=".999"
-                app:layout_constraintWidth_percent=".999" />
-        </Constraint>
-
-        <Constraint android:id="@+id/layout_studying_word_second">
-            <Layout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
         </Constraint>
     </ConstraintSet>
 </MotionScene>

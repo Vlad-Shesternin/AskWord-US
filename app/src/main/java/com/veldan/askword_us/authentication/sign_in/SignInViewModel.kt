@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.veldan.askword_us.authentication.User
 import com.veldan.askword_us.global.general_classes.SharedPreferences
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.AUTH
 import com.veldan.askword_us.global.objects.Verification
 import com.veldan.askword_us.global.toast
 import kotlinx.coroutines.Dispatchers
@@ -96,7 +97,7 @@ class SignInViewModel(
                         user.also {
                             "Success getUserForAccount".toast(context)
 
-                            val editor = SharedPreferences(fragment).getEditor()
+                            val editor = SharedPreferences(fragment).initSharedPref(AUTH).edit()
                             editor.putString(SharedPreferences.USER_NAME, it.name)
                             editor.putString(SharedPreferences.USER_SURNAME, it.surname)
                             editor.apply()

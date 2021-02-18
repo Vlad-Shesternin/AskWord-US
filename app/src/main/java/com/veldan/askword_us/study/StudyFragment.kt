@@ -24,9 +24,15 @@ import com.veldan.askword_us.database.selected_word.SelectedWordModel
 import com.veldan.askword_us.database.word.WordDatabaseDao
 import com.veldan.askword_us.database.word.WordModel
 import com.veldan.askword_us.databinding.FragmentStudyBinding
+import com.veldan.askword_us.global.general_classes.SharedPreferences
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.QUESTION_FORMAT_PHRASE
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.QUESTION_FORMAT_WORD
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.STUDY_FORMAT
 import com.veldan.askword_us.global.objects.Animator2
 import com.veldan.askword_us.global.objects.Direction
 import com.veldan.askword_us.global.objects.WordsPhrases
+import com.veldan.askword_us.global.objects.WordsPhrases.WORDS
+import com.veldan.askword_us.global.objects.WordsPhrases.WORDS_PHRASES
 import com.veldan.askword_us.global.toast
 import com.veldan.askword_us.start.StartFragmentDirections
 import com.veldan.askword_us.study.StudyAnimations.show_list_phrases
@@ -187,6 +193,14 @@ class StudyFragment :
     }
 
     // ==============================
+    //    to Studying
+    // ==============================
+    private fun transitionToStudying() {
+        val action = StudyFragmentDirections.actionStudyFragmentToStudyingFragment()
+        findNavController().navigate(action)
+    }
+
+    // ==============================
     //    Click Tab Word
     // ==============================
     private fun clickTabWord() {
@@ -341,15 +355,23 @@ class StudyFragment :
                         if (listSelectedWords.isNotEmpty() && listSelectedPhrases.isNotEmpty()) {
                             insertSelectedWords(listSelectedWords)
                             insertSelectedPhrases(listSelectedPhrases)
-                            transitionToStudyFormat(WordsPhrases.WORDS_PHRASES)
+                            val edit = SharedPreferences(this).initSharedPref(STUDY_FORMAT).edit()
+                            edit.putBoolean(QUESTION_FORMAT_WORD, true)
+                            edit.putBoolean(QUESTION_FORMAT_PHRASE, true)
+                            edit.apply()
+                            transitionToStudyFormat(WORDS_PHRASES)
                             return
                         } else if (listSelectedWords.isNotEmpty()) {
                             insertSelectedWords(listSelectedWords)
-                            transitionToStudyFormat(WordsPhrases.WORDS)
+                            SharedPreferences(this).initSharedPref(STUDY_FORMAT).edit().putBoolean(
+                                QUESTION_FORMAT_WORD, true).apply()
+                            transitionToStudyFormat(WORDS)
                             return
                         } else if (listSelectedPhrases.isNotEmpty()) {
                             insertSelectedPhrases(listSelectedPhrases)
-                            transitionToStudyFormat(WordsPhrases.PHRASES)
+                            SharedPreferences(this).initSharedPref(STUDY_FORMAT).edit().putBoolean(
+                                QUESTION_FORMAT_PHRASE, true).apply()
+                            transitionToStudying()
                             return
                         } else {
                             "Оберiть слова або фрази".toast(requireContext())

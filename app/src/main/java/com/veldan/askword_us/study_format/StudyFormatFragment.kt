@@ -1,26 +1,29 @@
 package com.veldan.askword_us.study_format
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
-import android.widget.RadioButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.veldan.askword_us.database.DatabaseDao
 import com.veldan.askword_us.database.MyDatabase
-import com.veldan.askword_us.databinding.FragmentStudyBinding
 import com.veldan.askword_us.databinding.FragmentStudyFormatBinding
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.ANSWER_FORMAT_ADDITIONAL
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.ANSWER_FORMAT_FILL
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.ANSWER_FORMAT_SELECTION
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.QUESTION_FORMAT_PHRASE
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.QUESTION_FORMAT_WORD
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.STUDY_FORMAT
+import com.veldan.askword_us.global.general_classes.SharedPreferences as SharePref
 import com.veldan.askword_us.global.objects.Animator2
-import com.veldan.askword_us.global.objects.WordsPhrases
-import com.veldan.askword_us.global.objects.WordsPhrases.PHRASES
 import com.veldan.askword_us.global.objects.WordsPhrases.WORDS
 import com.veldan.askword_us.global.objects.WordsPhrases.WORDS_PHRASES
+import com.veldan.askword_us.global.toast
 import kotlinx.android.synthetic.main.fragment_study_format.view.*
 import kotlinx.android.synthetic.main.layout_format_addition.view.*
 import kotlinx.android.synthetic.main.layout_format_fill.view.*
@@ -51,6 +54,7 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
 
     // Components
     private lateinit var databaseDao: DatabaseDao
+    private lateinit var argsStudyFormat: StudyFormatFragmentArgs
     private val animations = StudyFormatAnimations
     private val animator = Animator2
 
@@ -138,19 +142,15 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
     //    init UI
     // ==============================
     private fun initUI() {
-        val args = StudyFormatFragmentArgs.fromBundle(requireArguments())
         animator.apply {
             animations.apply {
-
-                when (args.wordsPhrases) {
+                argsStudyFormat = StudyFormatFragmentArgs.fromBundle(requireArguments())
+                when (argsStudyFormat.wordsPhrases) {
                     WORDS_PHRASES -> {
                         jumpToState(start_words_phrases)
                     }
                     WORDS -> {
                         jumpToState(start_words)
-                    }
-                    PHRASES -> {
-
                     }
                 }
             }
@@ -171,6 +171,12 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
     //    to Study
     // ==============================
     private fun transitionToStudy() {
+        CoroutineScope(Dispatchers.IO).launch {
+            databaseDao.apply {
+                selectedWordsDelete()
+                selectedPhrasesDelete()
+            }
+        }
         findNavController().popBackStack()
     }
 
@@ -180,6 +186,57 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
     private fun transitionToStudying() {
         val action = StudyFormatFragmentDirections.actionStudyFormatFragmentToStudyingFragment()
         findNavController().navigate(action)
+    }
+
+    // ==============================
+    //    Set format To SharedPref
+    // ==============================
+    private fun setFormatToSharedPref() {
+        val edit = SharePref(this).initSharedPref(STUDY_FORMAT).edit()
+        edit.apply {
+            when {
+                cbQuestionWord.isChecked -> putBoolean(QUESTION_FORMAT_WORD, true)
+                cbQuestionPhrase.isChecked -> putBoolean(QUESTION_FORMAT_PHRASE, true)
+                cbAnswerFill.isChecked -> putBoolean(ANSWER_FORMAT_FILL, true)
+                cbAnswerSelection.isChecked -> putBoolean(ANSWER_FORMAT_SELECTION, true)
+                cbAnswerAdditional.isChecked -> putBoolean(ANSWER_FORMAT_ADDITIONAL, true)
+                else -> return
+            }
+        }.apply()
+    }
+
+    // ==============================
+    //    Get format To SharedPref
+    // ==============================
+    private fun getFormatToSharedPref(wordsPhrase: Int): Boolean {
+        return when (wordsPhrase) {
+            WORDS_PHRASES -> {
+                return when {
+                    !(cbQuestionWord.isChecked) && !(cbQuestionPhrase.isChecked) -> {
+                        "Оберiть формат запитання".toast(requireContext())
+                        false
+                    }
+                    cbQuestionWord.isChecked &&
+                            !(cbAnswerFill.isChecked) &&
+                            !(cbAnswerSelection.isChecked) &&
+                            !(cbAnswerAdditional.isChecked) -> {
+                        "Оберiть формат вiдповiдi".toast(requireContext())
+                        false
+                    }
+                    else -> true
+                }
+            }
+            WORDS -> {
+                return when {
+                    !(cbAnswerFill.isChecked) && !(cbAnswerSelection.isChecked) && !(cbAnswerAdditional.isChecked) -> {
+                        "Оберiть формат вiдповiдi".toast(requireContext())
+                        false
+                    }
+                    else -> true
+                }
+            }
+            else -> false
+        }
     }
 
     // ==============================
@@ -203,16 +260,12 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
                 cbAnswerAdditional.apply { isChecked = !isChecked }
             }
             fabBack.id -> {
-                CoroutineScope(Dispatchers.IO).launch {
-                    databaseDao.apply {
-                        selectedWordsDelete()
-                        selectedPhrasesDelete()
-                    }
-                }
                 transitionToStudy()
             }
             fabNext.id -> {
-                transitionToStudying()
+                setFormatToSharedPref()
+                if (getFormatToSharedPref(argsStudyFormat.wordsPhrases))
+                    transitionToStudying()
             }
         }
     }
