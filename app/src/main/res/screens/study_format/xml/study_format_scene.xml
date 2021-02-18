@@ -102,10 +102,39 @@
 
         <Constraint android:id="@+id/tv_format_answer">
             <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/guideH_35"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_question_word" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/scrollH_answers">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/fab_back"
+                app:layout_constraintTop_toBottomOf="@+id/guideH_35"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintWidth_percent=".999" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: show_answer_format
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/show_answer_format"
+        app:deriveConstraintsFrom="@id/start_words_phrases">
+        <Constraint android:id="@+id/tv_format_answer">
+            <Layout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/guideH_35"
                 app:layout_constraintTop_toBottomOf="@id/tv_question_word" />
+            <PropertySet android:visibility="visible" />
         </Constraint>
 
         <Constraint android:id="@+id/scrollH_answers">
@@ -114,6 +143,7 @@
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toTopOf="@id/fab_back"
                 app:layout_constraintTop_toBottomOf="@+id/guideH_35" />
+            <PropertySet android:visibility="visible" />
         </Constraint>
     </ConstraintSet>
 

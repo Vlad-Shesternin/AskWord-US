@@ -1,10 +1,12 @@
 package com.veldan.askword_us.study_format
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.CompoundButton
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +34,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class StudyFormatFragment : Fragment(), View.OnClickListener {
+class StudyFormatFragment :
+    Fragment(),
+    View.OnClickListener,
+    CompoundButton.OnCheckedChangeListener {
     private val TAG = this::class.simpleName
 
     // Binding
@@ -113,6 +118,7 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
     //    init Listeners
     // ==============================
     private fun initListeners() {
+        // onClick
         tvQuestionWord.setOnClickListener(this)
         tvQuestionPhrase.setOnClickListener(this)
         constLayAnswerFill.setOnClickListener(this)
@@ -120,6 +126,9 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
         constLayAnswerAdditional.setOnClickListener(this)
         fabBack.setOnClickListener(this)
         fabNext.setOnClickListener(this)
+
+        // onCheck
+        cbQuestionWord.setOnCheckedChangeListener(this)
     }
 
     // ==============================
@@ -184,6 +193,7 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
     //    to Studying
     // ==============================
     private fun transitionToStudying() {
+        SharePref(this).initSharedPref(STUDY_FORMAT).edit().clear().apply()
         val action = StudyFormatFragmentDirections.actionStudyFormatFragmentToStudyingFragment()
         findNavController().navigate(action)
     }
@@ -193,14 +203,21 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
     // ==============================
     private fun setFormatToSharedPref() {
         val edit = SharePref(this).initSharedPref(STUDY_FORMAT).edit()
+        Log.i(TAG, "setFormatToSharedPref: ddddddddddd === ${cbQuestionPhrase.isChecked}")
         edit.apply {
             when {
-                cbQuestionWord.isChecked -> putBoolean(QUESTION_FORMAT_WORD, true)
-                cbQuestionPhrase.isChecked -> putBoolean(QUESTION_FORMAT_PHRASE, true)
+                какгого то ХУЯ when виделивается
+                cbQuestionWord.isChecked -> {
+                    putBoolean(QUESTION_FORMAT_WORD, true)
+                    Log.i(TAG, "setFormatToSharedPref: dsfdsgfsasfgfagasfg")
+                }
+                cbQuestionPhrase.isChecked -> {
+                    Log.i(TAG, "setFormatToSharedPref: ssssssssssssssssssssssssss")
+                    putBoolean(QUESTION_FORMAT_PHRASE, true)
+                }
                 cbAnswerFill.isChecked -> putBoolean(ANSWER_FORMAT_FILL, true)
                 cbAnswerSelection.isChecked -> putBoolean(ANSWER_FORMAT_SELECTION, true)
                 cbAnswerAdditional.isChecked -> putBoolean(ANSWER_FORMAT_ADDITIONAL, true)
-                else -> return
             }
         }.apply()
     }
@@ -232,7 +249,11 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
                         "Оберiть формат вiдповiдi".toast(requireContext())
                         false
                     }
-                    else -> true
+                    else -> {
+                        SharePref(this).initSharedPref(STUDY_FORMAT).edit().putBoolean(
+                            QUESTION_FORMAT_WORD, true).apply()
+                        true
+                    }
                 }
             }
             else -> false
@@ -264,8 +285,25 @@ class StudyFormatFragment : Fragment(), View.OnClickListener {
             }
             fabNext.id -> {
                 setFormatToSharedPref()
-                if (getFormatToSharedPref(argsStudyFormat.wordsPhrases))
+                if (getFormatToSharedPref(argsStudyFormat.wordsPhrases)) {
                     transitionToStudying()
+                }
+            }
+        }
+    }
+
+    override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
+        animator.apply {
+            animations.apply {
+                when (buttonView to isChecked) {
+                    cbQuestionWord to true -> transition(start_words_phrases to show_answer_format)
+                    cbQuestionWord to false -> {
+                        transition(show_answer_format to start_words_phrases)
+                        cbAnswerFill.isChecked = false
+                        cbAnswerSelection.isChecked = false
+                        cbAnswerAdditional.isChecked = false
+                    }
+                }
             }
         }
     }

@@ -355,16 +355,10 @@ class StudyFragment :
                         if (listSelectedWords.isNotEmpty() && listSelectedPhrases.isNotEmpty()) {
                             insertSelectedWords(listSelectedWords)
                             insertSelectedPhrases(listSelectedPhrases)
-                            val edit = SharedPreferences(this).initSharedPref(STUDY_FORMAT).edit()
-                            edit.putBoolean(QUESTION_FORMAT_WORD, true)
-                            edit.putBoolean(QUESTION_FORMAT_PHRASE, true)
-                            edit.apply()
                             transitionToStudyFormat(WORDS_PHRASES)
                             return
                         } else if (listSelectedWords.isNotEmpty()) {
                             insertSelectedWords(listSelectedWords)
-                            SharedPreferences(this).initSharedPref(STUDY_FORMAT).edit().putBoolean(
-                                QUESTION_FORMAT_WORD, true).apply()
                             transitionToStudyFormat(WORDS)
                             return
                         } else if (listSelectedPhrases.isNotEmpty()) {
