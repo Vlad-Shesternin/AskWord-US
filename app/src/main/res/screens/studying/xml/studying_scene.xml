@@ -13,27 +13,6 @@
            SET: start
         ==============================-->
     <ConstraintSet android:id="@+id/start">
-        <Constraint
-            android:id="@+id/layout_studying_word_first"
-            android:visibility="invisible" />
-        <Constraint
-            android:id="@+id/tv_update_wp"
-            android:visibility="invisible" />
-        <Constraint
-            android:id="@+id/tv_update_format"
-            android:visibility="invisible" />
-    </ConstraintSet>
-
-    <!--==============================
-           SET: start_word
-        ==============================-->
-    <ConstraintSet android:id="@+id/start_word">
-        <Constraint android:id="@+id/layout_studying_word_first">
-            <Layout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </Constraint>
-
         <Constraint android:id="@+id/tv_update_wp">
             <Layout
                 android:layout_width="wrap_content"
@@ -59,8 +38,7 @@
            SET: show_settings
         ==============================-->
     <ConstraintSet
-        android:id="@+id/show_settings"
-        app:deriveConstraintsFrom="@id/start_word">
+        android:id="@+id/show_settings">
         <Constraint android:id="@+id/tv_update_wp">
             <Layout
                 android:layout_width="wrap_content"

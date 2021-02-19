@@ -356,16 +356,19 @@ class StudyFragment :
                             insertSelectedWords(listSelectedWords)
                             insertSelectedPhrases(listSelectedPhrases)
                             transitionToStudyFormat(WORDS_PHRASES)
+                            animator.previous.clear()
                             return
                         } else if (listSelectedWords.isNotEmpty()) {
                             insertSelectedWords(listSelectedWords)
                             transitionToStudyFormat(WORDS)
+                            animator.previous.clear()
                             return
                         } else if (listSelectedPhrases.isNotEmpty()) {
                             insertSelectedPhrases(listSelectedPhrases)
                             SharedPreferences(this).initSharedPref(STUDY_FORMAT).edit().putBoolean(
                                 QUESTION_FORMAT_PHRASE, true).apply()
                             transitionToStudying()
+                            animator.previous.clear()
                             return
                         } else {
                             "Оберiть слова або фрази".toast(requireContext())

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--==============================
+           Default
+        ==============================-->
+    <Transition
+        app:constraintSetEnd="@+id/end"
+        app:constraintSetStart="@+id/start" />
+
+    <!--==============================
+           SET: start
+        ==============================-->
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/layout_studying_word"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/layout_studying_phrase"
+            android:visibility="invisible" />
+        <Constraint
+            android:id="@+id/layout_studying_phrase_next"
+            android:visibility="invisible" />
+    </ConstraintSet>
+
+    <!--==============================
+           SET: show_phrase
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/show_phrase"
+        app:deriveConstraintsFrom="@id/start">
+        <Constraint android:id="@+id/layout_studying_phrase">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_studying_phrase_next">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".999" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: phrase_next
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/phrase_next"
+        app:deriveConstraintsFrom="@id/show_phrase">
+        <Constraint android:id="@+id/layout_studying_phrase">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".999" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_studying_phrase_next">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: jump_to_next_phrase
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/jump_to_next_phrase"
+        app:deriveConstraintsFrom="@id/phrase_next">
+        <Constraint android:id="@+id/layout_studying_phrase">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".999" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: phrase_next_2
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/phrase_next_2"
+        app:deriveConstraintsFrom="@id/jump_to_next_phrase">
+        <Constraint android:id="@+id/layout_studying_phrase_next">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".999" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+
+        <Constraint android:id="@+id/layout_studying_phrase">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: jump_to_next_phrase_2
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/jump_to_next_phrase_2"
+        app:deriveConstraintsFrom="@id/phrase_next_2">
+        <Constraint android:id="@+id/layout_studying_phrase_next">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".999" />
+            <PropertySet android:visibility="invisible" />
+        </Constraint>
+    </ConstraintSet>
+
+    <!--==============================
+           SET: show_word
+        ==============================-->
+    <ConstraintSet
+        android:id="@+id/show_word"
+        app:deriveConstraintsFrom="@id/start">
+        <Constraint android:id="@+id/layout_studying_word">
+            <Layout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <PropertySet android:visibility="visible" />
+        </Constraint>
+    </ConstraintSet>
+</MotionScene>

@@ -3,25 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     app:layoutDescription="@xml/studying_scene">
 
-    <!--==============================
-           Layout studying word first
-        ==============================-->
-    <include
-        android:id="@+id/layout_studying_word_first"
-        layout="@layout/layout_studying_word" />
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/motion_studying_formats"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutDescription="@xml/studying_formats_scene"
+        app:layout_constraintBottom_toTopOf="@id/fab_settings"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!--    &lt;!&ndash;==============================-->
-    <!--           Layout studying word second-->
-    <!--        ==============================&ndash;&gt;-->
-    <!--    <include-->
-    <!--        android:id="@+id/layout_studying_word_second"-->
-    <!--        layout="@layout/layout_studying_word" />-->
+        <!--==============================
+               Layout studying word
+            ==============================-->
+        <include
+            android:id="@+id/layout_studying_word"
+            layout="@layout/layout_studying_word" />
+
+        <!--==============================
+               Layout studying phrase
+            ==============================-->
+        <include
+            android:id="@+id/layout_studying_phrase"
+            layout="@layout/layout_studying_phrase" />
+
+        <!--==============================
+               Layout studying phrase next
+            ==============================-->
+        <include
+            android:id="@+id/layout_studying_phrase_next"
+            layout="@layout/layout_studying_phrase" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
     <!--==============================
-           Fab next
-        ==============================-->
+               Fab next
+            ==============================-->
     <ImageButton
         android:id="@+id/fab_next"
         android:layout_width="0dp"
