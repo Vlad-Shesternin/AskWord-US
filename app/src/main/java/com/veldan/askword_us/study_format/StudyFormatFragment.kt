@@ -180,6 +180,7 @@ class StudyFormatFragment :
     //    to Study
     // ==============================
     private fun transitionToStudy() {
+        SharePref(this).initSharedPref(STUDY_FORMAT).edit().clear().apply()
         CoroutineScope(Dispatchers.IO).launch {
             databaseDao.apply {
                 selectedWordsDelete()
@@ -193,7 +194,6 @@ class StudyFormatFragment :
     //    to Studying
     // ==============================
     private fun transitionToStudying() {
-        SharePref(this).initSharedPref(STUDY_FORMAT).edit().clear().apply()
         val action = StudyFormatFragmentDirections.actionStudyFormatFragmentToStudyingFragment()
         findNavController().navigate(action)
     }
@@ -203,23 +203,38 @@ class StudyFormatFragment :
     // ==============================
     private fun setFormatToSharedPref() {
         val edit = SharePref(this).initSharedPref(STUDY_FORMAT).edit()
-        Log.i(TAG, "setFormatToSharedPref: ddddddddddd === ${cbQuestionPhrase.isChecked}")
-        edit.apply {
-            when {
-                какгого то ХУЯ when виделивается
-                cbQuestionWord.isChecked -> {
-                    putBoolean(QUESTION_FORMAT_WORD, true)
-                    Log.i(TAG, "setFormatToSharedPref: dsfdsgfsasfgfagasfg")
+
+        val checkBoxes = listOf(
+            cbQuestionWord,
+            cbQuestionPhrase,
+            cbAnswerFill,
+            cbAnswerSelection,
+            cbAnswerAdditional
+        )
+        val checkBoxesMap = checkBoxes.associateWith { it.isChecked }
+        val checkBox_isChecked = checkBoxesMap.toList()
+
+        for (pair in checkBox_isChecked) {
+            edit.apply {
+                when (pair) {
+                    cbQuestionWord to true -> {
+                        putBoolean(QUESTION_FORMAT_WORD, true)
+                    }
+                    cbQuestionPhrase to true -> {
+                        putBoolean(QUESTION_FORMAT_PHRASE, true)
+                    }
+                    cbAnswerFill to true -> {
+                        putBoolean(ANSWER_FORMAT_FILL, true)
+                    }
+                    cbAnswerSelection to true -> {
+                        putBoolean(ANSWER_FORMAT_SELECTION, true)
+                    }
+                    cbAnswerAdditional to true -> {
+                        putBoolean(ANSWER_FORMAT_ADDITIONAL, true)
+                    }
                 }
-                cbQuestionPhrase.isChecked -> {
-                    Log.i(TAG, "setFormatToSharedPref: ssssssssssssssssssssssssss")
-                    putBoolean(QUESTION_FORMAT_PHRASE, true)
-                }
-                cbAnswerFill.isChecked -> putBoolean(ANSWER_FORMAT_FILL, true)
-                cbAnswerSelection.isChecked -> putBoolean(ANSWER_FORMAT_SELECTION, true)
-                cbAnswerAdditional.isChecked -> putBoolean(ANSWER_FORMAT_ADDITIONAL, true)
-            }
-        }.apply()
+            }.apply()
+        }
     }
 
     // ==============================

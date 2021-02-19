@@ -1,6 +1,7 @@
 package com.veldan.askword_us.studying
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,9 @@ import com.veldan.askword_us.database.DatabaseDao
 import com.veldan.askword_us.database.MyDatabase
 import com.veldan.askword_us.databinding.FragmentStudyingBinding
 import com.veldan.askword_us.global.general_classes.SharedPreferences
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.ANSWER_FORMAT_ADDITIONAL
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.ANSWER_FORMAT_FILL
+import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.ANSWER_FORMAT_SELECTION
 import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.QUESTION_FORMAT_PHRASE
 import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.QUESTION_FORMAT_WORD
 import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.STUDY_FORMAT
@@ -115,15 +119,44 @@ class StudyingFragment :
                     pref.getBoolean(QUESTION_FORMAT_WORD, false) &&
                             pref.getBoolean(QUESTION_FORMAT_PHRASE, false) -> {
                         "Word ---------------- Phrase".toast(requireContext())
+                        answerFormat(pref)
                     }
                     pref.getBoolean(QUESTION_FORMAT_WORD, false) -> {
                         "Word".toast(requireContext())
-                        // Выбори форматов изучения
                         jumpToState(start_word)
+                        answerFormat(pref)
                     }
                     pref.getBoolean(QUESTION_FORMAT_PHRASE, false) -> {
                         "Phrase".toast(requireContext())
                     }
+                }
+            }
+        }
+    }
+
+
+    // ==============================
+    //    Answer Format
+    // ==============================
+    private fun answerFormat(pref: android.content.SharedPreferences) {
+        val answersFormats = listOf(
+            ANSWER_FORMAT_FILL,
+            ANSWER_FORMAT_SELECTION,
+            ANSWER_FORMAT_ADDITIONAL
+        )
+        val answersFormatsMap = answersFormats.associateWith { pref.getBoolean(it, false) }
+        val answerFormats_value = answersFormatsMap.toList()
+
+        for (pair in answerFormats_value) {
+            when (pair) {
+                ANSWER_FORMAT_FILL to true -> {
+                    "FILL".toast(requireContext())
+                }
+                ANSWER_FORMAT_SELECTION to true -> {
+                    "SELECTION".toast(requireContext())
+                }
+                ANSWER_FORMAT_ADDITIONAL to true -> {
+                    "ADDITIONAL".toast(requireContext())
                 }
             }
         }
