@@ -23,11 +23,19 @@
         android:id="@+id/tv_word"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@id/guideH_50"
         android:gravity="center"
         android:text="WORD"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/iv_image" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideH_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".5" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

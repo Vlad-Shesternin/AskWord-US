@@ -17,4 +17,8 @@ object StudyingAnimations {
 
     // Next word
     const val show_word = R.id.show_word
+    const val word_next = R.id.word_next
+    const val jump_to_next_word = R.id.jump_to_next_word
+    const val word_next_2 = R.id.word_next_2
+    const val jump_to_next_word_2 = R.id.jump_to_next_word_2
 }

@@ -1,30 +1,30 @@
 package com.veldan.askword_us.studying
 
+import android.app.ActionBar
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import android.text.Editable
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.constraintlayout.widget.ConstraintSet.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.veldan.askword_us.R
 import com.veldan.askword_us.database.DatabaseDao
 import com.veldan.askword_us.database.MyDatabase
-import com.veldan.askword_us.database.phrase.PhraseModel
 import com.veldan.askword_us.database.selected_phrase.SelectedPhraseDatabaseDao
 import com.veldan.askword_us.database.selected_phrase.SelectedPhraseModel
 import com.veldan.askword_us.database.selected_word.SelectedWordDatabaseDao
 import com.veldan.askword_us.database.selected_word.SelectedWordModel
-import com.veldan.askword_us.database.word.WordModel
-import com.veldan.askword_us.databinding.FragmentStudyingBinding
+import com.veldan.askword_us.databinding.*
 import com.veldan.askword_us.global.general_classes.SharedPreferences
 import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.ANSWER_FORMAT_ADDITIONAL
 import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.ANSWER_FORMAT_FILL
@@ -38,10 +38,12 @@ import com.veldan.askword_us.global.objects.Animator2
 import com.veldan.askword_us.global.toast
 import kotlinx.android.synthetic.main.fragment_studying.view.*
 import kotlinx.android.synthetic.main.layout_studying_phrase.view.*
+import kotlinx.android.synthetic.main.layout_studying_word.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
+import kotlinx.android.synthetic.main.layout_studying_word.view.guideH_50 as guideH_501
 
 class StudyingFragment :
     Fragment(),
@@ -153,12 +155,18 @@ class StudyingFragment :
                     pref.getBoolean(QUESTION_FORMAT_WORD, false) &&
                             pref.getBoolean(QUESTION_FORMAT_PHRASE, false) -> {
                         "Word - Phrase".toast(requireContext())
-                        answerFormat(pref)
+                        //answerFormat(pref, )
 
                     }
                     pref.getBoolean(QUESTION_FORMAT_WORD, false) -> {
                         "Word".toast(requireContext())
-                        answerFormat(pref)
+                        selectedWordDatabaseDao.getAllSelectedWords()
+                            ?.observe(viewLifecycleOwner, Observer {
+                                listWords = it
+                                generateQuestionWord(binding.layoutStudyingWord.root)
+                                generateQuestionWord(binding.layoutStudyingWordNext.root)
+                                answerFormat(it[0])
+                            })
                         jumpToState(show_word)
                     }
                     pref.getBoolean(QUESTION_FORMAT_PHRASE, false) -> {
@@ -166,8 +174,6 @@ class StudyingFragment :
                         selectedPhraseDatabaseDao.getAllSelectedPhrase()
                             ?.observe(viewLifecycleOwner, Observer {
                                 listPhrases = it
-                                binding.layoutStudyingPhrase.tvQuestionPhrase.text =
-                                    it[0].phrase
                                 generateQuestionPhrase(binding.layoutStudyingPhrase.root)
                                 generateQuestionPhrase(binding.layoutStudyingPhraseNext.root)
                             })
@@ -181,12 +187,15 @@ class StudyingFragment :
     // ==============================
     //    Answer Format
     // ==============================
-    private fun answerFormat(pref: android.content.SharedPreferences) {
+    private fun answerFormat(
+        selectedWordModel: SelectedWordModel,
+    ) {
         val answersFormats = listOf(
             ANSWER_FORMAT_FILL,
             ANSWER_FORMAT_SELECTION,
             ANSWER_FORMAT_ADDITIONAL
         )
+        val pref = SharedPreferences(this).initSharedPref(STUDY_FORMAT)
         val answersFormatsMap = answersFormats.associateWith { pref.getBoolean(it, false) }
         val answerFormats_value = answersFormatsMap.toList()
 
@@ -194,6 +203,8 @@ class StudyingFragment :
             when (pair) {
                 ANSWER_FORMAT_FILL to true -> {
                     "FILL".toast(requireContext())
+                    generateAnswerFormatFill(binding.layoutStudyingWord.root, selectedWordModel)
+                    generateAnswerFormatFill(binding.layoutStudyingWordNext.root, selectedWordModel)
                 }
                 ANSWER_FORMAT_SELECTION to true -> {
                     "SELECTION".toast(requireContext())
@@ -201,6 +212,118 @@ class StudyingFragment :
                 ANSWER_FORMAT_ADDITIONAL to true -> {
                     "ADDITIONAL".toast(requireContext())
                 }
+            }
+        }
+    }
+
+    // ==============================
+    //    Generate Format Fill
+    // ==============================
+    private val previousIds = mutableListOf<Int>()
+    private var previousViewId = 0
+    private var increment = 0
+        get() {
+            ++field
+            previousIds.add(field)
+            previousViewId = field - 1
+            return field
+        }
+
+    private fun generateAnswerFormatFill(
+        constraintLayout: ConstraintLayout,
+        selectedWordModel: SelectedWordModel,
+    ) {
+        increment = 0
+        previousIds.clear()
+        val translations = selectedWordModel.translations.shuffled()
+
+        val scrollHAnswer: HorizontalScrollView
+        val constraintAnswer: ConstraintLayout
+
+        if (translations[0].count() >= 7) {
+            ContainerAnswerStartBinding.inflate(layoutInflater).also {
+                scrollHAnswer = it.scrollHAnswer
+                constraintAnswer = it.constraintAnswer
+            }
+        } else {
+            ContainerAnswerCenterBinding.inflate(layoutInflater).also {
+                scrollHAnswer = it.scrollHAnswer
+                constraintAnswer = it.constraintAnswer
+            }
+        }
+
+        // VALUES
+        val SCROLL_H_ANSWER = scrollHAnswer.id
+        val GUIDE_H_50_ID = constraintLayout.guideH_50.id
+
+        for ((index, value) in translations[0].withIndex()) {
+            val editAnswer = ItemAnswerBinding.inflate(layoutInflater).root
+            val ITEM_ANSWER_ID = editAnswer.apply { id = increment }.id
+            editAnswer.setTextColor(resources.getColor(R.color.colorPrimary))
+            editAnswer.background = resources.getDrawable(R.drawable.shape_answer_rect)
+            constraintAnswer.addView(editAnswer)
+            ConstraintSet().apply {
+                clone(constraintAnswer)
+                constrainWidth(ITEM_ANSWER_ID, 0)
+                constrainPercentWidth(ITEM_ANSWER_ID, 10F)
+                setDimensionRatio(ITEM_ANSWER_ID, "1:1")
+                if (index == translations[0].lastIndex) {
+                    val views = previousIds.toIntArray()
+
+                    createHorizontalChain(
+                        PARENT_ID, LEFT,
+                        PARENT_ID, RIGHT,
+                        views, null,
+                        CHAIN_SPREAD)
+                }
+            }.applyTo(constraintAnswer)
+            editAnswer.addTextChangedListener(
+                object : TextChangeListener {
+                    override fun afterTextChanged(s: Editable?) {
+                        super.afterTextChanged(s)
+
+                        editAnswer.setTextColor(resources.getColor(R.color.colorRed))
+                        editAnswer.background =
+                            resources.getDrawable(R.drawable.shape_answer_rect_red)
+
+                        val charAnswer = translations[0][ITEM_ANSWER_ID - 1]
+                        if (s.toString().equals(charAnswer.toString(), true)) {
+                            editAnswer.setTextColor(resources.getColor(R.color.colorGreen))
+                            editAnswer.background =
+                                resources.getDrawable(R.drawable.shape_answer_rect_green)
+                            if (index != translations[0].lastIndex) {
+                                Log.i(TAG, "afterTextChanged: ddd")
+                                editAnswer.nextFocusForwardId = editAnswer.id+1
+                            }
+                        }
+                    }
+                }
+            )
+        }
+
+        constraintLayout.addView(scrollHAnswer)
+        ConstraintSet().apply {
+            clone(constraintLayout)
+            constrainWidth(SCROLL_H_ANSWER, 0)
+            connect(SCROLL_H_ANSWER, TOP, GUIDE_H_50_ID, BOTTOM)
+            connect(SCROLL_H_ANSWER, BOTTOM, PARENT_ID, BOTTOM)
+            connect(SCROLL_H_ANSWER, START, PARENT_ID, START, 50)
+            connect(SCROLL_H_ANSWER, END, PARENT_ID, END, 50)
+        }.applyTo(constraintLayout)
+    }
+
+    // ==============================
+    //    Generate Question Word
+    // ==============================
+    private fun generateQuestionWord(layoutWord: ConstraintLayout) {
+        val words = listWords.shuffled()
+        CoroutineScope(Dispatchers.Main).launch {
+            layoutWord.apply {
+                delay(100)
+                Glide.with(this)
+                    .load(words[0].image)
+                    .into(iv_image)
+                tv_word.text = words[0].word
             }
         }
     }
@@ -220,7 +343,10 @@ class StudyingFragment :
     // ==============================
     //    Listening answer phrase
     // ==============================
-    private fun listeningEditTextAnswerPhrase(editAnswerPhrase: EditText, answerPhrase: String) {
+    private fun listeningEditTextAnswerPhrase(
+        editAnswerPhrase: EditText,
+        answerPhrase: String,
+    ) {
         editAnswerPhrase.addTextChangedListener(
             object : TextChangeListener {
                 override fun afterTextChanged(s: Editable?) {
@@ -277,10 +403,27 @@ class StudyingFragment :
                     }
                     fabNext.id -> {
                         motion = binding.motionStudyingFormats
-                        when (motion.currentState) {
-                            show_phrase -> transition(show_phrase to phrase_next)
-                            jump_to_next_phrase -> transition(jump_to_next_phrase to phrase_next_2)
-                            jump_to_next_phrase_2 -> transition(jump_to_next_phrase_2 to phrase_next)
+                        val pref =
+                            SharedPreferences(this@StudyingFragment).initSharedPref(STUDY_FORMAT)
+                        when {
+                            pref.getBoolean(QUESTION_FORMAT_WORD, false) &&
+                                    pref.getBoolean(QUESTION_FORMAT_PHRASE, false) -> {
+
+                            }
+                            pref.getBoolean(QUESTION_FORMAT_WORD, false) -> {
+                                when (motion.currentState) {
+                                    show_word -> transition(show_word to word_next)
+                                    jump_to_next_word -> transition(jump_to_next_word to word_next_2)
+                                    jump_to_next_word_2 -> transition(jump_to_next_word_2 to word_next)
+                                }
+                            }
+                            pref.getBoolean(QUESTION_FORMAT_PHRASE, false) -> {
+                                when (motion.currentState) {
+                                    show_phrase -> transition(show_phrase to phrase_next)
+                                    jump_to_next_phrase -> transition(jump_to_next_phrase to phrase_next_2)
+                                    jump_to_next_phrase_2 -> transition(jump_to_next_phrase_2 to phrase_next)
+                                }
+                            }
                         }
                     }
                     tvBackToStudy.id -> {
@@ -289,7 +432,8 @@ class StudyingFragment :
                     }
                     tvBackToStudyFormat.id -> {
                         val pref =
-                            SharedPreferences(this@StudyingFragment).initSharedPref(STUDY_FORMAT)
+                            SharedPreferences(this@StudyingFragment).initSharedPref(
+                                STUDY_FORMAT)
                         if (pref.getBoolean(QUESTION_FORMAT_PHRASE, false)) {
                             CoroutineScope(Dispatchers.IO).launch {
                                 databaseDao.selectedPhrasesDelete()
@@ -309,6 +453,14 @@ class StudyingFragment :
         animator.apply {
             animations.apply {
                 when (stateEnd) {
+                    word_next -> {
+                        generateQuestionWord(binding.layoutStudyingWord.root)
+                        jumpToState(jump_to_next_word)
+                    }
+                    word_next_2 -> {
+                        generateQuestionWord(binding.layoutStudyingWordNext.root)
+                        jumpToState(jump_to_next_word_2)
+                    }
                     phrase_next -> {
                         generateQuestionPhrase(binding.layoutStudyingPhrase.root)
                         jumpToState(jump_to_next_phrase)
