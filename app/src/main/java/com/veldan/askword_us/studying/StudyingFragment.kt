@@ -13,6 +13,8 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.constraintlayout.widget.ConstraintSet.*
+import androidx.core.view.children
+import androidx.core.view.contains
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -35,6 +37,7 @@ import com.veldan.askword_us.global.general_classes.SharedPreferences.Companion.
 import com.veldan.askword_us.global.interfaces.TextChangeListener
 import com.veldan.askword_us.global.interfaces.TransitionListener
 import com.veldan.askword_us.global.objects.Animator2
+import com.veldan.askword_us.global.objects.WordsPhrases
 import com.veldan.askword_us.global.toast
 import kotlinx.android.synthetic.main.fragment_studying.view.*
 import kotlinx.android.synthetic.main.layout_studying_phrase.view.*
@@ -154,23 +157,20 @@ class StudyingFragment :
                 when {
                     pref.getBoolean(QUESTION_FORMAT_WORD, false) &&
                             pref.getBoolean(QUESTION_FORMAT_PHRASE, false) -> {
-                        "Word - Phrase".toast(requireContext())
-                        //answerFormat(pref, )
-
+                        // "Word - Phrase".toast(requireContext())
                     }
                     pref.getBoolean(QUESTION_FORMAT_WORD, false) -> {
-                        "Word".toast(requireContext())
+                        //"Word".toast(requireContext())
                         selectedWordDatabaseDao.getAllSelectedWords()
                             ?.observe(viewLifecycleOwner, Observer {
                                 listWords = it
-                                generateQuestionWord(binding.layoutStudyingWord.root)
-                                generateQuestionWord(binding.layoutStudyingWordNext.root)
-                                answerFormat(it[0])
+                                answerFormat(binding.layoutStudyingWord.root)
+                                answerFormat(binding.layoutStudyingWordNext.root)
                             })
                         jumpToState(show_word)
                     }
                     pref.getBoolean(QUESTION_FORMAT_PHRASE, false) -> {
-                        "Phrase".toast(requireContext())
+                        // "Phrase".toast(requireContext())
                         selectedPhraseDatabaseDao.getAllSelectedPhrase()
                             ?.observe(viewLifecycleOwner, Observer {
                                 listPhrases = it
@@ -188,7 +188,7 @@ class StudyingFragment :
     //    Answer Format
     // ==============================
     private fun answerFormat(
-        selectedWordModel: SelectedWordModel,
+        constraintLayout: ConstraintLayout,
     ) {
         val answersFormats = listOf(
             ANSWER_FORMAT_FILL,
@@ -202,114 +202,17 @@ class StudyingFragment :
         for (pair in answerFormats_value) {
             when (pair) {
                 ANSWER_FORMAT_FILL to true -> {
-                    "FILL".toast(requireContext())
-                    generateAnswerFormatFill(binding.layoutStudyingWord.root, selectedWordModel)
-                    generateAnswerFormatFill(binding.layoutStudyingWordNext.root, selectedWordModel)
+                    //"FILL".toast(requireContext())
+                    generateQuestionWord(constraintLayout)
                 }
                 ANSWER_FORMAT_SELECTION to true -> {
-                    "SELECTION".toast(requireContext())
+                    // "SELECTION".toast(requireContext())
                 }
                 ANSWER_FORMAT_ADDITIONAL to true -> {
-                    "ADDITIONAL".toast(requireContext())
+                    //   "ADDITIONAL".toast(requireContext())
                 }
             }
         }
-    }
-
-    // ==============================
-    //    Generate Format Fill
-    // ==============================
-    private val previousIds = mutableListOf<Int>()
-    private var previousViewId = 0
-    private var increment = 0
-        get() {
-            ++field
-            previousIds.add(field)
-            previousViewId = field - 1
-            return field
-        }
-
-    private fun generateAnswerFormatFill(
-        constraintLayout: ConstraintLayout,
-        selectedWordModel: SelectedWordModel,
-    ) {
-        increment = 0
-        previousIds.clear()
-        val translations = selectedWordModel.translations.shuffled()
-
-        val scrollHAnswer: HorizontalScrollView
-        val constraintAnswer: ConstraintLayout
-
-        if (translations[0].count() >= 7) {
-            ContainerAnswerStartBinding.inflate(layoutInflater).also {
-                scrollHAnswer = it.scrollHAnswer
-                constraintAnswer = it.constraintAnswer
-            }
-        } else {
-            ContainerAnswerCenterBinding.inflate(layoutInflater).also {
-                scrollHAnswer = it.scrollHAnswer
-                constraintAnswer = it.constraintAnswer
-            }
-        }
-
-        // VALUES
-        val SCROLL_H_ANSWER = scrollHAnswer.id
-        val GUIDE_H_50_ID = constraintLayout.guideH_50.id
-
-        for ((index, value) in translations[0].withIndex()) {
-            val editAnswer = ItemAnswerBinding.inflate(layoutInflater).root
-            val ITEM_ANSWER_ID = editAnswer.apply { id = increment }.id
-            editAnswer.setTextColor(resources.getColor(R.color.colorPrimary))
-            editAnswer.background = resources.getDrawable(R.drawable.shape_answer_rect)
-            constraintAnswer.addView(editAnswer)
-            ConstraintSet().apply {
-                clone(constraintAnswer)
-                constrainWidth(ITEM_ANSWER_ID, 0)
-                constrainPercentWidth(ITEM_ANSWER_ID, 10F)
-                setDimensionRatio(ITEM_ANSWER_ID, "1:1")
-                if (index == translations[0].lastIndex) {
-                    val views = previousIds.toIntArray()
-
-                    createHorizontalChain(
-                        PARENT_ID, LEFT,
-                        PARENT_ID, RIGHT,
-                        views, null,
-                        CHAIN_SPREAD)
-                }
-            }.applyTo(constraintAnswer)
-            editAnswer.addTextChangedListener(
-                object : TextChangeListener {
-                    override fun afterTextChanged(s: Editable?) {
-                        super.afterTextChanged(s)
-
-                        editAnswer.setTextColor(resources.getColor(R.color.colorRed))
-                        editAnswer.background =
-                            resources.getDrawable(R.drawable.shape_answer_rect_red)
-
-                        val charAnswer = translations[0][ITEM_ANSWER_ID - 1]
-                        if (s.toString().equals(charAnswer.toString(), true)) {
-                            editAnswer.setTextColor(resources.getColor(R.color.colorGreen))
-                            editAnswer.background =
-                                resources.getDrawable(R.drawable.shape_answer_rect_green)
-                            if (index != translations[0].lastIndex) {
-                                Log.i(TAG, "afterTextChanged: ddd")
-                                editAnswer.nextFocusForwardId = editAnswer.id+1
-                            }
-                        }
-                    }
-                }
-            )
-        }
-
-        constraintLayout.addView(scrollHAnswer)
-        ConstraintSet().apply {
-            clone(constraintLayout)
-            constrainWidth(SCROLL_H_ANSWER, 0)
-            connect(SCROLL_H_ANSWER, TOP, GUIDE_H_50_ID, BOTTOM)
-            connect(SCROLL_H_ANSWER, BOTTOM, PARENT_ID, BOTTOM)
-            connect(SCROLL_H_ANSWER, START, PARENT_ID, START, 50)
-            connect(SCROLL_H_ANSWER, END, PARENT_ID, END, 50)
-        }.applyTo(constraintLayout)
     }
 
     // ==============================
@@ -326,6 +229,101 @@ class StudyingFragment :
                 tv_word.text = words[0].word
             }
         }
+        generateAnswerFormatFill(layoutWord, words[0])
+    }
+
+    // ==============================
+    //    Generate Format Fill
+    // ==============================
+    private val previousIds = mutableListOf<Int>()
+    private var previousViewId = 0
+    private var increment = 0
+        get() {
+            ++field
+            previousIds.add(field)
+            previousViewId = field - 1
+            return field
+        }
+    private var i = 0
+
+    private fun generateAnswerFormatFill(
+        constraintLayout: ConstraintLayout,
+        selectedWordModel: SelectedWordModel,
+    ) {
+        increment = 0
+        previousIds.clear()
+        i = 0
+        val translations = selectedWordModel.translations.shuffled()
+
+        val constraintAnswerFormat =
+            constraintLayout.constraint_answer_format.apply { removeAllViews() }
+        val scrollHAnswer: HorizontalScrollView
+        val constraintAnswer: ConstraintLayout
+
+        if (translations[0].count() >= 7) {
+            ContainerAnswerStartBinding.inflate(layoutInflater).also {
+                scrollHAnswer = it.scrollHAnswer.apply { id = ++i }
+                constraintAnswer = it.constraintAnswer
+            }
+        } else {
+            ContainerAnswerCenterBinding.inflate(layoutInflater).also {
+                scrollHAnswer = it.scrollHAnswer.apply { id = ++i }
+                constraintAnswer = it.constraintAnswer
+            }
+        }
+
+        // VALUES
+        val SCROLL_H_ANSWER = scrollHAnswer.id
+
+        for ((index, value) in translations[0].withIndex()) {
+            val editAnswer = ItemAnswerBinding.inflate(layoutInflater).root
+            val ITEM_ANSWER_ID = editAnswer.apply { id = increment }.id
+            constraintAnswer.addView(editAnswer)
+            ConstraintSet().apply {
+                clone(constraintAnswer)
+                constrainWidth(ITEM_ANSWER_ID, 0)
+                constrainPercentWidth(ITEM_ANSWER_ID, 10F)
+                setDimensionRatio(ITEM_ANSWER_ID, "1:1")
+                if (translations[0].count() > 1) {
+                    if (index == translations[0].lastIndex) {
+                        val views = previousIds.toIntArray()
+                        createHorizontalChain(
+                            PARENT_ID, LEFT,
+                            PARENT_ID, RIGHT,
+                            views, null,
+                            CHAIN_SPREAD)
+                    }
+                }
+            }.applyTo(constraintAnswer)
+            editAnswer.addTextChangedListener(
+                object : TextChangeListener {
+                    override fun afterTextChanged(s: Editable?) {
+                        super.afterTextChanged(s)
+
+                        editAnswer.setTextColor(resources.getColor(R.color.colorRed))
+                        editAnswer.background =
+                            resources.getDrawable(R.drawable.shape_answer_rect_red)
+
+                        val charAnswer = translations[0][ITEM_ANSWER_ID - 1]
+                        if (s.toString().equals(charAnswer.toString(), true)) {
+                            editAnswer.setTextColor(resources.getColor(R.color.colorGreen))
+                            editAnswer.background =
+                                resources.getDrawable(R.drawable.shape_answer_rect_green)
+                        }
+                    }
+                }
+            )
+        }
+
+        constraintAnswerFormat.addView(scrollHAnswer)
+        ConstraintSet().apply {
+            clone(constraintAnswerFormat)
+            constrainWidth(SCROLL_H_ANSWER, 0)
+            connect(SCROLL_H_ANSWER, TOP, PARENT_ID, TOP)
+            connect(SCROLL_H_ANSWER, BOTTOM, PARENT_ID, BOTTOM)
+            connect(SCROLL_H_ANSWER, START, PARENT_ID, START, 50)
+            connect(SCROLL_H_ANSWER, END, PARENT_ID, END, 50)
+        }.applyTo(constraintAnswerFormat)
     }
 
     // ==============================
@@ -354,7 +352,6 @@ class StudyingFragment :
 
                     editAnswerPhrase.setTextColor(resources.getColor(R.color.colorRed))
                     if (s.toString() == answerPhrase) {
-                        Log.i(TAG, "()()()$s")
                         editAnswerPhrase.setTextColor(resources.getColor(R.color.colorAccent))
                     }
                 }
@@ -366,8 +363,15 @@ class StudyingFragment :
     // ==============================
     private fun transitionToStudyFormat() {
         // Надо бы отдельно удаление написать. Но как-то спешу, но в качественных проектах, создавай методы определённого назначения.
-        SharedPreferences(this).initSharedPref(STUDY_FORMAT).edit().clear().apply()
-        findNavController().popBackStack()
+        SharedPreferences(this).initSharedPref(STUDY_FORMAT).apply {
+            if (getBoolean(QUESTION_FORMAT_WORD, false)) {
+                val action = StudyingFragmentDirections.actionStudyingFragmentToStudyFormatFragment(
+                    WordsPhrases.WORDS)
+                findNavController().navigate(action)
+            } else {
+                transitionToStudy()
+            }
+        }
     }
 
     // ==============================
@@ -379,7 +383,8 @@ class StudyingFragment :
             databaseDao.selectedWordsDelete()
             databaseDao.selectedPhrasesDelete()
         }
-        findNavController().popBackStack(R.id.studyFragment, false)
+        val action = StudyingFragmentDirections.actionStudyingFragmentToStudyFragment()
+        findNavController().navigate(action)
     }
 
 
@@ -454,11 +459,11 @@ class StudyingFragment :
             animations.apply {
                 when (stateEnd) {
                     word_next -> {
-                        generateQuestionWord(binding.layoutStudyingWord.root)
+                        answerFormat(binding.layoutStudyingWord.root)
                         jumpToState(jump_to_next_word)
                     }
                     word_next_2 -> {
-                        generateQuestionWord(binding.layoutStudyingWordNext.root)
+                        answerFormat(binding.layoutStudyingWordNext.root)
                         jumpToState(jump_to_next_word_2)
                     }
                     phrase_next -> {

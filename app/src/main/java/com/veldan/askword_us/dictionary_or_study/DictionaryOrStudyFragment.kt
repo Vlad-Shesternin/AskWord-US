@@ -81,6 +81,27 @@ class DictionaryOrStudyFragment : Fragment() {
     }
 
     // ==============================
+    //    to Studying
+    // ==============================
+    private fun transitionToStudying() {
+        val action =
+            DictionaryOrStudyFragmentDirections.actionDictionaryOrStudyFragmentToStudyingFragment()
+        findNavController().navigate(action)
+    }
+
+    // ==============================
+    //    to Study | Studying
+    // ==============================
+    fun transitionToStudyOrStudying() {
+        val pref = SharedPreferences(this).initSharedPref(STUDY_FORMAT)
+        if (pref.all.isNotEmpty()) {
+            transitionToStudying()
+        } else {
+            transitionToStudy()
+        }
+    }
+
+    // ==============================
     //    to Authentication
     // ==============================
     fun transitionToAuthentication() {

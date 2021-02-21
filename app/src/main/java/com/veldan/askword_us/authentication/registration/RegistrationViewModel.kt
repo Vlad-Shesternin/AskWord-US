@@ -60,16 +60,16 @@ class RegistrationViewModel(
         if (Verification.verifyNameSurname(context, name, surname) &&
             Verification.verifyEmailPassword(context, email, password)
         ) {
-            "Проверка пройдена".toast(context)
+            "Перевiрку пройдено".toast(context)
             scope.launch(Dispatchers.Default) {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener {
-                        "Пользователя зарегистрировано".toast(context)
+                        "Користувача зареєстровано".toast(context)
                         Components(*views).enabled(false).background(null)
                         sendEmailVerification(name, surname, email)
                     }
                     .addOnFailureListener {
-                        "Пользователя не зарегистрировано".toast(context)
+                        "Користувача не зареєстровано".toast(context)
                     }
             }
         }
@@ -82,7 +82,7 @@ class RegistrationViewModel(
         fireUser = auth.currentUser
         fireUser!!.sendEmailVerification()
             .addOnSuccessListener {
-                "Подтвердите адрес: $email".toast(context)
+                "Пiдтвердiть адресу: $email".toast(context)
 
                 _visibilityBooleanTextViewVerifyEmail.value = true
 
@@ -101,7 +101,7 @@ class RegistrationViewModel(
                 }
             }
             .addOnFailureListener {
-                "Не удалось отправить: $email".toast(context)
+                "Не вдалось вiдправити: $email".toast(context)
             }
     }
 
@@ -132,7 +132,7 @@ class RegistrationViewModel(
             users.child(id)
                 .setValue(user)
                 .addOnSuccessListener {
-                    "Пользователя добавлено в БД".toast(context)
+                   // "Пользователя добавлено в БД".toast(context)
                 }
         }
         addUserJob.join()

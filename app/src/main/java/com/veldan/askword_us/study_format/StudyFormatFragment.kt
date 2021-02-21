@@ -187,7 +187,8 @@ class StudyFormatFragment :
                 selectedPhrasesDelete()
             }
         }
-        findNavController().popBackStack()
+        val action = StudyFormatFragmentDirections.actionStudyFormatFragmentToStudyFragment()
+        findNavController().navigate(action)
     }
 
     // ==============================

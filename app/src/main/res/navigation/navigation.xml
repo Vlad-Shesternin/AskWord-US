@@ -106,6 +106,9 @@
             <action
                 android:id="@+id/action_dictionaryOrStudyFragment_to_studyFragment"
                 app:destination="@id/studyFragment" />
+            <action
+                android:id="@+id/action_dictionaryOrStudyFragment_to_studyingFragment"
+                app:destination="@id/studyingFragment" />
         </fragment>
 
         <!--==============================
@@ -131,6 +134,9 @@
             <action
                 android:id="@+id/action_studyFragment_to_studyingFragment"
                 app:destination="@id/studyingFragment" />
+            <action
+                android:id="@+id/action_studyFragment_to_dictionaryOrStudyFragment"
+                app:destination="@id/dictionaryOrStudyFragment" />
         </fragment>
 
         <!--==============================
@@ -147,6 +153,9 @@
             <action
                 android:id="@+id/action_studyFormatFragment_to_studyingFragment"
                 app:destination="@id/studyingFragment" />
+            <action
+                android:id="@+id/action_studyFormatFragment_to_studyFragment"
+                app:destination="@id/studyFragment" />
         </fragment>
 
         <!--==============================
@@ -156,6 +165,13 @@
             android:id="@+id/studyingFragment"
             android:name="com.veldan.askword_us.studying.StudyingFragment"
             android:label="fragment_studying"
-            tools:layout="@layout/fragment_studying" />
+            tools:layout="@layout/fragment_studying" >
+            <action
+                android:id="@+id/action_studyingFragment_to_studyFormatFragment"
+                app:destination="@id/studyFormatFragment" />
+            <action
+                android:id="@+id/action_studyingFragment_to_studyFragment"
+                app:destination="@id/studyFragment" />
+        </fragment>
     </navigation>
 </navigation>

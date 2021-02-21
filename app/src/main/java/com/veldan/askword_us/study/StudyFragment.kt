@@ -180,7 +180,8 @@ class StudyFragment :
     // ==============================
     private fun transitionToDictionaryOrStudy() {
         Animator2.previous.clear()
-        findNavController().popBackStack()
+        val action = StudyFragmentDirections.actionStudyFragmentToDictionaryOrStudyFragment()
+        findNavController().navigate(action)
     }
 
     // ==============================

@@ -53,11 +53,11 @@ class SignInViewModel(
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener {
                         getUserForAccount(email)
-                        "Пользователь вошёл".toast(context)
+                        //"Пользователь вошёл".toast(context)
                     }
 
                     .addOnFailureListener {
-                        "Пользователь не вошёл".toast(context)
+                       // "Пользователь не вошёл".toast(context)
                     }
             }
         }
@@ -73,12 +73,12 @@ class SignInViewModel(
             scope.launch(Dispatchers.Default) {
                 auth.sendPasswordResetEmail(email)
                     .addOnSuccessListener {
-                        "Инструкцию по восстановлению пароля отправлено на почту: $email".toast(
+                        "Iнструкцiю по вiдновленню паролю вiдправлено на адресу: $email".toast(
                             context)
                         _visibilityBooleanTextViewVerifyEmail.value = true
                     }
                     .addOnFailureListener {
-                        "Нет такой почты".toast(context)
+                        "Неiснуюча адреса".toast(context)
                     }
             }
         }
@@ -95,7 +95,7 @@ class SignInViewModel(
                     for (data in snapshot.children) {
                         val user = data.getValue(User::class.java)!!
                         user.also {
-                            "Success getUserForAccount".toast(context)
+                           // "Success getUserForAccount".toast(context)
 
                             val editor = SharedPreferences(fragment).initSharedPref(AUTH).edit()
                             editor.putString(SharedPreferences.USER_NAME, it.name)
@@ -108,7 +108,7 @@ class SignInViewModel(
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    "Fail getUserForAccount".toast(context)
+                    //"Fail getUserForAccount".toast(context)
                 }
             })
     }
